@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import(SampleSpringAuthenticationFrameworkConfig.class)
 public class ScuoleDevelhopeApplicationConfig {
-
+    
 }
