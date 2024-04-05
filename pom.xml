@@ -51,7 +51,13 @@
 			<artifactId>sample-spring-authentication-framework</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.bananapilot</groupId>
+            <artifactId>sample-spring-authentication-framework</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
