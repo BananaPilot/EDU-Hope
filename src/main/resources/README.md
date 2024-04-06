@@ -1,0 +1,1 @@
+andate nel canale github di discord e guardate come inserire il file necessario per il setup
