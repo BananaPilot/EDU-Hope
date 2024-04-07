@@ -1,6 +1,9 @@
-package model;
+package model.user.role.type;
 
 import jakarta.persistence.*;
+import model.school.classes.Classes;
+import model.school.classes.register.Register;
+import model.user.User;
 
 @Entity
 public class Student {

@@ -1,8 +1,17 @@
-package model;
+package model.school.classes;
 
 import jakarta.persistence.*;
+import model.school.School;
+import model.school.classes.course.Course;
+import model.school.classes.register.Register;
+import model.user.role.type.Coordinator;
+import model.user.role.type.Student;
+import model.user.role.type.Tutor;
+
+import java.util.Set;
 
 @Entity
+@Table(name = "class")
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +26,18 @@ public class Classes {
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
+    @OneToMany(
+            mappedBy = "cl",
+            fetch = FetchType.LAZY)
+    private Set<School> schools;
+    @OneToMany(
+            mappedBy = "cl",
+            fetch = FetchType.LAZY)
+    private Set<Student> students;
+    @OneToMany(
+            mappedBy = "cl",
+            fetch = FetchType.LAZY)
+    private Set<Register> registers;
 
     public Integer getId() {
         return id;
@@ -36,6 +57,18 @@ public class Classes {
 
     public Course getCourse() {
         return course;
+    }
+
+    public Set<School> getSchools() {
+        return schools;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public Set<Register> getRegisters() {
+        return registers;
     }
 
     public void setName(String name) {

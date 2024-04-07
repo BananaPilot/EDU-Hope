@@ -1,9 +1,10 @@
-package model;
+package model.school.classes.register;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import model.user.role.type.Student;
 
 import java.time.LocalDate;
 
@@ -36,6 +37,7 @@ public class Vote {
     public LocalDate getDate() {
         return date;
     }
+
 
     public void setSubject(String subject) {
         this.subject = subject;

@@ -1,6 +1,12 @@
-package model;
+package model.school.classes.register;
 
 import jakarta.persistence.*;
+import model.school.classes.Classes;
+import model.school.School;
+import model.user.role.type.Student;
+import model.user.role.type.Tutor;
+
+import java.util.Set;
 
 @Entity
 public class Register {
@@ -8,12 +14,26 @@ public class Register {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String schoolYear;
+
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes cl;
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
+
+    @OneToMany(
+            mappedBy = "register",
+            fetch = FetchType.LAZY)
+    private Set<Vote> votes;
+    @OneToMany(
+            mappedBy = "register",
+            fetch = FetchType.LAZY)
+    private Set<School> schools;
+    @OneToMany(
+            mappedBy = "register",
+            fetch = FetchType.LAZY)
+    private Set<Student> students;
 
     public Integer getId() {
         return id;
@@ -23,12 +43,24 @@ public class Register {
         return schoolYear;
     }
 
-    public Classes getId_class() {
+    public Classes getCl() {
         return cl;
     }
 
-    public Tutor getId_tutor() {
+    public Tutor getTutor() {
         return tutor;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public Set<School> getSchools() {
+        return schools;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
     }
 
     public void setSchoolYear(String schoolYear) {

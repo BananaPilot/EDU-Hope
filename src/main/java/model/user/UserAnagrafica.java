@@ -1,4 +1,4 @@
-package model;
+package model.user;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,9 @@ public class UserAnagrafica {
 
     @Id
     @OneToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(
+            name = "id_user",
+            referencedColumnName = "id")
     private User user;
     private String name;
     private String surname;

@@ -1,9 +1,13 @@
-package model;
+package model.school;
 
 import jakarta.persistence.*;
+import model.school.classes.Classes;
+import model.school.classes.course.Course;
+import model.school.classes.register.Register;
+import model.user.User;
 
 @Entity
-public class Scuola {
+public class School {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +32,7 @@ public class Scuola {
         return id;
     }
 
-    public Classes getC() {
+    public Classes getCl() {
         return cl;
     }
 
