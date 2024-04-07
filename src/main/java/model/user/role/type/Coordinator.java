@@ -7,9 +7,11 @@ import model.user.User;
 import java.util.Set;
 
 @Entity
+@Table(name = "coordinator")
 public class Coordinator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_coordinator")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_user")

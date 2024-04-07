@@ -3,7 +3,8 @@ package model.user;
 import jakarta.persistence.*;
 
 @Entity
-public class UserAnagrafica {
+@Table(name = "user_details")
+public class UserDetails {
 
     @Id
     @OneToOne
@@ -11,10 +12,15 @@ public class UserAnagrafica {
             name = "id_user",
             referencedColumnName = "id")
     private User user;
+    @Column(name = "user_name")
     private String name;
+    @Column(name = "user_surname")
     private String surname;
-    @Column(nullable = false)
+    @Column(
+            name = "user_email",
+            nullable = false)
     private String email;
+    @Column(name = "user_telephone")
     private Long telephone;
 
     public User getUser() {
@@ -54,8 +60,8 @@ public class UserAnagrafica {
 
     @Override
     public String toString() {
-        return "User_Anagrafica{" +
-                "id_user: " + user +
+        return "UserDetails{" +
+                "user: " + user +
                 ", name: '" + name + '\'' +
                 ", surname: '" + surname + '\'' +
                 ", email: '" + email + '\'' +

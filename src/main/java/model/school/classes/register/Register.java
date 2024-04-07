@@ -9,10 +9,15 @@ import model.user.role.type.Tutor;
 import java.util.Set;
 
 @Entity
+@Table(name = "register")
 public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_register")
     private Integer id;
+    @Column(
+            name = "register_school-year",
+            nullable = false)
     private String schoolYear;
 
     @ManyToOne

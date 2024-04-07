@@ -7,10 +7,12 @@ import model.school.classes.register.Register;
 import model.user.User;
 
 @Entity
+@Table(name = "school")
 public class School {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_school")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_class")

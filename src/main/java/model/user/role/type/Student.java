@@ -6,9 +6,11 @@ import model.school.classes.register.Register;
 import model.user.User;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_student")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_user")

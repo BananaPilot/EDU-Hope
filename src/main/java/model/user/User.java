@@ -21,11 +21,13 @@ public class User {
             nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(
+            name = "user_password",
+            nullable = false)
     private String password;
-
+    @Column(name = "user_details")
     @OneToOne(mappedBy = "user")
-    private UserAnagrafica userAnagrafica;
+    private UserDetails userDetails;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -63,8 +65,8 @@ public class User {
         return password;
     }
 
-    public UserAnagrafica getUserAnagrafica() {
-        return userAnagrafica;
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
     public Set<Role> getRoles() {

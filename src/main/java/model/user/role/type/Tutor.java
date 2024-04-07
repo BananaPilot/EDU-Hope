@@ -8,9 +8,11 @@ import model.user.User;
 import java.util.Set;
 
 @Entity
+@Table(name = "tutor")
 public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_tutor")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_user")

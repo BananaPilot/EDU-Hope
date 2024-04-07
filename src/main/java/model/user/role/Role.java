@@ -6,6 +6,7 @@ import model.user.User;
 import java.util.Set;
 
 @Entity
+@Table(name = "role")
 public enum Role {
     SUPER_ADMIN,
     ADMIN,
@@ -15,6 +16,7 @@ public enum Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_role")
     private Integer id;
     @ManyToMany(
             mappedBy = "roles",

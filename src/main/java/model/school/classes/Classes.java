@@ -15,7 +15,11 @@ import java.util.Set;
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_class")
     private Integer id;
+    @Column(
+            name = "class_name",
+            nullable = false)
     private String name;
     @ManyToOne
     @JoinColumn(name = "id_tutor")

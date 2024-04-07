@@ -7,14 +7,21 @@ import model.school.classes.Classes;
 import java.util.Set;
 
 @Entity
+@Table(name = "course")
 public enum Course {
     BACKEND,
     FULLSTACK,
     FRONTEND;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_course")
     private Integer id;
+    @Column(
+            name = "course_name",
+            nullable = false
+    )
     private String name;
+    @Column(name = "course_description")
     private String description;
     @OneToMany(
             mappedBy = "course",

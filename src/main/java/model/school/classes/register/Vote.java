@@ -1,25 +1,31 @@
 package model.school.classes.register;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import model.user.role.type.Student;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "vote")
 public class Vote {
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_register")
+    @JoinColumn(
+            name = "id_register")
     private Register register;
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student student;
+    @Column(name = "vote_subject",
+            nullable = false)
     private String subject;
+    @Column(name = "vote_date",
+            nullable = false)
     private LocalDate date;
-    private Float vote;
+    @Column(name = "vote_evaluation",
+            nullable = false)
+    private Float evaluation;
+    @Column(name = "annotation")
     private String annotation;
 
     public Register getRegister() {
@@ -47,16 +53,16 @@ public class Vote {
         this.date = date;
     }
 
-    public void setVote(Float vote) {
-        this.vote = vote;
+    public void setEvaluation(Float evaluation) {
+        this.evaluation = evaluation;
     }
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
     }
 
-    public Float getVote() {
-        return vote;
+    public Float getEvaluation() {
+        return evaluation;
     }
 
     public String getAnnotation() {
@@ -70,7 +76,7 @@ public class Vote {
                 ", id_student: " + student +
                 ", subject: '" + subject + '\'' +
                 ", date: " + date +
-                ", vote: " + vote +
+                ", vote: " + evaluation +
                 ", annotation: '" + annotation + '\'' +
                 '}';
     }
