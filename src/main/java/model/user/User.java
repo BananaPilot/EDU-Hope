@@ -27,7 +27,7 @@ public class User {
     private String password;
     @Column(name = "user_details")
     @OneToOne(mappedBy = "user")
-    private UserDetails userDetails;
+    private UserRegistry userDetails;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -65,7 +65,7 @@ public class User {
         return password;
     }
 
-    public UserDetails getUserDetails() {
+    public UserRegistry getUserDetails() {
         return userDetails;
     }
 

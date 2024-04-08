@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class UserRegistry {
 
     @Id
     @OneToOne
