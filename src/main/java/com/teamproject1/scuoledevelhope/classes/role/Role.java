@@ -1,7 +1,7 @@
-package model.user.role;
+package com.teamproject1.scuoledevelhope.classes.role;
 
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import model.user.User;
 
 import java.util.Set;
 

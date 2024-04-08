@@ -1,10 +1,11 @@
-package model.school.classes.register;
+package com.teamproject1.scuoledevelhope.classes.register;
 
 import jakarta.persistence.*;
-import model.school.classes.Classes;
-import model.school.School;
-import model.user.role.type.Student;
-import model.user.role.type.Tutor;
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 
 import java.util.Set;
 

@@ -1,10 +1,10 @@
-package model.school;
+package com.teamproject1.scuoledevelhope.classes.school;
 
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.course.Course;
+import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import model.school.classes.Classes;
-import model.school.classes.course.Course;
-import model.school.classes.register.Register;
-import model.user.User;
 
 @Entity
 @Table(name = "school")

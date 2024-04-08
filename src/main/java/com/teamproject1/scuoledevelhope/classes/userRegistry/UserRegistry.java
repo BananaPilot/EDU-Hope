@@ -1,5 +1,6 @@
-package model.user;
+package com.teamproject1.scuoledevelhope.classes.userRegistry;
 
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 @Entity
