@@ -1,18 +1,24 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
+import com.teamproject1.scuoledevelhope.classes.role.Role;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String username;
 
     private String password;
+
+    @ManyToMany
+    private Set<Role> roles;
 
     public User(String username, String password) {
         this.username = username;

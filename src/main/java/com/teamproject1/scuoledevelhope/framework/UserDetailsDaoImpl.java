@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.user.framework;
+package com.teamproject1.scuoledevelhope.framework;
 
 import com.bananapilot.samplespringauthenticationframework.repo.UserDetailsDao;
 import com.bananapilot.samplespringauthenticationframework.types.UserDetails;
