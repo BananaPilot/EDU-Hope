@@ -7,17 +7,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public enum Role {
-    SUPER_ADMIN,
-    ADMIN,
-    COORDINATOR,
-    TUTOR,
-    STUDENT;
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
     private Integer id;
+    private RoleEnum roleEnum;
     @ManyToMany(
             mappedBy = "roles",
             fetch = FetchType.LAZY)
@@ -26,13 +22,27 @@ public enum Role {
     public Integer getId() {
         return id;
     }
+
     public Set<User> getUsers() {
         return users;
+    }
+
+    public RoleEnum getRoleEnum() {
+        return roleEnum;
+    }
+
+    public enum RoleEnum {
+        SUPER_ADMIN,
+        ADMIN,
+        COORDINATOR,
+        TUTOR,
+        STUDENT;
     }
 
     @Override
     public String toString() {
         return "Role{" +
+                "role: " + roleEnum +
                 "users: " + users +
                 '}';
     }

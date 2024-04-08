@@ -1,4 +1,4 @@
-package  com.teamproject1.scuoledevelhope.util;
+package com.teamproject1.scuoledevelhope.framework;
 
 import com.bananapilot.samplespringauthenticationframework.utils.FloorLevelImpl;
 import com.teamproject1.scuoledevelhope.types.errors.NullValueException;

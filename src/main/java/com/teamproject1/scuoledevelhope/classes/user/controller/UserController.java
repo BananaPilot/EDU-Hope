@@ -27,7 +27,7 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @NoAuthorization
+
     @BasicAuthorization(roles = {"ADMIN"})
     @GetMapping("user/{username}")
     public BaseResponseElement<User> getByUsername(@PathVariable("username") String username) {
