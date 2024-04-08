@@ -1,8 +1,8 @@
-package model.school.classes.course;
+package com.teamproject1.scuoledevelhope.classes.course;
 
 import jakarta.persistence.*;
-import model.school.School;
-import model.school.classes.Classes;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 
 import java.util.Set;
 

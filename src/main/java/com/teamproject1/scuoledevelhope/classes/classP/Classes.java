@@ -1,12 +1,12 @@
-package model.school.classes;
+package com.teamproject1.scuoledevelhope.classes.classP;
 
 import jakarta.persistence.*;
-import model.school.School;
-import model.school.classes.course.Course;
-import model.school.classes.register.Register;
-import model.user.role.type.Coordinator;
-import model.user.role.type.Student;
-import model.user.role.type.Tutor;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.course.Course;
+import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 
 import java.util.Set;
 

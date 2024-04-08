@@ -1,9 +1,9 @@
-package model.user.role.type;
+package com.teamproject1.scuoledevelhope.classes.tutor;
 
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import model.school.classes.Classes;
-import model.school.classes.register.Register;
-import model.user.User;
 
 import java.util.Set;
 

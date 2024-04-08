@@ -1,7 +1,8 @@
-package model.school.classes.register;
+package com.teamproject1.scuoledevelhope.classes.vote;
 
+import com.teamproject1.scuoledevelhope.classes.register.Register;
 import jakarta.persistence.*;
-import model.user.role.type.Student;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
 
 import java.time.LocalDate;
 
