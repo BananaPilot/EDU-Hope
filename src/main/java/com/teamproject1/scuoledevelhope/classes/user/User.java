@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
 import com.teamproject1.scuoledevelhope.classes.role.Role;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -12,11 +13,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String username;
 
     private String password;
-
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY)
+    private Set<Student> students;
     @ManyToMany
     private Set<Role> roles;
 

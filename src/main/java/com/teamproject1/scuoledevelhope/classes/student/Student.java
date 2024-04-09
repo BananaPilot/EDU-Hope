@@ -22,6 +22,25 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
+    public Student() {
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCl(Classes cl) {
+        this.cl = cl;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
+
     public Integer getId() {
         return id;
     }
