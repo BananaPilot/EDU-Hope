@@ -33,7 +33,7 @@ public class Classes {
 
     @ManyToOne
     @JoinColumn(name = "id_school")
-    private School schools;
+    private School school;
 
     @OneToMany(
             mappedBy = "cl",
@@ -63,7 +63,7 @@ public class Classes {
     }
 
     public School getSchools() {
-        return schools;
+        return school;
     }
 
     public Set<Student> getStudents() {

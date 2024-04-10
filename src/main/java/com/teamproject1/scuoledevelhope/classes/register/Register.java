@@ -35,10 +35,6 @@ public class Register {
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
-    private Set<School> schools;
-    @OneToMany(
-            mappedBy = "register",
-            fetch = FetchType.LAZY)
     private Set<Student> students;
 
     public Integer getId() {
@@ -59,10 +55,6 @@ public class Register {
 
     public Set<Vote> getVotes() {
         return votes;
-    }
-
-    public Set<School> getSchools() {
-        return schools;
     }
 
     public Set<Student> getStudents() {
