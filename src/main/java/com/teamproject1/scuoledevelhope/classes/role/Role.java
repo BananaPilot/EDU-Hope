@@ -13,10 +13,14 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
     private Integer id;
-    private RoleEnum roleEnum;
+
+    @Column(name = "role_name")
+    RoleEnum roleEnum;
+
     @ManyToMany(
             mappedBy = "roles",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private Set<User> users;
 
     public Integer getId() {
@@ -42,7 +46,6 @@ public class Role {
     @Override
     public String toString() {
         return "Role{" +
-                "role: " + roleEnum +
                 "users: " + users +
                 '}';
     }
