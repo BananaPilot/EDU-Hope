@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.coordinator.Controller;
+package com.teamproject1.scuoledevelhope.classes.coordinator;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
@@ -42,7 +42,7 @@ public class Coordinator {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Coordinator{" +
                 "id: " + id +
                 ", id_user: " + user +
                 ", id_class: " + cl +

@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TutorDAO extends JpaRepository<Tutor, Integer> {
+
+
 }
 
