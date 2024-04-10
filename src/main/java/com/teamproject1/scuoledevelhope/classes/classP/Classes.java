@@ -30,18 +30,17 @@ public class Classes {
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
-    @OneToMany(
-            mappedBy = "cl",
-            fetch = FetchType.LAZY)
-    private Set<School> schools;
+
+    @ManyToOne
+    @JoinColumn(name = "id_school")
+    private School schools;
+
     @OneToMany(
             mappedBy = "cl",
             fetch = FetchType.LAZY)
     private Set<Student> students;
-    @OneToMany(
-            mappedBy = "cl",
-            fetch = FetchType.LAZY)
-    private Set<Register> registers;
+    @OneToOne(mappedBy = "cl")
+    private Register registers;
 
     public Integer getId() {
         return id;
@@ -63,7 +62,7 @@ public class Classes {
         return course;
     }
 
-    public Set<School> getSchools() {
+    public School getSchools() {
         return schools;
     }
 
@@ -71,7 +70,7 @@ public class Classes {
         return students;
     }
 
-    public Set<Register> getRegisters() {
+    public Register getRegisters() {
         return registers;
     }
 

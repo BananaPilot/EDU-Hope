@@ -21,7 +21,7 @@ public class Register {
             nullable = false)
     private String schoolYear;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_class")
     private Classes cl;
     @ManyToOne
