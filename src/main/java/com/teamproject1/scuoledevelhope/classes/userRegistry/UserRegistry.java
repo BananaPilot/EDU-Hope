@@ -3,8 +3,10 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "user_details")
+@Table(name = "user_registry")
 public class UserRegistry {
 
     @Id
@@ -68,5 +70,21 @@ public class UserRegistry {
                 ", email: '" + email + '\'' +
                 ", telephone: " + telephone +
                 '}';
+    }
+
+    @Embeddable
+    public class UserRegistryId implements Serializable {
+        private Long userId;
+        private Long registryId; // Assegna un ID numerico a 'UserRegistry'
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public Long getRegistryId() {
+            return registryId;
+        }
+
+        // ... getter e setter
     }
 }
