@@ -10,9 +10,11 @@ import java.time.LocalDate;
 @Table(name = "vote")
 public class Vote {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id_vote")
+    private Integer id;
     @ManyToOne
-    @JoinColumn(
-            name = "id_register")
+    @JoinColumn(name = "id_register")
     private Register register;
     @ManyToOne
     @JoinColumn(name = "id_student")
