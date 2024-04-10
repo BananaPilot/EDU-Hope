@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.coordinator.Service;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 
@@ -26,7 +26,7 @@ public class Classes {
     private Tutor tutor;
     @ManyToOne
     @JoinColumn(name = "id_coordinator")
-    private Coordinator coordinator;
+    private Service coordinator;
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
@@ -55,7 +55,7 @@ public class Classes {
         return tutor;
     }
 
-    public Coordinator getCoordinator() {
+    public Service getCoordinator() {
         return coordinator;
     }
 

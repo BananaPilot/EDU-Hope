@@ -1,14 +1,15 @@
-package com.teamproject1.scuoledevelhope.classes.coordinator;
+package com.teamproject1.scuoledevelhope.classes.coordinator.Controller;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
-import java.util.Set;
 
 @Entity
 @Table(name = "coordinator")
 public class Coordinator {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
@@ -16,32 +17,36 @@ public class Coordinator {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
-    @OneToMany(
-            mappedBy = "coordinator",
-            fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    @ManyToOne
+    @JoinColumn(name = "id_class")
+    private Classes cl;
+    @ManyToOne
+    @JoinColumn(name = "id_register")
+    private Register register;
 
     public Integer getId() {
         return id;
-    }
-
-    public User getId_user() {
-        return user;
     }
 
     public User getUser() {
         return user;
     }
 
-    public Set<Classes> getClasses() {
-        return classes;
+    public Classes getCl() {
+        return cl;
+    }
+
+    public Register getRegister() {
+        return register;
     }
 
     @Override
     public String toString() {
-        return "Tutor{" +
+        return "Student{" +
                 "id: " + id +
                 ", id_user: " + user +
+                ", id_class: " + cl +
+                ", id_register: " + register +
                 '}';
     }
 }
