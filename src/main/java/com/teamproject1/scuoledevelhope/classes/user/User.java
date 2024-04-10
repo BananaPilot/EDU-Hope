@@ -21,7 +21,11 @@ public class User {
     private String username;
 
     private String password;
-    @OneToOne(mappedBy = "user")
+    @OneToOne()
+    @JoinColumn(
+            name = "user_registry_id",
+            referencedColumnName = "id"
+    )
     private UserRegistry userRegistry;
 
     @ManyToMany

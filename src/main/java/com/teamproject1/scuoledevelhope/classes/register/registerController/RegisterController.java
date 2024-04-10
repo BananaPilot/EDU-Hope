@@ -16,33 +16,36 @@ public class RegisterController {
         this.registerService = registerService;
     }
 
+    //READ
     @GetMapping("/get-all")
     public BaseResponseList<Register> findAll(){
         return registerService.findAll();
     }
 
-    @GetMapping("/get-by-id/{id}")
-    public BaseResponseElement<Register> findById(@PathVariable Integer id){
+    @GetMapping("/get-by-id")
+    public BaseResponseElement<Register> findById(@RequestParam Integer id){
         return registerService.findById(id);
     }
 
-    @GetMapping("/get-by-year/{year}")
-    public BaseResponseList<Register> getAllBySchoolYear(@PathVariable String schoolYear){
+    @GetMapping("/get-by-year")
+    public BaseResponseList<Register> getAllBySchoolYear(@RequestParam String schoolYear){
         return registerService.getAllBySchoolYear(schoolYear);
     }
 
-    @GetMapping("/get-by-tutor/{tutor}")
-    public BaseResponseList<Register> getAllByTutor(@PathVariable Integer tutor){
+    @GetMapping("/get-by-tutor")
+    public BaseResponseList<Register> getAllByTutor(@RequestParam Integer tutor){
         return registerService.getAllByTutor(tutor);
     }
 
+    //ADD - UPDATE
     @PostMapping("/save")
     public BaseResponseElement<Register> save(@RequestBody Register register){
         return registerService.save(register);
     }
 
-    @DeleteMapping("/delete-by-id/{id}")
-    public BaseResponseElement<Register> delete(@PathVariable Integer id){
+    //DELETE
+    @DeleteMapping("/delete-by-id")
+    public BaseResponseElement<Register> delete(@RequestParam Integer id){
         return registerService.deleteById(id);
     }
 

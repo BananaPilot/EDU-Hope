@@ -37,7 +37,7 @@ public class RegisterService {
     }
 
     public BaseResponseList<Register> getAllByTutor(Integer tutorId){
-        return new BaseResponseList<>((registerDao.getAllByTutor(tutorId)));
+        return new BaseResponseList<>(registerDao.getAllByTutor(tutorId));
     }
 
     public BaseResponseElement<Register> save(Register register) {
