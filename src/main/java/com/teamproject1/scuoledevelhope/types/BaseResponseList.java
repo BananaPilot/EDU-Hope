@@ -1,5 +1,7 @@
 package com.teamproject1.scuoledevelhope.types;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 
 public class BaseResponseList <T> extends BaseResponse{
@@ -7,6 +9,11 @@ public class BaseResponseList <T> extends BaseResponse{
 
     public BaseResponseList(){
 
+    }
+
+    public BaseResponseList(HttpStatus httpStatus, String message, String description, List<T> elements) {
+        super(httpStatus, message, description);
+        this.elements = elements;
     }
 
     public BaseResponseList(List<T> elements){

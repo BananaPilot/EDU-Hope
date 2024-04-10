@@ -6,6 +6,7 @@ import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +27,6 @@ public class UserService {
         if (res < 1) {
             throw new SQLException("User was not added");
         }
-        return new BaseResponseElement<>(user);
+        return new BaseResponseElement<>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), " ", userDao.getByUsername(user.getUsername()));
     }
 }
