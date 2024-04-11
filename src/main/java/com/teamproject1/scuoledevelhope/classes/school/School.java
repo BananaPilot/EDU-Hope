@@ -15,12 +15,10 @@ public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
-    private UUID id;
-    @Column(name = "school_name")
-    private String name;
+    private UUID id = UUID.randomUUID();
     @ManyToOne
     @JoinColumn(name = "id_class")
-    private Classes schoolClass;
+    private Classes cl;
 
     @ManyToOne
     @JoinColumn(name = "id_course")
@@ -35,33 +33,29 @@ public class School {
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
-    @OneToMany(
-            mappedBy = "school",
-            fetch = FetchType.LAZY)
-    private Set<Course> courses;
-
-    @OneToMany(
-            mappedBy = "school",
-            fetch = FetchType.LAZY)
-    private Set<User> users;
-
     public UUID getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public Classes getCl() {
+        return cl;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Course getCourse() {
+        return course;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String toString() {
-        return "School{" +
+        return "Scuola{" +
                 "id: " + id +
-                ", name: '" + name + '\'' +
+                ", class: " + cl +
+                ", course: " + course +
+                ", user: " + user +
                 '}';
     }
 }

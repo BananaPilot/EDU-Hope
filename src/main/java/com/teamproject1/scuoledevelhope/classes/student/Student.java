@@ -5,13 +5,15 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
-    private Integer id;
+    private UUID id = UUID.randomUUID();
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -22,7 +24,7 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

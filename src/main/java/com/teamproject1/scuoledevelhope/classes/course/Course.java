@@ -16,7 +16,7 @@ public enum Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private UUID id;
+    private final UUID id = UUID.randomUUID();
     @Column(
             name = "course_name",
             nullable = false
@@ -24,9 +24,10 @@ public enum Course {
     private String name;
     @Column(name = "course_description")
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "id_school")
-    private School school;
+    @OneToMany(
+            mappedBy = "course",
+            fetch = FetchType.LAZY)
+    private Set<School> schools;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
@@ -41,9 +42,11 @@ public enum Course {
     public String getDescription() {
         return description;
     }
-
-    public School getSchool() {
-        return school;
+    public Set<School> getSchools() {
+        return schools;
+    }
+    public Set<Classes> getClasses() {
+        return classes;
     }
 
     public void setName(String name) {

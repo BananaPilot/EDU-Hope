@@ -2,7 +2,6 @@ package com.teamproject1.scuoledevelhope.classes.user;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
-import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;

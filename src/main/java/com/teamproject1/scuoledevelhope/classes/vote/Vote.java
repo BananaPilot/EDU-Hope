@@ -13,7 +13,7 @@ public class Vote {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;

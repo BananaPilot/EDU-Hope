@@ -13,7 +13,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @Column(name = "role_name")
     @Enumerated(EnumType.STRING)
