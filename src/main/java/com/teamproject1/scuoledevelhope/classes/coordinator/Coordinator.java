@@ -11,7 +11,6 @@ import java.util.UUID;
 @Table(name = "coordinator")
 public class Coordinator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
     private UUID id = UUID.randomUUID();
     @ManyToOne
