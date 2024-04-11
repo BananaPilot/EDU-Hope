@@ -28,6 +28,10 @@ public class User {
     )
     private UserRegistry userRegistry;
 
+    @ManyToOne
+    @JoinColumn(name = "id_school")
+    private School school;
+
     @ManyToMany
     private Set<Role> roles;
     @OneToMany(

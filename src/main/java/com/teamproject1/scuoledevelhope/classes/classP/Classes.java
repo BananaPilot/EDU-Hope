@@ -62,16 +62,12 @@ public class Classes {
         return course;
     }
 
-    public School getSchools() {
+    public School getSchool() {
         return school;
     }
 
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public Register getRegisters() {
-        return registers;
+    public School getSchools() {
+        return school;
     }
 
     public void setName(String name) {

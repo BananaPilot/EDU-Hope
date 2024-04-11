@@ -8,6 +8,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "school")
@@ -16,47 +17,42 @@ public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
-    private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_class")
-    private Classes cl;
-
-    @ManyToOne
-    @JoinColumn(name = "id_course")
-    private Course course;
-
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
+    private UUID id;
+    @Column(name = "school_name")
+    private String name;
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
-    public Integer getId() {
+    @OneToMany(
+            mappedBy = "school",
+            fetch = FetchType.LAZY)
+    private Set<Course> courses;
+
+    @OneToMany(
+            mappedBy = "school",
+            fetch = FetchType.LAZY)
+    private Set<User> users;
+
+
+    public UUID getId() {
         return id;
     }
 
-    public Classes getCl() {
-        return cl;
+    public String getName() {
+        return name;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public User getUser() {
-        return user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Scuola{" +
+        return "School{" +
                 "id: " + id +
-                ", class: " + cl +
-                ", course: " + course +
-                ", user: " + user +
+                ", name: '" + name + '\'' +
                 '}';
     }
 }

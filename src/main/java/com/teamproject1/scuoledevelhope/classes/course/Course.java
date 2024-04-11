@@ -23,10 +23,9 @@ public enum Course {
     private String name;
     @Column(name = "course_description")
     private String description;
-    @OneToMany(
-            mappedBy = "course",
-            fetch = FetchType.LAZY)
-    private Set<School> schools;
+    @ManyToOne
+    @JoinColumn(name = "id_school")
+    private School school;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
@@ -41,11 +40,9 @@ public enum Course {
     public String getDescription() {
         return description;
     }
-    public Set<School> getSchools() {
-        return schools;
-    }
-    public Set<Classes> getClasses() {
-        return classes;
+
+    public School getSchool() {
+        return school;
     }
 
     public void setName(String name) {
