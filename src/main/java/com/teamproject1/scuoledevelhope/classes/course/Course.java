@@ -15,7 +15,7 @@ public enum Course {
     FRONTEND;
     @Id
     @Column(name = "id_course")
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     @Column(
             name = "course_name",
             nullable = false
@@ -23,10 +23,9 @@ public enum Course {
     private String name;
     @Column(name = "course_description")
     private String description;
-    @OneToMany(
-            mappedBy = "course",
-            fetch = FetchType.LAZY)
-    private Set<School> schools;
+    @ManyToOne
+    @JoinColumn(name = "id_school")
+    private School school;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
@@ -41,13 +40,9 @@ public enum Course {
     public String getDescription() {
         return description;
     }
-    public Set<School> getSchools() {
-        return schools;
+    public School getSchool() {
+        return school;
     }
-    public Set<Classes> getClasses() {
-        return classes;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -56,12 +51,17 @@ public enum Course {
         this.description = description;
     }
 
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
-                "id: " + id +
+                "id:" + id +
                 ", name: '" + name + '\'' +
                 ", description: '" + description + '\'' +
+                ", school: " + school +
                 '}';
     }
 }

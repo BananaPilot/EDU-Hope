@@ -31,6 +31,10 @@ public class Vote {
     @Column(name = "annotation")
     private String annotation;
 
+    public UUID getId() {
+        return id;
+    }
+
     public Register getRegister() {
         return register;
     }
@@ -47,6 +51,21 @@ public class Vote {
         return date;
     }
 
+    public Float getEvaluation() {
+        return evaluation;
+    }
+
+    public String getAnnotation() {
+        return annotation;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public void setSubject(String subject) {
         this.subject = subject;
@@ -62,14 +81,6 @@ public class Vote {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
-    }
-
-    public Float getEvaluation() {
-        return evaluation;
-    }
-
-    public String getAnnotation() {
-        return annotation;
     }
 
     @Override

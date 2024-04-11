@@ -15,46 +15,43 @@ public class School {
     @Id
     @Column(name = "id_school")
     private UUID id = UUID.randomUUID();
-    @ManyToOne
-    @JoinColumn(name = "id_class")
-    private Classes cl;
 
-    @ManyToOne
-    @JoinColumn(name = "id_course")
-    private Course course;
-
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+    @Column(
+            name = "class_name",
+            nullable = false)
+    private String name;
 
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
+    @OneToMany(
+            mappedBy = "school",
+            fetch = FetchType.LAZY)
+    private Set<Course> courses;
+
+    @OneToMany(
+            mappedBy = "school",
+            fetch = FetchType.LAZY)
+    private Set<User> users;
+
     public UUID getId() {
         return id;
     }
-
-    public Classes getCl() {
-        return cl;
+    public String getName() {
+        return name;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public User getUser() {
-        return user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Scuola{" +
+        return "School{" +
                 "id: " + id +
-                ", class: " + cl +
-                ", course: " + course +
-                ", user: " + user +
+                ", name: '" + name + '\'' +
                 '}';
     }
 }

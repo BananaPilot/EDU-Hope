@@ -52,12 +52,12 @@ public class Register {
         return tutor;
     }
 
-    public Set<Vote> getVotes() {
-        return votes;
+    public void setSchoolClass(Classes schoolClass) {
+        this.schoolClass = schoolClass;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
     }
 
     public void setSchoolYear(String schoolYear) {
