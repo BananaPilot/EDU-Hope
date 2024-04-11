@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: "UNIDEVELHOPE"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://avnadmin:AVNS_k1yLZ-e_M0Q5ukT5ftW@mysql-tp1-team-project-1.a.aivencloud.com:20268/defaultdb?ssl-mode=REQUIRED
+    username: avnadmin
+    password: AVNS_k1yLZ-e_M0Q5ukT5ftW
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+framework:
+  jwt:
+    hashKey: c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2
+    advice: ciao
+    timeToExpire: 3000
