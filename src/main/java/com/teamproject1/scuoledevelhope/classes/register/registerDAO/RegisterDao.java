@@ -23,7 +23,7 @@ public interface RegisterDao extends JpaRepository<Register, UUID>{
 
     @Modifying
     @Transactional
-    @Query(value = "insert into register (schoolYear, cl, tutor) values (:schoolYear, :cl, :tutor)",nativeQuery = true)
-    int addRegister(@Param("schoolYear") String schoolYear, @Param("cl") Classes classes, @Param("tutor") Tutor tutor);
+    @Query(value = "insert into register (schoolYear, id_cl, id_tutor) values (:schoolYear, :idClass, :idTutor)",nativeQuery = true)
+    int addRegister(@Param("schoolYear") String schoolYear, @Param("cl") UUID classes, @Param("id_tutor") UUID idTutor);
 
 }

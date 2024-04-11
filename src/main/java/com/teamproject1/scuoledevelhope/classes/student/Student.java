@@ -39,6 +39,18 @@ public class Student {
         return register;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setSchoolClass(Classes schoolClass) {
+        this.schoolClass = schoolClass;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
