@@ -15,6 +15,7 @@ public class Role {
     private Integer id;
 
     @Column(name = "role_name")
+    @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
     @ManyToMany(
@@ -38,6 +39,8 @@ public class Role {
     public enum RoleEnum {
         SUPER_ADMIN,
         ADMIN,
+        MODERATOR,
+        USER,
         COORDINATOR,
         TUTOR,
         STUDENT;
