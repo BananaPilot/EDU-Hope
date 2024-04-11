@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "vote")
@@ -12,7 +13,7 @@ public class Vote {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
-    private Integer id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;

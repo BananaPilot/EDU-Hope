@@ -4,6 +4,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "role")
@@ -12,7 +13,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
-    private Integer id;
+    private UUID id;
 
     @Column(name = "role_name")
     @Enumerated(EnumType.STRING)
@@ -24,7 +25,7 @@ public class Role {
     )
     private Set<User> users;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

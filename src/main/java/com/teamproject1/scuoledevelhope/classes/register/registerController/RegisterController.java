@@ -6,6 +6,8 @@ import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/register")
 public class RegisterController {
@@ -45,7 +47,7 @@ public class RegisterController {
 
     //DELETE
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Register> delete(@RequestParam Integer id){
+    public BaseResponseElement<Register> delete(@RequestParam UUID id){
         return registerService.deleteById(id);
     }
 

@@ -2,12 +2,12 @@ package com.teamproject1.scuoledevelhope.classes.register;
 
 import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "register")
@@ -15,7 +15,7 @@ public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
-    private Integer id;
+    private UUID id;
     @Column(
             name = "register_school-year",
             nullable = false)
@@ -23,7 +23,7 @@ public class Register {
 
     @OneToOne
     @JoinColumn(name = "id_class")
-    private Classes cl;
+    private Classes schoolClass;
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
@@ -37,7 +37,7 @@ public class Register {
             fetch = FetchType.LAZY)
     private Set<Student> students;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -45,8 +45,8 @@ public class Register {
         return schoolYear;
     }
 
-    public Classes getCl() {
-        return cl;
+    public Classes getSchoolClass() {
+        return schoolClass;
     }
 
     public Tutor getTutor() {
@@ -70,7 +70,7 @@ public class Register {
         return "Register{" +
                 "id: " + id +
                 ", schoolYear: '" + schoolYear + '\'' +
-                ", id_class: " + cl +
+                ", id_class: " + schoolClass +
                 ", id_tutor: " + tutor +
                 '}';
     }

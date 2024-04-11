@@ -4,6 +4,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user_registry")
@@ -11,7 +12,7 @@ public class UserRegistry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private UUID id;
     @OneToOne(mappedBy = "user")
     private User user;
     @Column(name = "user_name")
@@ -25,7 +26,7 @@ public class UserRegistry {
     @Column(name = "user_telephone")
     private String telephone;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
     public String getName() {

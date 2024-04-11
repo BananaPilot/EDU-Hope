@@ -2,12 +2,11 @@ package com.teamproject1.scuoledevelhope.classes.school;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
-import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "school")
@@ -16,7 +15,7 @@ public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
-    private Integer id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes cl;
@@ -34,7 +33,7 @@ public class School {
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
