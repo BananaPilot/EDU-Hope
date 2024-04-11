@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Register> findById(@RequestParam Integer id){
+    public BaseResponseElement<Register> findById(@RequestParam UUID id){
         return registerService.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class RegisterController {
     }
 
     @GetMapping("/get-by-tutor")
-    public BaseResponseList<Register> getAllByTutor(@RequestParam Integer tutor){
+    public BaseResponseList<Register> getAllByTutor(@RequestParam UUID tutor){
         return registerService.getAllByTutor(tutor);
     }
 

@@ -15,7 +15,7 @@ public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes cl;

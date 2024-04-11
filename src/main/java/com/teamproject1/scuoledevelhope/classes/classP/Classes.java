@@ -17,7 +17,7 @@ public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_class")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @Column(
             name = "class_name",
             nullable = false)
@@ -37,10 +37,10 @@ public class Classes {
     private School school;
 
     @OneToMany(
-            mappedBy = "SchoolClass",
+            mappedBy = "schoolClass",
             fetch = FetchType.LAZY)
     private Set<Student> students;
-    @OneToOne(mappedBy = "SchoolClass")
+    @OneToOne(mappedBy = "schoolClass")
     private Register registers;
 
     public UUID getId() {

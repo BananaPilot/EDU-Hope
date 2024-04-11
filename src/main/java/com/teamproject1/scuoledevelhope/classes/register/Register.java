@@ -15,7 +15,7 @@ public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @Column(
             name = "register_school-year",
             nullable = false)

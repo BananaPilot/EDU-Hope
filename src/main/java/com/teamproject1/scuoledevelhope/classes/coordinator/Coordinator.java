@@ -13,7 +13,7 @@ public class Coordinator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;

@@ -12,7 +12,7 @@ public class UserRegistry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @OneToOne(mappedBy = "user")
     private User user;
     @Column(name = "user_name")

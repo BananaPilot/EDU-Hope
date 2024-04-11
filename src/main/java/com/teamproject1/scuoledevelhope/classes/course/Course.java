@@ -16,7 +16,7 @@ public enum Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private UUID id;
+    private final UUID id = UUID.randomUUID();
     @Column(
             name = "course_name",
             nullable = false
