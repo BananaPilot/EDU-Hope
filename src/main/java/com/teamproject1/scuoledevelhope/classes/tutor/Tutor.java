@@ -11,7 +11,6 @@ import java.util.Set;
 @Table(name = "tutor")
 public class Tutor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tutor")
     private Integer id;
     @ManyToOne

@@ -15,7 +15,6 @@ import java.util.UUID;
 @Table(name = "class")
 public class Classes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_class")
     private UUID id = UUID.randomUUID();
     @Column(

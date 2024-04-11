@@ -13,7 +13,6 @@ import java.util.UUID;
 @Table(name = "register")
 public class Register {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
     private UUID id = UUID.randomUUID();
     @Column(

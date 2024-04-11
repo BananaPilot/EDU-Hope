@@ -14,7 +14,6 @@ public enum Course {
     FULLSTACK,
     FRONTEND;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
     private final UUID id = UUID.randomUUID();
     @Column(
