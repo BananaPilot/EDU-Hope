@@ -15,7 +15,7 @@ public enum Course {
     FRONTEND;
     @Id
     @Column(name = "id_course")
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     @Column(
             name = "course_name",
             nullable = false
