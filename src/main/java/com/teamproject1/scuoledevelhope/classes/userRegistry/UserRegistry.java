@@ -11,9 +11,8 @@ import java.util.UUID;
 public class UserRegistry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id = UUID.randomUUID();
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "userRegistry")
     private User user;
     @Column(name = "user_name")
     private String name;

@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.user.dao;
 
+import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,8 +22,8 @@ public interface UserDao extends JpaRepository<User, UUID> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into user (username, password) values (:username, :password)",nativeQuery = true)
-    int addUser(@Param("username") String username, @Param("password") String password);
+    @Query(value = "insert into user (id, username, password, school) values (:id, :username, :password, :school)",nativeQuery = true)
+    int addUser(@Param("id") UUID uuid, @Param("username") String username, @Param("password") String password, @Param("school") School school);
 
     
 }

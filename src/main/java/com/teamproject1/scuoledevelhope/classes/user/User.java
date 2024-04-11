@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.user;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
+import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
@@ -15,7 +16,6 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id = UUID.randomUUID();
 
     private String username;
@@ -27,6 +27,10 @@ public class User {
             referencedColumnName = "id"
     )
     private UserRegistry userRegistry;
+
+    @ManyToOne
+    @JoinColumn(name = "id_school")
+    private School school;
 
     @ManyToMany
     private Set<Role> roles;
@@ -70,6 +74,9 @@ public class User {
         this.password = password;
     }
 
+    public School getSchool() {
+        return school;
+    }
 
     public static final class UserBuilder {
         private UUID id;
