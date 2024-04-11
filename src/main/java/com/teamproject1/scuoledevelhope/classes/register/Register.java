@@ -21,7 +21,7 @@ public class Register {
             nullable = false)
     private String schoolYear;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_class")
     private Classes cl;
     @ManyToOne
@@ -32,10 +32,6 @@ public class Register {
             mappedBy = "register",
             fetch = FetchType.LAZY)
     private Set<Vote> votes;
-    @OneToMany(
-            mappedBy = "register",
-            fetch = FetchType.LAZY)
-    private Set<School> schools;
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
@@ -59,10 +55,6 @@ public class Register {
 
     public Set<Vote> getVotes() {
         return votes;
-    }
-
-    public Set<School> getSchools() {
-        return schools;
     }
 
     public Set<Student> getStudents() {

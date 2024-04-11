@@ -3,8 +3,11 @@ package com.teamproject1.scuoledevelhope.classes.school;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "school")
@@ -23,12 +26,13 @@ public class School {
     private Course course;
 
     @ManyToOne
-    @JoinColumn(name = "id_register")
-    private Register register;
-
-    @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+
+    @OneToMany(
+            mappedBy = "school",
+            fetch = FetchType.LAZY)
+    private Set<Classes> classes;
 
     public Integer getId() {
         return id;
@@ -40,10 +44,6 @@ public class School {
 
     public Course getCourse() {
         return course;
-    }
-
-    public Register getRegister() {
-        return register;
     }
 
     public User getUser() {

@@ -1,6 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
+import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -16,9 +21,27 @@ public class User {
     private String username;
 
     private String password;
+    @OneToOne()
+    @JoinColumn(
+            name = "user_registry_id",
+            referencedColumnName = "id"
+    )
+    private UserRegistry userRegistry;
 
     @ManyToMany
     private Set<Role> roles;
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY)
+    private Set<Student> students;
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY)
+    private Set<Tutor> tutors;
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY)
+    private Set<Coordinator> coordinators;
 
     public User(String username, String password) {
         this.username = username;

@@ -3,15 +3,16 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "user_details")
+@Table(name = "user_registry")
 public class UserRegistry {
 
     @Id
-    @OneToOne
-    @JoinColumn(
-            name = "id_user",
-            referencedColumnName = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @OneToOne(mappedBy = "user")
     private User user;
     @Column(name = "user_name")
     private String name;
@@ -22,10 +23,10 @@ public class UserRegistry {
             nullable = false)
     private String email;
     @Column(name = "user_telephone")
-    private Long telephone;
+    private String telephone;
 
-    public User getUser() {
-        return user;
+    public Integer getId() {
+        return id;
     }
     public String getName() {
         return name;
@@ -39,7 +40,7 @@ public class UserRegistry {
         return email;
     }
 
-    public Long getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
@@ -55,18 +56,34 @@ public class UserRegistry {
         this.email = email;
     }
 
-    public void setTelephone(Long telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
     @Override
     public String toString() {
         return "UserDetails{" +
-                "user: " + user +
+                "user: " + id +
                 ", name: '" + name + '\'' +
                 ", surname: '" + surname + '\'' +
                 ", email: '" + email + '\'' +
                 ", telephone: " + telephone +
                 '}';
+    }
+
+    @Embeddable
+    public class UserRegistryId implements Serializable {
+        private Long userId;
+        private Long registryId; // Assegna un ID numerico a 'UserRegistry'
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public Long getRegistryId() {
+            return registryId;
+        }
+
+        // ... getter e setter
     }
 }
