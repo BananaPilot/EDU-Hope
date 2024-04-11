@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user")
@@ -16,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private UUID id = UUID.randomUUID();
 
     private String username;
 
@@ -54,7 +55,7 @@ public class User {
 
     public User() {}
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -74,9 +75,12 @@ public class User {
         this.password = password;
     }
 
+    public School getSchool() {
+        return school;
+    }
 
     public static final class UserBuilder {
-        private int id;
+        private UUID id;
         private String username;
         private String password;
 
@@ -87,7 +91,7 @@ public class User {
             return new UserBuilder();
         }
 
-        public UserBuilder withId(int id) {
+        public UserBuilder withId(UUID id) {
             this.id = id;
             return this;
         }
@@ -103,9 +107,7 @@ public class User {
         }
 
         public User build() {
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
+            User user = new User(username, password);
             user.id = this.id;
             return user;
         }

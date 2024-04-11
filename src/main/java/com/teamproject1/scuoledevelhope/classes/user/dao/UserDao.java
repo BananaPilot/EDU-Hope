@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.user.dao;
 
+import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,9 +10,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface UserDao extends JpaRepository<User, Integer> {
+public interface UserDao extends JpaRepository<User, UUID> {
     @Query(value = "select * from user", nativeQuery = true)
     List<User> getAll();
 
@@ -20,6 +22,8 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into user (username, password) values (:username, :password)",nativeQuery = true)
-    int addUser(@Param("username") String username, @Param("password") String password);
+    @Query(value = "insert into user (id, username, password, school) values (:id, :username, :password, :school)",nativeQuery = true)
+    int addUser(@Param("id") UUID id, @Param("username") String username, @Param("password") String password, @Param("school") School school);
+
+    
 }

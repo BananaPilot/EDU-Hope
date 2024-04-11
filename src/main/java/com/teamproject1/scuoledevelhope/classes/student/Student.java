@@ -17,7 +17,7 @@ public class Student {
     private User user;
     @ManyToOne
     @JoinColumn(name = "id_class")
-    private Classes cl;
+    private Classes schoolClass;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
@@ -30,8 +30,8 @@ public class Student {
         return user;
     }
 
-    public Classes getCl() {
-        return cl;
+    public Classes getSchoolClass() {
+        return schoolClass;
     }
 
     public Register getRegister() {
@@ -43,7 +43,7 @@ public class Student {
         return "Student{" +
                 "id: " + id +
                 ", id_user: " + user +
-                ", id_class: " + cl +
+                ", id_class: " + schoolClass +
                 ", id_register: " + register +
                 '}';
     }

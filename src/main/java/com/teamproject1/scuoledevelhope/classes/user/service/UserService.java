@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public BaseResponseElement<User> addUser(User user) {
-        int res = userDao.addUser(user.getUsername(), user.getPassword());
+        int res = userDao.addUser(user.getId(), user.getUsername(), user.getPassword(), user.getSchool());
         if (res < 1) {
             throw new SQLException("User was not added");
         }

@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "course")
@@ -15,7 +16,7 @@ public enum Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private Integer id;
+    private UUID id;
     @Column(
             name = "course_name",
             nullable = false
@@ -31,7 +32,7 @@ public enum Course {
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
     public String getName() {

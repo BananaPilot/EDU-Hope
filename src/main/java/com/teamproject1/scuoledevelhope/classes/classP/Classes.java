@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "class")
@@ -16,7 +17,7 @@ public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_class")
-    private Integer id;
+    private UUID id;
     @Column(
             name = "class_name",
             nullable = false)
@@ -36,13 +37,13 @@ public class Classes {
     private School school;
 
     @OneToMany(
-            mappedBy = "cl",
+            mappedBy = "SchoolClass",
             fetch = FetchType.LAZY)
     private Set<Student> students;
-    @OneToOne(mappedBy = "cl")
+    @OneToOne(mappedBy = "SchoolClass")
     private Register registers;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

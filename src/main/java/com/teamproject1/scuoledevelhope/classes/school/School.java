@@ -2,8 +2,6 @@ package com.teamproject1.scuoledevelhope.classes.school;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
-import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
@@ -20,6 +18,18 @@ public class School {
     private UUID id;
     @Column(name = "school_name")
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "id_class")
+    private Classes schoolClass;
+
+    @ManyToOne
+    @JoinColumn(name = "id_course")
+    private Course course;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
@@ -34,7 +44,6 @@ public class School {
             mappedBy = "school",
             fetch = FetchType.LAZY)
     private Set<User> users;
-
 
     public UUID getId() {
         return id;

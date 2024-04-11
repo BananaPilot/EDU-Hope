@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "coordinator")
@@ -12,7 +13,7 @@ public class Coordinator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
-    private Integer id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -21,7 +22,7 @@ public class Coordinator {
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
