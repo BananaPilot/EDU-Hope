@@ -1,17 +1,11 @@
 package com.teamproject1.scuoledevelhope;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.student.studentDAO.StudentDAO;
-import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.classes.student.dao.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.user.dao.UserDao;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.UUID;
 
 
 @SpringBootApplication

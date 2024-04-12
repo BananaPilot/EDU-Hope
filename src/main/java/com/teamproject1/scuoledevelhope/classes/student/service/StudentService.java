@@ -1,8 +1,7 @@
-package com.teamproject1.scuoledevelhope.classes.student.studentService;
+package com.teamproject1.scuoledevelhope.classes.student.service;
 
-import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.student.studentDAO.StudentDAO;
+import com.teamproject1.scuoledevelhope.classes.student.dao.StudentDAO;
 import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
@@ -31,24 +30,6 @@ public class StudentService {
             return new BaseResponseElement<>(result.get());
         }else{
             throw new SQLException("Student was not present");}
-    }
-    public BaseResponseElement<Student> save(Student theStudent) {
-        studentDAO.save(theStudent);
-        return new BaseResponseElement<>(theStudent);
-    }
-
-    //TODO FIX UPDATES
-    public BaseResponseElement<Student> update( String id,Student theStudent) {
-
-        UUID uuid = UUID.fromString(id);
-        Student tempStudent = studentDAO.findById(uuid).get();
-
-        tempStudent.setUser(theStudent.getUser());
-        tempStudent.setSchoolClass(theStudent.getSchoolClass());
-        tempStudent.setRegister(theStudent.getRegister());
-
-        studentDAO.save(tempStudent);
-        return new BaseResponseElement<>(tempStudent);
     }
 
     public BaseResponseElement<Student> deleteById(UUID id){

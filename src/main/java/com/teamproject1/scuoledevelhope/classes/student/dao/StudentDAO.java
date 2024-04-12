@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.student.studentDAO;
+package com.teamproject1.scuoledevelhope.classes.student.dao;
 
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
