@@ -23,6 +23,15 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
+    public Student() {
+    }
+
+    public Student(User user, Classes schoolClass, Register register) {
+        this.user = user;
+        this.schoolClass = schoolClass;
+        this.register = register;
+    }
+
     public UUID getId() {
         return id;
     }
