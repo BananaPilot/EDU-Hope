@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,7 +24,7 @@ public interface RegisterDao extends JpaRepository<Register, UUID>{
 
     @Modifying
     @Transactional
-    @Query(value = "insert into register (schoolYear, cl, tutor) values (:schoolYear, :cl, :tutor)",nativeQuery = true)
-    int addRegister(@Param("schoolYear") String schoolYear, @Param("cl") Classes classes, @Param("tutor") Tutor tutor);
+    @Query(value = "insert into register (school_year, id_school_class, id_tutor) values (:school_year, :id_school_class, :id_tutor)",nativeQuery = true)
+    int addRegister(@Param("school_year") String schoolYear, @Param("id_school_class") UUID classes, @Param("id_tutor") UUID idTutor);
 
 }

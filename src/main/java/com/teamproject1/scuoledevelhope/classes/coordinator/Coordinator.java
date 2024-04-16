@@ -25,16 +25,12 @@ public class Coordinator {
         return id;
     }
 
-    public User getId_user() {
-        return user;
-    }
-
     public User getUser() {
         return user;
     }
 
-    public Set<Classes> getClasses() {
-        return classes;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

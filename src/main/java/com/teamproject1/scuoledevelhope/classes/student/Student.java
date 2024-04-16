@@ -23,6 +23,15 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
+    public Student() {
+    }
+
+    public Student(User user, Classes schoolClass, Register register) {
+        this.user = user;
+        this.schoolClass = schoolClass;
+        this.register = register;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -37,6 +46,18 @@ public class Student {
 
     public Register getRegister() {
         return register;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setSchoolClass(Classes schoolClass) {
+        this.schoolClass = schoolClass;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
     }
 
     @Override

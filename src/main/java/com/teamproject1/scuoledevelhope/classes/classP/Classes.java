@@ -30,7 +30,6 @@ public class Classes {
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
-
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
@@ -62,20 +61,37 @@ public class Classes {
         return course;
     }
 
-    public School getSchools() {
-        return school;
-    }
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
     public Register getRegisters() {
         return registers;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    public void setCoordinator(Coordinator coordinator) {
+        this.coordinator = coordinator;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public void setRegisters(Register registers) {
+        this.registers = registers;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+
     }
 
     @Override

@@ -62,20 +62,32 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
+    }
+
+    public UserRegistry getUserRegistry() {
+        return userRegistry;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public School getSchool() {
-        return school;
+    public void setUserRegistry(UserRegistry userRegistry) {
+        this.userRegistry = userRegistry;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public static final class UserBuilder {
