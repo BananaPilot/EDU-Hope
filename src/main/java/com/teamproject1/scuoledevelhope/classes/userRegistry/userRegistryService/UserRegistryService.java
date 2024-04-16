@@ -15,6 +15,11 @@ import java.util.UUID;
 public class UserRegistryService {
 
     UserRegistryDAO userRegistryDAO;
+
+    public UserRegistryService(UserRegistryDAO userRegistryDAO) {
+        this.userRegistryDAO = userRegistryDAO;
+    }
+
     public BaseResponseList<UserRegistry> findAll(){
         return new BaseResponseList<>(userRegistryDAO.findAll());
     }

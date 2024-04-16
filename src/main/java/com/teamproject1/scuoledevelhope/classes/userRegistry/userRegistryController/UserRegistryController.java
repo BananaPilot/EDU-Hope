@@ -14,6 +14,11 @@ import java.util.UUID;
 public class UserRegistryController {
 
     UserRegistryService userRegistryService;
+
+    public UserRegistryController(UserRegistryService userRegistryService) {
+        this.userRegistryService = userRegistryService;
+    }
+
     @GetMapping("/get-all")
     public BaseResponseList<UserRegistry> findAll(){
         return userRegistryService.findAll();
