@@ -27,7 +27,7 @@ public class UserRegistryService {
     public BaseResponseElement<UserRegistry> findById(UUID id){
         Optional<UserRegistry> result = userRegistryDAO.findById(id);
         if(result.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("UserRegistry was not present");
         }
         return new BaseResponseElement<>(result.get());
     }
@@ -40,7 +40,7 @@ public class UserRegistryService {
         Optional<UserRegistry> temp = userRegistryDAO.findById(id);
 
         if(temp.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("UserRegistry was not present");
         }
         userRegistryDAO.deleteById(id);
 
