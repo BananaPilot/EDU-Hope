@@ -9,10 +9,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "course")
-public enum Course {
-    BACKEND,
-    FULLSTACK,
-    FRONTEND;
+public class Course {
+    //BACKEND,
+    //FULLSTACK,
+    //FRONTEND;
     @Id
     @Column(name = "id_course")
     private UUID id = UUID.randomUUID();
@@ -30,6 +30,9 @@ public enum Course {
             mappedBy = "course",
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
+
+    public Course() {
+    }
 
     public UUID getId() {
         return id;
