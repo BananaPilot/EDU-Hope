@@ -26,7 +26,7 @@ public class SchoolService {
     public BaseResponseElement<School> findById(UUID id){
         Optional<School> result = schoolDAO.findById(id);
         if(result.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("School was not present");
         }
         return new BaseResponseElement<>(result.get());
     }
@@ -39,7 +39,7 @@ public class SchoolService {
         Optional<School> temp = schoolDAO.findById(id);
 
         if(temp.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("School was not present");
         }
         schoolDAO.deleteById(id);
 

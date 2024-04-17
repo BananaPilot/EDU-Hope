@@ -28,7 +28,7 @@ public class VoteService {
     public BaseResponseElement<Vote> findById(UUID id){
         Optional<Vote> result = voteDAO.findById(id);
         if(result.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("Vote was not present");
         }
         return new BaseResponseElement<>(result.get());
     }
@@ -41,7 +41,7 @@ public class VoteService {
         Optional<Vote> temp = voteDAO.findById(id);
 
         if(temp.isEmpty()){
-            throw new SQLException("Register was not present");
+            throw new SQLException("Vote was not present");
         }
         voteDAO.deleteById(id);
 
