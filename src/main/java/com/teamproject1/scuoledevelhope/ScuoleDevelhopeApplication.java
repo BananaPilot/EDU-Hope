@@ -30,6 +30,6 @@ public class ScuoleDevelhopeApplication {
 			//System.out.println(UUID.randomUUID());*/
 		};
 
-		}
+	}
 }
 

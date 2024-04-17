@@ -9,14 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "course")
-public enum Course {
-    BACKEND,
-    FULLSTACK,
-    FRONTEND;
-
-    Course() {
-    }
-
+public class Course {
     @Id
     @Column(name = "id_course")
     private UUID id = UUID.randomUUID();
@@ -30,11 +23,14 @@ public enum Course {
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
+    private EnumCourse enumCourse;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
 
+    public Course() {
+    }
 
     public UUID getId() {
         return id;
@@ -68,5 +64,11 @@ public enum Course {
                 ", description: '" + description + '\'' +
                 ", school: " + school +
                 '}';
+    }
+
+    public enum EnumCourse {
+        BACKEND,
+        FULLSTACK,
+        FRONTEND;
     }
 }
