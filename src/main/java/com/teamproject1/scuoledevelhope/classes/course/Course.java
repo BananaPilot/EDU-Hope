@@ -13,6 +13,10 @@ public enum Course {
     BACKEND,
     FULLSTACK,
     FRONTEND;
+
+    Course() {
+    }
+
     @Id
     @Column(name = "id_course")
     private UUID id = UUID.randomUUID();
@@ -30,6 +34,7 @@ public enum Course {
             mappedBy = "course",
             fetch = FetchType.LAZY)
     private Set<Classes> classes;
+
 
     public UUID getId() {
         return id;
