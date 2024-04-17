@@ -2,8 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryServic
 
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryDAO.UserRegistryDAO;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 

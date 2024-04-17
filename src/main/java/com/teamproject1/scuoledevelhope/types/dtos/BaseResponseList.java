@@ -1,10 +1,10 @@
-package com.teamproject1.scuoledevelhope.types;
+package com.teamproject1.scuoledevelhope.types.dtos;
 
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class BaseResponseList <T> extends BaseResponse{
+public class BaseResponseList <T> extends BaseResponse {
     List<T> elements;
 
     public BaseResponseList(){

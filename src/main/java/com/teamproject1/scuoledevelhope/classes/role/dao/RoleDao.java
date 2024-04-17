@@ -14,9 +14,6 @@ import java.util.UUID;
 @Repository
 public interface RoleDao extends JpaRepository<Role, UUID> {
 
-    @Query(value = "select * from role r join user_roles on r.id_role = user_roles.roles_id_role join user u on u.id = user_roles.users_id where u.username = :username", nativeQuery = true)
-    List<Role> getRoleByUsername(@Param("username") String username);
-
     @Transactional
     @Modifying
     @Query(value = "insert into user_roles(users_id, roles_id_role) value ((select id from user where username = :username), (select id_role from role where role_name = :roleName))", nativeQuery = true)

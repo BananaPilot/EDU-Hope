@@ -2,8 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.register.registerController;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.registerService.RegisterService;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;

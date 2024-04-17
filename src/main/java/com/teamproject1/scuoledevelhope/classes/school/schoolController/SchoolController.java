@@ -2,8 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.school.schoolController;
 
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.school.schoolService.SchoolService;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
