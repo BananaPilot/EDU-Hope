@@ -33,6 +33,4 @@ public class StudentController {
 
         return studentService.deleteById(UUID.fromString(id));
     }
-
-
 }

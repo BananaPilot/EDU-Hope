@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequestMapping("/user_registry")
 public class UserRegistryController {
 
-    UserRegistryService userRegistryService;
+    private final UserRegistryService userRegistryService;
 
     public UserRegistryController(UserRegistryService userRegistryService) {
         this.userRegistryService = userRegistryService;

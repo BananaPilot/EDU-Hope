@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired
-    UserDao userDao;
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public BaseResponseList<User> getAll() {
         return new BaseResponseList<>(userDao.getAll());

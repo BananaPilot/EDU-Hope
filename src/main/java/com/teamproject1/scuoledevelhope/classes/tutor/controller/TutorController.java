@@ -11,7 +11,7 @@ import java.util.UUID;
 @RestController
 public class TutorController {
 
-    TutorService tutorService;
+    private final TutorService tutorService;
 
     public TutorController(TutorService tutorService) {
         this.tutorService = tutorService;

@@ -11,7 +11,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/vote")
 public class VoteController {
-    VoteService voteService;
+    private final VoteService voteService;
 
     public VoteController(VoteService voteService) {
         this.voteService = voteService;

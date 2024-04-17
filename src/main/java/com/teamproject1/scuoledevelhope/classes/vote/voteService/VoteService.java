@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 public class VoteService {
-    VoteDAO voteDAO;
+    private final VoteDAO voteDAO;
 
     public VoteService(VoteDAO voteDAO) {
         this.voteDAO = voteDAO;

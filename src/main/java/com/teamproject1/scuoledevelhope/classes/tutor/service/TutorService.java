@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class TutorService {
 
-    TutorDAO tutorDAO;
+    private final TutorDAO tutorDAO;
 
     public TutorService(TutorDAO tutorDAO) {
         this.tutorDAO = tutorDAO;

@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class UserRegistryService {
 
-    UserRegistryDAO userRegistryDAO;
+    private final UserRegistryDAO userRegistryDAO;
 
     public UserRegistryService(UserRegistryDAO userRegistryDAO) {
         this.userRegistryDAO = userRegistryDAO;
