@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.vote;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;

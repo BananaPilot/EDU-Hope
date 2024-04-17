@@ -13,19 +13,19 @@ import java.util.UUID;
 @Service
 public class SchoolService {
 
-    SchoolDAO schoolDAO;
+    private final SchoolDAO schoolDAO;
 
     public SchoolService(SchoolDAO schoolDAO) {
         this.schoolDAO = schoolDAO;
     }
 
-    public BaseResponseList<School> findAll(){
+    public BaseResponseList<School> findAll() {
         return new BaseResponseList<>(schoolDAO.findAll());
     }
 
-    public BaseResponseElement<School> findById(UUID id){
+    public BaseResponseElement<School> findById(UUID id) {
         Optional<School> result = schoolDAO.findById(id);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new SQLException("School was not present");
         }
         return new BaseResponseElement<>(result.get());
@@ -35,10 +35,10 @@ public class SchoolService {
         return new BaseResponseElement<>(schoolDAO.save(school));
     }
 
-    public BaseResponseElement<School> deleteById(UUID id){
+    public BaseResponseElement<School> deleteById(UUID id) {
         Optional<School> temp = schoolDAO.findById(id);
 
-        if(temp.isEmpty()){
+        if (temp.isEmpty()) {
             throw new SQLException("School was not present");
         }
         schoolDAO.deleteById(id);

@@ -13,29 +13,29 @@ import java.util.UUID;
 @Service
 public class RegisterService {
 
-    RegisterDao registerDao;
+    private final RegisterDao registerDao;
 
     public RegisterService(RegisterDao registerDao) {
         this.registerDao = registerDao;
     }
 
-    public BaseResponseList<Register> findAll(){
+    public BaseResponseList<Register> findAll() {
         return new BaseResponseList<>(registerDao.findAll());
     }
 
-    public BaseResponseElement<Register> findById(UUID id){
+    public BaseResponseElement<Register> findById(UUID id) {
         Optional<Register> result = registerDao.findById(id);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new SQLException("Register was not present");
         }
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseList<Register> getAllBySchoolYear(String schoolYear){
+    public BaseResponseList<Register> getAllBySchoolYear(String schoolYear) {
         return new BaseResponseList<>(registerDao.getAllBySchoolYear(schoolYear));
     }
 
-    public BaseResponseList<Register> getAllByTutor(UUID tutorId){
+    public BaseResponseList<Register> getAllByTutor(UUID tutorId) {
         return new BaseResponseList<>(registerDao.getAllByTutor(tutorId));
     }
 
@@ -47,10 +47,10 @@ public class RegisterService {
         return new BaseResponseElement<>(register);
     }
 
-    public BaseResponseElement<Register> deleteById(UUID id){
+    public BaseResponseElement<Register> deleteById(UUID id) {
         Optional<Register> temp = registerDao.findById(id);
 
-        if(temp.isEmpty()){
+        if (temp.isEmpty()) {
             throw new SQLException("Register was not present");
         }
         registerDao.deleteById(id);

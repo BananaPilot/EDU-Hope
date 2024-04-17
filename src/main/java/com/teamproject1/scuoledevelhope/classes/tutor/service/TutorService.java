@@ -9,22 +9,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
+
 @Service
 public class TutorService {
 
     TutorDAO tutorDAO;
+
     public TutorService(TutorDAO tutorDAO) {
         this.tutorDAO = tutorDAO;
     }
 
 
-    public BaseResponseList<Tutor> findAll(){
+    public BaseResponseList<Tutor> findAll() {
         return new BaseResponseList<>(tutorDAO.findAll());
     }
 
-    public BaseResponseElement<Tutor> findById(UUID id){
+    public BaseResponseElement<Tutor> findById(UUID id) {
         Optional<Tutor> result = tutorDAO.findById(id);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new SQLException("Tutor was not present");
         }
         return new BaseResponseElement<>(result.get());
@@ -34,10 +36,10 @@ public class TutorService {
         return new BaseResponseElement<>(tutorDAO.save(tutor));
     }
 
-    public BaseResponseElement<Tutor> deleteById(UUID id){
+    public BaseResponseElement<Tutor> deleteById(UUID id) {
         Optional<Tutor> temp = tutorDAO.findById(id);
 
-        if(temp.isEmpty()){
+        if (temp.isEmpty()) {
             throw new SQLException("Tutor was not present");
         }
         tutorDAO.deleteById(id);

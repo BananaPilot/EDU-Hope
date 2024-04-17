@@ -1,6 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryService;
 
-import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryDAO.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
@@ -20,13 +19,13 @@ public class UserRegistryService {
         this.userRegistryDAO = userRegistryDAO;
     }
 
-    public BaseResponseList<UserRegistry> findAll(){
+    public BaseResponseList<UserRegistry> findAll() {
         return new BaseResponseList<>(userRegistryDAO.findAll());
     }
 
-    public BaseResponseElement<UserRegistry> findById(UUID id){
+    public BaseResponseElement<UserRegistry> findById(UUID id) {
         Optional<UserRegistry> result = userRegistryDAO.findById(id);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new SQLException("UserRegistry was not present");
         }
         return new BaseResponseElement<>(result.get());
@@ -36,10 +35,10 @@ public class UserRegistryService {
         return new BaseResponseElement<>(userRegistryDAO.save(userRegistry));
     }
 
-    public BaseResponseElement<UserRegistry> deleteById(UUID id){
+    public BaseResponseElement<UserRegistry> deleteById(UUID id) {
         Optional<UserRegistry> temp = userRegistryDAO.findById(id);
 
-        if(temp.isEmpty()){
+        if (temp.isEmpty()) {
             throw new SQLException("UserRegistry was not present");
         }
         userRegistryDAO.deleteById(id);
