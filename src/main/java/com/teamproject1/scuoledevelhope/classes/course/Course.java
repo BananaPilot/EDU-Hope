@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.course;
 
-import jakarta.persistence.*;
-import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "course")
 public class Course {
-  
+
     @Id
     @Column(name = "id_course")
     private UUID id = UUID.randomUUID();
@@ -35,15 +35,19 @@ public class Course {
     public UUID getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public School getSchool() {
         return school;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -65,8 +69,8 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
-  
-  public enum EnumCourse {
+
+    public enum EnumCourse {
         BACKEND,
         FULLSTACK,
         FRONTEND;

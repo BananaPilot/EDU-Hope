@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
@@ -21,14 +20,16 @@ public class UserRegistry {
     private String surname;
     @Column(
             name = "user_email",
-            nullable = false)
+            nullable = false,
+            unique = true)
     private String email;
-    @Column(name = "user_telephone")
+    @Column(name = "user_telephone", unique = true)
     private String telephone;
 
     public UUID getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -70,21 +71,5 @@ public class UserRegistry {
                 ", email: '" + email + '\'' +
                 ", telephone: " + telephone +
                 '}';
-    }
-
-    @Embeddable
-    public class UserRegistryId implements Serializable {
-        private Long userId;
-        private Long registryId; // Assegna un ID numerico a 'UserRegistry'
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public Long getRegistryId() {
-            return registryId;
-        }
-
-        // ... getter e setter
     }
 }

@@ -15,7 +15,7 @@ public class Role {
     @Column(name = "id_role")
     private UUID id = UUID.randomUUID();
 
-    @Column(name = "role_name")
+    @Column(name = "role_name", unique = true)
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 

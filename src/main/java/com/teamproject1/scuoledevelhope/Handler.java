@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope;
 
-import com.teamproject1.scuoledevelhope.types.BaseResponse;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponse;
 import com.teamproject1.scuoledevelhope.types.errors.BadRequestException;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.NullValueException;
