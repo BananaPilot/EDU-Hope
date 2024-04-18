@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.calendar;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
@@ -19,8 +19,11 @@ public class Meeting {
 
     @Column(name="title")
     private String title;
-    @Column(name="data")
-    private LocalDateTime data;
+    @Column(name="start_date")
+    private LocalDateTime startDate;
+
+    @Column(name="end_date")
+    private LocalDateTime endDate;
     @Column(name="link")
     private String link;
     @Column(name="note")
@@ -41,30 +44,24 @@ public class Meeting {
     )
     private List<Student> students;
 
-
     public Meeting() {
     }
+
     @Override
     public String toString() {
         return "Meeting{" +
                 "meetingID=" + meetingID +
                 ", title='" + title + '\'' +
-                ", data=" + data +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", link='" + link + '\'' +
                 ", note='" + note + '\'' +
-                ", tutorIDfk='" + tutorIDfk + '\'' +
-                ", coordinatorIDfk='" + coordinatorIDfk + '\'' +
+                ", tutorIDfk=" + tutorIDfk +
+                ", coordinatorIDfk=" + coordinatorIDfk +
                 ", students=" + students +
                 '}';
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
     public String getTitle() {
         return title;
     }
@@ -73,12 +70,20 @@ public class Meeting {
         this.title = title;
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public String getLink() {
@@ -113,11 +118,11 @@ public class Meeting {
         this.coordinatorIDfk = coordinatorIDfk;
     }
 
-    public List<Student> getStudent() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudent(List<Student> student) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 }

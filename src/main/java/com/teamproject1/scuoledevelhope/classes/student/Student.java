@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.student;
 
-import com.teamproject1.scuoledevelhope.classes.calendar.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
@@ -33,7 +33,6 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "id_meeting")
     )
     private List<Meeting> meetings;
-
 
     public Student() {
     }
