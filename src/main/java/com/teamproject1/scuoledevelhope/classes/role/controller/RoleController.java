@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.role.controller;
 
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.service.RoleService;
@@ -18,17 +19,13 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @NoAuthorization
-    @PostMapping("/addRole")
-    public void addRoleSQL(@RequestBody Role role) {
-        roleService.addRole(role);
-    }
-
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @PutMapping("/add")
     public BaseResponseElement<User> addRole(@RequestBody RoleUsername roleUsername) {
         return roleService.addRole(roleUsername);
     }
 
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/add")
     public BaseResponseElement<User> deleteRole(@RequestBody RoleUsername roleUsername) {
         return roleService.deleteRole(roleUsername);

@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.user.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.BasicAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
@@ -32,13 +33,13 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @BasicAuthorization(roles = {"ADMIN"})
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/{username}")
     public BaseResponseElement<User> getByUsername(@PathVariable("username") String username) {
         return userService.getByUsername(username);
     }
 
-    @BasicAuthorization(roles = {"ADMIN"})
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
     public BaseResponseList<User> getAll() {
         return userService.getAll();
