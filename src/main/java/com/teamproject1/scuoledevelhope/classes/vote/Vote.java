@@ -11,8 +11,9 @@ import java.util.UUID;
 @Table(name = "vote")
 public class Vote {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_vote")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;

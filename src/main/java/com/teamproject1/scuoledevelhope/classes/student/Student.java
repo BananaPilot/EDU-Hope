@@ -11,8 +11,9 @@ import java.util.UUID;
 @Table(name = "student")
 public class Student {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_student")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;

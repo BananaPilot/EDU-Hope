@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.role.service;
 
+import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.dao.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dao.UserDao;
@@ -34,5 +35,9 @@ public class RoleService {
             throw new SQLException("role wasn't deleted");
         }
         return new BaseResponseElement<>(userDao.getByUsername(roleUsername.getUsername()));
+    }
+
+    public void addRole(Role role) {
+        roleDao.save(role);
     }
 }

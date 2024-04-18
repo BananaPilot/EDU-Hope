@@ -15,8 +15,9 @@ import java.util.UUID;
 @Table(name = "class")
 public class Classes {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_class")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     @Column(
             name = "class_name",
             nullable = false)

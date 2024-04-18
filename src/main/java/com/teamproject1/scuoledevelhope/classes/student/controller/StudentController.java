@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.student.controller;
 
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -18,16 +19,19 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findAll")
     public BaseResponseList<Student> findAll() {
         return studentService.findAll();
     }
 
+    @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findById")
     public BaseResponseElement<Student> findById(@RequestParam String id) {
         return studentService.findById(id);
     }
 
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
     public BaseResponseElement<Student> delete(@RequestParam String id) {
 

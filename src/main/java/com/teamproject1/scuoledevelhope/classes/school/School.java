@@ -13,8 +13,9 @@ import java.util.UUID;
 public class School {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_school")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
 
     @Column(
             name = "class_name",
