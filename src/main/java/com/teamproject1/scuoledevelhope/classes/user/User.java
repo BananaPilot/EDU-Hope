@@ -18,6 +18,7 @@ public class User {
     @Id
     private UUID id = UUID.randomUUID();
 
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -52,7 +53,8 @@ public class User {
         this.password = password;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public UUID getId() {
         return id;
@@ -74,6 +76,10 @@ public class User {
         return school;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -91,6 +97,7 @@ public class User {
     }
 
     public static final class UserBuilder {
+
         private UUID id;
         private String username;
         private String password;

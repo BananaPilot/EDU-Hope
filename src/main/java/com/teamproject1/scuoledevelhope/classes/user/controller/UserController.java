@@ -4,8 +4,8 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Ba
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
