@@ -5,6 +5,9 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.tutor.service.TutorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -17,6 +20,7 @@ public class TutorController {
     public TutorController(TutorService tutorService) {
         this.tutorService = tutorService;
     }
+
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-all")
@@ -41,4 +45,25 @@ public class TutorController {
     public BaseResponseElement<Tutor> delete(@RequestParam UUID id) {
         return tutorService.deleteById(id);
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> createTutor(@Valid @RequestBody Tutor tutor, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Errore di validazione: " + bindingResult.getAllErrors().get(0).getDefaultMessage());
+        }
+
+        BaseResponseElement<Tutor> response = tutorService.createTutor(tutor);
+
+
+        if (response.isSuccess()) {
+            return ResponseEntity.ok("Tutor creato con successo");
+        } else {
+            return ResponseEntity.badRequest().body(response.getMessage());
+        }
+
+    }
+
 }
+
+

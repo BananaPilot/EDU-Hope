@@ -5,7 +5,10 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.dao.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -45,5 +48,21 @@ public class CoordinatorService {
         coordinatorDAO.deleteById(id);
 
         return new BaseResponseElement<>(temp.get());
+    }
+
+    public BaseResponseElement<Coordinator> save(@Valid Coordinator coordinator, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+
+            StringBuilder errorMessage = new StringBuilder("Errore di validazione: ");
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMessage.append(error.getDefaultMessage()).append("; ");
+            }
+            return new BaseResponseElement<>(null, errorMessage.toString(), false);
+        }
+
+        Coordinator savedCoordinator = coordinatorDAO.save(coordinator);
+
+        return new BaseResponseElement<>(savedCoordinator, "Coordinatore salvato con successo", true);
     }
 }

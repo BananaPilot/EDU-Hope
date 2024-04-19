@@ -46,4 +46,10 @@ public class TutorService {
 
         return new BaseResponseElement<>(temp.get());
     }
+
+    public BaseResponseElement<Tutor> createTutor(Tutor tutor) {
+        tutorDAO.save(tutor);
+        return null;
+    }
+
 }

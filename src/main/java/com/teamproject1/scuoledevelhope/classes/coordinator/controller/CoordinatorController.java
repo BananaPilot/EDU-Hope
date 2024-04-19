@@ -5,6 +5,10 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.service.CoordinatorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -41,5 +45,22 @@ public class CoordinatorController {
     @DeleteMapping("/delete-by-id")
     public BaseResponseElement<Coordinator> delete(@RequestParam UUID id) {
         return coordinatorService.deleteById(id);
+    }
+
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @PostMapping("/save")
+    public ResponseEntity<BaseResponseElement<Coordinator>> save(@Valid @RequestBody Coordinator coordinator, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder("Errore di validazione: ");
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMessage.append(error.getDefaultMessage()).append("; ");
+            }
+            return ResponseEntity.badRequest().body(new BaseResponseElement<>(null, errorMessage.toString(), false));
+        }
+
+        BaseResponseElement<Coordinator> response = coordinatorService.save(coordinator);
+
+        return ResponseEntity.ok(response);
     }
 }
