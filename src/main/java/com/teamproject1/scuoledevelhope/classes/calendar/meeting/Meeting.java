@@ -40,8 +40,8 @@ public class Meeting {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_meeting"),
-            inverseJoinColumns = @JoinColumn(name = "id_student")
+            joinColumns = @JoinColumn(name = "id_meeting_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_student_fk")
     )
     private Set<Student> students;
 
