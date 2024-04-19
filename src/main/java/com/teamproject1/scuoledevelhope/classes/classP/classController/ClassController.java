@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.classP.classService.ClassService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -26,13 +27,13 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Classes> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Classes> findById(@Valid @RequestParam UUID id) {
         return classService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<Classes> save(@RequestBody Classes classes) {
+    public BaseResponseElement<Classes> save(@Valid @RequestBody Classes classes) {
         return classService.save(classes);
     }
 

@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +30,13 @@ public class UserController {
     @NoAuthorization
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseElement<User> addUser(@RequestBody User user) {
+    public BaseResponseElement<User> addUser(@Valid @RequestBody User user) {
         return userService.addUser(user);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/{username}")
-    public BaseResponseElement<User> getByUsername(@PathVariable("username") String username) {
+    public BaseResponseElement<User> getByUsername(@Valid @PathVariable("username") String username) {
         return userService.getByUsername(username);
     }
 
