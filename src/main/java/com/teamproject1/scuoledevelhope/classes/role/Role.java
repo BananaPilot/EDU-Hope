@@ -13,9 +13,9 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role")
-    private UUID id;
+    private Long id;
 
     @NotBlank(message = "Role enum is needed to create the entity")
     @Column(name = "role_name", unique = true)
@@ -38,7 +38,7 @@ public class Role {
     )
     private Set<User> users;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

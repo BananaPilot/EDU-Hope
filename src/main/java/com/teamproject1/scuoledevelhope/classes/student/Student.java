@@ -14,9 +14,9 @@ import java.util.UUID;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
-    private UUID id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -52,7 +52,7 @@ public class Student {
         this.meetings = meetings;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

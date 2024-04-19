@@ -27,7 +27,7 @@ public class SchoolController {
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<School> findById(@RequestParam UUID id) {
+    public BaseResponseElement<School> findById(@RequestParam Long id) {
         return schoolService.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class SchoolController {
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<School> delete(@RequestParam UUID id) {
+    public BaseResponseElement<School> delete(@RequestParam Long id) {
         return schoolService.deleteById(id);
     }
 }

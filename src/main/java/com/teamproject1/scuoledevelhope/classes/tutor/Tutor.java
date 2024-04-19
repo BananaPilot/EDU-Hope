@@ -12,8 +12,8 @@ import java.util.UUID;
 @Table(name = "tutor")
 public class Tutor {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -26,7 +26,7 @@ public class Tutor {
             fetch = FetchType.LAZY)
     private Set<Register> registers;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

@@ -10,8 +10,8 @@ import java.util.UUID;
 public class UserRegistry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @OneToOne(mappedBy = "userRegistry")
     private User user;
     @Column(name = "user_name")
@@ -26,7 +26,7 @@ public class UserRegistry {
     @Column(name = "user_telephone", unique = true)
     private String telephone;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

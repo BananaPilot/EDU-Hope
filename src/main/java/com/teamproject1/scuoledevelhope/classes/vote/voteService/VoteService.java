@@ -23,7 +23,7 @@ public class VoteService {
         return new BaseResponseList<>(voteDAO.findAll());
     }
 
-    public BaseResponseElement<Vote> findById(UUID id) {
+    public BaseResponseElement<Vote> findById(Long id) {
         Optional<Vote> result = voteDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Vote was not present");
@@ -35,7 +35,7 @@ public class VoteService {
         return new BaseResponseElement<>(voteDAO.save(vote));
     }
 
-    public BaseResponseElement<Vote> deleteById(UUID id) {
+    public BaseResponseElement<Vote> deleteById(Long id) {
         Optional<Vote> temp = voteDAO.findById(id);
 
         if (temp.isEmpty()) {

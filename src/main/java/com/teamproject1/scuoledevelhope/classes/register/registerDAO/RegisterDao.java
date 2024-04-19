@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface RegisterDao extends JpaRepository<Register, UUID> {
+public interface RegisterDao extends JpaRepository<Register, Long> {
     @Query(value = "select * from register where schoolYear = :schoolYear", nativeQuery = true)
     List<Register> getAllBySchoolYear(@Param("schoolYear") String schoolYear);
 
     @Query(value = "select * from register where tutor = :tutorId", nativeQuery = true)
-    List<Register> getAllByTutor(@Param("tutor") UUID tutorId);
+    List<Register> getAllByTutor(@Param("tutor") Long tutorId);
 
     @Modifying
     @Transactional
     @Query(value = "insert into register (school_year, id_school_class, id_tutor) values (:school_year, :id_school_class, :id_tutor)", nativeQuery = true)
-    int addRegister(@Param("school_year") String schoolYear, @Param("id_school_class") UUID classes, @Param("id_tutor") UUID idTutor);
+    int addRegister(@Param("school_year") String schoolYear, @Param("id_school_class") Long classes, @Param("id_tutor") UUID idTutor);
 
 }

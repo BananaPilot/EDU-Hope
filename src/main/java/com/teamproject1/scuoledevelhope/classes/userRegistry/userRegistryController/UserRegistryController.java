@@ -27,7 +27,7 @@ public class UserRegistryController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<UserRegistry> findById(@RequestParam UUID id) {
+    public BaseResponseElement<UserRegistry> findById(@RequestParam Long id) {
         return userRegistryService.findById(id);
     }
 

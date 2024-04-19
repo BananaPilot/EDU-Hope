@@ -24,7 +24,7 @@ public class TutorService {
         return new BaseResponseList<>(tutorDAO.findAll());
     }
 
-    public BaseResponseElement<Tutor> findById(UUID id) {
+    public BaseResponseElement<Tutor> findById(Long id) {
         Optional<Tutor> result = tutorDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Tutor was not present");
@@ -36,7 +36,7 @@ public class TutorService {
         return new BaseResponseElement<>(tutorDAO.save(tutor));
     }
 
-    public BaseResponseElement<Tutor> deleteById(UUID id) {
+    public BaseResponseElement<Tutor> deleteById(Long id) {
         Optional<Tutor> temp = tutorDAO.findById(id);
 
         if (temp.isEmpty()) {

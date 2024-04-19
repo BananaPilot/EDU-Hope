@@ -11,9 +11,9 @@ import java.util.UUID;
 @Table(name = "vote")
 public class Vote {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
-    private UUID id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
@@ -32,7 +32,7 @@ public class Vote {
     @Column(name = "annotation")
     private String annotation;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

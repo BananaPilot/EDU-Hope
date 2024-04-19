@@ -23,7 +23,7 @@ public class UserRegistryService {
         return new BaseResponseList<>(userRegistryDAO.findAll());
     }
 
-    public BaseResponseElement<UserRegistry> findById(UUID id) {
+    public BaseResponseElement<UserRegistry> findById(Long id) {
         Optional<UserRegistry> result = userRegistryDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("UserRegistry was not present");
@@ -35,7 +35,7 @@ public class UserRegistryService {
         return new BaseResponseElement<>(userRegistryDAO.save(userRegistry));
     }
 
-    public BaseResponseElement<UserRegistry> deleteById(UUID id) {
+    public BaseResponseElement<UserRegistry> deleteById(Long id) {
         Optional<UserRegistry> temp = userRegistryDAO.findById(id);
 
         if (temp.isEmpty()) {

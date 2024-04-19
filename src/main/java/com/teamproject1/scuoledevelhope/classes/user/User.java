@@ -17,7 +17,8 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Username is needed to create a user")
     @Column(unique = true)
@@ -63,7 +64,7 @@ public class User {
     public User() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -105,7 +106,7 @@ public class User {
 
     public static final class UserBuilder {
 
-        private UUID id;
+        private Long id;
         private String username;
         private String password;
 
@@ -116,7 +117,7 @@ public class User {
             return new UserBuilder();
         }
 
-        public UserBuilder withId(UUID id) {
+        public UserBuilder withId(Long id) {
             this.id = id;
             return this;
         }

@@ -23,7 +23,7 @@ public class SchoolService {
         return new BaseResponseList<>(schoolDAO.findAll());
     }
 
-    public BaseResponseElement<School> findById(UUID id) {
+    public BaseResponseElement<School> findById(Long id) {
         Optional<School> result = schoolDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("School was not present");
@@ -35,7 +35,7 @@ public class SchoolService {
         return new BaseResponseElement<>(schoolDAO.save(school));
     }
 
-    public BaseResponseElement<School> deleteById(UUID id) {
+    public BaseResponseElement<School> deleteById(Long id) {
         Optional<School> temp = schoolDAO.findById(id);
 
         if (temp.isEmpty()) {

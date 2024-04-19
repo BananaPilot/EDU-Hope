@@ -19,15 +19,15 @@ public class MeetingController {
     }
 
     @GetMapping("/allByStudentId/{id}")
-    public BaseResponseList<Meeting> allByStudentId(@PathVariable String id){
+    public BaseResponseList<Meeting> allByStudentId(@PathVariable Long id){
         return meetingService.allByStudentId(id);
     }
     @GetMapping("/allByCoordinatorId/{id}")
-    public BaseResponseList<Meeting> allByCoordinatorId(@PathVariable String id){
+    public BaseResponseList<Meeting> allByCoordinatorId(@PathVariable Long id){
         return meetingService.allByCoordinatorId(id);
     }
     @GetMapping("/allByTutorId/{id}")
-    public BaseResponseList<Meeting> allByTutorId(@PathVariable String id){
+    public BaseResponseList<Meeting> allByTutorId(@PathVariable Long id){
         return meetingService.allByTutorId(id);
     }
 }
