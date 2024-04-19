@@ -2,11 +2,9 @@ package com.teamproject1.scuoledevelhope.classes.calendar.meeting.controller;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/meeting")
@@ -29,5 +27,9 @@ public class MeetingController {
     @GetMapping("/allByTutorId/{id}")
     public BaseResponseList<Meeting> allByTutorId(@PathVariable String id){
         return meetingService.allByTutorId(id);
+    }
+    @PostMapping("/save")
+    public BaseResponseElement<Meeting> saveMeeting (@RequestBody Meeting meeting) {
+        return meetingService.save(meeting);
     }
 }
