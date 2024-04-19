@@ -39,7 +39,7 @@ public class UserRegistryController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<UserRegistry> delete(@RequestParam UUID id) {
+    public BaseResponseElement<UserRegistry> delete(@RequestParam Long id) {
         return userRegistryService.deleteById(id);
     }
 }

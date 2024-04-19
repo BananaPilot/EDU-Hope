@@ -37,7 +37,7 @@ public class Register {
             fetch = FetchType.LAZY)
     private Set<Student> students;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
