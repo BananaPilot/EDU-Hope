@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.calendar.meeting.service;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,10 @@ public class MeetingService {
     }
     public BaseResponseList<Meeting> allByTutorId(Long id){
         return new BaseResponseList<>(meetingDAO.allByTutorId(id));
+    }
+
+    public BaseResponseElement<Meeting> save (Meeting meeting){
+        return new BaseResponseElement<Meeting> (meetingDAO.save(meeting));
     }
 
 }
