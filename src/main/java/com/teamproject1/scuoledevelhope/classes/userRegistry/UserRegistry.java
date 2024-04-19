@@ -70,20 +70,4 @@ public class UserRegistry {
                 ", telephone: " + telephone +
                 '}';
     }
-
-    @Embeddable
-    public class UserRegistryId implements Serializable {
-        private Long userId;
-        private Long registryId; // Assegna un ID numerico a 'UserRegistry'
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public Long getRegistryId() {
-            return registryId;
-        }
-
-        // ... getter e setter
-    }
 }
