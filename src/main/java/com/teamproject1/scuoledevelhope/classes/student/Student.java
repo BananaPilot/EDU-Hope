@@ -5,6 +5,9 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 import java.util.Set;
@@ -17,12 +20,17 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_student")
     private UUID id;
+    @NotBlank(message = "Student name can't be blank")
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+    @NotEmpty(message = "Associates at least 1 class.")
+    @Valid
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes schoolClass;
+    @NotEmpty(message = "Associates at least 1 register.")
+    @Valid
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
