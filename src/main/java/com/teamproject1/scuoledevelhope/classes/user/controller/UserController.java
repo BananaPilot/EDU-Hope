@@ -45,4 +45,10 @@ public class UserController {
     public BaseResponseList<User> getAll() {
         return userService.getAll();
     }
+
+    @NoAuthorization
+    @GetMapping("/dashboard/{id}")
+    public BaseResponseElement<User> dashboard(@PathVariable("id") Long id) {
+        return userService.getByID(id);
+    }
 }

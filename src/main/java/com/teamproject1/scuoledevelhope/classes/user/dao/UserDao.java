@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
+
     @Query(value = "select * from user", nativeQuery = true)
     List<User> getAll();
 
@@ -24,5 +25,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     @Query(value = "insert into user (id, username, password) values (:id, :username, :password)", nativeQuery = true)
     int addUser(@Param("id") Long id, @Param("username") String username, @Param("password") String password);
 
-
+    @Query(value = "select * from user where id = :id", nativeQuery = true)
+    User getByID(@Param("id") Long id);
 }
