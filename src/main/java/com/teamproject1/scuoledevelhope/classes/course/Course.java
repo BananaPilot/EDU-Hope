@@ -10,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "course")
 public class Course {
+
     @Id
     @Column(name = "id_course")
     private UUID id = UUID.randomUUID();
@@ -65,7 +66,6 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
-
     public enum EnumCourse {
         BACKEND,
         FULLSTACK,
