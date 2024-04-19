@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -32,7 +33,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_meeting")
     )
-    private List<Meeting> meetings;
+    private Set<Meeting> meetings;
 
     public Student() {
     }
@@ -43,11 +44,11 @@ public class Student {
         this.register = register;
     }
 
-    public List<Meeting> getMeetings() {
+    public Set<Meeting> getMeetings() {
         return meetings;
     }
 
-    public void setMeetings(List<Meeting> meetings) {
+    public void setMeetings(Set<Meeting> meetings) {
         this.meetings = meetings;
     }
 

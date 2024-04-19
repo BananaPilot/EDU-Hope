@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -42,7 +43,7 @@ public class Meeting {
             joinColumns = @JoinColumn(name = "id_meeting"),
             inverseJoinColumns = @JoinColumn(name = "id_student")
     )
-    private List<Student> students;
+    private Set<Student> students;
 
     public Meeting() {
     }
@@ -118,11 +119,11 @@ public class Meeting {
         this.coordinatorIDfk = coordinatorIDfk;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 }

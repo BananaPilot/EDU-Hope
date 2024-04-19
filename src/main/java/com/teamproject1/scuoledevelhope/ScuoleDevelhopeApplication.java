@@ -23,13 +23,5 @@ public class ScuoleDevelhopeApplication {
 	}
 
 
-	@Bean
-	public CommandLineRunner commandLineRunner(CoordinatorDAO cDao){
-		return runner ->{
-
-
-		};
-
-		}
 }
 
