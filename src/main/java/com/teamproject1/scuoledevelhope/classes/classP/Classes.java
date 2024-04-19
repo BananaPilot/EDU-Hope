@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Set;
 import java.util.UUID;
@@ -14,14 +15,18 @@ import java.util.UUID;
 @Entity
 @Table(name = "class")
 public class Classes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_class")
     private UUID id;
+
+    @NotBlank(message = "Class name can't be blank")
     @Column(
             name = "class_name",
             nullable = false)
     private String name;
+
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
