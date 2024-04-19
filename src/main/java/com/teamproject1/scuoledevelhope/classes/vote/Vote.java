@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.vote;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,8 +11,9 @@ import java.util.UUID;
 @Table(name = "vote")
 public class Vote {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_vote")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;

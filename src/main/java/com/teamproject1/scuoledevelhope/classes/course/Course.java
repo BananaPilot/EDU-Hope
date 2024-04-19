@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.course;
 
-import jakarta.persistence.*;
-import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.school.School;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -36,15 +36,19 @@ public class Course {
     public UUID getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public School getSchool() {
         return school;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -66,6 +70,10 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc768e5296049c85af2e7273597484ecb0c0a1ea
     public enum EnumCourse {
         BACKEND,
         FULLSTACK,

@@ -2,17 +2,19 @@ package com.teamproject1.scuoledevelhope.classes.user.service;
 
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dao.UserDao;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired
-    UserDao userDao;
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public BaseResponseList<User> getAll() {
         return new BaseResponseList<>(userDao.getAll());

@@ -1,9 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator.service;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.coordinator.DAO.CoordinatorDAO;
-import com.teamproject1.scuoledevelhope.types.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.BaseResponseList;
+import com.teamproject1.scuoledevelhope.classes.coordinator.dao.CoordinatorDAO;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +13,20 @@ import java.util.UUID;
 @Service
 public class CoordinatorService {
 
-    CoordinatorDAO coordinatorDAO;
+    private final CoordinatorDAO coordinatorDAO;
+
     public CoordinatorService(CoordinatorDAO coordinatorDAO) {
         this.coordinatorDAO = coordinatorDAO;
     }
 
 
-    public BaseResponseList<Coordinator> findAll(){
+    public BaseResponseList<Coordinator> findAll() {
         return new BaseResponseList<>(coordinatorDAO.findAll());
     }
 
-    public BaseResponseElement<Coordinator> findById(UUID id){
+    public BaseResponseElement<Coordinator> findById(UUID id) {
         Optional<Coordinator> result = coordinatorDAO.findById(id);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new SQLException("Coordinator was not present");
         }
         return new BaseResponseElement<>(result.get());
@@ -35,10 +36,10 @@ public class CoordinatorService {
         return new BaseResponseElement<>(coordinatorDAO.save(coordinator));
     }
 
-    public BaseResponseElement<Coordinator> deleteById(UUID id){
+    public BaseResponseElement<Coordinator> deleteById(UUID id) {
         Optional<Coordinator> temp = coordinatorDAO.findById(id);
 
-        if(temp.isEmpty()){
+        if (temp.isEmpty()) {
             throw new SQLException("Coordinator was not present");
         }
         coordinatorDAO.deleteById(id);

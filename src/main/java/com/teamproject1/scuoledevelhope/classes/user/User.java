@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Set;
 import java.util.UUID;
@@ -18,9 +19,13 @@ public class User {
     @Id
     private UUID id = UUID.randomUUID();
 
+    @NotBlank(message = "Username is needed to create a user")
+    @Column(unique = true)
     private String username;
 
+    @NotBlank(message = "Password is needed to create a user")
     private String password;
+
     @OneToOne()
     @JoinColumn(
             name = "user_registry_id",
@@ -34,14 +39,17 @@ public class User {
 
     @ManyToMany
     private Set<Role> roles;
+
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
     private Set<Student> students;
+
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
     private Set<Tutor> tutors;
+
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
@@ -52,7 +60,8 @@ public class User {
         this.password = password;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public UUID getId() {
         return id;
@@ -74,6 +83,10 @@ public class User {
         return school;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -91,6 +104,7 @@ public class User {
     }
 
     public static final class UserBuilder {
+
         private UUID id;
         private String username;
         private String password;

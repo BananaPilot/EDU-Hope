@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
@@ -11,7 +10,8 @@ import java.util.UUID;
 public class UserRegistry {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @OneToOne(mappedBy = "userRegistry")
     private User user;
     @Column(name = "user_name")
@@ -20,14 +20,16 @@ public class UserRegistry {
     private String surname;
     @Column(
             name = "user_email",
-            nullable = false)
+            nullable = false,
+            unique = true)
     private String email;
-    @Column(name = "user_telephone")
+    @Column(name = "user_telephone", unique = true)
     private String telephone;
 
     public UUID getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }

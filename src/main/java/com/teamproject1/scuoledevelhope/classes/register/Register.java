@@ -1,10 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.register;
 
-import jakarta.persistence.*;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -13,8 +13,9 @@ import java.util.UUID;
 @Table(name = "register")
 public class Register {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_register")
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     @Column(
             name = "register_school-year",
             nullable = false)

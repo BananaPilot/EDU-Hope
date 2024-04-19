@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.types;
+package com.teamproject1.scuoledevelhope.types.dtos;
 
 import org.springframework.http.HttpStatus;
 

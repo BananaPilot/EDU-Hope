@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Repository
 public class UserDetailsDaoImpl implements UserDetailsDao {
@@ -26,7 +27,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
                 .withId(user.getId())
                 .withUsername(user.getUsername())
                 .withPassword(user.getPassword())
-                .withRoles(Arrays.asList("ADMIN"))
+                .withRoles(Collections.singletonList(user.getRoles().toString()))
                 .build();
     }
 }
