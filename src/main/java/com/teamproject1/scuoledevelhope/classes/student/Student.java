@@ -1,10 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.student;
 
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -24,6 +27,14 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "meeting_student",
+            joinColumns = @JoinColumn(name = "id_student"),
+            inverseJoinColumns = @JoinColumn(name = "id_meeting")
+    )
+    private Set<Meeting> meetings;
+
     public Student() {
     }
 
@@ -31,6 +42,14 @@ public class Student {
         this.user = user;
         this.schoolClass = schoolClass;
         this.register = register;
+    }
+
+    public Set<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(Set<Meeting> meetings) {
+        this.meetings = meetings;
     }
 
     public UUID getId() {
