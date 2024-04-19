@@ -12,8 +12,9 @@ import java.util.UUID;
 public class Course {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private UUID id = UUID.randomUUID();
+    private Long id;
     @Column(
             name = "course_name",
             nullable = false
@@ -32,7 +33,7 @@ public class Course {
     public Course() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

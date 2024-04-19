@@ -17,21 +17,15 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
     }
 
-    public BaseResponseList<Meeting> allByStudentId(String id){
-
-        UUID uuid = UUID.fromString(id);
-        return new BaseResponseList<>(meetingDAO.allByStudentId(uuid));
+    public BaseResponseList<Meeting> allByStudentId(Long id){
+        return new BaseResponseList<>(meetingDAO.allByStudentId(id));
     }
 
-    public BaseResponseList<Meeting> allByCoordinatorId(String id){
-
-        UUID uuid = UUID.fromString(id);
-        return new BaseResponseList<>(meetingDAO.allByCoordinatorId(uuid));
+    public BaseResponseList<Meeting> allByCoordinatorId(Long id){
+        return new BaseResponseList<>(meetingDAO.allByCoordinatorId(id));
     }
-    public BaseResponseList<Meeting> allByTutorId(String id){
-
-        UUID uuid = UUID.fromString(id);
-        return new BaseResponseList<>(meetingDAO.allByTutorId(uuid));
+    public BaseResponseList<Meeting> allByTutorId(Long id){
+        return new BaseResponseList<>(meetingDAO.allByTutorId(id));
     }
 
     public BaseResponseElement<Meeting> save (Meeting meeting){

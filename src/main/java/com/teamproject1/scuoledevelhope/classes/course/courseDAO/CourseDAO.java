@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface CourseDAO extends JpaRepository<Course, UUID> {
+public interface CourseDAO extends JpaRepository<Course, Long> {
 }

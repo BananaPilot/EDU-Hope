@@ -27,7 +27,7 @@ public class CoordinatorController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Coordinator> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Coordinator> findById(@RequestParam Long id) {
         return coordinatorService.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class CoordinatorController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Coordinator> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Coordinator> delete(@RequestParam Long id) {
         return coordinatorService.deleteById(id);
     }
 }

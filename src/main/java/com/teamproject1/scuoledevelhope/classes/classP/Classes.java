@@ -17,9 +17,9 @@ import java.util.UUID;
 public class Classes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_class")
-    private UUID id;
+    private Long id;
 
     @NotBlank(message = "Class name can't be blank")
     @Column(
@@ -47,7 +47,7 @@ public class Classes {
     @OneToOne(mappedBy = "schoolClass")
     private Register registers;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

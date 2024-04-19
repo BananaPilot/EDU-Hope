@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface VoteDAO extends JpaRepository<Vote, UUID> {
+public interface VoteDAO extends JpaRepository<Vote, Long> {
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface CoordinatorDAO extends JpaRepository<Coordinator, UUID> {
+public interface CoordinatorDAO extends JpaRepository<Coordinator, Long> {
 }

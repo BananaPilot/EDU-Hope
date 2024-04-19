@@ -27,7 +27,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Classes> findById(@Valid @RequestParam UUID id) {
+    public BaseResponseElement<Classes> findById(@Valid @RequestParam Long id) {
         return classService.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Classes> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Classes> delete(@RequestParam Long id) {
         return classService.deleteById(id);
     }
 }

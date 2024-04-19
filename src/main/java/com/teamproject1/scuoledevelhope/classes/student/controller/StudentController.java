@@ -27,14 +27,14 @@ public class StudentController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findById")
-    public BaseResponseElement<Student> findById(@RequestParam String id) {
+    public BaseResponseElement<Student> findById(@RequestParam Long id) {
         return studentService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
-    public BaseResponseElement<Student> delete(@RequestParam String id) {
+    public BaseResponseElement<Student> delete(@RequestParam Long id) {
 
-        return studentService.deleteById(UUID.fromString(id));
+        return studentService.deleteById(id);
     }
 }

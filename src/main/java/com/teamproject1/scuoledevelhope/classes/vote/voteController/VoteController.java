@@ -26,7 +26,7 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Vote> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Vote> findById(@RequestParam Long id) {
         return voteService.findById(id);
     }
 
@@ -38,7 +38,7 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Vote> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Vote> delete(@RequestParam Long id) {
         return voteService.deleteById(id);
     }
 }
