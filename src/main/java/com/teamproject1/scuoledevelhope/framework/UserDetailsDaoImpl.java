@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.framework;
 
 import com.bananapilot.samplespringauthenticationframework.repo.UserDetailsDao;
 import com.bananapilot.samplespringauthenticationframework.types.UserDetails;
+import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dao.UserDao;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
@@ -9,7 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
+import java.util.*;
 
 @Repository
 public class UserDetailsDaoImpl implements UserDetailsDao {
@@ -28,7 +29,15 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
                 .withId(user.getId())
                 .withUsername(user.getUsername())
                 .withPassword(user.getPassword())
-                .withRoles(Collections.singletonList(user.getRoles().toString()))
+                .withRoles(translate(user.getRoles()))
                 .build();
+    }
+
+    public List<String> translate(List<Role> roles) {
+        List<String> myList = new ArrayList<>();
+        for (Role role: roles) {
+            myList.add(role.getRoleEnum().toString());
+        }
+        return myList;
     }
 }

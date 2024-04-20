@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,7 +39,7 @@ public class User {
     private School school;
 
     @ManyToMany
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @OneToMany(
             mappedBy = "user",
@@ -75,7 +76,7 @@ public class User {
         return password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
