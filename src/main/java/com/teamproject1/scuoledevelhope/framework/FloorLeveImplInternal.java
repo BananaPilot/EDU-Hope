@@ -11,16 +11,14 @@ public class FloorLeveImplInternal extends FloorLevelImpl {
     @Override
     protected boolean isRoleInternalGreaterOrEquals(String requiredRole, String userRoles) {
         return switch (requiredRole) {
-            case "STUDENT" ->
-                    "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER-ADMIN".equals(userRoles) || "TUTOR".equals(userRoles) || "COORDINATOR".equals(userRoles);
-            case "TUTOR" ->
-                    "ADMIN".equals(userRoles) || "SUPER-ADMIN".equals(userRoles) || "COORDINATOR".equals(userRoles);
-            case "COORDINATOR", "ADMIN" -> "ADMIN".equals(userRoles) || "SUPER-ADMIN".equals(userRoles);
+            case "STUDENT" -> "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "TUTOR".equals(userRoles) || "COORDINATOR".equals(userRoles);
+            case "TUTOR" -> "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "COORDINATOR".equals(userRoles);
+            case "COORDINATOR", "ADMIN" -> "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles);
             case "USER" ->
-                    "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER-ADMIN".equals(userRoles);
+                    "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles);
             case "MODERATOR" ->
-                    "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER-ADMIN".equals(userRoles);
-            case "SUPER-ADMIN" -> "SUPER-ADMIN".equals(userRoles);
+                    "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles);
+            case "SUPER_ADMIN" -> "SUPER_ADMIN".equals(userRoles);
             case null -> throw new NullValueException("role can't be null on this endpoint");
             default -> false;
         };

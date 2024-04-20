@@ -31,4 +31,8 @@ public class UserService {
         }
         return new BaseResponseElement<>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), " ", userDao.getByUsername(user.getUsername()));
     }
+
+    public BaseResponseElement<User> getByID(Long id) {
+        return new BaseResponseElement<>(userDao.getByID(id));
+    }
 }

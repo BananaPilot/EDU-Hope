@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface RoleDao extends JpaRepository<Role, UUID> {
+public interface RoleDao extends JpaRepository<Role, Long> {
 
     @Transactional
     @Modifying

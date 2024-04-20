@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.role;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +16,6 @@ public class Role {
     @Column(name = "id_role")
     private Long id;
 
-    @NotBlank(message = "Role enum is needed to create the entity")
     @Column(name = "role_name", unique = true)
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
@@ -38,10 +38,6 @@ public class Role {
 
     public Long getId() {
         return id;
-    }
-
-    public Set<User> getUsers() {
-        return users;
     }
 
     public RoleEnum getRoleEnum() {
