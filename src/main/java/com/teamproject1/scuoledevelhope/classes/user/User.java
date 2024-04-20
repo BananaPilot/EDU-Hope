@@ -76,16 +76,16 @@ public class User {
         return password;
     }
 
-    public UserRegistry getUserRegistry() {
-        return userRegistry;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     public School getSchool() {
         return school;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public UserRegistry getUserRegistry() {
+        return userRegistry;
     }
 
     public void setUsername(String username) {
@@ -94,14 +94,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setUserRegistry(UserRegistry userRegistry) {
-        this.userRegistry = userRegistry;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
     }
 
     public static final class UserBuilder {

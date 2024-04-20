@@ -32,7 +32,6 @@ public class Role {
         STUDENT;
     }
 
-    @JsonIgnore
     @ManyToMany(
             mappedBy = "roles",
             fetch = FetchType.LAZY
@@ -41,10 +40,6 @@ public class Role {
 
     public Long getId() {
         return id;
-    }
-
-    public Set<User> getUsers() {
-        return users;
     }
 
     public RoleEnum getRoleEnum() {
