@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.calendarResponse;
 
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,15 +9,9 @@ import java.util.List;
 public class Calendar {
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<Meeting> calendar = new ArrayList<>();
+    private List<MeetingDTO> calendar = new ArrayList<>();
 
     public Calendar() {
-    }
-
-    public Calendar(LocalDate startDate, LocalDate endDate, List<Meeting> calendar) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.calendar = calendar;
     }
 
     @Override
@@ -45,11 +39,11 @@ public class Calendar {
         this.endDate = endDate;
     }
 
-    public List<Meeting> getCalendar() {
+    public List<MeetingDTO> getCalendar() {
         return calendar;
     }
 
-    public void setCalendar(List<Meeting> calendar) {
+    public void setCalendar(List<MeetingDTO> calendar) {
         this.calendar = calendar;
     }
 }

@@ -36,16 +36,6 @@ public class Student {
     public Student() {
     }
 
-    public Student(User user, Classes schoolClass, Register register) {
-        this.user = user;
-        this.schoolClass = schoolClass;
-        this.register = register;
-    }
-
-    public Set<Meeting> getMeetings() {
-        return meetings;
-    }
-
     public void setMeetings(Set<Meeting> meetings) {
         this.meetings = meetings;
     }
