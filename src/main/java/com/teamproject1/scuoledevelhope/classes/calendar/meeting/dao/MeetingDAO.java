@@ -6,11 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface MeetingDAO extends JpaRepository<Meeting, Long> {
 
-    @Query(value ="select * from meeting m \n" +
+    @Query(value = "select * from meeting m \n" +
             "join meeting_student ms on ms.id_meeting = m.meeting_id \n" +
             "where ms.id_student  = :idStudent ", nativeQuery = true)
     List<Meeting> allByStudentId(@Param("idStudent") Long idStudent);

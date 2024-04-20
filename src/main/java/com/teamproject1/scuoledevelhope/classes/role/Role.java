@@ -3,10 +3,8 @@ package com.teamproject1.scuoledevelhope.classes.role;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "role")

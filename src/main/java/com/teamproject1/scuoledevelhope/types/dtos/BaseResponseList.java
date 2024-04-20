@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class BaseResponseList <T> extends BaseResponse {
+public class BaseResponseList<T> extends BaseResponse {
     List<T> elements;
 
-    public BaseResponseList(){
+    public BaseResponseList() {
 
     }
 
@@ -16,7 +16,7 @@ public class BaseResponseList <T> extends BaseResponse {
         this.elements = elements;
     }
 
-    public BaseResponseList(List<T> elements){
+    public BaseResponseList(List<T> elements) {
         this.elements = elements;
     }
 

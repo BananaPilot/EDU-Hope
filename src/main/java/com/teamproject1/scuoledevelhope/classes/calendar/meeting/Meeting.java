@@ -6,35 +6,33 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name ="meeting")
+@Table(name = "meeting")
 public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_meeting")
+    @Column(name = "id_meeting")
     private Long meetingID;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
-    @Column(name="start_date")
+    @Column(name = "start_date")
     private LocalDateTime startDate;
 
-    @Column(name="end_date")
+    @Column(name = "end_date")
     private LocalDateTime endDate;
-    @Column(name="link")
+    @Column(name = "link")
     private String link;
-    @Column(name="note")
+    @Column(name = "note")
     private String note;
 
     @OneToOne
-    @JoinColumn(name="tutor_id_fk")
+    @JoinColumn(name = "tutor_id_fk")
     private Tutor tutorIDfk;
     @OneToOne
-    @JoinColumn(name="coordinator_id_fk")
+    @JoinColumn(name = "coordinator_id_fk")
     private Coordinator coordinatorIDfk;
 
     @ManyToMany(fetch = FetchType.LAZY)

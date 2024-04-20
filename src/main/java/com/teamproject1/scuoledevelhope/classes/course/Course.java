@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "course")
