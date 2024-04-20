@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.student.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -16,6 +17,7 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findAll")
