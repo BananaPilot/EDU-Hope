@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "vote")
