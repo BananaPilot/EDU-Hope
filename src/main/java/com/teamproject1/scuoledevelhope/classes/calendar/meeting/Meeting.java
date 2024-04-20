@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
@@ -117,6 +118,7 @@ public class Meeting {
         this.coordinatorIDfk = coordinatorIDfk;
     }
 
+    @JsonIgnore
     public Set<Student> getStudents() {
         return students;
     }
