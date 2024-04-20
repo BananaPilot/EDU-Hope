@@ -1,6 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
-import com.bananapilot.samplespringauthenticationframework.types.UserDetails;
 import com.bananapilot.samplespringauthenticationframework.utils.Constants;
 import com.bananapilot.samplespringauthenticationframework.utils.JWTUtils;
 import io.jsonwebtoken.Claims;
@@ -12,10 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
 @Component
 public class UserMiddleware implements HandlerInterceptor {
 
@@ -24,10 +19,17 @@ public class UserMiddleware implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return request.getRequestURI().contains("dashboard") && handle(request, response);
+        if (!request.getRequestURI().contains("dashboard")){
+            return true;
+        }
+        if (request.getRequestURI().contains("dashboard") && handle(request)) {
+            return true;
+        }
+        response.sendError(HttpStatus.FORBIDDEN.value());
+        return false;
     }
 
-    public boolean handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public boolean handle(HttpServletRequest request) {
         Jws<Claims> claimsJws = jwtUtils.validate(request.getHeader(Constants.AUTHORIZATION_HEADER));
         User user = User.UserBuilder.anUser()
                 .withId(claimsJws.getBody().get("user-id", Long.class))

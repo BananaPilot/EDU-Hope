@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Component
 public class Middlewares implements WebMvcConfigurer {
+
     @Autowired
     UserMiddleware userMiddleware;
 
