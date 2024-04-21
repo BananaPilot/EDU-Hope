@@ -6,6 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,7 +32,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "id_student_fk"),
             inverseJoinColumns = @JoinColumn(name = "id_meeting_fk")
     )
-    private Set<Meeting> meetings;
+    private List<Meeting> meetings;
 
     public Student() {
     }
@@ -42,11 +43,11 @@ public class Student {
         this.register = register;
     }
 
-    public Set<Meeting> getMeetings() {
+    public List<Meeting> getMeetings() {
         return meetings;
     }
 
-    public void setMeetings(Set<Meeting> meetings) {
+    public void setMeetings(List<Meeting> meetings) {
         this.meetings = meetings;
     }
 

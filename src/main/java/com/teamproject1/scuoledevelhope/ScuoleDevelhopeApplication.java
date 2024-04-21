@@ -12,23 +12,5 @@ public class ScuoleDevelhopeApplication {
     }
 
 
-<<<<<<< HEAD
-	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO, UserDao userDao){
-		return runner ->{
-/*
-			User user = new User("Willo","Gattone");
-
-			userDao.save(user);
-			Classes classes = null;
-			Register register = null;
-			Student student = new Student(user,classes,register);
-			studentDAO.save(student);
-			//System.out.println(UUID.randomUUID());*/
-		};
-
-	}
-=======
->>>>>>> cc768e5296049c85af2e7273597484ecb0c0a1ea
 }
 

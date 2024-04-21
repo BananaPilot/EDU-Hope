@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,11 +20,11 @@ public class Tutor {
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
-    private Set<Register> registers;
+    private List<Register> registers;
 
     public Long getId() {
         return id;

@@ -3,7 +3,9 @@ package com.teamproject1.scuoledevelhope.classes.course;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,6 +16,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
     private Long id;
+
+    @NotBlank(message = "Course name can't be blank")
     @Column(
             name = "course_name",
             nullable = false
@@ -28,7 +32,7 @@ public class Course {
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
 
     public Course() {
     }
@@ -70,10 +74,6 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> cc768e5296049c85af2e7273597484ecb0c0a1ea
     public enum EnumCourse {
         BACKEND,
         FULLSTACK,

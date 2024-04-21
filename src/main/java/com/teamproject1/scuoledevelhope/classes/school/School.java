@@ -4,7 +4,9 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +17,7 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
     private Long id;
-
+    @NotBlank(message = "School name can't be blank")
     @Column(
             name = "class_name",
             nullable = false)
@@ -24,17 +26,17 @@ public class School {
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
 
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
-    private Set<Course> courses;
+    private List<Course> courses;
 
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
-    private Set<User> users;
+    private List<User> users;
 
     public Long getId() {
         return id;

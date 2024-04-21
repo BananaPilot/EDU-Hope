@@ -6,6 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,13 +28,13 @@ public class StudentController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findById")
-    public BaseResponseElement<Student> findById(@RequestParam Long id) {
+    public BaseResponseElement<Student> findById(@Valid @RequestParam Long id) {
         return studentService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
-    public BaseResponseElement<Student> delete(@RequestParam Long id) {
+    public BaseResponseElement<Student> delete(@Valid @RequestParam Long id) {
 
         return studentService.deleteById(id);
     }
