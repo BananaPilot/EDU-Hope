@@ -19,8 +19,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
-    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @NoAuthorization
+  //@FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findAll")
     public BaseResponseList<Student> findAll() {
         return studentService.findAll();
@@ -31,8 +31,8 @@ public class StudentController {
     public BaseResponseElement<Student> findById(@Valid @RequestParam Long id) {
         return studentService.findById(id);
     }
-
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @NoAuthorization
+ //@FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
     public BaseResponseElement<Student> delete(@Valid @RequestParam Long id) {
 
