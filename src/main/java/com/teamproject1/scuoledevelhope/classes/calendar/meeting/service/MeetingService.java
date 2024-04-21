@@ -17,37 +17,37 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
     }
 
-                        //----------- STUDENTE----------//
+    //----------- STUDENTE----------//
     public BaseResponseList<Meeting> allByStudentId(Long id) {
         return new BaseResponseList<>(meetingDAO.allByStudentId(id));
     }
 
-    public BaseResponseList<Meeting> intervalStudentId(Long idStudent ,LocalDate startDate , LocalDate endDate){
-        return new BaseResponseList<>(meetingDAO.intervalStudentId(idStudent ,startDate,endDate));
+    public BaseResponseList<Meeting> intervalStudentId(Long idStudent, LocalDate startDate, LocalDate endDate) {
+        return new BaseResponseList<>(meetingDAO.intervalStudentId(idStudent, startDate, endDate));
     }
-                        //----------- END STUDENTE----------//
+    //----------- END STUDENTE----------//
 
-                        //----------- TUTOR ----------//
+    //----------- TUTOR ----------//
     public BaseResponseList<Meeting> allByTutorId(Long id) {
         return new BaseResponseList<>(meetingDAO.allByTutorId(id));
     }
 
-    public BaseResponseList<Meeting> intervalTutorId(Long idTutor , LocalDate startDate, LocalDate endDate){
-        return new BaseResponseList<>(meetingDAO.intervalTutorId(idTutor,startDate,endDate));
+    public BaseResponseList<Meeting> intervalTutorId(Long idTutor, LocalDate startDate, LocalDate endDate) {
+        return new BaseResponseList<>(meetingDAO.intervalTutorId(idTutor, startDate, endDate));
     }
 
-                        //----------- END TUTOR ----------//
+    //----------- END TUTOR ----------//
 
-                        //----------- COORDINATOR ----------//
+    //----------- COORDINATOR ----------//
     public BaseResponseList<Meeting> allByCoordinatorId(Long id) {
         return new BaseResponseList<>(meetingDAO.allByCoordinatorId(id));
     }
 
-    public BaseResponseList<Meeting> intervalCoordinatorId(Long idCoordinator, LocalDate startDate , LocalDate endDate){
-        return new BaseResponseList<>(meetingDAO.intervalCoordinatorId(idCoordinator,startDate,endDate));
+    public BaseResponseList<Meeting> intervalCoordinatorId(Long idCoordinator, LocalDate startDate, LocalDate endDate) {
+        return new BaseResponseList<>(meetingDAO.intervalCoordinatorId(idCoordinator, startDate, endDate));
     }
 
-                     //----------- END COORDINATOR ----------//
+    //----------- END COORDINATOR ----------//
 
     public BaseResponseElement<Meeting> save(Meeting meeting) {
         return new BaseResponseElement<Meeting>(meetingDAO.save(meeting));

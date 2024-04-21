@@ -10,7 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserDetailsDaoImpl implements UserDetailsDao {
@@ -35,7 +36,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 
     public List<String> translate(List<Role> roles) {
         List<String> myList = new ArrayList<>();
-        for (Role role: roles) {
+        for (Role role : roles) {
             myList.add(role.getRoleEnum().toString());
         }
         return myList;

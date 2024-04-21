@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto;
 
 import org.springframework.stereotype.Component;
+
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 public class MeetingDTO {

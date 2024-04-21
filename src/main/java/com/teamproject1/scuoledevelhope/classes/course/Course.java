@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "course")
@@ -74,9 +73,10 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
+
     public enum EnumCourse {
         BACKEND,
         FULLSTACK,
-        FRONTEND;
+        FRONTEND
     }
 }
