@@ -8,7 +8,6 @@ import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class StudentService {
@@ -23,11 +22,9 @@ public class StudentService {
         return new BaseResponseList<>(studentDAO.findAll());
     }
 
-    public BaseResponseElement<Student> findById(String id) {
+    public BaseResponseElement<Student> findById(Long id) {
 
-        UUID tempUUID = UUID.fromString(id);
-
-        Optional<Student> result = studentDAO.findById(tempUUID);
+        Optional<Student> result = studentDAO.findById(id);
         if (result.isPresent()) {
             return new BaseResponseElement<>(result.get());
         } else {
@@ -35,7 +32,7 @@ public class StudentService {
         }
     }
 
-    public BaseResponseElement<Student> deleteById(UUID id) {
+    public BaseResponseElement<Student> deleteById(Long id) {
         Optional<Student> temp = studentDAO.findById(id);
         if (temp.isPresent()) {
             studentDAO.deleteById(id);

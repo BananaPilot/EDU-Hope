@@ -7,8 +7,6 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 public class TutorController {
 
@@ -26,7 +24,7 @@ public class TutorController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Tutor> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Tutor> findById(@RequestParam Long id) {
         return tutorService.findById(id);
     }
 
@@ -38,7 +36,7 @@ public class TutorController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Tutor> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Tutor> delete(@RequestParam Long id) {
         return tutorService.deleteById(id);
     }
 }

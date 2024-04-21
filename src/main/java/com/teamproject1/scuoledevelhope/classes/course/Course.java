@@ -5,15 +5,15 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "course")
 public class Course {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private UUID id = UUID.randomUUID();
+    private Long id;
     @Column(
             name = "course_name",
             nullable = false
@@ -33,7 +33,7 @@ public class Course {
     public Course() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

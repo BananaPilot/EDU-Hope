@@ -1,47 +1,46 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name ="meeting")
+@Table(name = "meeting")
 public class Meeting {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name="id_meeting")
-    private UUID meetingID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_meeting")
+    private Long meetingID;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
-    @Column(name="start_date")
+    @Column(name = "start_date")
     private LocalDateTime startDate;
 
-    @Column(name="end_date")
+    @Column(name = "end_date")
     private LocalDateTime endDate;
-    @Column(name="link")
+    @Column(name = "link")
     private String link;
-    @Column(name="note")
+    @Column(name = "note")
     private String note;
 
     @OneToOne
-    @JoinColumn(name="tutor_id_fk")
+    @JoinColumn(name = "tutor_id_fk")
     private Tutor tutorIDfk;
     @OneToOne
-    @JoinColumn(name="coordinator_id_fk")
+    @JoinColumn(name = "coordinator_id_fk")
     private Coordinator coordinatorIDfk;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_meeting"),
-            inverseJoinColumns = @JoinColumn(name = "id_student")
+            joinColumns = @JoinColumn(name = "id_meeting_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_student_fk")
     )
     private Set<Student> students;
 
@@ -119,6 +118,7 @@ public class Meeting {
         this.coordinatorIDfk = coordinatorIDfk;
     }
 
+    @JsonIgnore
     public Set<Student> getStudents() {
         return students;
     }

@@ -6,14 +6,13 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tutor")
 public class Tutor {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -26,7 +25,7 @@ public class Tutor {
             fetch = FetchType.LAZY)
     private Set<Register> registers;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

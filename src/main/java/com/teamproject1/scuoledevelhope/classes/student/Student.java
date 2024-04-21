@@ -6,17 +6,15 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
-    private UUID id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -30,8 +28,8 @@ public class Student {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_student"),
-            inverseJoinColumns = @JoinColumn(name = "id_meeting")
+            joinColumns = @JoinColumn(name = "id_student_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_meeting_fk")
     )
     private Set<Meeting> meetings;
 
@@ -52,7 +50,7 @@ public class Student {
         this.meetings = meetings;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

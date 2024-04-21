@@ -7,8 +7,6 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/user_registry")
 public class UserRegistryController {
@@ -27,7 +25,7 @@ public class UserRegistryController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<UserRegistry> findById(@RequestParam UUID id) {
+    public BaseResponseElement<UserRegistry> findById(@RequestParam Long id) {
         return userRegistryService.findById(id);
     }
 
@@ -39,7 +37,7 @@ public class UserRegistryController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<UserRegistry> delete(@RequestParam UUID id) {
+    public BaseResponseElement<UserRegistry> delete(@RequestParam Long id) {
         return userRegistryService.deleteById(id);
     }
 }

@@ -8,21 +8,24 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Username is needed to create a user")
     @Column(unique = true)
     private String username;
 
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
@@ -38,7 +41,7 @@ public class User {
     private School school;
 
     @ManyToMany
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @OneToMany(
             mappedBy = "user",
@@ -63,7 +66,7 @@ public class User {
     public User() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -75,16 +78,16 @@ public class User {
         return password;
     }
 
-    public UserRegistry getUserRegistry() {
-        return userRegistry;
+    public List<Role> getRoles() {
+        return roles;
     }
 
     public School getSchool() {
         return school;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public UserRegistry getUserRegistry() {
+        return userRegistry;
     }
 
     public void setUsername(String username) {
@@ -95,17 +98,9 @@ public class User {
         this.password = password;
     }
 
-    public void setUserRegistry(UserRegistry userRegistry) {
-        this.userRegistry = userRegistry;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
     public static final class UserBuilder {
 
-        private UUID id;
+        private Long id;
         private String username;
         private String password;
 
@@ -116,7 +111,7 @@ public class User {
             return new UserBuilder();
         }
 
-        public UserBuilder withId(UUID id) {
+        public UserBuilder withId(Long id) {
             this.id = id;
             return this;
         }
