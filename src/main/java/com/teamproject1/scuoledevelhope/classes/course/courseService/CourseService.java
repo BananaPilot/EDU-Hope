@@ -1,7 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.course.courseService;
 
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.courseDAO.CourseDAO;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
@@ -44,5 +47,29 @@ public class CourseService {
 
         return new BaseResponseElement<>(temp.get());
     }
+    public BaseResponseList<Classes> getClassesByCourse(Long id){
+        Optional<Course> result = courseDAO.findById(id);
+        if (result.isEmpty()) {
+            throw new SQLException("Course was not present");
+        }
+        return new BaseResponseList<>(courseDAO.getClassesByCourse(id));
+    }
+
+    public BaseResponseList<Tutor> getTutorsByCourse(Long id){
+        Optional<Course> result = courseDAO.findById(id);
+        if (result.isEmpty()) {
+            throw new SQLException("Course was not present");
+        }
+        return new BaseResponseList<>(courseDAO.getTutorsByCourse(id));
+    }
+
+    public BaseResponseList<Student> getStudentsByCourse(Long id){
+        Optional<Course> result = courseDAO.findById(id);
+        if (result.isEmpty()) {
+            throw new SQLException("Course was not present");
+        }
+        return new BaseResponseList<>(courseDAO.getStudentsByCourse(id));
+    }
+
 }
 

@@ -45,4 +45,5 @@ public interface ClassDAO extends JpaRepository<Classes, Long> {
             "join class c on s.id_class = c.id_class\n"+
             "where c.id = :idClass", nativeQuery = true)
     List<Student> getStudentsByClass(@Param("idClass") Long idClass);
+
 }
