@@ -24,6 +24,8 @@ public class UserRegistry {
             nullable = false,
             unique = true)
     private String email;
+
+    @Pattern(regexp = "^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{7}$")
     @Column(name = "user_telephone", unique = true)
     private String telephone;
 

@@ -3,18 +3,24 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry.dto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UrDtoNameSurname {
+public class UserRegistryDTO {
+
+
     private String name;
     private String surname;
+    private String email;
+    private String telephone;
 
-    public UrDtoNameSurname() {
+    public UserRegistryDTO() {
     }
 
     @Override
     public String toString() {
-        return "UserRegistryDTONameSurname{" +
+        return "PartecipanteDTO{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
                 '}';
     }
 
@@ -22,15 +28,16 @@ public class UrDtoNameSurname {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getEmail() {
+        return email;
     }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
 }

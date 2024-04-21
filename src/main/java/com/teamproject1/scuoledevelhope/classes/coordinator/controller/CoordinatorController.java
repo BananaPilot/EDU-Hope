@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.service.CoordinatorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -28,6 +29,7 @@ public class CoordinatorController {
     public BaseResponseList<Coordinator> findAll() {
         return coordinatorService.findAll();
     }
+
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-by-id")

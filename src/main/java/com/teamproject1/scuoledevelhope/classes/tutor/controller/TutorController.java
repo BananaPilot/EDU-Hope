@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.tutor.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.tutor.service.TutorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -26,7 +27,8 @@ public class TutorController {
         return tutorService.findAll();
     }
 
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @NoAuthorization
+   // @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
     public BaseResponseElement<Tutor> findById(@Valid @RequestParam Long id) {
         return tutorService.findById(id);

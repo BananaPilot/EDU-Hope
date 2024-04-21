@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +43,7 @@ public class Meeting {
             joinColumns = @JoinColumn(name = "id_meeting_fk"),
             inverseJoinColumns = @JoinColumn(name = "id_student_fk")
     )
-    private Set<Student> students;
+    private List<Student> students;
 
     public Meeting() {
     }
@@ -60,6 +61,10 @@ public class Meeting {
                 ", coordinatorIDfk=" + coordinatorIDfk +
                 ", students=" + students +
                 '}';
+    }
+
+    public Long getMeetingID() {
+        return meetingID;
     }
 
     public String getTitle() {
@@ -119,11 +124,11 @@ public class Meeting {
     }
 
     @JsonIgnore
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 }
