@@ -7,6 +7,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,5 +35,5 @@ public interface CourseDAO extends JpaRepository<Course, Long> {
             "where c.id_course = :idCourse", nativeQuery = true)
     List<Student> getStudentsByCourse(@Param("idCourse") Long idCourse);
 
-    //PULLINA AL VOLO PER FABIETTO
+
 }

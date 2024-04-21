@@ -38,4 +38,8 @@ public class StudentController {
 
         return studentService.deleteById(id);
     }
+
+    public void pullinaPerFabietto(){
+        System.out.println("ULLINA AL VOLO PER FABIETTO");
+    }
 }
