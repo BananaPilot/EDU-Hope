@@ -14,15 +14,6 @@ public class Calendar {
     public Calendar() {
     }
 
-    @Override
-    public String toString() {
-        return "Calendar{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", calendar=" + calendar +
-                '}';
-    }
-
     public LocalDate getStartDate() {
         return startDate;
     }

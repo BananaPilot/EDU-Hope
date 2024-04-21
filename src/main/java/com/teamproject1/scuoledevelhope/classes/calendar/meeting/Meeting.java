@@ -62,6 +62,10 @@ public class Meeting {
                 '}';
     }
 
+    public Long getMeetingID() {
+        return meetingID;
+    }
+
     public String getTitle() {
         return title;
     }
