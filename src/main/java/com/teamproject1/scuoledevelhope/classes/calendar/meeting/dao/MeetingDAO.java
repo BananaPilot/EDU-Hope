@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +23,16 @@ public interface MeetingDAO extends JpaRepository<Meeting, Long> {
             "where meeting_student.id_student_fk = :idStudent\n" +
             "and meeting.start_date > :startDate and meeting.start_date < :endDate", nativeQuery = true)
     List<Meeting> intervalStudentId(@Param("idStudent") Long idStudent, @Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
+
+    // VISUALIZZA TUTTI GLI STUDENTI CHE PARTECIPANO AD UN MEETING (PartecipantiDTO)
+    @Query(value = "select user_registry .* from user_registry \n" +
+            "join user on user_registry .id = user.user_registry_id \n" +
+            "join student on user.id = student.id_user \n" +
+            "join meeting_student  on meeting_student.id_student_fk = student.id_student \n" +
+            "join meeting  on meeting_student.id_meeting_fk = meeting.id_meeting \n" +
+            "where id_meeting = :iDmeeting", nativeQuery = true)
+    List<UserRegistry> allStudentsByMeeting(@Param("iDmeeting") Long iDmeeting);
+
 
                                 //-----------END STUDENT----------//
 
