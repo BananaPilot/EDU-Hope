@@ -43,8 +43,9 @@ public class CourseController {
     public BaseResponseList<Tutor> getTutorsByCourse(@Valid @RequestParam Long id) {
         return courseService.getTutorsByCourse(id);
     }
+
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @GetMapping("/get-tutors")
+    @GetMapping("/get-students")
     public BaseResponseList<Student> getStudentsByCourse(@Valid @RequestParam Long id) {
         return courseService.getStudentsByCourse(id);
     }
