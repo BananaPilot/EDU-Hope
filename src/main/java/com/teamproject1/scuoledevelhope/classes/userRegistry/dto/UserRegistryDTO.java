@@ -9,19 +9,8 @@ public class UserRegistryDTO {
     private String name;
     private String surname;
     private String email;
-    private String telephone;
 
     public UserRegistryDTO() {
-    }
-
-    @Override
-    public String toString() {
-        return "PartecipanteDTO{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                '}';
     }
 
     public String getName() {
@@ -36,8 +25,17 @@ public class UserRegistryDTO {
         return email;
     }
 
-    public String getTelephone() {
-        return telephone;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

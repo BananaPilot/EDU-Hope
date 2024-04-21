@@ -2,16 +2,20 @@ package com.teamproject1.scuoledevelhope.classes.calendar.meeting.service;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryDAO.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class MeetingService {
 
     MeetingDAO meetingDAO;
+    UserRegistryDAO urDAO;
 
     public MeetingService(MeetingDAO meetingDAO) {
         this.meetingDAO = meetingDAO;
@@ -25,7 +29,11 @@ public class MeetingService {
     public BaseResponseList<Meeting> intervalStudentId(Long idStudent, LocalDate startDate, LocalDate endDate) {
         return new BaseResponseList<>(meetingDAO.intervalStudentId(idStudent, startDate, endDate));
     }
-    //----------- END STUDENTE----------//
+
+    public List<UserRegistry> allStudentsByMeeting(Long iDmeeting){
+        return urDAO.allStudentsByMeeting(iDmeeting);
+    }
+                        //----------- END STUDENTE----------//
 
     //----------- TUTOR ----------//
     public BaseResponseList<Meeting> allByTutorId(Long id) {
