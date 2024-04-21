@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.userRegistryService.UserRegistryService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,19 +26,19 @@ public class UserRegistryController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<UserRegistry> findById(@RequestParam Long id) {
+    public BaseResponseElement<UserRegistry> findById(@Valid @RequestParam Long id) {
         return userRegistryService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<UserRegistry> save(@RequestBody UserRegistry userRegistry) {
+    public BaseResponseElement<UserRegistry> save(@Valid @RequestBody UserRegistry userRegistry) {
         return userRegistryService.save(userRegistry);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<UserRegistry> delete(@RequestParam Long id) {
+    public BaseResponseElement<UserRegistry> delete(@Valid @RequestParam Long id) {
         return userRegistryService.deleteById(id);
     }
 }

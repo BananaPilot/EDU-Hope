@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "user_registry")
@@ -16,11 +17,15 @@ public class UserRegistry {
     private String name;
     @Column(name = "user_surname")
     private String surname;
+
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$")
     @Column(
             name = "user_email",
             nullable = false,
             unique = true)
     private String email;
+
+    @Pattern(regexp = "^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{7}$")
     @Column(name = "user_telephone", unique = true)
     private String telephone;
 

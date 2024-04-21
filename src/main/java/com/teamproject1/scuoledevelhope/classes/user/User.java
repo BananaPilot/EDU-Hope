@@ -8,6 +8,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
@@ -44,17 +46,17 @@ public class User {
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
 
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Tutor> tutors;
+    private List<Tutor> tutors;
 
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Coordinator> coordinators;
+    private List<Coordinator> coordinators;
 
     public User(String username, String password) {
         this.username = username;

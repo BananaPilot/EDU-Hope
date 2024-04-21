@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.school.schoolService.SchoolService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,19 +26,19 @@ public class SchoolController {
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<School> findById(@RequestParam Long id) {
+    public BaseResponseElement<School> findById(@Valid @RequestParam Long id) {
         return schoolService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @PostMapping("/save")
-    public BaseResponseElement<School> save(@RequestBody School school) {
+    public BaseResponseElement<School> save(@Valid @RequestBody School school) {
         return schoolService.save(school);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<School> delete(@RequestParam Long id) {
+    public BaseResponseElement<School> delete(@Valid @RequestParam Long id) {
         return schoolService.deleteById(id);
     }
 }

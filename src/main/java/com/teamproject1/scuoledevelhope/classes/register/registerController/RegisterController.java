@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.registerService.RegisterService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,33 +27,33 @@ public class RegisterController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Register> findById(@RequestParam Long id) {
+    public BaseResponseElement<Register> findById(@Valid @RequestParam Long id) {
         return registerService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-year")
-    public BaseResponseList<Register> getAllBySchoolYear(@RequestParam String schoolYear) {
+    public BaseResponseList<Register> getAllBySchoolYear(@Valid @RequestParam String schoolYear) {
         return registerService.getAllBySchoolYear(schoolYear);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-tutor")
-    public BaseResponseList<Register> getAllByTutor(@RequestParam Long tutor) {
+    public BaseResponseList<Register> getAllByTutor(@Valid @RequestParam Long tutor) {
         return registerService.getAllByTutor(tutor);
     }
 
     //ADD - UPDATE
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<Register> save(@RequestBody Register register) {
+    public BaseResponseElement<Register> save(@Valid @RequestBody Register register) {
         return registerService.save(register);
     }
 
     //DELETE
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Register> delete(@RequestParam Long id) {
+    public BaseResponseElement<Register> delete(@Valid @RequestParam Long id) {
         return registerService.deleteById(id);
     }
 
