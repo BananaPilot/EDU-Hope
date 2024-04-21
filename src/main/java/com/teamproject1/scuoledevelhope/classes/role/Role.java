@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,7 +35,7 @@ public class Role {
             mappedBy = "roles",
             fetch = FetchType.LAZY
     )
-    private Set<User> users;
+    private List<User> users;
 
     public Long getId() {
         return id;

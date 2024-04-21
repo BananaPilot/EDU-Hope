@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +43,7 @@ public class Classes {
     @OneToMany(
             mappedBy = "schoolClass",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
     @OneToOne(mappedBy = "schoolClass")
     private Register registers;
 

@@ -5,7 +5,9 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,6 +17,7 @@ public class Register {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
     private Long id;
+    @NotBlank(message = "school year can't be blank")
     @Column(
             name = "register_school-year",
             nullable = false)
@@ -30,11 +33,11 @@ public class Register {
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
-    private Set<Vote> votes;
+    private List<Vote> votes;
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
 
     public Long getId() {
         return id;
