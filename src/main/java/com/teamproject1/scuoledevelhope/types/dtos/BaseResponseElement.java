@@ -18,7 +18,14 @@ public class BaseResponseElement<T> extends BaseResponse {
         this.element = element;
     }
 
+    public BaseResponseElement(Object o, String string, boolean b) {
+    }
+
     public T getElement() {
         return element;
+    }
+
+    public boolean isSuccess() {
+        return true;
     }
 }
