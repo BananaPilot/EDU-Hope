@@ -25,7 +25,7 @@ public class TutorController {
     }
 
     @NoAuthorization
-   // @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    // @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
     public BaseResponseElement<Tutor> findById(@Valid @RequestParam Long id) {
         return tutorService.findById(id);

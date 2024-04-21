@@ -1,12 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.role;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -28,7 +25,7 @@ public class Role {
         USER,
         COORDINATOR,
         TUTOR,
-        STUDENT;
+        STUDENT
     }
 
     @ManyToMany(

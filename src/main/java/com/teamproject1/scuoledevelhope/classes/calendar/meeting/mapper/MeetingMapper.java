@@ -19,7 +19,7 @@ public class MeetingMapper {
         this.meetingDAO = meetingDAO;
     }
 
-    public MeetingDTO toMeetingDTO(Meeting meeting ){
+    public MeetingDTO toMeetingDTO(Meeting meeting) {
 
         MeetingDTO meetingDTO = new MeetingDTO();
 

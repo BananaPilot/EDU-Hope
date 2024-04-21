@@ -47,7 +47,8 @@ public class CourseService {
 
         return new BaseResponseElement<>(temp.get());
     }
-    public BaseResponseList<Classes> getClassesByCourse(Long id){
+
+    public BaseResponseList<Classes> getClassesByCourse(Long id) {
         Optional<Course> result = courseDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Course was not present");
@@ -55,7 +56,7 @@ public class CourseService {
         return new BaseResponseList<>(courseDAO.getClassesByCourse(id));
     }
 
-    public BaseResponseList<Tutor> getTutorsByCourse(Long id){
+    public BaseResponseList<Tutor> getTutorsByCourse(Long id) {
         Optional<Course> result = courseDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Course was not present");
@@ -63,7 +64,7 @@ public class CourseService {
         return new BaseResponseList<>(courseDAO.getTutorsByCourse(id));
     }
 
-    public BaseResponseList<Student> getStudentsByCourse(Long id){
+    public BaseResponseList<Student> getStudentsByCourse(Long id) {
         Optional<Course> result = courseDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Course was not present");
