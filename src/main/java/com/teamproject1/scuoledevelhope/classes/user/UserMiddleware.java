@@ -19,7 +19,7 @@ public class UserMiddleware implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (!request.getRequestURI().contains("dashboard")){
+        if (!request.getRequestURI().contains("dashboard")) {
             return true;
         }
         if (request.getRequestURI().contains("dashboard") && handle(request)) {

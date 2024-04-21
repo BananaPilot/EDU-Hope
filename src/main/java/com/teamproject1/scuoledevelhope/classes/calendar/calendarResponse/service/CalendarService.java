@@ -12,7 +12,6 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,19 +30,19 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> studentCalendar(Long idStudent, LocalDate startDate, LocalDate endDate){
-        List<Meeting> allMeetings = meetingDAO.intervalStudentId(idStudent,startDate,endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate,endDate,allMeetings));
+    public BaseResponseElement<Calendar> studentCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
+        List<Meeting> allMeetings = meetingDAO.intervalStudentId(idStudent, startDate, endDate);
+        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
     }
 
-    public BaseResponseElement<Calendar> coordinatorCalendar(Long idCoordinator, LocalDate startDate, LocalDate endDate){
-        List<Meeting> allMeetings = meetingDAO.intervalCoordinatorId(idCoordinator,startDate,endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate,endDate,allMeetings));
+    public BaseResponseElement<Calendar> coordinatorCalendar(Long idCoordinator, LocalDate startDate, LocalDate endDate) {
+        List<Meeting> allMeetings = meetingDAO.intervalCoordinatorId(idCoordinator, startDate, endDate);
+        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
     }
 
-    public BaseResponseElement<Calendar> tutorCalendar(Long idTutor, LocalDate startDate, LocalDate endDate){
-        List<Meeting> allMeetings = meetingDAO.intervalTutorId(idTutor,startDate,endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate,endDate,allMeetings));
+    public BaseResponseElement<Calendar> tutorCalendar(Long idTutor, LocalDate startDate, LocalDate endDate) {
+        List<Meeting> allMeetings = meetingDAO.intervalTutorId(idTutor, startDate, endDate);
+        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
     }
 
 
@@ -52,7 +51,7 @@ public class CalendarService {
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
-
+      
         for(Meeting allMeet : allMeetings){
 
             MeetingResponse meetingResponse = new MeetingResponse();

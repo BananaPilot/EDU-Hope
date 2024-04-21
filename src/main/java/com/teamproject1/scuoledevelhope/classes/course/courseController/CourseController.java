@@ -38,6 +38,7 @@ public class CourseController {
     public BaseResponseList<Classes> getClassesByCourse(@Valid @RequestParam Long id) {
         return courseService.getClassesByCourse(id);
     }
+
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-tutors")
     public BaseResponseList<Tutor> getTutorsByCourse(@Valid @RequestParam Long id) {
@@ -49,6 +50,7 @@ public class CourseController {
     public BaseResponseList<Student> getStudentsByCourse(@Valid @RequestParam Long id) {
         return courseService.getStudentsByCourse(id);
     }
+
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PostMapping("/save")
     public BaseResponseElement<Course> save(@Valid @RequestBody Course course) {

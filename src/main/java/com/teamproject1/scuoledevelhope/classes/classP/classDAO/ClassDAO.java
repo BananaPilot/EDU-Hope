@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,11 +37,11 @@ public interface ClassDAO extends JpaRepository<Classes, Long> {
             "where c.id = :idClass", nativeQuery = true)
     Course getCourseByClass(@Param("idClass") Long idClass);
 
-    //eseleziona tutti gli studenti di questa classe
+    //seleziona tutti gli studenti di questa classe
     @Query(value = "select class_name, user_name, user_surname  from user_registry ur\n" +
             "join user u on ur.id = u.user_registry_id\n" +
             "join student s on u.id = s.id_user\n" +
-            "join class c on s.id_class = c.id_class\n"+
+            "join class c on s.id_class = c.id_class\n" +
             "where c.id = :idClass", nativeQuery = true)
     List<Student> getStudentsByClass(@Param("idClass") Long idClass);
 

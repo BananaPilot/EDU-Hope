@@ -26,7 +26,10 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     @Query(value = "select * from user where id = :id", nativeQuery = true)
     User getByID(@Param("id") Long id);
-  
+
+    @Query(value = "select * from user where id = :id", nativeQuery = true)
+    User searchByID(@Param("id") Long id);
+
     @Query(value = "insert into user (username, password) values (:username, :password)", nativeQuery = true)
     int addUser(@Param("username") String username, @Param("password") String password);
 }

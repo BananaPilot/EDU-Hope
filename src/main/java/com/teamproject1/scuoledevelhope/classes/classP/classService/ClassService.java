@@ -25,7 +25,7 @@ public class ClassService {
         return new BaseResponseList<>(classDAO.findAll());
     }
 
-    public BaseResponseElement<Classes> findById(Long id){
+    public BaseResponseElement<Classes> findById(Long id) {
         Optional<Classes> result = classDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -33,11 +33,11 @@ public class ClassService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseElement<Classes> save(Classes classes){
+    public BaseResponseElement<Classes> save(Classes classes) {
         return new BaseResponseElement<>(classDAO.save(classes));
     }
 
-    public BaseResponseElement<Classes> deleteById(Long id){
+    public BaseResponseElement<Classes> deleteById(Long id) {
         Optional<Classes> temp = classDAO.findById(id);
 
         if (temp.isEmpty()) {
@@ -48,7 +48,7 @@ public class ClassService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseElement<Tutor> getTutorByClass(Long idClass){
+    public BaseResponseElement<Tutor> getTutorByClass(Long idClass) {
         Optional<Classes> result = classDAO.findById(idClass);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -56,7 +56,7 @@ public class ClassService {
         return new BaseResponseElement<>(classDAO.getTutorByClass(idClass));
     }
 
-    public BaseResponseElement<Coordinator> getCoordinatorByClass(Long idClass){
+    public BaseResponseElement<Coordinator> getCoordinatorByClass(Long idClass) {
         Optional<Classes> result = classDAO.findById(idClass);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -64,7 +64,7 @@ public class ClassService {
         return new BaseResponseElement<>(classDAO.getCoordinatorByClass(idClass));
     }
 
-    public BaseResponseElement<Course> getCourseByClass(Long idClass){
+    public BaseResponseElement<Course> getCourseByClass(Long idClass) {
         Optional<Classes> result = classDAO.findById(idClass);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -72,7 +72,7 @@ public class ClassService {
         return new BaseResponseElement<>(classDAO.getCourseByClass(idClass));
     }
 
-    public BaseResponseList<Student> getStudentsByClass(Long idClass){
+    public BaseResponseList<Student> getStudentsByClass(Long idClass) {
         Optional<Classes> result = classDAO.findById(idClass);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");

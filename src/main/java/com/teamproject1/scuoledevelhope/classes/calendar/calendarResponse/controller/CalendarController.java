@@ -17,23 +17,25 @@ public class CalendarController {
     public CalendarController(CalendarService calendarService) {
         this.calendarService = calendarService;
     }
+
     @NoAuthorization
     @GetMapping("/studentCalendar/{idStudent}")
-    public BaseResponseElement<Calendar> studentCalendar(@PathVariable Long idStudent, @RequestParam LocalDate startDate, LocalDate endDate){
+    public BaseResponseElement<Calendar> studentCalendar(@PathVariable Long idStudent, @RequestParam LocalDate startDate, LocalDate endDate) {
 
-        return calendarService.studentCalendar(idStudent, startDate,endDate);
+        return calendarService.studentCalendar(idStudent, startDate, endDate);
     }
+
     @NoAuthorization
     @GetMapping("/coordinatorCalendar/{idCoordinator}")
-    public BaseResponseElement<Calendar> coordinatorCalendar(@PathVariable Long idCoordinator, @RequestParam LocalDate startDate, LocalDate endDate){
+    public BaseResponseElement<Calendar> coordinatorCalendar(@PathVariable Long idCoordinator, @RequestParam LocalDate startDate, LocalDate endDate) {
 
-        return calendarService.coordinatorCalendar(idCoordinator, startDate,endDate);
+        return calendarService.coordinatorCalendar(idCoordinator, startDate, endDate);
     }
 
     @NoAuthorization
     @GetMapping("/tutorCalendar/{idTutor}")
-    public BaseResponseElement<Calendar> tutorCalendar(@PathVariable Long idTutor, @RequestParam LocalDate startDate, LocalDate endDate){
+    public BaseResponseElement<Calendar> tutorCalendar(@PathVariable Long idTutor, @RequestParam LocalDate startDate, LocalDate endDate) {
 
-        return calendarService.tutorCalendar(idTutor, startDate,endDate);
+        return calendarService.tutorCalendar(idTutor, startDate, endDate);
     }
 }

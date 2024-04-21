@@ -15,7 +15,6 @@
 	<name>scuole-develhope</name>
 	<description>scuole-develhope</description>
 	<properties>
-		<sonar.skip>true</sonar.skip>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
