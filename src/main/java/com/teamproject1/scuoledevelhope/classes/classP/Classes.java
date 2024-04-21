@@ -9,17 +9,17 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "class")
 public class Classes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_class")
-    private UUID id;
+    private Long id;
 
     @NotBlank(message = "Class name can't be blank")
     @Column(
@@ -43,11 +43,11 @@ public class Classes {
     @OneToMany(
             mappedBy = "schoolClass",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
     @OneToOne(mappedBy = "schoolClass")
     private Register registers;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

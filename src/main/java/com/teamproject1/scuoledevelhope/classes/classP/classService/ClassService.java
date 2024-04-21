@@ -8,7 +8,6 @@ import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ClassService {
@@ -22,7 +21,7 @@ public class ClassService {
         return new BaseResponseList<>(classDAO.findAll());
     }
 
-    public BaseResponseElement<Classes> findById(UUID id) {
+    public BaseResponseElement<Classes> findById(Long id) {
         Optional<Classes> result = classDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -34,7 +33,7 @@ public class ClassService {
         return new BaseResponseElement<>(classDAO.save(classes));
     }
 
-    public BaseResponseElement<Classes> deleteById(UUID id) {
+    public BaseResponseElement<Classes> deleteById(Long id) {
         Optional<Classes> temp = classDAO.findById(id);
 
         if (temp.isEmpty()) {

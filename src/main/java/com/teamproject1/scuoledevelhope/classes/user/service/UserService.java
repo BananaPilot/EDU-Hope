@@ -25,10 +25,14 @@ public class UserService {
     }
 
     public BaseResponseElement<User> addUser(User user) {
-        int res = userDao.addUser(user.getUsername(), user.getPassword(), user.getSchool().getId());
+        int res = userDao.addUser(user.getUsername(), user.getPassword());
         if (res < 1) {
             throw new SQLException("User was not added");
         }
         return new BaseResponseElement<>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), " ", userDao.getByUsername(user.getUsername()));
+    }
+
+    public BaseResponseElement<User> getByID(Long id) {
+        return new BaseResponseElement<>(userDao.getByID(id));
     }
 }

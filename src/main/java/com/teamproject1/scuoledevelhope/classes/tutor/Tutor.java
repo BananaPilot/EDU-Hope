@@ -9,16 +9,18 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tutor")
 public class Tutor {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+
     @NotBlank(message = "Tutor name can't be blank")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -27,13 +29,13 @@ public class Tutor {
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
-    private Set<Register> registers;
+    private List<Register> registers;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

@@ -7,17 +7,19 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "coordinator")
 public class Coordinator {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
-    private UUID id;
+
     @NotBlank(message = "Coordinator name can't be blank")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -26,9 +28,9 @@ public class Coordinator {
     @OneToMany(
             mappedBy = "coordinator",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

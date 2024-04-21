@@ -3,36 +3,41 @@ package com.teamproject1.scuoledevelhope.classes.vote;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "vote")
 public class Vote {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
-    private UUID id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student student;
+
+    @NotBlank(message = "subject can't be blank")
     @Column(name = "vote_subject",
             nullable = false)
     private String subject;
+
+    @NotBlank(message = "date can't be blank")
     @Column(name = "vote_date",
             nullable = false)
     private LocalDate date;
+    @NotBlank(message = "evaluation can't be blank")
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
     @Column(name = "annotation")
     private String annotation;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

@@ -8,7 +8,6 @@ import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class RegisterService {
@@ -23,7 +22,7 @@ public class RegisterService {
         return new BaseResponseList<>(registerDao.findAll());
     }
 
-    public BaseResponseElement<Register> findById(UUID id) {
+    public BaseResponseElement<Register> findById(Long id) {
         Optional<Register> result = registerDao.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Register was not present");
@@ -35,7 +34,7 @@ public class RegisterService {
         return new BaseResponseList<>(registerDao.getAllBySchoolYear(schoolYear));
     }
 
-    public BaseResponseList<Register> getAllByTutor(UUID tutorId) {
+    public BaseResponseList<Register> getAllByTutor(Long tutorId) {
         return new BaseResponseList<>(registerDao.getAllByTutor(tutorId));
     }
 
@@ -47,7 +46,7 @@ public class RegisterService {
         return new BaseResponseElement<>(register);
     }
 
-    public BaseResponseElement<Register> deleteById(UUID id) {
+    public BaseResponseElement<Register> deleteById(Long id) {
         Optional<Register> temp = registerDao.findById(id);
 
         if (temp.isEmpty()) {

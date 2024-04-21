@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.student.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -9,8 +10,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/student")
@@ -22,7 +21,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @NoAuthorization
+  //@FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findAll")
     public BaseResponseList<Student> findAll() {
         return studentService.findAll();
@@ -30,15 +30,15 @@ public class StudentController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findById")
-    public BaseResponseElement<Student> findById(@RequestParam String id) {
+    public BaseResponseElement<Student> findById(@Valid @RequestParam Long id) {
         return studentService.findById(id);
     }
-
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @NoAuthorization
+ //@FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
-    public BaseResponseElement<Student> delete(@RequestParam String id) {
+    public BaseResponseElement<Student> delete(@Valid @RequestParam Long id) {
 
-        return studentService.deleteById(UUID.fromString(id));
+        return studentService.deleteById(id);
     }
     @PostMapping("/save")
     public ResponseEntity<String> save(@Valid @RequestBody Student student, BindingResult bindingResult) {

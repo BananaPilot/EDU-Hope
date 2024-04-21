@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 public class TutorController {
 
@@ -30,19 +28,19 @@ public class TutorController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Tutor> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Tutor> findById(@Valid @RequestParam Long id) {
         return tutorService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<Tutor> save(@RequestBody Tutor tutor) {
+    public BaseResponseElement<Tutor> save(@Valid @RequestBody Tutor tutor) {
         return tutorService.save(tutor);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Tutor> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Tutor> delete(@Valid @RequestParam Long id) {
         return tutorService.deleteById(id);
     }
 

@@ -3,17 +3,21 @@ package com.teamproject1.scuoledevelhope.classes.course;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "course")
 public class Course {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
-    private UUID id = UUID.randomUUID();
+    private Long id;
+
+    @NotBlank(message = "Course name can't be blank")
     @Column(
             name = "course_name",
             nullable = false
@@ -24,15 +28,16 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
+    private EnumCourse enumCourse;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
+    private List<Classes> classes;
 
     public Course() {
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -69,7 +74,6 @@ public class Course {
                 ", school: " + school +
                 '}';
     }
-
     public enum EnumCourse {
         BACKEND,
         FULLSTACK,

@@ -8,8 +8,6 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/class")
 public class ClassController {
@@ -27,7 +25,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Classes> findById(@Valid @RequestParam UUID id) {
+    public BaseResponseElement<Classes> findById(@Valid @RequestParam Long id) {
         return classService.findById(id);
     }
 
@@ -39,7 +37,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Classes> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Classes> delete(@Valid @RequestParam Long id) {
         return classService.deleteById(id);
     }
 }

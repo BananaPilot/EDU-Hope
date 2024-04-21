@@ -2,7 +2,7 @@ package com.teamproject1.scuoledevelhope.types.dtos;
 
 import org.springframework.http.HttpStatus;
 
-public class BaseResponseElement <T> extends BaseResponse {
+public class BaseResponseElement<T> extends BaseResponse {
     private T element;
 
     public BaseResponseElement() {

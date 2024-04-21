@@ -9,9 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/coordinator")
@@ -31,19 +31,19 @@ public class CoordinatorController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Coordinator> findById(@RequestParam UUID id) {
+    public BaseResponseElement<Coordinator> findById(@Valid @RequestParam Long id) {
         return coordinatorService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PostMapping("/save")
-    public BaseResponseElement<Coordinator> save(@RequestBody Coordinator coordinator) {
+    public BaseResponseElement<Coordinator> save(@Valid @RequestBody Coordinator coordinator) {
         return coordinatorService.save(coordinator);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Coordinator> delete(@RequestParam UUID id) {
+    public BaseResponseElement<Coordinator> delete(@Valid @RequestParam Long id) {
         return coordinatorService.deleteById(id);
     }
 

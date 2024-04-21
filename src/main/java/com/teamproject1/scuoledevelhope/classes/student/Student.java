@@ -11,16 +11,17 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
-    private UUID id;
+
+   
     @NotBlank(message = "Student name can't be blank")
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -38,10 +39,10 @@ public class Student {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_student"),
-            inverseJoinColumns = @JoinColumn(name = "id_meeting")
+            joinColumns = @JoinColumn(name = "id_student_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_meeting_fk")
     )
-    private Set<Meeting> meetings;
+    private List<Meeting> meetings;
 
     public Student() {
     }
@@ -52,15 +53,15 @@ public class Student {
         this.register = register;
     }
 
-    public Set<Meeting> getMeetings() {
+    public List<Meeting> getMeetings() {
         return meetings;
     }
 
-    public void setMeetings(Set<Meeting> meetings) {
+    public void setMeetings(List<Meeting> meetings) {
         this.meetings = meetings;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
