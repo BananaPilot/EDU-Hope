@@ -3,6 +3,8 @@ package com.teamproject1.scuoledevelhope.classes.classP.classService;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.classP.classDAO.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.course.Course;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -23,7 +25,7 @@ public class ClassService {
         return new BaseResponseList<>(classDAO.findAll());
     }
 
-    public BaseResponseElement<Classes> findById(Long id) {
+    public BaseResponseElement<Classes> findById(Long id){
         Optional<Classes> result = classDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
@@ -31,11 +33,11 @@ public class ClassService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseElement<Classes> save(Classes classes) {
+    public BaseResponseElement<Classes> save(Classes classes){
         return new BaseResponseElement<>(classDAO.save(classes));
     }
 
-    public BaseResponseElement<Classes> deleteById(Long id) {
+    public BaseResponseElement<Classes> deleteById(Long id){
         Optional<Classes> temp = classDAO.findById(id);
 
         if (temp.isEmpty()) {
@@ -46,5 +48,19 @@ public class ClassService {
         return new BaseResponseElement<>(temp.get());
     }
 
+    public BaseResponseElement<Tutor> getTutorByClass(Long idClass){
+        return new BaseResponseElement<>(classDAO.getTutorByClass(idClass));
+    }
 
+    public BaseResponseElement<Coordinator> getCoordinatorByClass(Long idClass){
+        return new BaseResponseElement<>(classDAO.getCoordinatorByClass(idClass));
+    }
+
+    public BaseResponseElement<Course> getCourseByClass(Long idClass){
+        return new BaseResponseElement<>(classDAO.getCourseByClass(idClass));
+    }
+
+    public BaseResponseList<Student> getStudentsByClass(Long idClass){
+        return new BaseResponseList<>(classDAO.getStudentsByClass(idClass));
+    }
 }
