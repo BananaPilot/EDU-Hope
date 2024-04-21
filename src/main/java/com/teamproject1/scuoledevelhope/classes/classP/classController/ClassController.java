@@ -21,37 +21,37 @@ public class ClassController {
         this.classService = classService;
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-all")
     public BaseResponseList<Classes> findAll() {
         return classService.findAll();
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-by-id")
     public BaseResponseElement<Classes> findById(@Valid @RequestParam Long id) {
         return classService.findById(id);
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR") //CONTROLLA FABIO
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-tutor")
     public BaseResponseElement<Tutor> getTutorByClass(@Valid @RequestParam Long idClass) {
         return classService.getTutorByClass(idClass);
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR") //CONTROLLA FABIO
+    @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @GetMapping("/get-coordinator")
     public BaseResponseElement<Coordinator> getCoordinatorByClass(@Valid @RequestParam Long idClass) {
         return classService.getCoordinatorByClass(idClass);
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR") //CONTROLLA FABIO
+    @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-course")
     public BaseResponseElement<Course> getCourseByClass(@Valid @RequestParam Long idClass) {
         return classService.getCourseByClass(idClass);
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR") //CONTROLLA FABIO
+    @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-students")
     public BaseResponseList<Student> getStudentsByClass(@Valid @RequestParam Long idClass) {
         return classService.getStudentsByClass(idClass);
