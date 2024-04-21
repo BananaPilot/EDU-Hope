@@ -49,18 +49,34 @@ public class ClassService {
     }
 
     public BaseResponseElement<Tutor> getTutorByClass(Long idClass){
+        Optional<Classes> result = classDAO.findById(idClass);
+        if (result.isEmpty()) {
+            throw new SQLException("Class was not present");
+        }
         return new BaseResponseElement<>(classDAO.getTutorByClass(idClass));
     }
 
     public BaseResponseElement<Coordinator> getCoordinatorByClass(Long idClass){
+        Optional<Classes> result = classDAO.findById(idClass);
+        if (result.isEmpty()) {
+            throw new SQLException("Class was not present");
+        }
         return new BaseResponseElement<>(classDAO.getCoordinatorByClass(idClass));
     }
 
     public BaseResponseElement<Course> getCourseByClass(Long idClass){
+        Optional<Classes> result = classDAO.findById(idClass);
+        if (result.isEmpty()) {
+            throw new SQLException("Class was not present");
+        }
         return new BaseResponseElement<>(classDAO.getCourseByClass(idClass));
     }
 
     public BaseResponseList<Student> getStudentsByClass(Long idClass){
+        Optional<Classes> result = classDAO.findById(idClass);
+        if (result.isEmpty()) {
+            throw new SQLException("Class was not present");
+        }
         return new BaseResponseList<>(classDAO.getStudentsByClass(idClass));
     }
 }
