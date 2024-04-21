@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.service.CoordinatorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,19 +26,19 @@ public class CoordinatorController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Coordinator> findById(@RequestParam Long id) {
+    public BaseResponseElement<Coordinator> findById(@Valid @RequestParam Long id) {
         return coordinatorService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PostMapping("/save")
-    public BaseResponseElement<Coordinator> save(@RequestBody Coordinator coordinator) {
+    public BaseResponseElement<Coordinator> save(@Valid @RequestBody Coordinator coordinator) {
         return coordinatorService.save(coordinator);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Coordinator> delete(@RequestParam Long id) {
+    public BaseResponseElement<Coordinator> delete(@Valid @RequestParam Long id) {
         return coordinatorService.deleteById(id);
     }
 }

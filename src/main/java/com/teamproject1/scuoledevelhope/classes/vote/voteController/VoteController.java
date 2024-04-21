@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.voteService.VoteService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,19 +25,19 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-by-id")
-    public BaseResponseElement<Vote> findById(@RequestParam Long id) {
+    public BaseResponseElement<Vote> findById(@Valid @RequestParam Long id) {
         return voteService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/save")
-    public BaseResponseElement<Vote> save(@RequestBody Vote vote) {
+    public BaseResponseElement<Vote> save(@Valid @RequestBody Vote vote) {
         return voteService.save(vote);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Vote> delete(@RequestParam Long id) {
+    public BaseResponseElement<Vote> delete(@Valid @RequestParam Long id) {
         return voteService.deleteById(id);
     }
 }

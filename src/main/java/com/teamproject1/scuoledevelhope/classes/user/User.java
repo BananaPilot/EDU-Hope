@@ -46,17 +46,17 @@ public class User {
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
 
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Tutor> tutors;
+    private List<Tutor> tutors;
 
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY)
-    private Set<Coordinator> coordinators;
+    private List<Coordinator> coordinators;
 
     public User(String username, String password) {
         this.username = username;
