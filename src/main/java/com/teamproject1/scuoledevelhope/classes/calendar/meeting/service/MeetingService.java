@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -58,6 +59,11 @@ public class MeetingService {
     //----------- END COORDINATOR ----------//
 
     public BaseResponseElement<Meeting> save(Meeting meeting) {
+        LocalDateTime start_date = meeting.getStartDate();
+        LocalDateTime end_date = meeting.getEndDate();
+        if (end_date.isAfter(start_date)) {
+            throw new IllegalArgumentException("Hai confuso le date");
+        }
         return new BaseResponseElement<Meeting>(meetingDAO.save(meeting));
     }
 

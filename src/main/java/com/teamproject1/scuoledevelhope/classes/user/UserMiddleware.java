@@ -30,7 +30,7 @@ public class UserMiddleware implements HandlerInterceptor {
     }
 
     public boolean handle(HttpServletRequest request) {
-        Jws<Claims> claimsJws = jwtUtils.validate(request.getHeader(Constants.AUTHORIZATION_HEADER));
+        Jws<Claims> claimsJws = jwtUtils.validate(request.getHeader(Constants.AUTHORIZATION_HEADER).split(" ")[1]);
         User user = User.UserBuilder.anUser()
                 .withId(claimsJws.getBody().get("user-id", Long.class))
                 .withUsername(claimsJws.getBody().get("user-username", String.class))

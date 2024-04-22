@@ -3,6 +3,8 @@ package com.teamproject1.scuoledevelhope.classes.register.registerController;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.registerService.RegisterService;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
@@ -41,6 +43,18 @@ public class RegisterController {
     @GetMapping("/get-by-tutor")
     public BaseResponseList<Register> getAllByTutor(@Valid @RequestParam Long tutor) {
         return registerService.getAllByTutor(tutor);
+    }
+
+    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @GetMapping("/get-students")
+    public BaseResponseList<Student> getStudentsByRegister(@Valid @RequestParam Long register) {
+        return registerService.getStudentsByRegister(register);
+    }
+
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @GetMapping("/get-tutor")
+    public BaseResponseElement<Tutor> getTutorByRegister(@Valid @RequestParam Long register) {
+        return registerService.getTutorByRegister(register);
     }
 
     //ADD - UPDATE
