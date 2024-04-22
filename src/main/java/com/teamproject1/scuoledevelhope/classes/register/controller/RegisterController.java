@@ -3,8 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.register.controller;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.service.RegisterService;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
@@ -44,6 +42,7 @@ public class RegisterController {
     public BaseResponseList<Register> getAllByTutor(@Valid @RequestParam Long tutor) {
         return registerService.getAllByTutor(tutor);
     }
+
     //ADD - UPDATE
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")

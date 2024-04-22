@@ -45,7 +45,7 @@ public class VoteService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseList<Vote> getVoteByStudent(Long id){
+    public BaseResponseList<Vote> getVoteByStudent(Long id) {
         Optional<Vote> temp = voteDAO.findById(id);
 
         if (temp.isEmpty()) {

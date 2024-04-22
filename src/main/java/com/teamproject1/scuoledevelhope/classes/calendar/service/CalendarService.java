@@ -4,11 +4,11 @@ import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
-import com.teamproject1.scuoledevelhope.types.mappers.MeetingMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
-import com.teamproject1.scuoledevelhope.types.mappers.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.mappers.MeetingMapper;
+import com.teamproject1.scuoledevelhope.types.mappers.UserRegistryMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -46,19 +46,19 @@ public class CalendarService {
     }
 
 
-    private Calendar buildCalendar(LocalDate startDate, LocalDate endDate,List<Meeting> allMeetings ){
+    private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
 
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
-      
-        for(Meeting allMeet : allMeetings){
+
+        for (Meeting allMeet : allMeetings) {
 
             MeetingResponse meetingResponse = new MeetingResponse();
             meetingResponse.setMeetingDTO(meetingMapper.toMeetingDTO(allMeet));
 
             List<UserRegistry> ur = urDAO.allStudentsByMeeting(allMeet.getMeetingID());
-            for (UserRegistry urList : ur){
+            for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }
 

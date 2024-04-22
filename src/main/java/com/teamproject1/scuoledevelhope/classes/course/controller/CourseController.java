@@ -1,11 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.course.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.service.CourseService;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;

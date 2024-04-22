@@ -21,8 +21,8 @@ public interface MeetingDAO extends JpaRepository<Meeting, Long> {
             "join meeting_student on meeting.id_meeting = meeting_student.id_meeting_fk \n" +
             "where meeting_student.id_student_fk = :idStudent\n" +
             "and meeting.start_date > :startDate and meeting.start_date < :endDate", nativeQuery = true)
-    List<Meeting> intervalStudentId(@Param("idStudent") Long idStudent, @Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
-   
+    List<Meeting> intervalStudentId(@Param("idStudent") Long idStudent, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
 
     //----------- TUTOR ----------//
 
