@@ -49,19 +49,4 @@ public class CoordinatorService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseElement<Coordinator> save(@Valid Coordinator coordinator, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-
-            StringBuilder errorMessage = new StringBuilder("Errore di validazione: ");
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMessage.append(error.getDefaultMessage()).append("; ");
-            }
-            return new BaseResponseElement<>(null, errorMessage.toString(), false);
-        }
-
-        Coordinator savedCoordinator = coordinatorDAO.save(coordinator);
-
-        return new BaseResponseElement<>(savedCoordinator, "Coordinatore salvato con successo", true);
-    }
 }

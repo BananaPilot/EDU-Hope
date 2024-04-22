@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.student.dao.StudentDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -41,10 +40,6 @@ public class StudentService {
             throw new SQLException("Student was not present");
         }
         return new BaseResponseElement<>(temp.get());
-    }
-    public BaseResponseElement<Student> save(@Valid Student student) {
-
-        return new BaseResponseElement<>(studentDAO.save(student));
     }
 
 }
