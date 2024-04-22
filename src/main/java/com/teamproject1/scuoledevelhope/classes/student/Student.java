@@ -1,7 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.student;
 
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
 
-   
+
     @NotBlank(message = "Student name can't be blank")
     private Long id;
     @ManyToOne

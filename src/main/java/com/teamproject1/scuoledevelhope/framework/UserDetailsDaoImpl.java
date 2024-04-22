@@ -4,7 +4,7 @@ import com.bananapilot.samplespringauthenticationframework.repo.UserDetailsDao;
 import com.bananapilot.samplespringauthenticationframework.types.UserDetails;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.user.User;
-import com.teamproject1.scuoledevelhope.classes.user.dao.UserDao;
+import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
