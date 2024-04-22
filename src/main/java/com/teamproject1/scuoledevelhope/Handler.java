@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.config;
+package com.teamproject1.scuoledevelhope;
 
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponse;
 import com.teamproject1.scuoledevelhope.types.errors.BadRequestException;
