@@ -46,14 +46,6 @@ public class Register {
         return schoolYear;
     }
 
-    public Classes getSchoolClass() {
-        return schoolClass;
-    }
-
-    public Tutor getTutor() {
-        return tutor;
-    }
-
     public void setSchoolClass(Classes schoolClass) {
         this.schoolClass = schoolClass;
     }
@@ -66,13 +58,11 @@ public class Register {
         this.schoolYear = schoolYear;
     }
 
-    @Override
-    public String toString() {
-        return "Register{" +
-                "id: " + id +
-                ", schoolYear: '" + schoolYear + '\'' +
-                ", id_class: " + schoolClass +
-                ", id_tutor: " + tutor +
-                '}';
+    public Classes getSchoolClass() {
+        return schoolClass;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
     }
 }

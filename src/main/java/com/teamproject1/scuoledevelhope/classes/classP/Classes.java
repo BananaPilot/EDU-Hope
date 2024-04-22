@@ -54,26 +54,6 @@ public class Classes {
         return name;
     }
 
-    public Tutor getTutor() {
-        return tutor;
-    }
-
-    public Coordinator getCoordinator() {
-        return coordinator;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public Register getRegisters() {
-        return registers;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -97,16 +77,5 @@ public class Classes {
     public void setSchool(School school) {
         this.school = school;
 
-    }
-
-    @Override
-    public String toString() {
-        return "Class{" +
-                "id: " + id +
-                ", name: '" + name + '\'' +
-                ", tutor: " + tutor +
-                ", coordinator: " + coordinator +
-                ", course: " + course +
-                '}';
     }
 }

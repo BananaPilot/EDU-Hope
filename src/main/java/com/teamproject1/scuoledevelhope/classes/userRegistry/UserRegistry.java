@@ -65,15 +65,4 @@ public class UserRegistry {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
-    @Override
-    public String toString() {
-        return "UserDetails{" +
-                "user: " + id +
-                ", name: '" + name + '\'' +
-                ", surname: '" + surname + '\'' +
-                ", email: '" + email + '\'' +
-                ", telephone: " + telephone +
-                '}';
-    }
 }

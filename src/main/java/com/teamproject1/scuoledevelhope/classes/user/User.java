@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
@@ -63,16 +64,9 @@ public class User {
         return password;
     }
 
+    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public UserRegistry getUserRegistry() {
-        return userRegistry;
     }
 
     public void setUsername(String username) {

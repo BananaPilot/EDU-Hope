@@ -41,14 +41,6 @@ public class Vote {
         return id;
     }
 
-    public Register getRegister() {
-        return register;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
     public String getSubject() {
         return subject;
     }

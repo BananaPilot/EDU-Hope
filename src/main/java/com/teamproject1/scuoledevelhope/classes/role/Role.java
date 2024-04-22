@@ -18,6 +18,12 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
+    @ManyToMany(
+            mappedBy = "roles",
+            fetch = FetchType.LAZY
+    )
+    private List<User> users;
+
     public enum RoleEnum {
         SUPER_ADMIN,
         ADMIN,
@@ -26,13 +32,8 @@ public class Role {
         COORDINATOR,
         TUTOR,
         STUDENT
-    }
 
-    @ManyToMany(
-            mappedBy = "roles",
-            fetch = FetchType.LAZY
-    )
-    private List<User> users;
+    }
 
     public Long getId() {
         return id;
@@ -41,13 +42,4 @@ public class Role {
     public RoleEnum getRoleEnum() {
         return roleEnum;
     }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "users: " + users +
-                '}';
-    }
-
-
 }

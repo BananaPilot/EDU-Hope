@@ -13,29 +13,16 @@ import java.util.List;
 @Table(name = "coordinator")
 public class Coordinator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_coordinator")
-
-    @NotBlank(message = "Coordinator name can't be blank")
     private Long id;
 
     @ManyToOne
     @MapsId
     private User user;
     @NotEmpty(message = "Associates at least 1 class.")
-    @Valid
     @OneToMany(
             mappedBy = "coordinator",
             fetch = FetchType.LAZY)
     private List<Classes> classes;
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
 
     public void setUser(User user) {
         this.user = user;

@@ -39,7 +39,7 @@ public class RegisterService {
     }
 
     public BaseResponseElement<Register> save(Register register) {
-        int res = registerDao.addRegister(register.getSchoolYear(), register.getSchoolClass().getId(), register.getTutor().getId());
+        int res = registerDao.addRegister(register.getSchoolYear(), register.getSchoolClass().getId(), register.getTutor().getUser().getId());
         if (res < 1) {
             throw new SQLException("User was not added");
         }

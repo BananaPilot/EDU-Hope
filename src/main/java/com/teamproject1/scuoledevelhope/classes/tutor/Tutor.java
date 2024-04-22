@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.tutor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
@@ -13,17 +14,15 @@ import java.util.List;
 @Entity
 @Table(name = "tutor")
 public class Tutor {
-    @Id
 
-    @NotBlank(message = "Tutor name can't be blank")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
     @ManyToOne
     @MapsId
     private User user;
+
     @NotEmpty(message = "Associates at least 1 class.")
-    @Valid
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
@@ -33,23 +32,11 @@ public class Tutor {
             fetch = FetchType.LAZY)
     private List<Register> registers;
 
-    public Long getId() {
-        return id;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Tutor{" +
-                "id: " + id +
-                ", id_user: " + user +
-                '}';
     }
 }

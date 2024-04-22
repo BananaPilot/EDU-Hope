@@ -48,10 +48,6 @@ public class Course {
         return description;
     }
 
-    public School getSchool() {
-        return school;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -62,16 +58,6 @@ public class Course {
 
     public void setSchool(School school) {
         this.school = school;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id:" + id +
-                ", name: '" + name + '\'' +
-                ", description: '" + description + '\'' +
-                ", school: " + school +
-                '}';
     }
 
     public enum EnumCourse {

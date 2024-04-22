@@ -39,27 +39,12 @@ public class Meeting {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_meeting_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_student_fk")
+            joinColumns = @JoinColumn(name = "id_meeting"),
+            inverseJoinColumns = @JoinColumn(name = "id_student")
     )
     private List<Student> students;
 
     public Meeting() {
-    }
-
-    @Override
-    public String toString() {
-        return "Meeting{" +
-                "meetingID=" + meetingID +
-                ", title='" + title + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", link='" + link + '\'' +
-                ", note='" + note + '\'' +
-                ", tutorIDfk=" + tutorIDfk +
-                ", coordinatorIDfk=" + coordinatorIDfk +
-                ", students=" + students +
-                '}';
     }
 
     public Long getMeetingID() {

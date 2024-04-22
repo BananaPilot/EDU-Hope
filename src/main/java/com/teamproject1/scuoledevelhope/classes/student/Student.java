@@ -16,11 +16,8 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_student")
-
-
-    @NotBlank(message = "Student name can't be blank")
     private Long id;
+
     @ManyToOne
     @MapsId
     private User user;
@@ -38,8 +35,8 @@ public class Student {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_student_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_meeting_fk")
+            joinColumns = @JoinColumn(name = "id_student"),
+            inverseJoinColumns = @JoinColumn(name = "id_meeting")
     )
     private List<Meeting> meetings;
 
@@ -58,10 +55,6 @@ public class Student {
 
     public void setMeetings(List<Meeting> meetings) {
         this.meetings = meetings;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public User getUser() {
@@ -86,15 +79,5 @@ public class Student {
 
     public void setRegister(Register register) {
         this.register = register;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id: " + id +
-                ", id_user: " + user +
-                ", id_class: " + schoolClass +
-                ", id_register: " + register +
-                '}';
     }
 }
