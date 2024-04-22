@@ -6,6 +6,8 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.service.CoordinatorS
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
+
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,3 +45,4 @@ public class CoordinatorController {
         return coordinatorService.deleteById(id);
     }
 }
+
