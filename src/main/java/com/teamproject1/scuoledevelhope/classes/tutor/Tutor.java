@@ -4,19 +4,27 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "tutor")
 public class Tutor {
     @Id
+
+    @NotBlank(message = "Tutor name can't be blank")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @MapsId
     private User user;
+    @NotEmpty(message = "Associates at least 1 class.")
+    @Valid
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)

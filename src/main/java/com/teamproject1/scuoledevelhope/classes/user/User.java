@@ -11,7 +11,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
