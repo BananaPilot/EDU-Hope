@@ -40,5 +40,5 @@ public class StudentController {
         return studentService.deleteById(id);
     }
 
-    }
+}
 

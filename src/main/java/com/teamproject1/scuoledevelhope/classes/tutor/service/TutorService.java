@@ -1,7 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.tutor.service;
 
-import com.teamproject1.scuoledevelhope.classes.tutor.DAO.TutorDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
