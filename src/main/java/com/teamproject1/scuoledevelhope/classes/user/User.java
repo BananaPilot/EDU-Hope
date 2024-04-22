@@ -29,33 +29,19 @@ public class User {
     private String password;
 
     @OneToOne()
-    @JoinColumn(
-            name = "user_registry_id",
-            referencedColumnName = "id"
-    )
     private UserRegistry userRegistry;
 
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private List<Role> roles;
-
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private List<Student> students;
-
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private List<Tutor> tutors;
-
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private List<Coordinator> coordinators;
 
     public User(String username, String password) {
         this.username = username;

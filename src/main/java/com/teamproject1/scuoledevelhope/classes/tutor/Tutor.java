@@ -20,7 +20,7 @@ public class Tutor {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @NotEmpty(message = "Associates at least 1 class.")
     @Valid

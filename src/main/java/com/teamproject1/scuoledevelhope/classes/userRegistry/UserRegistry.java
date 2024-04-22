@@ -11,7 +11,8 @@ public class UserRegistry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "userRegistry")
+    @OneToOne
+    @MapsId
     private User user;
     @Column(name = "user_name")
     private String name;
