@@ -14,8 +14,9 @@ public class Coordinator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_coordinator")
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @OneToMany(
             mappedBy = "coordinator",

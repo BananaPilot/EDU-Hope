@@ -21,16 +21,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
-    public enum RoleEnum {
-        SUPER_ADMIN,
-        ADMIN,
-        MODERATOR,
-        USER,
-        COORDINATOR,
-        TUTOR,
-        STUDENT;
-    }
-
     @ManyToMany(
             mappedBy = "roles",
             fetch = FetchType.LAZY
@@ -51,4 +41,15 @@ public class Role {
                 "users: " + users +
                 '}';
     }
+
+    public enum RoleEnum {
+        SUPER_ADMIN,
+        ADMIN,
+        MODERATOR,
+        USER,
+        COORDINATOR,
+        TUTOR,
+        STUDENT;
+    }
+
 }

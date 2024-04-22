@@ -17,7 +17,7 @@ public class Student {
     @Column(name = "id_student")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @ManyToOne
     @JoinColumn(name = "id_class")

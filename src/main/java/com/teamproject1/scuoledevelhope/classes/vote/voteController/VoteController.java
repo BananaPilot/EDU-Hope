@@ -30,12 +30,6 @@ public class VoteController {
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-by-student")
-    public BaseResponseList<Vote> getVoteByStudent(@Valid @RequestParam Long id) {
-        return voteService.getVoteByStudent(id);
-    }
-
-    @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/save")
     public BaseResponseElement<Vote> save(@Valid @RequestBody Vote vote) {
         return voteService.save(vote);

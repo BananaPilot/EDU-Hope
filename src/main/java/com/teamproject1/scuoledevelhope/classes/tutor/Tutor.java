@@ -15,7 +15,7 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @OneToMany(
             mappedBy = "tutor",

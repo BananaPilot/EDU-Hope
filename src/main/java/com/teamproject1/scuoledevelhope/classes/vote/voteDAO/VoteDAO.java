@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface VoteDAO extends JpaRepository<Vote, Long> {
-    @Query(value = "select v.* from vote v\n" +
-            "join student s on v.id_student = s.id_student\n" +
-            "where s.id_student = idStudent", nativeQuery = true)
-    List<Vote> getVoteByStudent(@Param("idStudent") Long idStudent);
+
 }

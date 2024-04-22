@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.vote.voteService;
 
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.voteDAO.VoteDAO;
@@ -8,6 +9,7 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -46,12 +48,5 @@ public class VoteService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseList<Vote> getVoteByStudent(Long id){
-        Optional<Vote> temp = voteDAO.findById(id);
 
-        if (temp.isEmpty()) {
-            throw new SQLException("Register was not present");
-        }
-        return new BaseResponseList<>(voteDAO.getVoteByStudent(id));
-    }
 }
