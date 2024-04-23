@@ -20,29 +20,23 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student student;
-
-    @NotBlank(message = "subject can't be blank")
-    @Column(name = "vote_subject",
-            nullable = false)
-    private String subject;
-
     @NotBlank(message = "date can't be blank")
     @Column(name = "vote_date",
             nullable = false)
     private LocalDate date;
+    @NotBlank(message = "subject can't be blank")
+    @Column(name = "subject")
+    private String subject;
     @NotBlank(message = "evaluation can't be blank")
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
     @Column(name = "annotation")
     private String annotation;
+    private Boolean isCheckPoint;
 
     public Long getId() {
         return id;
-    }
-
-    public String getSubject() {
-        return subject;
     }
 
     public LocalDate getDate() {
@@ -57,16 +51,16 @@ public class Vote {
         return annotation;
     }
 
+    public Boolean getCheckPoint() {
+        return isCheckPoint;
+    }
+
     public void setRegister(Register register) {
         this.register = register;
     }
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public void setDate(LocalDate date) {
@@ -81,15 +75,19 @@ public class Vote {
         this.annotation = annotation;
     }
 
+    public void setCheckPoint(Boolean checkPoint) {
+        isCheckPoint = checkPoint;
+    }
+
     @Override
     public String toString() {
         return "Vote{" +
                 "id_register: " + register +
                 ", id_student: " + student +
-                ", subject: '" + subject + '\'' +
                 ", date: " + date +
                 ", vote: " + evaluation +
                 ", annotation: '" + annotation + '\'' +
                 '}';
     }
+
 }

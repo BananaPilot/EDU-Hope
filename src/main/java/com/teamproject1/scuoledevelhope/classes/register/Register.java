@@ -18,7 +18,7 @@ public class Register {
     private Long id;
     @NotBlank(message = "school year can't be blank")
     @Column(
-            name = "register_school-year",
+            name = "register_school_year",
             nullable = false)
     private String schoolYear;
 

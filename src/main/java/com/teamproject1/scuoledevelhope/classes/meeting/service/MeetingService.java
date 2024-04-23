@@ -30,7 +30,7 @@ public class MeetingService {
     }
 
     public BaseResponseList<Meeting> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
-        return new BaseResponseList<>(meetingDAO.IntervalGetByID(id, startDate, endDate));
+        return new BaseResponseList<>(meetingDAO.intervalGetByID(id, startDate, endDate));
     }
 
     public BaseResponseElement<Meeting> save(Meeting meeting) {

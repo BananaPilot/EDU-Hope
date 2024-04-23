@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.role.Role;
 
 public class RoleUsername {
     private String username;
-
     private Role.RoleEnum roleEnum;
 
     public RoleUsername(String username, Role.RoleEnum roleEnum) {

@@ -13,7 +13,6 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_meeting")
     private Long meetingID;
-
     @Column(name = "title")
     private String title;
     @Column(name = "start_date")
@@ -24,6 +23,14 @@ public class Meeting {
     private String link;
     @Column(name = "note")
     private String note;
+
+    @JoinTable(
+            name = "user_meeting",
+            joinColumns = @JoinColumn(name = "id_meeting"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
+    )
+    @ManyToMany
+    List<User> users;
 
 
     public Meeting() {
@@ -71,6 +78,10 @@ public class Meeting {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 
 }
