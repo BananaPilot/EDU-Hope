@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,6 @@ public class Meeting {
     private String title;
     @Column(name = "start_date")
     private LocalDateTime startDate;
-
     @Column(name = "end_date")
     private LocalDateTime endDate;
     @Column(name = "link")
@@ -43,6 +43,8 @@ public class Meeting {
             inverseJoinColumns = @JoinColumn(name = "id_student")
     )
     private List<Student> students;
+
+    private List<User> participants;
 
     public Meeting() {
     }
@@ -114,5 +116,9 @@ public class Meeting {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<User> getParticipants() {
+        return participants;
     }
 }
