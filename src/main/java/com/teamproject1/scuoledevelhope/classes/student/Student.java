@@ -32,14 +32,6 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_student"),
-            inverseJoinColumns = @JoinColumn(name = "id_meeting")
-    )
-    private List<Meeting> meetings;
-
     public Student() {
     }
 
@@ -47,14 +39,6 @@ public class Student {
         this.user = user;
         this.schoolClass = schoolClass;
         this.register = register;
-    }
-
-    public List<Meeting> getMeetings() {
-        return meetings;
-    }
-
-    public void setMeetings(List<Meeting> meetings) {
-        this.meetings = meetings;
     }
 
     public User getUser() {

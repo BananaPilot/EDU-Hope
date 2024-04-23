@@ -1,6 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.meeting;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
@@ -27,7 +26,6 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
-    @JsonIgnore
     @JoinTable(
             name = "user_meeting",
             joinColumns = @JoinColumn(name = "id_meeting"),

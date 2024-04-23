@@ -19,23 +19,9 @@ public class CalendarController {
     }
 
     @NoAuthorization
-    @GetMapping("/studentCalendar/{idStudent}")
-    public BaseResponseElement<Calendar> studentCalendar(@PathVariable Long idStudent, @RequestParam LocalDate startDate, LocalDate endDate) {
+    @GetMapping("/{id}")
+    public BaseResponseElement<Calendar> getCalendarById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
 
-        return calendarService.studentCalendar(idStudent, startDate, endDate);
-    }
-
-    @NoAuthorization
-    @GetMapping("/coordinatorCalendar/{idCoordinator}")
-    public BaseResponseElement<Calendar> coordinatorCalendar(@PathVariable Long idCoordinator, @RequestParam LocalDate startDate, LocalDate endDate) {
-
-        return calendarService.coordinatorCalendar(idCoordinator, startDate, endDate);
-    }
-
-    @NoAuthorization
-    @GetMapping("/tutorCalendar/{idTutor}")
-    public BaseResponseElement<Calendar> tutorCalendar(@PathVariable Long idTutor, @RequestParam LocalDate startDate, LocalDate endDate) {
-
-        return calendarService.tutorCalendar(idTutor, startDate, endDate);
+        return calendarService.allCalendar(id, startDate, endDate);
     }
 }

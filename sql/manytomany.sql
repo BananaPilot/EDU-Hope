@@ -7,11 +7,11 @@ create table if not exists user_role
     primary key (id_user, id_role)
 );
 
-create table if not exists meeting_student
+create table if not exists user_meeting
 (
-    id_student bigint,
+    id_user bigint,
     id_meeting bigint,
-    foreign key (id_student) references student (user_id),
+    foreign key (id_user) references user(id),
     foreign key (id_meeting) references meeting (id_meeting),
-    primary key (id_meeting, id_student)
+    primary key (id_meeting, id_user)
 );
