@@ -12,7 +12,4 @@ import java.util.List;
 @Repository
 public interface VoteDAO extends JpaRepository<Vote, Long> {
 
-
-
-
 }
