@@ -30,20 +30,12 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> studentCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalStudentId(idStudent, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+    public BaseResponseElement<Calendar> allCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
+//        List<Meeting> allMeetings = meetingDAO.getMeetingsInInterval(idStudent, startDate, endDate);
+//        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+        return null;
     }
 
-    public BaseResponseElement<Calendar> coordinatorCalendar(Long idCoordinator, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalCoordinatorId(idCoordinator, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
-    }
-
-    public BaseResponseElement<Calendar> tutorCalendar(Long idTutor, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalTutorId(idTutor, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
-    }
 
 
     private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {

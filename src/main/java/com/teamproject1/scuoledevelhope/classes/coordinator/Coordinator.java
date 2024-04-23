@@ -27,12 +27,4 @@ public class Coordinator {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Override
-    public String toString() {
-        return "Tutor{" +
-                "id: " + id +
-                ", id_user: " + user +
-                '}';
-    }
 }

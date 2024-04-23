@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
@@ -39,10 +40,16 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
     )
     private List<Role> roles;
+
+    @ManyToMany(
+            mappedBy = "users",
+            fetch = FetchType.LAZY
+    )
+    public List<Meeting> meetings;
 
     public User(String username, String password) {
         this.username = username;
@@ -110,5 +117,18 @@ public class User {
             user.id = this.id;
             return user;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userRegistry=" + userRegistry +
+                ", school=" + school +
+                ", roles=" + roles +
+                ", meetings=" + meetings +
+                '}';
     }
 }
