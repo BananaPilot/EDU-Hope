@@ -31,8 +31,9 @@ public class CalendarService {
     }
 
     public BaseResponseElement<Calendar> allCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.getMeetingsInInterval(idStudent, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+//        List<Meeting> allMeetings = meetingDAO.getMeetingsInInterval(idStudent, startDate, endDate);
+//        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+        return null;
     }
 
 

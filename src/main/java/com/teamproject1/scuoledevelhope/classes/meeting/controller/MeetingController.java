@@ -28,7 +28,7 @@ public class MeetingController {
     @NoAuthorization
     @GetMapping("/interval/{id}")
     public BaseResponseList<Meeting> getWithInterval(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return meetingService.getByIntervalWithId(id, startDate, endDate);
+        return meetingService.intervalGetById(id, startDate, endDate);
     }
 
     @NoAuthorization
