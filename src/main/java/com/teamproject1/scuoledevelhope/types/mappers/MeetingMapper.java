@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.types.mappers;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
-import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.MeetingDTO;
 import org.springframework.stereotype.Component;
@@ -26,8 +26,6 @@ public class MeetingMapper {
         meetingDTO.setTitolo(meeting.getTitle());
         meetingDTO.setStartDate(meeting.getStartDate());
         meetingDTO.setEndDate(meeting.getEndDate());
-        meetingDTO.setTutor("sostituisci con nome e cognome tutor");
-        meetingDTO.setCoordinator("sostituisci con nome e cognome coordinator");
         meetingDTO.setNote(meeting.getNote());
 
         return meetingDTO;

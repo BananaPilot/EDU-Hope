@@ -1,12 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.meeting.dao;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao;
 
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +15,5 @@ public interface MeetingDAO extends JpaRepository<Meeting, Long> {
     List<Meeting> getAllByID(@Param("userId") Long id);
 
     @Query(value = "select m.* from meeting m join defaultdb.user_meeting um on m.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :id and m.start_date > :startDate and m.start_date < :endDate", nativeQuery = true)
-    List<Meeting> IntervalGetByID(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<Meeting> intervalGetByID(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

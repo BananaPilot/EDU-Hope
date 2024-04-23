@@ -1,9 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.service;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
-import com.teamproject1.scuoledevelhope.classes.meeting.MeetingResponse;
-import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -30,10 +30,10 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
-//        List<Meeting> allMeetings = meetingDAO.getMeetingsInInterval(idStudent, startDate, endDate);
-//        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
-        return null;
+    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
+      List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
+    return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+
     }
 
 
