@@ -25,14 +25,6 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
-    @JoinTable(
-            name = "user_meeting",
-            joinColumns = @JoinColumn(name = "id_meeting"),
-            inverseJoinColumns = @JoinColumn(name = "id_user")
-    )
-    @ManyToMany
-    List<User> users;
-    private List<User> participants;
 
     public Meeting() {
     }
@@ -81,7 +73,4 @@ public class Meeting {
         this.note = note;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 }
