@@ -1,9 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.meeting;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
@@ -29,20 +25,13 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
-    @OneToOne
-    @JoinColumn(name = "tutor_id_fk")
-    private Tutor tutorIDfk;
-    @OneToOne
-    @JoinColumn(name = "coordinator_id_fk")
-    private Coordinator coordinatorIDfk;
-
-    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "meeting_student",
+            name = "user_meeting",
             joinColumns = @JoinColumn(name = "id_meeting"),
-            inverseJoinColumns = @JoinColumn(name = "id_student")
+            inverseJoinColumns = @JoinColumn(name = "id_user")
     )
-    private List<Student> students;
+    @ManyToMany
+    List<User> users;
 
     private List<User> participants;
 
@@ -93,29 +82,8 @@ public class Meeting {
         this.note = note;
     }
 
-    public Tutor getTutorIDfk() {
-        return tutorIDfk;
-    }
-
-    public void setTutorIDfk(Tutor tutorIDfk) {
-        this.tutorIDfk = tutorIDfk;
-    }
-
-    public Coordinator getCoordinatorIDfk() {
-        return coordinatorIDfk;
-    }
-
-    public void setCoordinatorIDfk(Coordinator coordinatorIDfk) {
-        this.coordinatorIDfk = coordinatorIDfk;
-    }
-
-    @JsonIgnore
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public List<User> getUsers() {
+        return users;
     }
 
     public List<User> getParticipants() {
