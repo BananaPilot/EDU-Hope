@@ -32,7 +32,6 @@ public class Meeting {
     )
     @ManyToMany
     List<User> users;
-
     private List<User> participants;
 
     public Meeting() {
@@ -84,9 +83,5 @@ public class Meeting {
 
     public List<User> getUsers() {
         return users;
-    }
-
-    public List<User> getParticipants() {
-        return participants;
     }
 }
