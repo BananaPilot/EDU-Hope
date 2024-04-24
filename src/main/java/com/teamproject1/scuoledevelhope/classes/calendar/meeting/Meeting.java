@@ -25,6 +25,7 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
+    @JsonIgnore
     @JoinTable(
             name = "user_meeting",
             joinColumns = @JoinColumn(name = "id_meeting"),

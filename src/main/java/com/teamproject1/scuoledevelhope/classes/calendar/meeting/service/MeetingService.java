@@ -17,7 +17,7 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
     }
 
-    public BaseResponseList<Meeting> getAllById(Long id) {
+    public BaseResponseList<Meeting> findAllById(Long id) {
         return new BaseResponseList<>(meetingDAO.getAllByID(id));
     }
 

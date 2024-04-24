@@ -9,8 +9,7 @@ public class MeetingDTO {
     private String titolo;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String tutor;
-    private String coordinator;
+
     private String note;
 
     public MeetingDTO() {
@@ -38,22 +37,6 @@ public class MeetingDTO {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-    public String getTutor() {
-        return tutor;
-    }
-
-    public void setTutor(String tutor) {
-        this.tutor = tutor;
-    }
-
-    public String getCoordinator() {
-        return coordinator;
-    }
-
-    public void setCoordinator(String coordinator) {
-        this.coordinator = coordinator;
     }
 
     public String getNote() {

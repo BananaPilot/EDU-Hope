@@ -30,9 +30,10 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long idStudent, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalGetByID(idStudent, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
+      List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
+    return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+
     }
 
 
