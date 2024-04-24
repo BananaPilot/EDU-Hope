@@ -30,17 +30,23 @@ public class MeetingService {
     }
 
     public BaseResponseElement<Meeting> save(Meeting meeting) {
-        LocalDateTime start_date = meeting.getStartDate();
-        LocalDateTime end_date = meeting.getEndDate();
-        if (end_date.isAfter(start_date)) {
-            throw new IllegalArgumentException("Hai confuso le date");
-        }
+        checkData(meeting);
         return new BaseResponseElement<Meeting>(meetingDAO.save(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO){
 
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
+        checkData(meeting);
         return new BaseResponseElement<>(mapper.toMeetingDTO(meeting));
+    }
+
+    public Meeting checkData(Meeting meeting){
+        LocalDateTime start_date = meeting.getStartDate();
+        LocalDateTime end_date = meeting.getEndDate();
+        if (end_date.isBefore(start_date)) {
+            throw new IllegalArgumentException("Hai confuso le date");
+        }
+        return meeting;
     }
 }
