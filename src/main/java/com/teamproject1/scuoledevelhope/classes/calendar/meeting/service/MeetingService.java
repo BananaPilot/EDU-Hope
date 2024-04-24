@@ -6,11 +6,13 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class MeetingService {
@@ -21,6 +23,15 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
         this.mapper = mapper;
     }
+
+    //trova meeting by id
+   public BaseResponseElement<Meeting> findById(Long id){
+        Optional<Meeting> results = meetingDAO.findById(id);
+        if (results.isPresent()){
+            return new BaseResponseElement<>( results.get());
+        }
+       throw new SQLException("Student was not present");
+   }
 
     //tutti i meeting di un user
     public BaseResponseList<Meeting> allMeetingByUser(Long id) {
@@ -35,14 +46,22 @@ public class MeetingService {
     public BaseResponseElement<Meeting> save(Meeting meeting) {
         meeting.setMeetingID(null);
         checkData(meeting);
-        return new BaseResponseElement<Meeting>(HttpStatus.CREATED,HttpStatus.CREATED.getReasonPhrase(),"data saving successful",meetingDAO.save(meeting));
+        return new BaseResponseElement<Meeting>(HttpStatus.CREATED,HttpStatus.CREATED.getReasonPhrase(),"Data saving successful",meetingDAO.save(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO){
 
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
         checkData(meeting);
-        return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"data updated correctly",mapper.toMeetingDTO(meeting));
+        return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"Data updated correctly",mapper.toMeetingDTO(meeting));
+    }
+
+    public BaseResponseElement<MeetingDTO> deleteMeeting(Long id){
+
+        MeetingDTO temp = new MeetingDTO();
+        temp = mapper.toMeetingDTO(findById(id).getElement());
+        meetingDAO.deleteById(id);
+        return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"Meetings deleted",temp);
     }
 
     public Meeting checkData(Meeting meeting){

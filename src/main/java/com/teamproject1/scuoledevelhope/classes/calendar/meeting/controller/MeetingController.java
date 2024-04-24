@@ -21,7 +21,7 @@ public class MeetingController {
 
     //tutti i meeting di un user
     @NoAuthorization
-    @GetMapping("/all/{id}")
+    @GetMapping("/allMeetingByUserId/{id}")
     public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
         return meetingService.allMeetingByUser(id);
     }
@@ -42,4 +42,10 @@ public class MeetingController {
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
+    @NoAuthorization
+    @GetMapping("/delete")
+    public BaseResponseElement<MeetingDTO> deleteMeeting(@RequestParam Long id){
+        return meetingService.deleteMeeting(id);
+    }
+
 }
