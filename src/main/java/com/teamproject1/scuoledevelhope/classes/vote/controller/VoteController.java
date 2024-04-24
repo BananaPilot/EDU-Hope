@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/vote")
 public class VoteController {
     private final VoteService voteService;
-
     public VoteController(VoteService voteService) {
         this.voteService = voteService;
     }
-
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-all")
     public BaseResponseList<Vote> findAll() {
@@ -37,8 +35,16 @@ public class VoteController {
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
+    @PostMapping("/add")
+    public BaseResponseElement<Vote> add(@Valid @RequestBody Vote vote) {
+        return voteService.save(vote);
+    }
+
+    @FloorLevelAuthorization(floorRole = "TUTOR")
     @DeleteMapping("/delete-by-id")
     public BaseResponseElement<Vote> delete(@Valid @RequestParam Long id) {
         return voteService.deleteById(id);
     }
+
+
 }
