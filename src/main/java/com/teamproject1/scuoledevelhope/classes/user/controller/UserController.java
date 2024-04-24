@@ -49,5 +49,4 @@ public class UserController {
     public BaseResponseElement<User> dashboard(@Valid @PathVariable("id") Long id) {
         return userService.getByID(id);
     }
-
 }

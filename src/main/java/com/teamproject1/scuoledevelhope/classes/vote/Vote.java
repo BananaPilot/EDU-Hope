@@ -3,7 +3,9 @@ package com.teamproject1.scuoledevelhope.classes.vote;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
@@ -20,14 +22,13 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student student;
-    @NotBlank(message = "date can't be blank")
+    @PastOrPresent
     @Column(name = "vote_date",
             nullable = false)
     private LocalDate date;
     @NotBlank(message = "subject can't be blank")
     @Column(name = "subject")
     private String subject;
-    @NotBlank(message = "evaluation can't be blank")
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
@@ -55,6 +56,14 @@ public class Vote {
         return isCheckPoint;
     }
 
+    public Register getRegister() {
+        return register;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
     public void setRegister(Register register) {
         this.register = register;
     }
@@ -77,6 +86,14 @@ public class Vote {
 
     public void setCheckPoint(Boolean checkPoint) {
         isCheckPoint = checkPoint;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     @Override
