@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,13 +21,13 @@ public class MeetingMiddleware implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getRequestURI().contains("/meeting/interval") || request.getRequestURI().contains("/meeting/all")) {
-            return handle(request);
-        }
-        if (!request.getRequestURI().contains("/meeting/interval") || !request.getRequestURI().contains("/meeting/all")) {
+        if (!request.getRequestURI().contains("/meeting")) {
             return true;
         }
-        response.sendError(403);
+        if (request.getRequestURI().contains("/meeting/interval") || request.getRequestURI().contains("/meeting/all") && handle(request)) {
+            return true;
+        }
+        response.sendError(HttpStatus.FORBIDDEN.value());
         return false;
     }
 
