@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.meeting;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;

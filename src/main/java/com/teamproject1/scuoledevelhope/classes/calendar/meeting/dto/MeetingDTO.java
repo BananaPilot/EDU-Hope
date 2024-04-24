@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.meeting.dto;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto;
 
 import org.springframework.stereotype.Component;
 

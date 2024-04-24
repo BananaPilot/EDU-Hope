@@ -1,10 +1,8 @@
-package com.teamproject1.scuoledevelhope.classes.meeting.mapper;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper;
 
-import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
-import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
-import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
-import com.teamproject1.scuoledevelhope.classes.meeting.dto.MeetingDTO;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import org.springframework.stereotype.Component;
 
 @Component

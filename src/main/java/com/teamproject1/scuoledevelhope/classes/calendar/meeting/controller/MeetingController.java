@@ -1,8 +1,8 @@
-package com.teamproject1.scuoledevelhope.classes.meeting.controller;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
-import com.teamproject1.scuoledevelhope.classes.meeting.service.MeetingService;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
