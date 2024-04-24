@@ -35,9 +35,6 @@ public class CalendarService {
     return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
 
     }
-
-
-
     private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
 
         Calendar calendar = new Calendar();
@@ -53,7 +50,6 @@ public class CalendarService {
             for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }
-
 
             calendar.getCalendar().add(meetingResponse);
         }

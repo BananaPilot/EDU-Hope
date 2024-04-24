@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 
 @Component
 public class MeetingDTO {
-    private String titolo;
+    private Long meetingID;
+    private String title;
+    private String link;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
@@ -15,12 +17,28 @@ public class MeetingDTO {
     public MeetingDTO() {
     }
 
-    public String getTitolo() {
-        return titolo;
+    public String getLink() {
+        return link;
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Long getMeetingID() {
+        return meetingID;
+    }
+
+    public void setMeetingID(Long meetingID) {
+        this.meetingID = meetingID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDateTime getStartDate() {

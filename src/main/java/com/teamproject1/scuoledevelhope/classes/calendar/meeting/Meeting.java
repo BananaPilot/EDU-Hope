@@ -38,6 +38,11 @@ public class Meeting {
     public Meeting() {
     }
 
+
+    public void setMeetingID(Long meetingID) {
+        this.meetingID = meetingID;
+    }
+
     public Long getMeetingID() {
         return meetingID;
     }

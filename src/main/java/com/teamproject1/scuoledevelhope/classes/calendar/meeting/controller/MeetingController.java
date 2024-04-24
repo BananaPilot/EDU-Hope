@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting.controller;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -38,4 +39,11 @@ public class MeetingController {
     public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
         return meetingService.save(meeting);
     }
+
+    @NoAuthorization
+    @PostMapping("/update")
+    public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
+        return meetingService.updateMeeting(meeting);
+    }
+
 }
