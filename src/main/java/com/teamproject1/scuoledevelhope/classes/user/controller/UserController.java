@@ -45,8 +45,8 @@ public class UserController {
     }
 
     @NoAuthorization
-    @GetMapping("/dashboard/{id}")
-    public BaseResponseElement<User> dashboard(@Valid @PathVariable("id") Long id) {
-        return userService.getByID(id);
+    @GetMapping("/dashboard")
+    public BaseResponseElement<User> dashboard(@RequestHeader("Authorization") String jwt) {
+        return userService.getDashboard(jwt);
     }
 }

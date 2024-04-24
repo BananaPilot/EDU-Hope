@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
@@ -59,12 +60,21 @@ public class User {
         return id;
     }
 
+    @JsonIgnore
+    public List<Meeting> getMeetings() {
+        return meetings;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public UserRegistry getUserRegistry() {
+        return userRegistry;
     }
 
     public List<Role> getRoles() {
@@ -80,10 +90,10 @@ public class User {
     }
 
     public static final class UserBuilder {
-
         private Long id;
         private String username;
         private String password;
+        private List<Role> roles;
 
         private UserBuilder() {
         }
@@ -107,8 +117,16 @@ public class User {
             return this;
         }
 
+        public UserBuilder withRoles(List<Role> roles) {
+            this.roles = roles;
+            return this;
+        }
+
         public User build() {
-            User user = new User(username, password);
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.roles = this.roles;
             user.id = this.id;
             return user;
         }
