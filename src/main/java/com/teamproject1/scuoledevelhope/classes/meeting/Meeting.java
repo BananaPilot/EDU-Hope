@@ -13,12 +13,10 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_meeting")
     private Long meetingID;
-
     @Column(name = "title")
     private String title;
     @Column(name = "start_date")
     private LocalDateTime startDate;
-
     @Column(name = "end_date")
     private LocalDateTime endDate;
     @Column(name = "link")
@@ -33,6 +31,7 @@ public class Meeting {
     )
     @ManyToMany
     List<User> users;
+
 
     public Meeting() {
     }
@@ -84,4 +83,5 @@ public class Meeting {
     public List<User> getUsers() {
         return users;
     }
+
 }

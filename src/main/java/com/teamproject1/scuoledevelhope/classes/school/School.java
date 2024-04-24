@@ -18,7 +18,7 @@ public class School {
     private Long id;
     @NotBlank(message = "School name can't be blank")
     @Column(
-            name = "class_name",
+            name = "school_name",
             nullable = false)
     private String name;
 

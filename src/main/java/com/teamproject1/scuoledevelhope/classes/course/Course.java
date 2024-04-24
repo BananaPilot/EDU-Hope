@@ -27,7 +27,6 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
-    private EnumCourse enumCourse;
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)
@@ -60,9 +59,4 @@ public class Course {
         this.school = school;
     }
 
-    public enum EnumCourse {
-        BACKEND,
-        FULLSTACK,
-        FRONTEND
-    }
 }

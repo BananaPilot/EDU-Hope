@@ -45,5 +45,7 @@ public class VoteService {
         return new BaseResponseElement<>(temp.get());
     }
 
-
+    public BaseResponseElement<Vote> add(Vote vote)  {
+        return new BaseResponseElement<>(voteDAO.add(vote.getDate(), vote.getEvaluation(), vote.getRegister().getId(), vote.getStudent().getId(), vote.getAnnotation(), vote.getSubject(), vote.getCheckPoint()));
+    }
 }
