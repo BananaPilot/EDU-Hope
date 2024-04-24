@@ -71,7 +71,6 @@ public class User {
         return password;
     }
 
-    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
     }
@@ -117,18 +116,5 @@ public class User {
             user.id = this.id;
             return user;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", userRegistry=" + userRegistry +
-                ", school=" + school +
-                ", roles=" + roles +
-                ", meetings=" + meetings +
-                '}';
     }
 }

@@ -7,8 +7,8 @@ import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.mappers.MeetingMapper;
-import com.teamproject1.scuoledevelhope.types.mappers.UserRegistryMapper;
+import com.teamproject1.scuoledevelhope.classes.meeting.mapper.MeetingMapper;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

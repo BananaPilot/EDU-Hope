@@ -1,10 +1,10 @@
-package com.teamproject1.scuoledevelhope.types.mappers;
+package com.teamproject1.scuoledevelhope.classes.meeting.mapper;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
-import com.teamproject1.scuoledevelhope.types.dtos.MeetingDTO;
+import com.teamproject1.scuoledevelhope.classes.meeting.dto.MeetingDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,8 +12,6 @@ public class MeetingMapper {
 
 
     MeetingDAO meetingDAO;
-    CoordinatorDAO coordinatorDAO;
-    TutorDAO tutorDAO;
 
     public MeetingMapper(MeetingDAO meetingDAO) {
         this.meetingDAO = meetingDAO;
