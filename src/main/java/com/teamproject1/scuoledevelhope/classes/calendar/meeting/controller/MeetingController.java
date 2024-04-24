@@ -43,9 +43,14 @@ public class MeetingController {
         return meetingService.updateMeeting(meeting);
     }
     @NoAuthorization
-    @GetMapping("/delete")
-    public BaseResponseElement<MeetingDTO> deleteMeeting(@RequestParam Long id){
+    @GetMapping("/delete/{id}")
+    public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id){
         return meetingService.deleteMeeting(id);
     }
 
+    @NoAuthorization
+    @GetMapping("/cancel/{id}")
+    public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id){
+        return meetingService.cancelMeeting(id);
+    }
 }

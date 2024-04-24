@@ -11,7 +11,6 @@ public class MeetingDTO {
     private String link;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-
     private String note;
 
     public MeetingDTO() {

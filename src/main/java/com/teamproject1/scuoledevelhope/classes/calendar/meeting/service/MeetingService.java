@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
@@ -70,12 +71,22 @@ public class MeetingService {
         LocalDateTime end_date = meeting.getEndDate();
 
         if (start_date.isBefore(LocalDateTime.now())){
-            throw new IllegalArgumentException("You cannot insert events into the past");
+            throw new IllegalArgumentException("You cannot insert , update , cancel meeting into the past");
         }
 
         if (end_date.isBefore(start_date)) {
             throw new IllegalArgumentException("You mixed up the date");
         }
         return meeting;
+    }
+
+    public BaseResponseElement<MeetingDTO> cancelMeeting(Long id) {
+
+        Meeting temp = findById(id).getElement();
+        temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** " +temp.getNote());
+        temp.setLink("*** Link deleted ***");
+        updateMeeting(mapper.toMeetingDTO(temp));
+
+        return  new BaseResponseElement<>(mapper.toMeetingDTO(temp));
     }
 }
