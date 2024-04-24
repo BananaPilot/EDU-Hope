@@ -19,57 +19,21 @@ public class MeetingController {
         this.meetingService = meetingService;
     }
 
-                                    //----------- STUDENTE----------//
     @NoAuthorization
-    @GetMapping("/allByStudentId/{id}")
-    public BaseResponseList<Meeting> allByStudentId(@PathVariable Long id) {
-        return meetingService.allByStudentId(id);
-    }
-    @NoAuthorization
-    @GetMapping("/intervalStudentId/{id}")
-    public BaseResponseList<Meeting> intervalStudentId(@PathVariable Long id , @RequestParam LocalDate startDate , LocalDate endDate){
-        return meetingService.intervalStudentId(id,startDate,endDate);
-    }
-
-                                    //----------- END STUDENTE----------//
-
-
-
-                                    //----------- TUTOR ----------//
-    @NoAuthorization
-    @GetMapping("/allByTutorId/{id}")
-    public BaseResponseList<Meeting> allByTutorId(@PathVariable Long id) {
-
-        return meetingService.allByTutorId(id);
+    @GetMapping("/all/{id}")
+    public BaseResponseList<Meeting> getAllById(@PathVariable Long id) {
+        return meetingService.getAllById(id);
     }
 
     @NoAuthorization
-    @GetMapping("/intervalTutorId/{id}")
-    public BaseResponseList<Meeting> intervalTutorId(@PathVariable Long id,@RequestParam LocalDate startDate, LocalDate endDate){
-
-        return meetingService.intervalTutorId(id,startDate,endDate);
-
-    }
-                                //----------- END TUTOR ----------//
-
-                                //----------- COORDINATOR ----------//
-    @NoAuthorization
-    @GetMapping("/allByCoordinatorId/{id}")
-    public BaseResponseList<Meeting> allByCoordinatorId(@PathVariable Long id) {
-        return meetingService.allByCoordinatorId(id);
+    @GetMapping("/interval/{id}")
+    public BaseResponseList<Meeting> getWithInterval(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
+        return meetingService.intervalGetById(id, startDate, endDate);
     }
 
-    @NoAuthorization
-    @GetMapping("/intervalCoordinatorId/{id}")
-    public BaseResponseList<Meeting> intervalCoordinatorId(@PathVariable Long id ,@RequestParam LocalDate startDate, LocalDate endDate){
-        return meetingService.intervalCoordinatorId(id, startDate, endDate);
-    }
-                                //----------- END COORDINATOR ----------//
     @NoAuthorization
     @PostMapping("/save")
     public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
         return meetingService.save(meeting);
     }
-
-
 }

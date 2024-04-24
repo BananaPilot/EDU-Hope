@@ -1,11 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.role;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -20,6 +18,12 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
+    @ManyToMany(
+            mappedBy = "roles",
+            fetch = FetchType.LAZY
+    )
+    private List<User> users;
+
     public enum RoleEnum {
         SUPER_ADMIN,
         ADMIN,
@@ -27,14 +31,9 @@ public class Role {
         USER,
         COORDINATOR,
         TUTOR,
-        STUDENT;
-    }
+        STUDENT
 
-    @ManyToMany(
-            mappedBy = "roles",
-            fetch = FetchType.LAZY
-    )
-    private Set<User> users;
+    }
 
     public Long getId() {
         return id;
@@ -44,10 +43,7 @@ public class Role {
         return roleEnum;
     }
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "users: " + users +
-                '}';
+    public List<User> getUsers() {
+        return users;
     }
 }

@@ -7,8 +7,6 @@ import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +19,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
-    @FloorLevelAuthorization(floorRole = "TUTOR")
+    @NoAuthorization
+    //@FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findAll")
     public BaseResponseList<Student> findAll() {
         return studentService.findAll();
@@ -30,32 +28,17 @@ public class StudentController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/findById")
-    public BaseResponseElement<Student> findById(@RequestParam Long id) {
+    public BaseResponseElement<Student> findById(@Valid @RequestParam Long id) {
         return studentService.findById(id);
     }
 
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @NoAuthorization
+    //@FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/deleteById")
-    public BaseResponseElement<Student> delete(@RequestParam Long id) {
+    public BaseResponseElement<Student> delete(@Valid @RequestParam Long id) {
 
         return studentService.deleteById(id);
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save(@Valid @RequestBody Student student, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body("Errore di validazione: " + bindingResult.getAllErrors().get(0).getDefaultMessage());
-        }
-
-        BaseResponseElement<Student> response = studentService.save(student);
-
-        if (response.isSuccess()) {
-            return ResponseEntity.ok("Studente salvato con successo");
-        } else {
-            return ResponseEntity.badRequest().body(response.getMessage());
-        }
-    }
-
-
-
 }
+

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -47,7 +46,7 @@ public class UserController {
 
     @NoAuthorization
     @GetMapping("/dashboard/{id}")
-    public BaseResponseElement<User> dashboard(@PathVariable("id") Long id) {
+    public BaseResponseElement<User> dashboard(@Valid @PathVariable("id") Long id) {
         return userService.getByID(id);
     }
 }

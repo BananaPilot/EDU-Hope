@@ -7,43 +7,24 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "coordinator")
 public class Coordinator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_coordinator")
     private Long id;
-    @NotBlank(message = "Coordinator name can't be blank")
+
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @NotEmpty(message = "Associates at least 1 class.")
-    @Valid
     @OneToMany(
             mappedBy = "coordinator",
             fetch = FetchType.LAZY)
-    private Set<Classes> classes;
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
+    private List<Classes> classes;
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Tutor{" +
-                "id: " + id +
-                ", id_user: " + user +
-                '}';
     }
 }

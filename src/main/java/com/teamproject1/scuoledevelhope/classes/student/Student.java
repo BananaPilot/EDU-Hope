@@ -1,26 +1,21 @@
 package com.teamproject1.scuoledevelhope.classes.student;
 
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_student")
     private Long id;
-    @NotBlank(message = "Student name can't be blank")
+
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @MapsId
     private User user;
     @NotEmpty(message = "Associates at least 1 class.")
     @Valid
@@ -33,14 +28,6 @@ public class Student {
     @JoinColumn(name = "id_register")
     private Register register;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_student_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_meeting_fk")
-    )
-    private Set<Meeting> meetings;
-
     public Student() {
     }
 
@@ -48,14 +35,6 @@ public class Student {
         this.user = user;
         this.schoolClass = schoolClass;
         this.register = register;
-    }
-
-    public Set<Meeting> getMeetings() {
-        return meetings;
-    }
-
-    public void setMeetings(Set<Meeting> meetings) {
-        this.meetings = meetings;
     }
 
     public Long getId() {
@@ -84,15 +63,5 @@ public class Student {
 
     public void setRegister(Register register) {
         this.register = register;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id: " + id +
-                ", id_user: " + user +
-                ", id_class: " + schoolClass +
-                ", id_register: " + register +
-                '}';
     }
 }

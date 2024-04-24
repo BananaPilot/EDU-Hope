@@ -6,7 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.service.RoleService;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.RoleUsername;
+import com.teamproject1.scuoledevelhope.classes.role.dto.RoleUsername;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +22,13 @@ public class RoleController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PutMapping("/add")
-    public BaseResponseElement<User> addRole(@RequestBody RoleUsername roleUsername) {
+    public BaseResponseElement<User> addRole(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.addRole(roleUsername);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/add")
-    public BaseResponseElement<User> deleteRole(@RequestBody RoleUsername roleUsername) {
+    public BaseResponseElement<User> deleteRole(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.deleteRole(roleUsername);
     }
 

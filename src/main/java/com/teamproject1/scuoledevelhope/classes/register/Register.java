@@ -5,8 +5,9 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "register")
@@ -15,8 +16,9 @@ public class Register {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
     private Long id;
+    @NotBlank(message = "school year can't be blank")
     @Column(
-            name = "register_school-year",
+            name = "register_school_year",
             nullable = false)
     private String schoolYear;
 
@@ -30,11 +32,11 @@ public class Register {
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
-    private Set<Vote> votes;
+    private List<Vote> votes;
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
 
     public Long getId() {
         return id;
@@ -42,14 +44,6 @@ public class Register {
 
     public String getSchoolYear() {
         return schoolYear;
-    }
-
-    public Classes getSchoolClass() {
-        return schoolClass;
-    }
-
-    public Tutor getTutor() {
-        return tutor;
     }
 
     public void setSchoolClass(Classes schoolClass) {
@@ -64,13 +58,11 @@ public class Register {
         this.schoolYear = schoolYear;
     }
 
-    @Override
-    public String toString() {
-        return "Register{" +
-                "id: " + id +
-                ", schoolYear: '" + schoolYear + '\'' +
-                ", id_class: " + schoolClass +
-                ", id_tutor: " + tutor +
-                '}';
+    public Classes getSchoolClass() {
+        return schoolClass;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
     }
 }

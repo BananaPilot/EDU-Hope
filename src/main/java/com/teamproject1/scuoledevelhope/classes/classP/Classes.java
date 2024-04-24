@@ -9,7 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "class")
@@ -42,7 +42,7 @@ public class Classes {
     @OneToMany(
             mappedBy = "schoolClass",
             fetch = FetchType.LAZY)
-    private Set<Student> students;
+    private List<Student> students;
     @OneToOne(mappedBy = "schoolClass")
     private Register registers;
 
@@ -52,26 +52,6 @@ public class Classes {
 
     public String getName() {
         return name;
-    }
-
-    public Tutor getTutor() {
-        return tutor;
-    }
-
-    public Coordinator getCoordinator() {
-        return coordinator;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public Register getRegisters() {
-        return registers;
-    }
-
-    public School getSchool() {
-        return school;
     }
 
     public void setName(String name) {
@@ -97,16 +77,5 @@ public class Classes {
     public void setSchool(School school) {
         this.school = school;
 
-    }
-
-    @Override
-    public String toString() {
-        return "Class{" +
-                "id: " + id +
-                ", name: '" + name + '\'' +
-                ", tutor: " + tutor +
-                ", coordinator: " + coordinator +
-                ", course: " + course +
-                '}';
     }
 }

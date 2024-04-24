@@ -1,13 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "meeting")
@@ -16,12 +14,10 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_meeting")
     private Long meetingID;
-
     @Column(name = "title")
     private String title;
     @Column(name = "start_date")
     private LocalDateTime startDate;
-
     @Column(name = "end_date")
     private LocalDateTime endDate;
     @Column(name = "link")
@@ -29,37 +25,20 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
-    @OneToOne
-    @JoinColumn(name = "tutor_id_fk")
-    private Tutor tutorIDfk;
-    @OneToOne
-    @JoinColumn(name = "coordinator_id_fk")
-    private Coordinator coordinatorIDfk;
-
-    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "meeting_student",
-            joinColumns = @JoinColumn(name = "id_meeting_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_student_fk")
+            name = "user_meeting",
+            joinColumns = @JoinColumn(name = "id_meeting"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
     )
-    private Set<Student> students;
+    @ManyToMany
+    List<User> users;
+
 
     public Meeting() {
     }
 
-    @Override
-    public String toString() {
-        return "Meeting{" +
-                "meetingID=" + meetingID +
-                ", title='" + title + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", link='" + link + '\'' +
-                ", note='" + note + '\'' +
-                ", tutorIDfk=" + tutorIDfk +
-                ", coordinatorIDfk=" + coordinatorIDfk +
-                ", students=" + students +
-                '}';
+    public Long getMeetingID() {
+        return meetingID;
     }
 
     public String getTitle() {
@@ -102,28 +81,7 @@ public class Meeting {
         this.note = note;
     }
 
-    public Tutor getTutorIDfk() {
-        return tutorIDfk;
-    }
-
-    public void setTutorIDfk(Tutor tutorIDfk) {
-        this.tutorIDfk = tutorIDfk;
-    }
-
-    public Coordinator getCoordinatorIDfk() {
-        return coordinatorIDfk;
-    }
-
-    public void setCoordinatorIDfk(Coordinator coordinatorIDfk) {
-        this.coordinatorIDfk = coordinatorIDfk;
-    }
-
-    @JsonIgnore
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public List<User> getUsers() {
+        return users;
     }
 }

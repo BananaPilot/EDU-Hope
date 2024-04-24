@@ -11,8 +11,10 @@ public class FloorLeveImplInternal extends FloorLevelImpl {
     @Override
     protected boolean isRoleInternalGreaterOrEquals(String requiredRole, String userRoles) {
         return switch (requiredRole) {
-            case "STUDENT" -> "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "TUTOR".equals(userRoles) || "COORDINATOR".equals(userRoles);
-            case "TUTOR" -> "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "COORDINATOR".equals(userRoles);
+            case "STUDENT" ->
+                    "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "TUTOR".equals(userRoles) || "COORDINATOR".equals(userRoles);
+            case "TUTOR" ->
+                    "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles) || "COORDINATOR".equals(userRoles);
             case "COORDINATOR", "ADMIN" -> "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles);
             case "USER" ->
                     "USER".equals(userRoles) || "MODERATOR".equals(userRoles) || "ADMIN".equals(userRoles) || "SUPER_ADMIN".equals(userRoles);

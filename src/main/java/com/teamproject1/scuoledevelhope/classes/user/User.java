@@ -1,17 +1,14 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -30,33 +27,25 @@ public class User {
     private String password;
 
     @OneToOne()
-    @JoinColumn(
-            name = "user_registry_id",
-            referencedColumnName = "id"
-    )
     private UserRegistry userRegistry;
 
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
+    )
     private List<Role> roles;
 
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private Set<Student> students;
-
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private Set<Tutor> tutors;
-
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private Set<Coordinator> coordinators;
+    @ManyToMany(
+            mappedBy = "users",
+            fetch = FetchType.LAZY
+    )
+    public List<Meeting> meetings;
 
     public User(String username, String password) {
         this.username = username;
@@ -80,14 +69,6 @@ public class User {
 
     public List<Role> getRoles() {
         return roles;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public UserRegistry getUserRegistry() {
-        return userRegistry;
     }
 
     public void setUsername(String username) {
