@@ -22,28 +22,24 @@ public class MeetingController {
     //tutti i meeting di un user
     @NoAuthorization
     @GetMapping("/all/{id}")
-    public BaseResponseList<Meeting> findAllById(@PathVariable Long id) {
-        return meetingService.findAllById(id);
+    public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
+        return meetingService.allMeetingByUser(id);
     }
-
-
     //tutti i meeting di un user in un intervallo di tempo
     @NoAuthorization
     @GetMapping("/byUserId/{id}")
     public BaseResponseList<Meeting> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
         return meetingService.intervalGetById(id, startDate, endDate);
     }
-
     @NoAuthorization
     @PostMapping("/save")
     public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
         return meetingService.save(meeting);
     }
-
+    //aggiorna il meeting attraverso l id
     @NoAuthorization
     @PostMapping("/update")
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
-
 }

@@ -5,14 +5,11 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import org.springframework.stereotype.Component;
 @Component
 public class MeetingMapper {
-
-
     MeetingDAO meetingDAO;
 
     public MeetingMapper(MeetingDAO meetingDAO) {
         this.meetingDAO = meetingDAO;
     }
-
     public MeetingDTO toMeetingDTO(Meeting meeting) {
 
         MeetingDTO meetingDTO = new MeetingDTO();
@@ -23,7 +20,6 @@ public class MeetingMapper {
         meetingDTO.setEndDate(meeting.getEndDate());
         meetingDTO.setLink(meeting.getLink());
         meetingDTO.setNote(meeting.getNote());
-
         return meetingDTO;
     }
     public Meeting toMeeting(MeetingDTO meetingDTO) {
@@ -36,7 +32,6 @@ public class MeetingMapper {
         meeting.setEndDate(meetingDTO.getEndDate());
         meeting.setLink(meetingDTO.getLink());
         meeting.setNote(meetingDTO.getNote());
-
         return meeting;
     }
 }
