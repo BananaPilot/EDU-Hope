@@ -13,5 +13,40 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
 
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @NoAuthorization()
+    @PostMapping("/login")
+    public String login() {
+        return "JWT is in Authorization header";
+    }
+
+    @NoAuthorization
+    @PostMapping("/signin")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BaseResponseElement<User> addUser(@Valid @RequestBody User user) {
+        return userService.addUser(user);
+    }
+
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/{username}")
+    public BaseResponseElement<User> getByUsername(@Valid @PathVariable("username") String username) {
+        return userService.getByUsername(username);
+    }
+
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/all")
+    public BaseResponseList<User> getAll() {
+        return userService.getAll();
+    }
+
+    @NoAuthorization
+    @GetMapping("/dashboard/{id}")
+    public BaseResponseElement<User> dashboard(@Valid @PathVariable("id") Long id) {
+        return userService.getByID(id);
+    }
 }
