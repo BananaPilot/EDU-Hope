@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.meeting.dao;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao;
 
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

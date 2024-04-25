@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope;
 
-import com.teamproject1.scuoledevelhope.classes.meeting.MeetingMiddleware;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingMiddleware;
 import com.teamproject1.scuoledevelhope.classes.user.UserMiddleware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

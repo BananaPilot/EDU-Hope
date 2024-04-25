@@ -1,12 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -71,7 +67,6 @@ public class User {
         return password;
     }
 
-    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
     }
@@ -117,18 +112,5 @@ public class User {
             user.id = this.id;
             return user;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", userRegistry=" + userRegistry +
-                ", school=" + school +
-                ", roles=" + roles +
-                ", meetings=" + meetings +
-                '}';
     }
 }

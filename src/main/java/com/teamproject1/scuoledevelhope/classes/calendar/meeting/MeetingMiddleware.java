@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.meeting;
+package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
 import com.bananapilot.samplespringauthenticationframework.utils.Constants;
 import com.bananapilot.samplespringauthenticationframework.utils.JWTUtils;

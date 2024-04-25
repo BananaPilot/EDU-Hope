@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.calendar;
 
-import com.teamproject1.scuoledevelhope.classes.meeting.MeetingResponse;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

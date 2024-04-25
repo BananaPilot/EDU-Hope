@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.types.dtos;
+package com.teamproject1.scuoledevelhope.classes.role.dto;
 
 
 import com.teamproject1.scuoledevelhope.classes.role.Role;

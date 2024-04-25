@@ -42,4 +42,8 @@ public class Role {
     public RoleEnum getRoleEnum() {
         return roleEnum;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
 }
