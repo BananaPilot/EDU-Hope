@@ -1,7 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.user.service;
 
 import com.bananapilot.samplespringauthenticationframework.utils.JWTUtils;
+import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
 import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -42,7 +44,12 @@ public class UserService {
         return new BaseResponseElement<>(userDao.getByID(id));
     }
 
-    public BaseResponseElement<User> getDashboard(String jwt) {
-        return new BaseResponseElement<>(userDao.getByID(utils.getUserFromJwt(jwt).getId()));
+    public BaseResponseElement<DashboardDto> getDashboard(String jwt) {
+        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.aDashboardDto()
+                .map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard().map(user.getRoles()).build())
+                .build();
+        return new BaseResponseElement<>(dashboardDto);
     }
 }
