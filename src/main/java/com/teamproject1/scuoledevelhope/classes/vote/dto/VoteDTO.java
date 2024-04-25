@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.vote.dto;
 import java.time.LocalDate;
 
 public class VoteDTO {
-
     private Long idRegister;
     private Long idStudent;
     private LocalDate date;

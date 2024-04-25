@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.vote;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 
@@ -27,13 +26,16 @@ public class Vote {
             nullable = false)
     private LocalDate date;
     @NotBlank(message = "subject can't be blank")
-    @Column(name = "subject")
+    @Column(name = "vote_subject")
     private String subject;
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
+
     @Column(name = "annotation")
     private String annotation;
+    @Column(name = "is_check_point",
+            columnDefinition = "TINYINT", length = 1)
     private Boolean isCheckPoint;
 
     public Long getId() {

@@ -1,10 +1,15 @@
 package com.teamproject1.scuoledevelhope.classes.vote.service;
 
+import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +17,10 @@ import java.util.Optional;
 @Service
 public class VoteService {
     private final VoteDAO voteDAO;
+    @Autowired
+    private RegisterDao registerDao;
+    @Autowired
+    private StudentDAO studentDao;
 
     public VoteService(VoteDAO voteDAO) {
         this.voteDAO = voteDAO;
@@ -45,7 +54,16 @@ public class VoteService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseElement<Vote> add(Vote vote)  {
-        return new BaseResponseElement<>(voteDAO.add(vote.getDate(), vote.getEvaluation(), vote.getRegister().getId(), vote.getStudent().getId(), vote.getAnnotation(), vote.getSubject(), vote.getCheckPoint()));
+    public BaseResponseElement<Vote> add(VoteDTO voteDTO)  {
+        Vote vote = new Vote();
+        vote.setAnnotation(voteDTO.getAnnotation());
+        vote.setDate(voteDTO.getDate());
+        vote.setEvaluation(voteDTO.getEvaluation());
+        vote.setRegister(registerDao.getReferenceById(voteDTO.getIdRegister()));
+        vote.setStudent(studentDao.getReferenceById(voteDTO.getIdStudent()));
+        vote.setCheckPoint(voteDTO.getCheckPoint());
+        vote.setSubject(voteDTO.getSubject());
+
+        return new BaseResponseElement<>(voteDAO.save(vote));
     }
 }

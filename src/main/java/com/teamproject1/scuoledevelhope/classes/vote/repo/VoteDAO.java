@@ -15,9 +15,4 @@ import java.util.List;
 @Repository
 public interface VoteDAO extends JpaRepository<Vote, Long> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "insert into vote(vote_date, vote_evaluation, id_register, id_student, annotation, vote_subject, is_check_point) values (:date, :evaluation, :idRegistry, :idStudent, :annotation, :subject, :isCheckPoint)", nativeQuery = true)
-    Vote add(@Param("date") LocalDate date, @Param("evaluation") Float evaluation, @Param("idRegistry") Long registry, @Param("idStudent") Long student, @Param("annotation") String annotation, @Param("subject") String subject, @Param("isCheckPoint") Boolean isCheckPoint);
-
 }
