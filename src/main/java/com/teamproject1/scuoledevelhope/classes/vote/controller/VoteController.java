@@ -17,39 +17,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/vote")
 public class VoteController {
     private final VoteService voteService;
-    private final VoteDAO voteDAO;
-    public VoteController(VoteService voteService, VoteDAO voteDAO) {
+    public VoteController(VoteService voteService) {
         this.voteService = voteService;
-        this.voteDAO = voteDAO;
     }
     @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-all")
-    public BaseResponseList<Vote> findAll() {
+    @GetMapping("/all")
+    public BaseResponseList<VoteDTO> findAll() {
         return voteService.findAll();
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-by-id")
-    public BaseResponseElement<Vote> findById(@Valid @RequestParam Long id) {
+    @GetMapping
+    public BaseResponseElement<VoteDTO> findById(@Valid @RequestParam Long id) {
         return voteService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/save")
-    public BaseResponseElement<Vote> save(@Valid @RequestBody Vote vote) {
-        return voteService.save(vote);
-    }
-
-    @FloorLevelAuthorization(floorRole = "TUTOR")
-    @PostMapping("/add")
     public BaseResponseElement<VoteDTO> add(@Valid @RequestBody VoteDTO voteDTO) {
-        return voteService.add(voteDTO);
+        return voteService.addVote(voteDTO);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
-    @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Vote> delete(@Valid @RequestParam Long id) {
-        return voteService.deleteById(id);
+    @DeleteMapping("/delete")
+    public BaseResponseElement<VoteDTO> delete(@RequestParam Long idStudent, @RequestParam Long idVote) {
+        return voteService.deleteVote(idStudent, idVote);
     }
 
 }
