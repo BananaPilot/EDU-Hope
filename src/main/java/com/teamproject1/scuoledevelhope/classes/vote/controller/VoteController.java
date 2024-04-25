@@ -40,9 +40,8 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/add")
-    public Vote add(@Valid @RequestBody VoteDTO voteDTO) {
-        BaseResponseElement<Vote> questo = voteService.add(voteDTO);
-        return voteDAO.getReferenceById(questo.getElement().getId());
+    public BaseResponseElement<Vote> add(@Valid @RequestBody VoteDTO voteDTO) {
+        return voteService.add(voteDTO);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
@@ -50,6 +49,5 @@ public class VoteController {
     public BaseResponseElement<Vote> delete(@Valid @RequestParam Long id) {
         return voteService.deleteById(id);
     }
-
 
 }

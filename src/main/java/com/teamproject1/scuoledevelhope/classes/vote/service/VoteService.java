@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -17,13 +18,11 @@ import java.util.Optional;
 @Service
 public class VoteService {
     private final VoteDAO voteDAO;
-    @Autowired
-    private RegisterDao registerDao;
-    @Autowired
-    private StudentDAO studentDao;
+    private final VoteMapper voteMapper;
 
-    public VoteService(VoteDAO voteDAO) {
+    public VoteService(VoteDAO voteDAO, VoteMapper voteMapper) {
         this.voteDAO = voteDAO;
+        this.voteMapper = voteMapper;
     }
 
     public BaseResponseList<Vote> findAll() {
@@ -55,15 +54,6 @@ public class VoteService {
     }
 
     public BaseResponseElement<Vote> add(VoteDTO voteDTO)  {
-        Vote vote = new Vote();
-        vote.setAnnotation(voteDTO.getAnnotation());
-        vote.setDate(voteDTO.getDate());
-        vote.setEvaluation(voteDTO.getEvaluation());
-        vote.setRegister(registerDao.getReferenceById(voteDTO.getIdRegister()));
-        vote.setStudent(studentDao.getReferenceById(voteDTO.getIdStudent()));
-        vote.setCheckPoint(voteDTO.getCheckPoint());
-        vote.setSubject(voteDTO.getSubject());
-
-        return new BaseResponseElement<>(voteDAO.save(vote));
+        return new BaseResponseElement<>(voteDAO.save(voteMapper.toVote(voteDTO)));
     }
 }

@@ -101,12 +101,14 @@ public class Vote {
     @Override
     public String toString() {
         return "Vote{" +
-                "id_register: " + register +
-                ", id_student: " + student +
-                ", date: " + date +
-                ", vote: " + evaluation +
-                ", annotation: '" + annotation + '\'' +
+                "id=" + id +
+                ", register=" + register +
+                ", student=" + student +
+                ", date=" + date +
+                ", subject='" + subject + '\'' +
+                ", evaluation=" + evaluation +
+                ", annotation='" + annotation + '\'' +
+                ", isCheckPoint=" + isCheckPoint +
                 '}';
     }
-
 }
