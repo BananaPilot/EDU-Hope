@@ -97,18 +97,4 @@ public class Vote {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-
-    @Override
-    public String toString() {
-        return "Vote{" +
-                "id=" + id +
-                ", register=" + register +
-                ", student=" + student +
-                ", date=" + date +
-                ", subject='" + subject + '\'' +
-                ", evaluation=" + evaluation +
-                ", annotation='" + annotation + '\'' +
-                ", isCheckPoint=" + isCheckPoint +
-                '}';
-    }
 }
