@@ -4,6 +4,7 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Fl
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.service.VoteService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/vote")
 public class VoteController {
     private final VoteService voteService;
-    @Autowired private VoteDAO voteDAO;
-    public VoteController(VoteService voteService) {
+    private final VoteDAO voteDAO;
+    public VoteController(VoteService voteService, VoteDAO voteDAO) {
         this.voteService = voteService;
+        this.voteDAO = voteDAO;
     }
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/get-all")
@@ -40,7 +42,7 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/add")
-    public BaseResponseElement<Vote> add(@Valid @RequestBody VoteDTO voteDTO) {
+    public BaseResponseElement<VoteDTO> add(@Valid @RequestBody VoteDTO voteDTO) {
         return voteService.add(voteDTO);
     }
 

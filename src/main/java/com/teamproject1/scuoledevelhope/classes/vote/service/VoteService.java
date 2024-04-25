@@ -53,7 +53,9 @@ public class VoteService {
         return new BaseResponseElement<>(temp.get());
     }
 
-    public BaseResponseElement<Vote> add(VoteDTO voteDTO)  {
-        return new BaseResponseElement<>(voteDAO.save(voteMapper.toVote(voteDTO)));
+    public BaseResponseElement<VoteDTO> add(VoteDTO voteDTO)  {
+        Vote res = voteDAO.save(voteMapper.toVote(voteDTO));
+
+        return new BaseResponseElement<>(voteDTO);
     }
 }
