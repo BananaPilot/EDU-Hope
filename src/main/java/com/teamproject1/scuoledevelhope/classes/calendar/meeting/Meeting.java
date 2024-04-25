@@ -26,6 +26,7 @@ public class Meeting {
     @Column(name = "note")
     private String note;
 
+    @JsonIgnore
     @JoinTable(
             name = "user_meeting",
             joinColumns = @JoinColumn(name = "id_meeting"),
@@ -36,6 +37,11 @@ public class Meeting {
 
 
     public Meeting() {
+    }
+
+
+    public void setMeetingID(Long meetingID) {
+        this.meetingID = meetingID;
     }
 
     public Long getMeetingID() {
