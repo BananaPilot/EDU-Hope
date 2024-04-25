@@ -24,47 +24,43 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
         this.mapper = mapper;
     }
-
     //trova meeting by id
    public BaseResponseElement<Meeting> findById(Long id){
         Optional<Meeting> results = meetingDAO.findById(id);
         if (results.isPresent()){
             return new BaseResponseElement<>( results.get());
         }
-       throw new SQLException("Student was not present");
+       throw new SQLException("Meeting was not present");
    }
-
     //tutti i meeting di un user
     public BaseResponseList<Meeting> allMeetingByUser(Long id) {
         return new BaseResponseList<>(meetingDAO.allMeetingByUser(id));
     }
-
     //tutti i meeting di un user in un intervallo di tempo
     public BaseResponseList<Meeting> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
         return new BaseResponseList<>(meetingDAO.intervalGetByID(id, startDate, endDate));
     }
-
     public BaseResponseElement<Meeting> save(Meeting meeting) {
         meeting.setMeetingID(null);
         checkData(meeting);
         return new BaseResponseElement<Meeting>(HttpStatus.CREATED,HttpStatus.CREATED.getReasonPhrase(),"Data saving successful",meetingDAO.save(meeting));
     }
-
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO){
-
+        if(meetingDTO.getMeetingID() == null){
+            throw new SQLException("It is not possible to update the meeting without the ID");
+        }
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
         checkData(meeting);
         return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"Data updated correctly",mapper.toMeetingDTO(meeting));
     }
-
     public BaseResponseElement<MeetingDTO> deleteMeeting(Long id){
 
-        MeetingDTO temp = new MeetingDTO();
-        temp = mapper.toMeetingDTO(findById(id).getElement());
+        Meeting temp = new Meeting();
+        temp = findById(id).getElement();
+        checkData(temp);
         meetingDAO.deleteById(id);
-        return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"Meetings deleted",temp);
+        return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"Meetings deleted", mapper.toMeetingDTO(temp));
     }
-
     public Meeting checkData(Meeting meeting){
 
         LocalDateTime start_date = meeting.getStartDate();
@@ -79,14 +75,25 @@ public class MeetingService {
         }
         return meeting;
     }
-
     public BaseResponseElement<MeetingDTO> cancelMeeting(Long id) {
 
         Meeting temp = findById(id).getElement();
-        temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** " +temp.getNote());
+        checkData(temp);
+        temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** Original note: " +temp.getNote());
         temp.setLink("*** Link deleted ***");
         updateMeeting(mapper.toMeetingDTO(temp));
 
         return  new BaseResponseElement<>(mapper.toMeetingDTO(temp));
     }
+
+    public BaseResponseElement<MeetingDTO> nextMeetingById(Long id){
+        Meeting meeting = new Meeting();
+        meeting = meetingDAO.nextMeetingById(id,LocalDate.now(),LocalDate.now().plusDays(7));
+        if (meeting == null){
+            return new BaseResponseElement<>(HttpStatus.OK,HttpStatus.OK.getReasonPhrase(),"No meetings in the next 7 days",null);
+        }
+        return new BaseResponseElement<>(mapper.toMeetingDTO(meeting));
+    }
+
+
 }
