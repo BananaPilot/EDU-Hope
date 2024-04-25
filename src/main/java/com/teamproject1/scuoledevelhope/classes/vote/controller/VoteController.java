@@ -28,8 +28,8 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/by-student")
-    public BaseResponseList<VoteDTO> findByStudent(@Valid @RequestParam Long id) {
-        return voteService.findByStudent(id);
+    public BaseResponseList<VoteDTO> findByStudent(@Valid @RequestParam Long idStudent) {
+        return voteService.findByStudent(idStudent);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")

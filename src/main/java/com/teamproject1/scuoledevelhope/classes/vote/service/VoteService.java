@@ -37,19 +37,17 @@ public class VoteService {
         }
         return new BaseResponseList<>(voteDTOS);
     }
-
     public BaseResponseList<VoteDTO> findByStudent(Long idStudent){
         List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDtos = new ArrayList<>();
-        Optional<Student> student = studentDAO.findById(idStudent);
+        List<VoteDTO> voteDTOS = new ArrayList<>();
 
         for (Vote element : votes){
-            if(!element.getStudent().equals(student)) {
-                voteDtos.add(voteMapper.toVoteDto(element));
+            if(element.getStudent().getId().equals(idStudent)) {
+                voteDTOS.add(voteMapper.toVoteDto(element));
             }
         }
 
-        return new BaseResponseList<>(voteDtos);
+        return new BaseResponseList<>(voteDTOS);
     }
 
     public BaseResponseElement<VoteDTO> deleteVote(Long idStudent, Long idVote) {
