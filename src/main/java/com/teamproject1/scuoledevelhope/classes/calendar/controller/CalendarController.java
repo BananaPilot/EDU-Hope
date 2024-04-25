@@ -20,7 +20,7 @@ public class CalendarController {
 
     @NoAuthorization
     @GetMapping("/{id}")
-    public BaseResponseElement<Calendar> getCalendarById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
+    public BaseResponseElement<Calendar> intervalGetByID(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
 
         return calendarService.allCalendar(id, startDate, endDate);
     }

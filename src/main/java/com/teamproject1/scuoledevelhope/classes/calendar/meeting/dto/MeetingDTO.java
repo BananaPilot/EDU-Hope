@@ -6,22 +6,38 @@ import java.time.LocalDateTime;
 
 @Component
 public class MeetingDTO {
-    private String titolo;
+    private Long meetingID;
+    private String title;
+    private String link;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String tutor;
-    private String coordinator;
     private String note;
 
     public MeetingDTO() {
     }
 
-    public String getTitolo() {
-        return titolo;
+    public String getLink() {
+        return link;
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Long getMeetingID() {
+        return meetingID;
+    }
+
+    public void setMeetingID(Long meetingID) {
+        this.meetingID = meetingID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDateTime getStartDate() {
@@ -38,22 +54,6 @@ public class MeetingDTO {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-    public String getTutor() {
-        return tutor;
-    }
-
-    public void setTutor(String tutor) {
-        this.tutor = tutor;
-    }
-
-    public String getCoordinator() {
-        return coordinator;
-    }
-
-    public void setCoordinator(String coordinator) {
-        this.coordinator = coordinator;
     }
 
     public String getNote() {

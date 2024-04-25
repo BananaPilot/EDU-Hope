@@ -1,5 +1,4 @@
 package com.teamproject1.scuoledevelhope.classes.user;
-
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
