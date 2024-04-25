@@ -3,6 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.vote.dto;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +26,8 @@ public class VoteMapper {
         vote.setEvaluation(voteDto.getEvaluation());
         vote.setRegister(registerDao.getReferenceById(voteDto.getIdRegister()));
         vote.setStudent(studentDao.getReferenceById(voteDto.getIdStudent()));
-        vote.setCheckPoint(voteDto.getCheckPoint());
         vote.setSubject(voteDto.getSubject());
-
+        vote.setCheckPoint(voteDto.getCheckPoint() == 1);
         return vote;
     }
 
@@ -39,9 +39,8 @@ public class VoteMapper {
         voteDto.setEvaluation(vote.getEvaluation());
         voteDto.setIdRegister(vote.getRegister().getId());
         voteDto.setIdStudent(vote.getStudent().getId());
-        voteDto.setCheckPoint(vote.getCheckPoint());
+        voteDto.setCheckPoint(vote.getCheckPoint() ? (byte) 1 : (byte) 0);
         voteDto.setSubject(vote.getSubject());
-
         return voteDto;
     }
 }
