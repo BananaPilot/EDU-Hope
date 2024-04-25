@@ -38,14 +38,18 @@ public class VoteService {
         return new BaseResponseList<>(voteDTOS);
     }
 
-    public BaseResponseElement<VoteDTO> findById(Long id) {
-        Optional<Vote> result = voteDAO.findById(id);
-        if (result.isEmpty()) {
-            throw new SQLException("Vote was not present");
+    public BaseResponseList<VoteDTO> findByStudent(Long idStudent){
+        List<Vote> votes = voteDAO.findAll();
+        List<VoteDTO> voteDtos = new ArrayList<>();
+        Optional<Student> student = studentDAO.findById(idStudent);
+
+        for (Vote element : votes){
+            if(!element.getStudent().equals(student)) {
+                voteDtos.add(voteMapper.toVoteDto(element));
+            }
         }
-        VoteDTO voteDTO = voteMapper.toVoteDto(result.get());
-        voteDAO.findById(id);
-        return new BaseResponseElement<>(voteDTO);
+
+        return new BaseResponseList<>(voteDtos);
     }
 
     public BaseResponseElement<VoteDTO> deleteVote(Long idStudent, Long idVote) {
