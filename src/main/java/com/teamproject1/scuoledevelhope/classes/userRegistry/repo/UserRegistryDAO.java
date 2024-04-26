@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface UserRegistryDAO extends JpaRepository<UserRegistry, Long> {
 
-    // VISUALIZZA TUTTI GLI STUDENTI CHE PARTECIPANO AD UN MEETING
+    // VISUALIZZA TUTTI GLI USER CHE PARTECIPANO AD UN MEETING
     @Query(value = "select * from user_registry\n" +
             "join user_meeting on user_registry.user_id  = user_meeting.id_user\n" +
             "where user_meeting.id_meeting  =:id", nativeQuery = true)
-    List<UserRegistry> allStudentsByMeeting(@Param("id") Long id);
+    List<UserRegistry> allUserByMeeting(@Param("id") Long id);
 }
