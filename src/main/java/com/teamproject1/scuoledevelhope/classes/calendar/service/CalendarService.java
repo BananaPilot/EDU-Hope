@@ -4,11 +4,11 @@ import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,10 +31,11 @@ public class CalendarService {
     }
 
     public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
-      List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
-    return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+        List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
+        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
 
     }
+
     private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
 
         Calendar calendar = new Calendar();

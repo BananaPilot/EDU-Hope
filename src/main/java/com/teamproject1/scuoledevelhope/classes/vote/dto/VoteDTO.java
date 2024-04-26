@@ -65,6 +65,7 @@ public class VoteDTO {
     public int getCheckPoint() {
         return isCheckPoint;
     }
+
     public void setCheckPoint(int checkPoint) {
         isCheckPoint = checkPoint;
     }
