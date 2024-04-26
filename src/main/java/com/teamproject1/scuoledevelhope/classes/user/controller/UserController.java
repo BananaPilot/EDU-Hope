@@ -3,6 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.user.controller;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -45,8 +46,8 @@ public class UserController {
     }
 
     @NoAuthorization
-    @GetMapping("/dashboard/{id}")
-    public BaseResponseElement<User> dashboard(@Valid @PathVariable("id") Long id) {
-        return userService.getByID(id);
+    @GetMapping("/dashboard")
+    public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
+        return userService.getDashboard(jwt);
     }
 }

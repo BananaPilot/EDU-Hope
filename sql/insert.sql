@@ -69,21 +69,21 @@ values ('develhope');
 
 insert into course (enum_course, id_school, course_description, course_name)
 values
-(0, 1, 'tuttafuffa', 'java_back_end'),
-(1, 1, 'blabla', 'full_stack'),
-(2, 1, 'blabla', 'front_end');
+(1, 'tuttafuffa', 'java_back_end'),
+(1, 'blabla', 'full_stack'),
+(1, 'blabla', 'front_end');
 
 insert into class (id_coordinator, id_course, id_school, id_tutor, class_name)
 values
-(2, 5, 1, 3, 'java21'),
-(2, 6, 1, 1, 'full_stack21')
+(2, 1, 1, 3, 'java21'),
+(2, 2, 1, 1, 'full_stack21')
 
 insert into register(id_class, id_tutor, register_school_year)
 values
-(5, 3, '2024-05-01'),
-(6, 1, '2024-05-01')
+(1, 3, '2024-05-01'),
+(2, 1, '2024-05-01')
 
 insert into vote(vote_date, vote_evaluation, id_register, id_student, annotation, vote_subject, is_check_point)
 values
-('2024-04-12', 7, 1, 4, 'benfatto', 'SPRING_BOOT_INTRO', true),
-('2024-04-12', 4, 2, 5, 'haifattoschifo', 'CSS', true)
+('2024-04-12', 7, 1, 4, 'benfatto', 'spring_boot', true),
+('2024-04-12', 4, 2, 5, 'haifattoschifo', 'css', true)

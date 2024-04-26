@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.role;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 
@@ -43,6 +44,7 @@ public class Role {
         return roleEnum;
     }
 
+    @JsonBackReference
     public List<User> getUsers() {
         return users;
     }
