@@ -1,11 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.role.service;
 
-import com.teamproject1.scuoledevelhope.classes.role.Role;
+import com.teamproject1.scuoledevelhope.classes.role.dto.RoleUsername;
 import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.classes.role.dto.RoleUsername;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
