@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -22,16 +23,19 @@ public class School {
             nullable = false)
     private String name;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
     private List<Classes> classes;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)
     private List<Course> courses;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
             fetch = FetchType.LAZY)

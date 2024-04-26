@@ -6,6 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -29,10 +30,13 @@ public class Register {
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
     private List<Vote> votes;
+
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "register",
             fetch = FetchType.LAZY)
