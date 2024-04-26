@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
@@ -87,6 +88,7 @@ public class Meeting {
         this.note = note;
     }
 
+    @JsonBackReference
     public List<User> getUsers() {
         return users;
     }

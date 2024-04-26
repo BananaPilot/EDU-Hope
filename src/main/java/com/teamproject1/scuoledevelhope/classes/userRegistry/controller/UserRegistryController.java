@@ -35,10 +35,4 @@ public class UserRegistryController {
     public BaseResponseElement<UserRegistry> save(@Valid @RequestBody UserRegistry userRegistry) {
         return userRegistryService.save(userRegistry);
     }
-
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<UserRegistry> delete(@Valid @RequestParam Long id) {
-        return userRegistryService.deleteById(id);
-    }
 }

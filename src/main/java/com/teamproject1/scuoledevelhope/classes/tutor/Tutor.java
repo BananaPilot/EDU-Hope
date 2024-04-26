@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class Tutor {
             mappedBy = "tutor",
             fetch = FetchType.LAZY)
     private List<Classes> classes;
+
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY)

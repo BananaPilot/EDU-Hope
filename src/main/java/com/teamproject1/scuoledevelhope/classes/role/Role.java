@@ -1,7 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.role;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ManyToMany(
             mappedBy = "roles",
             fetch = FetchType.LAZY
@@ -43,6 +46,7 @@ public class Role {
         return roleEnum;
     }
 
+    @JsonBackReference
     public List<User> getUsers() {
         return users;
     }

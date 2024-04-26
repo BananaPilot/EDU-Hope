@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.vote.repo;
 
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,7 +17,9 @@ import java.util.List;
 public interface VoteDAO extends JpaRepository<Vote, Long> {
     @Transactional
     @Modifying
-    @Query(value = "insert into vote(vote_date, vote_evaluation, id_register, id_student, annotation, vote_subject, is_check_point) values (?, ?, ?, ?, ?, ?, ?)", nativeQuery = true)
-    public Vote add(LocalDate date, Float evaluation, Long idRegistri, Long idStudent, String annotation, String subject, Boolean isCheckPoint);
+    @Query(value = "delete v from vote v \n" +
+            "join student s on v.id_student = s.user_id \n" +
+            "where s.user_id  = ?1 AND v.id_vote = ?2", nativeQuery = true)
+    void deleteVote(Long idStudent, Long idVote);
 
 }
