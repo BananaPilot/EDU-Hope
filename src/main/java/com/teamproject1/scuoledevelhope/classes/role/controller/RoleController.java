@@ -27,14 +27,8 @@ public class RoleController {
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @DeleteMapping("/add")
+    @DeleteMapping("/remove")
     public BaseResponseElement<User> deleteRole(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.deleteRole(roleUsername);
-    }
-
-    @NoAuthorization
-    @PostMapping("/createRole")
-    public void createRole(@Valid @RequestBody Role role) {
-        roleService.addRole(role);
     }
 }

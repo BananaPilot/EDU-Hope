@@ -19,7 +19,7 @@ public class UserRegistry {
     @Column(name = "user_surname")
     private String surname;
 
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{3,}$")
     @Column(
             name = "user_email",
             nullable = false,

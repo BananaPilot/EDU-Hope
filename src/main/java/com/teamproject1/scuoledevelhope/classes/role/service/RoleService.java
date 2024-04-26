@@ -22,7 +22,7 @@ public class RoleService {
     }
 
     public BaseResponseElement<User> addRole(RoleUsername roleUsername) {
-        int res = roleDao.addRoleWithUsername(roleUsername.getUsername(), roleUsername.getRoleEnum());
+        int res = roleDao.addRoleWithUsername(roleUsername.getUsername(), roleUsername.getRoleEnum().getRoleString());
         if (res < 1) {
             throw new SQLException("role wasn't added");
         }
@@ -30,14 +30,10 @@ public class RoleService {
     }
 
     public BaseResponseElement<User> deleteRole(RoleUsername roleUsername) {
-        int res = roleDao.deleteRoleByUsername(roleUsername.getUsername(), roleUsername.getRoleEnum());
+        int res = roleDao.deleteRoleByUsername(roleUsername.getUsername(), roleUsername.getRoleEnum().getRoleString());
         if (res < 1) {
             throw new SQLException("role wasn't deleted");
         }
         return new BaseResponseElement<>(userDao.getByUsername(roleUsername.getUsername()));
-    }
-
-    public void addRole(Role role) {
-        roleDao.save(role);
     }
 }
