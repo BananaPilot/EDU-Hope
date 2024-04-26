@@ -46,7 +46,7 @@ public class DashboardDto {
         private DashboardDtoBuilder() {
         }
 
-        public DashboardDtoBuilder map(User user) {
+        public static DashboardDtoBuilder map(User user) {
             return DashboardDtoBuilder.aDashboardDto()
                     .withPassword(user.getPassword())
                     .withUsername(user.getUsername())

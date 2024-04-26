@@ -56,9 +56,8 @@ public class UserService {
 
     public BaseResponseElement<DashboardDto> getDashboard(String jwt) {
         User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
-        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.aDashboardDto()
-                .map(user)
-                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard().map(user.getRoles()).build())
+        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
         return new BaseResponseElement<>(dashboardDto);
     }
