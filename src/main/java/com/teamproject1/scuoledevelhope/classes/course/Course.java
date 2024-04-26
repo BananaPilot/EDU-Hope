@@ -4,6 +4,7 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "course",
             fetch = FetchType.LAZY)

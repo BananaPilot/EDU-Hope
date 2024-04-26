@@ -9,7 +9,7 @@ public class VoteDTO {
     private String subject;
     private Float evaluation;
     private String annotation;
-    private Boolean isCheckPoint;
+    private int isCheckPoint;
 
     public VoteDTO() {
     }
@@ -62,10 +62,11 @@ public class VoteDTO {
         this.annotation = annotation;
     }
 
-    public Boolean getCheckPoint() {
+    public int getCheckPoint() {
         return isCheckPoint;
     }
-    public void setCheckPoint(Boolean checkPoint) {
+
+    public void setCheckPoint(int checkPoint) {
         isCheckPoint = checkPoint;
     }
 }
