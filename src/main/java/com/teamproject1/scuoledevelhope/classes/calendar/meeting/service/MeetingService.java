@@ -1,9 +1,17 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting.service;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
+import com.teamproject1.scuoledevelhope.classes.userMeeting.UserMeeting;
+import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
+import com.teamproject1.scuoledevelhope.classes.userMeeting.repository.UserMeetingRepository;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.dto.UserRegistryDTO;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
+import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
@@ -13,16 +21,24 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MeetingService {
     private final MeetingDAO meetingDAO;
     private final MeetingMapper mapper;
+    private final UserMeetingRepository  userMeetingRepository;
+    private final UserRegistryDAO userRegistryDAO;
+    private final UserRegistryMapper userRegistryMapper;
 
-    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper) {
+    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper, UserMeetingRepository userMeetingRepository, UserRegistryDAO userRegistryDAO, UserRegistryMapper userRegistryMapper) {
         this.meetingDAO = meetingDAO;
         this.mapper = mapper;
+        this.userMeetingRepository = userMeetingRepository;
+        this.userRegistryDAO = userRegistryDAO;
+        this.userRegistryMapper = userRegistryMapper;
     }
     //trova meeting by id
    public BaseResponseElement<Meeting> findById(Long id){
@@ -95,5 +111,32 @@ public class MeetingService {
         return new BaseResponseElement<>(mapper.toMeetingDTO(meeting));
     }
 
+    public BaseResponseElement<MeetingResponse> addParticipants(UserMeetingDTO participants){
 
+        MeetingResponse meetingResponse = new MeetingResponse();
+        //setta il meeting nella risposta
+        meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(participants.getIdMeeting()).getElement()));
+
+        //salva i partecipanti nella many to many
+        for(Long usDTO : participants.getAddParticipantsId()){
+            UserMeeting userMeeting = new UserMeeting();
+            userMeeting.setIdMeeting((participants.getIdMeeting()));
+            userMeeting.setIdUser(usDTO);
+            userMeetingRepository.save(userMeeting);
+        }
+
+        //sezione partecipanti
+        List<UserRegistryDTO> userRegistryDTO = new ArrayList<>();
+        List<UserRegistry> userRegistry = new ArrayList<>();
+        userRegistry = userRegistryDAO.allUserByMeeting(participants.getIdMeeting());
+        //conversione a userRegistryDTO
+        for (UserRegistry ur : userRegistry){
+            userRegistryDTO.add(userRegistryMapper.toUserRegistryDTO(ur));
+        }
+        //aggiunge i partecipanti
+        meetingResponse.setParticipants(userRegistryDTO);
+        //ritorna la risposta completa
+
+        return new BaseResponseElement<>(meetingResponse);
+    }
 }

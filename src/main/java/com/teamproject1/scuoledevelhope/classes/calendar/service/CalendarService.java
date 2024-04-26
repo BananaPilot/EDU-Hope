@@ -46,7 +46,7 @@ public class CalendarService {
             MeetingResponse meetingResponse = new MeetingResponse();
             meetingResponse.setMeetingDTO(meetingMapper.toMeetingDTO(allMeet));
 
-            List<UserRegistry> ur = urDAO.allStudentsByMeeting(allMeet.getMeetingID());
+            List<UserRegistry> ur = urDAO.allUserByMeeting(allMeet.getMeetingID());
             for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }

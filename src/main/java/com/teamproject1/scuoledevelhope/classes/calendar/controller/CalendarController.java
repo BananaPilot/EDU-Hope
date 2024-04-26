@@ -3,9 +3,12 @@ package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
+import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.classes.calendar.service.CalendarService;
+import com.teamproject1.scuoledevelhope.classes.userMeeting.UserMeeting;
+import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
@@ -33,24 +36,24 @@ public class CalendarController {
                     //----------- MEETING ---------//
     //tutti i meeting di un user
     @NoAuthorization
-    @GetMapping("meeting/allMeetingByUserId/{id}")
+    @GetMapping("/meeting/allMeetingByUserId/{id}")
     public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
         return meetingService.allMeetingByUser(id);
     }
     //tutti i meeting di un user in un intervallo di tempo
     @NoAuthorization
-    @GetMapping("meeting/intervalByUserId/{id}")
+    @GetMapping("/meeting/intervalByUserId/{id}")
     public BaseResponseList<Meeting> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
         return meetingService.intervalGetById(id, startDate, endDate);
     }
     @NoAuthorization
-    @PostMapping("meeting/save")
+    @PostMapping("/meeting/save")
     public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
         return meetingService.save(meeting);
     }
     //aggiorna il meeting attraverso l id
     @NoAuthorization
-    @PostMapping("meeting/update")
+    @PostMapping("/meeting/update")
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
@@ -62,16 +65,46 @@ public class CalendarController {
     }
 
     @NoAuthorization
-    @GetMapping("meeting/delete/{id}")
+    @GetMapping("/meeting/delete/{id}")
     public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id){
         return meetingService.deleteMeeting(id);
     }
 
     @NoAuthorization
-    @GetMapping("meeting/cancel/{id}")
+    @GetMapping("/meeting/cancel/{id}")
     public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id){
         return meetingService.cancelMeeting(id);
     }
+
+    @NoAuthorization
+    @PostMapping("/meeting/addParticipants")
+    public BaseResponseElement<MeetingResponse> addParticipants(@RequestBody UserMeetingDTO usDTO){
+        System.out.println(usDTO);
+        return meetingService.addParticipants(usDTO);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                         //-----------END MEETING ---------//
