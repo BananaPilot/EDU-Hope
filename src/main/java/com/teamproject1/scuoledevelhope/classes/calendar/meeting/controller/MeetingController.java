@@ -20,15 +20,15 @@ public class MeetingController {
     }
 
     @NoAuthorization
-    @GetMapping("/all/{id}")
-    public BaseResponseList<Meeting> getAllById(@PathVariable Long id) {
-        return meetingService.getAllById(id);
+    @GetMapping("/all")
+    public BaseResponseList<Meeting> getAllById(@RequestHeader("Authorization") String jwt) {
+        return meetingService.getAllById(jwt);
     }
 
     @NoAuthorization
-    @GetMapping("/interval/{id}")
-    public BaseResponseList<Meeting> getWithInterval(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return meetingService.intervalGetById(id, startDate, endDate);
+    @GetMapping("/interval")
+    public BaseResponseList<Meeting> getWithInterval(@RequestHeader("Authorization")String jwt,@RequestParam LocalDate startDate, LocalDate endDate) {
+        return meetingService.intervalGetById(jwt, startDate, endDate);
     }
 
     @NoAuthorization

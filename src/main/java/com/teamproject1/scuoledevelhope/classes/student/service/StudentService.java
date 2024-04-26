@@ -24,7 +24,6 @@ public class StudentService {
     }
 
     public BaseResponseElement<Student> findById(Long id) {
-
         Optional<Student> result = studentDAO.findById(id);
         if (result.isPresent()) {
             return new BaseResponseElement<>(result.get());

@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public interface MeetingDAO extends JpaRepository<Meeting, Long> {
 
-
+    //tutti i meeting di un user
     @Query(value = "select m.* from meeting m join defaultdb.user_meeting um on m.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :userId", nativeQuery = true)
-    List<Meeting> getAllByID(@Param("userId") Long id);
+    List<Meeting> allMeetingByUser(@Param("userId") Long id);
 
-
+    //tutti i meeting di un user in un intervallo di tempo
     @Query(value = "select m.* from meeting m join defaultdb.user_meeting um on m.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :id and m.start_date > :startDate and m.start_date < :endDate", nativeQuery = true)
     List<Meeting> intervalGetByID(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

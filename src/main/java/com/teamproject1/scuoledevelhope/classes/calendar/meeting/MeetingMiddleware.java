@@ -15,7 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
 public class MeetingMiddleware implements HandlerInterceptor {
-
+/*
     @Autowired
     JWTUtils jwtUtils;
 
@@ -38,5 +38,5 @@ public class MeetingMiddleware implements HandlerInterceptor {
                 .withUsername(claimsJws.getBody().get("user-username", String.class))
                 .build();
         return user.getId() == Long.parseLong(request.getRequestURI().split("/")[3]);
-    }
+    */
 }
