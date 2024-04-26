@@ -25,7 +25,13 @@ public class VoteMapper {
         vote.setEvaluation(voteDto.getEvaluation());
         vote.setRegister(registerDao.getReferenceById(voteDto.getIdRegister()));
         vote.setStudent(studentDao.getReferenceById(voteDto.getIdStudent()));
-        vote.setCheckPoint(voteDto.getCheckPoint());
+        //vote.setCheckPoint(voteDto.getCheckPoint());
+        if(voteDto.getCheckPoint() == 1){
+            vote.setCheckPoint(true);
+        }
+        if(voteDto.getCheckPoint() == 0){
+            vote.setCheckPoint(false);
+        }
         vote.setSubject(voteDto.getSubject());
 
         return vote;
@@ -39,7 +45,13 @@ public class VoteMapper {
         voteDto.setEvaluation(vote.getEvaluation());
         voteDto.setIdRegister(vote.getRegister().getId());
         voteDto.setIdStudent(vote.getStudent().getId());
-        voteDto.setCheckPoint(vote.getCheckPoint());
+        //voteDto.setCheckPoint(vote.getCheckPoint());
+        if(vote.getCheckPoint().equals(true)){
+            voteDto.setCheckPoint(1);
+        }
+        if(vote.getCheckPoint().equals(false)){
+            voteDto.setCheckPoint(0);
+        }
         voteDto.setSubject(vote.getSubject());
 
         return voteDto;

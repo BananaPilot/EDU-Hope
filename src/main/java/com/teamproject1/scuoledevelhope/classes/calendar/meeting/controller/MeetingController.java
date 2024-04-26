@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @RequestMapping("/meeting")
 public class MeetingController {
 
+    /*
     MeetingService meetingService;
 
     public MeetingController(MeetingService meetingService) {
@@ -35,5 +36,5 @@ public class MeetingController {
     @PostMapping("/save")
     public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
         return meetingService.save(meeting);
-    }
+    }*/
 }
