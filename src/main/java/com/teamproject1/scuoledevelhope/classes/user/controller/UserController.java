@@ -51,4 +51,10 @@ public class UserController {
     public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
         return userService.getDashboard(jwt);
     }
+
+    @NoAuthorization
+    @DeleteMapping("/delete")
+    public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
+        return userService.delete(jwt);
+    }
 }

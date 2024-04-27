@@ -16,6 +16,7 @@ public class Student {
     private Long id;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @MapsId
     private User user;
 

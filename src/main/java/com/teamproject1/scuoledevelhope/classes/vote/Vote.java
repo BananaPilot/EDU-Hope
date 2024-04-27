@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public class Vote {
     @JoinColumn(name = "id_register")
     private Register register;
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "id_student")
     private Student student;
     @PastOrPresent
