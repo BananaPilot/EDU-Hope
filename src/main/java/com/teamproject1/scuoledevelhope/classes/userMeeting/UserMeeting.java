@@ -6,13 +6,13 @@ import java.util.Objects;
 
 @Entity
 @IdClass(UserMeeting.class)
-@Table(name="user_meeting")
+@Table(name = "user_meeting")
 public class UserMeeting {
     @Id
-    @Column(name ="id_user")
+    @Column(name = "id_user")
     private Long idUser;
     @Id
-    @Column(name ="id_meeting")
+    @Column(name = "id_meeting")
     private Long idMeeting;
 
     public UserMeeting() {

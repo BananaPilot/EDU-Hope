@@ -3,8 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.vote.dto;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
-import com.teamproject1.scuoledevelhope.types.errors.SQLException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +16,7 @@ public class VoteMapper {
         this.studentDao = studentDao;
     }
 
-    public Vote toVote(VoteDTO voteDto){
+    public Vote toVote(VoteDTO voteDto) {
         Vote vote = new Vote();
 
         vote.setAnnotation(voteDto.getAnnotation());
@@ -31,7 +29,7 @@ public class VoteMapper {
         return vote;
     }
 
-    public VoteDTO toVoteDto(Vote vote){
+    public VoteDTO toVoteDto(Vote vote) {
         VoteDTO voteDto = new VoteDTO();
 
         voteDto.setAnnotation(vote.getAnnotation());
