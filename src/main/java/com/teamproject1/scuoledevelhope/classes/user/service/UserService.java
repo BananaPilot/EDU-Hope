@@ -62,8 +62,7 @@ public class UserService {
         return new BaseResponseElement<>(dashboardDto);
     }
 
-
-    @Transactional
+    
     public BaseResponseElement<User> delete(String jwt) {
         User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
         userDao.deleteUser(user.getId());
