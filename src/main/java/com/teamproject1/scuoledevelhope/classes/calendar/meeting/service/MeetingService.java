@@ -51,40 +51,55 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user
-    public BaseResponseList<Meeting> allMeetingByUser(Long id) {
-        return new BaseResponseList<>(meetingDAO.allMeetingByUser(id));
+    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id) {
+        List<MeetingDTO> meetingDTO = new ArrayList<>();
+
+        for(Meeting meeting : meetingDAO.allMeetingByUser(id)){
+            meetingDTO.add(mapper.toMeetingDTO(meeting));
+        }
+        return new BaseResponseList<>(meetingDTO);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
-    public BaseResponseList<Meeting> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
-        return new BaseResponseList<>(meetingDAO.intervalGetByID(id, startDate, endDate));
+    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
+
+        List<MeetingDTO> meetingDTO = new ArrayList<>();
+
+        for(Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)){
+            meetingDTO.add(mapper.toMeetingDTO(meeting));
+        }
+        return new BaseResponseList<>(meetingDTO);
     }
 
-    public BaseResponseElement<Meeting> save(Meeting meeting) {
-        meeting.setMeetingID(null);
-        checkData(meeting);
-        return new BaseResponseElement<Meeting>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), "Data saving successful", meetingDAO.save(meeting));
+    public BaseResponseElement<MeetingDTO> save(MeetingDTO meetingDTO) {
+
+        meetingDTO.setMeetingID(null);
+        checkData(meetingDTO);
+        Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
+
+        return new BaseResponseElement<MeetingDTO>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(),"Data saving successful",mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO) {
         if (meetingDTO.getMeetingID() == null) {
             throw new SQLException("It is not possible to update the meeting without the ID");
         }
+        checkData(meetingDTO);
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
-        checkData(meeting);
+
         return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Data updated correctly", mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> deleteMeeting(Long id) {
 
-        Meeting temp = new Meeting();
-        temp = findById(id).getElement();
+        MeetingDTO temp = new MeetingDTO();
+        temp = mapper.toMeetingDTO(findById(id).getElement());
         checkData(temp);
         meetingDAO.deleteById(id);
-        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", mapper.toMeetingDTO(temp));
+        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", temp);
     }
 
-    public Meeting checkData(Meeting meeting) {
+    public MeetingDTO checkData(MeetingDTO meeting) {
 
         LocalDateTime start_date = meeting.getStartDate();
         LocalDateTime end_date = meeting.getEndDate();
@@ -101,15 +116,15 @@ public class MeetingService {
 
     public BaseResponseElement<MeetingDTO> cancelMeeting(Long id) {
 
-        Meeting temp = findById(id).getElement();
+        MeetingDTO temp =mapper.toMeetingDTO( findById(id).getElement());
         checkData(temp);
         temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** Original note: " + temp.getNote());
         temp.setLink("*** Link deleted ***");
-        updateMeeting(mapper.toMeetingDTO(temp));
+        updateMeeting(temp);
 
-        return new BaseResponseElement<>(mapper.toMeetingDTO(temp));
+        return new BaseResponseElement<>(temp);
     }
-
+    //prossimo meeting di un user (entro 7 gg)
     public BaseResponseElement<MeetingDTO> nextMeetingById(Long id) {
         Meeting meeting = new Meeting();
         meeting = meetingDAO.nextMeetingById(id, LocalDate.now(), LocalDate.now().plusDays(7));

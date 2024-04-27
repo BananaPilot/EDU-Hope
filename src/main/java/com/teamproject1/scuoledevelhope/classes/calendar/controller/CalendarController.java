@@ -37,21 +37,21 @@ public class CalendarController {
     //tutti i meeting di un user
     @NoAuthorization
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id) {
         return meetingService.allMeetingByUser(id);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
     @NoAuthorization
     @GetMapping("/meeting/intervalByUserId/{id}")
-    public BaseResponseList<Meeting> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
         return meetingService.intervalGetById(id, startDate, endDate);
     }
 
     @NoAuthorization
     @PostMapping("/meeting/save")
-    public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
-        return meetingService.save(meeting);
+    public BaseResponseElement<MeetingDTO> saveMeeting(@RequestBody MeetingDTO meetingDTO) {
+        return meetingService.save(meetingDTO);
     }
 
     //aggiorna il meeting attraverso l id
