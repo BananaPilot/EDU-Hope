@@ -4,6 +4,7 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Fl
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -29,7 +30,7 @@ public class UserController {
     @NoAuthorization
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseElement<User> addUser(@Valid @RequestBody User user) {
+    public BaseResponseElement<User> addUser(@Valid @RequestBody UserAdd user) {
         return userService.addUser(user);
     }
 

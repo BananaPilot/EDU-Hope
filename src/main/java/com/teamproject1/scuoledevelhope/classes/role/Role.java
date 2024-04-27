@@ -28,14 +28,23 @@ public class Role {
     private List<User> users;
 
     public enum RoleEnum {
-        SUPER_ADMIN,
-        ADMIN,
-        MODERATOR,
-        USER,
-        COORDINATOR,
-        TUTOR,
-        STUDENT
+        SUPER_ADMIN("SUPER_ADMIN"),
+        ADMIN("ADMIN"),
+        MODERATOR("MODERATOR"),
+        USER("USER"),
+        COORDINATOR("COORDINATOR"),
+        TUTOR("TUTOR"),
+        STUDENT("STUDENT");
 
+        private final String roleString;
+
+        RoleEnum(String roleString) {
+            this.roleString = roleString;
+        }
+
+        public String getRoleString() {
+            return roleString;
+        }
     }
 
     public Long getId() {

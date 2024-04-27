@@ -1,8 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper;
+
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import org.springframework.stereotype.Component;
+
 @Component
 public class MeetingMapper {
     MeetingDAO meetingDAO;
@@ -10,6 +12,7 @@ public class MeetingMapper {
     public MeetingMapper(MeetingDAO meetingDAO) {
         this.meetingDAO = meetingDAO;
     }
+
     public MeetingDTO toMeetingDTO(Meeting meeting) {
 
         MeetingDTO meetingDTO = new MeetingDTO();
@@ -22,6 +25,7 @@ public class MeetingMapper {
         meetingDTO.setNote(meeting.getNote());
         return meetingDTO;
     }
+
     public Meeting toMeeting(MeetingDTO meetingDTO) {
 
         Meeting meeting = new Meeting();
