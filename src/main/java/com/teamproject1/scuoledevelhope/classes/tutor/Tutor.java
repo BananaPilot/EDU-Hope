@@ -16,7 +16,9 @@ public class Tutor {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.REMOVE
+    )
     @MapsId
     private User user;
 

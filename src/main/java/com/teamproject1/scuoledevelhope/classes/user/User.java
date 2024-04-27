@@ -28,17 +28,17 @@ public class User {
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.REMOVE)
     private UserRegistry userRegistry;
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "id_school")
     private School school;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE
+    )
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "id_user"),
@@ -46,12 +46,16 @@ public class User {
     )
     private List<Role> roles;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ManyToMany(
             mappedBy = "users",
             fetch = FetchType.LAZY
     )
     public List<Meeting> meetings;
+
+    @PreRemove
+    private void preRemove() {
+        meetings.forEach(meeting -> meeting.getUsers().remove(this));
+    }
 
     public User(String username, String password) {
         this.username = username;

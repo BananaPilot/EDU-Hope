@@ -14,14 +14,16 @@ public class Coordinator {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.REMOVE
+    )
     @MapsId
     private User user;
     @NotEmpty(message = "Associates at least 1 class.")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "coordinator",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Classes> classes;
 
     public void setUser(User user) {

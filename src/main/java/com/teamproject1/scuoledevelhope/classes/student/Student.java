@@ -15,8 +15,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToOne(
+            cascade = CascadeType.REMOVE
+    )
     @MapsId
     private User user;
 
