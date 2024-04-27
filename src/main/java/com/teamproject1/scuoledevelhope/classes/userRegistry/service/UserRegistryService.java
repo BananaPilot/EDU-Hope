@@ -29,19 +29,4 @@ public class UserRegistryService {
         }
         return new BaseResponseElement<>(result.get());
     }
-
-    public BaseResponseElement<UserRegistry> save(UserRegistry userRegistry) {
-        return new BaseResponseElement<>(userRegistryDAO.save(userRegistry));
-    }
-
-    public BaseResponseElement<UserRegistry> deleteById(Long id) {
-        Optional<UserRegistry> temp = userRegistryDAO.findById(id);
-
-        if (temp.isEmpty()) {
-            throw new SQLException("UserRegistry was not present");
-        }
-        userRegistryDAO.deleteById(id);
-
-        return new BaseResponseElement<>(temp.get());
-    }
 }

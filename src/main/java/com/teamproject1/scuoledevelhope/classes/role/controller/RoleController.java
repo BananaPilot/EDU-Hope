@@ -20,13 +20,13 @@ public class RoleController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PutMapping("/add")
-    public BaseResponseElement<User> addRole(@Valid @RequestBody RoleUsername roleUsername) {
+    public BaseResponseElement<User> addRoleToUser(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.addRole(roleUsername);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/remove")
-    public BaseResponseElement<User> deleteRole(@Valid @RequestBody RoleUsername roleUsername) {
+    public BaseResponseElement<User> deleteRoleFromUser(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.deleteRole(roleUsername);
     }
 }
