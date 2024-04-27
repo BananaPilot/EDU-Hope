@@ -20,7 +20,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ManyToMany(
             mappedBy = "roles",
             fetch = FetchType.LAZY

@@ -48,4 +48,12 @@ public class Tutor {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(List<Register> registers) {
+        this.registers = registers;
+    }
 }

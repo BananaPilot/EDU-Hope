@@ -8,7 +8,6 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -24,7 +23,8 @@ public class Classes {
     @NotBlank(message = "Class name can't be blank")
     @Column(
             name = "class_name",
-            nullable = false)
+            nullable = false
+    )
     private String name;
 
     @ManyToOne
@@ -40,12 +40,25 @@ public class Classes {
     @JoinColumn(name = "id_school")
     private School school;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "schoolClass",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Student> students;
-    @OneToOne(mappedBy = "schoolClass")
+
+    @PreRemove
+    private void preDelete() {
+        setStudents(null);
+        setSchool(null);
+        setCourse(null);
+        setCoordinator(null);
+        setTutor(null);
+    }
+
+    @OneToOne(
+            mappedBy = "schoolClass",
+            cascade = CascadeType.ALL
+    )
     private Register registers;
 
     public Long getId() {
@@ -56,12 +69,20 @@ public class Classes {
         return name;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public void setCoordinator(Coordinator coordinator) {

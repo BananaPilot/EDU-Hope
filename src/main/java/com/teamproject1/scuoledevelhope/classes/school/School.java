@@ -20,25 +20,29 @@ public class School {
     @NotBlank(message = "School name can't be blank")
     @Column(
             name = "school_name",
-            nullable = false)
+            nullable = false
+    )
     private String name;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<Classes> classes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<Course> courses;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<User> users;
 
     public Long getId() {

@@ -20,7 +20,8 @@ public class Register {
     @NotBlank(message = "school year can't be blank")
     @Column(
             name = "register_school_year",
-            nullable = false)
+            nullable = false
+    )
     private String schoolYear;
 
     @OneToOne
@@ -30,17 +31,25 @@ public class Register {
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "register",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<Vote> votes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "register",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Student> students;
+
+    @PreRemove
+    private void preRemove() {
+        tutor.getRegisters().remove(this);
+        setSchoolClass(null);
+        students.forEach(student -> student.setRegister(null));
+    }
 
     public Long getId() {
         return id;

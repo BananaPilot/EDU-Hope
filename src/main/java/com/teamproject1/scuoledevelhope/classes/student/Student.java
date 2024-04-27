@@ -36,6 +36,7 @@ public class Student {
     @PreRemove
     private void preRemove() {
         setRegister(null);
+        schoolClass.getStudents().remove(this);
     }
 
     public Student() {

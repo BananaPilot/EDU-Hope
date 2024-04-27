@@ -55,6 +55,7 @@ public class User {
     @PreRemove
     private void preRemove() {
         meetings.forEach(meeting -> meeting.getUsers().remove(this));
+        roles.forEach(role -> role.getUsers().remove(this));
     }
 
     public User(String username, String password) {

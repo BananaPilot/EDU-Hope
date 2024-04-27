@@ -40,6 +40,12 @@ public class Vote {
             columnDefinition = "TINYINT", length = 1)
     private Boolean isCheckPoint;
 
+    @PreRemove
+    private void preDelete() {
+        setIdStudent(null);
+        setIdRegister(null);
+    }
+
     public Long getId() {
         return id;
     }

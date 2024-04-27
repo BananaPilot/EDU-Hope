@@ -28,10 +28,17 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+
+    @PreRemove
+    private void preDelete() {
+        setSchool(null);
+    }
+
     @OneToMany(
             mappedBy = "course",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<Classes> classes;
 
     public Course() {

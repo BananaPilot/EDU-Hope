@@ -12,7 +12,6 @@ public class UserRegistry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToOne
     @MapsId
     private User user;
