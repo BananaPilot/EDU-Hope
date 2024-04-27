@@ -8,6 +8,7 @@ import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,11 @@ public class UserController {
     @GetMapping("/dashboard")
     public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
         return userService.getDashboard(jwt);
+    }
+
+    @NoAuthorization
+    @DeleteMapping("/delete")
+    public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
+        return userService.delete(jwt);
     }
 }

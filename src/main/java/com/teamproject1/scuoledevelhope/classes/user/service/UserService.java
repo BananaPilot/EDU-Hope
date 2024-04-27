@@ -53,11 +53,20 @@ public class UserService {
         return new BaseResponseElement<>(userDao.getByUsername(userAdd.getUsername()));
     }
 
+
     public BaseResponseElement<DashboardDto> getDashboard(String jwt) {
         User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
         DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
         return new BaseResponseElement<>(dashboardDto);
+    }
+
+
+    @Transactional
+    public BaseResponseElement<User> delete(String jwt) {
+        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+        userDao.deleteUser(user.getId());
+        return new BaseResponseElement<>(user);
     }
 }
