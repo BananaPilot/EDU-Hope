@@ -33,7 +33,7 @@ public class CalendarController {
         return calendarService.allCalendar(id, startDate, endDate);
     }
 
-    //----------- MEETING ---------//
+                            //----------- MEETING ---------//
     //tutti i meeting di un user
     @NoAuthorization
     @GetMapping("/meeting/allMeetingByUserId/{id}")
@@ -68,7 +68,7 @@ public class CalendarController {
     }
 
     @NoAuthorization
-    @GetMapping("/meeting/delete/{id}")
+    @DeleteMapping("/meeting/delete/{id}")
     public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id) {
         return meetingService.deleteMeeting(id);
     }
@@ -85,5 +85,13 @@ public class CalendarController {
         System.out.println(usDTO);
         return meetingService.addParticipants(usDTO);
     }
+    @NoAuthorization
+    @DeleteMapping("/meeting/deleteUser")
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO){
+        System.out.println(usDTO);
+
+        return meetingService.removeUserFromMeeting(usDTO);
+    }
+
                         //-----------END MEETING ---------//
 }

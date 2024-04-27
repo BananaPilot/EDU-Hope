@@ -27,11 +27,11 @@ public class UserMeetingDTO {
         this.idMeeting = idMeeting;
     }
 
-    public List<Long> getparticipantsId() {
+    public List<Long> getParticipantsId() {
         return participantsId;
     }
 
-    public void setAddParticipantsId(List<Long> participantsId) {
+    public void setParticipantsId(List<Long> participantsId) {
         this.participantsId = participantsId;
     }
 }

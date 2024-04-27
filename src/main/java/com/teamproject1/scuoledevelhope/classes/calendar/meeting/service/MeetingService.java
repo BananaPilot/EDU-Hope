@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
+import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.UserMeeting;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.repository.UserMeetingRepository;
@@ -32,13 +33,15 @@ public class MeetingService {
     private final UserMeetingRepository userMeetingRepository;
     private final UserRegistryDAO userRegistryDAO;
     private final UserRegistryMapper userRegistryMapper;
+    private final UserDao userDao;
 
-    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper, UserMeetingRepository userMeetingRepository, UserRegistryDAO userRegistryDAO, UserRegistryMapper userRegistryMapper) {
+    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper, UserMeetingRepository userMeetingRepository, UserRegistryDAO userRegistryDAO, UserRegistryMapper userRegistryMapper, UserDao userDao) {
         this.meetingDAO = meetingDAO;
         this.mapper = mapper;
         this.userMeetingRepository = userMeetingRepository;
         this.userRegistryDAO = userRegistryDAO;
         this.userRegistryMapper = userRegistryMapper;
+        this.userDao = userDao;
     }
 
     //trova meeting by id
@@ -141,7 +144,7 @@ public class MeetingService {
         meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(participants.getIdMeeting()).getElement()));
 
         //salva i partecipanti nella many to many
-        for(Long usDTO : participants.getparticipantsId()){
+        for(Long usDTO : participants.getParticipantsId()){
             UserMeeting userMeeting = new UserMeeting();
             userMeeting.setIdMeeting((participants.getIdMeeting()));
             userMeeting.setIdUser(usDTO);
@@ -162,4 +165,32 @@ public class MeetingService {
 
         return new BaseResponseElement<>(meetingResponse);
     }
+
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(UserMeetingDTO usDTO) {
+
+        //controllo su presenza meeting
+        if(meetingDAO.findById(usDTO.getIdMeeting()).isEmpty()){
+            throw new RuntimeException("This meeting does not exist");
+        }
+        for (Long userRemove : usDTO.getParticipantsId()) {
+            //controllo se esiste l user
+            if(userDao.findById(userRemove).isPresent()){
+                //rimuove utente e meeting dalla many to many
+                userMeetingRepository.delete(new UserMeeting(userRemove,usDTO.getIdMeeting()));
+            }
+        }
+        MeetingResponse meetingResponse = new MeetingResponse();
+        meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(usDTO.getIdMeeting()).getElement()));
+
+        List<UserRegistryDTO> userRegistryDTO = new ArrayList<>();
+        for(UserRegistry userRegistry : userRegistryDAO.allUserByMeeting(usDTO.getIdMeeting())){
+            userRegistryDTO.add(userRegistryMapper.toUserRegistryDTO(userRegistry));
+        }
+
+        meetingResponse.setParticipants(userRegistryDTO);
+        return new BaseResponseElement<>(meetingResponse);
+
+    }
+
+
 }
