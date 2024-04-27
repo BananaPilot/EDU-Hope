@@ -1,7 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.userMeeting.dto;
 
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class UserMeetingDTO {
         this.idMeeting = idMeeting;
     }
 
-    public List<Long> getAddParticipantsId() {
+    public List<Long> getparticipantsId() {
         return participantsId;
     }
 

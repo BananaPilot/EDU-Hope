@@ -74,14 +74,17 @@ public class User {
         return username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore
     public UserRegistry getUserRegistry() {
         return userRegistry;
     }
 
+    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
     }

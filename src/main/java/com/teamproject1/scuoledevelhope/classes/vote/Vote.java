@@ -54,7 +54,7 @@ public class Vote {
         return annotation;
     }
 
-    public Boolean getCheckPoint() {
+    public Boolean getIsCheckPoint() {
         return isCheckPoint;
     }
 
@@ -86,8 +86,8 @@ public class Vote {
         this.annotation = annotation;
     }
 
-    public void setCheckPoint(Boolean checkPoint) {
-        isCheckPoint = checkPoint;
+    public void setIsCheckPoint(Boolean isCheckPoint) {
+        this.isCheckPoint = isCheckPoint;
     }
 
     public String getSubject() {
