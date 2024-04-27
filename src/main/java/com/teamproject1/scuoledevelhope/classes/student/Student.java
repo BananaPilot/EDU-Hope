@@ -16,7 +16,7 @@ public class Student {
     private Long id;
 
     @ManyToOne(
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     @MapsId
     private User user;
@@ -30,9 +30,13 @@ public class Student {
     @NotEmpty(message = "Associates at least 1 register.")
     @Valid
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "id_register")
     private Register register;
+
+    @PreRemove
+    private void preRemove() {
+        setRegister(null);
+    }
 
     public Student() {
     }

@@ -15,7 +15,7 @@ public class Coordinator {
     private Long id;
 
     @ManyToOne(
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     @MapsId
     private User user;
@@ -25,6 +25,11 @@ public class Coordinator {
             fetch = FetchType.LAZY
     )
     private List<Classes> classes;
+
+    @PreRemove
+    private void preRemove() {
+        classes.forEach(cla -> cla.setCoordinator(null));
+    }
 
     public void setUser(User user) {
         this.user = user;

@@ -17,7 +17,7 @@ public class Tutor {
     private Long id;
 
     @ManyToOne(
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     @MapsId
     private User user;
@@ -25,14 +25,21 @@ public class Tutor {
     @NotEmpty(message = "Associates at least 1 class.")
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Classes> classes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Register> registers;
+
+    @PreRemove
+    private void preDelete() {
+        registers.forEach(register -> register.setTutor(null));
+        classes.forEach(cla -> cla.setTutor(null));
+    }
 
     public User getUser() {
         return user;

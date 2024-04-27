@@ -28,7 +28,7 @@ public class User {
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     private UserRegistry userRegistry;
 
     @ManyToOne
@@ -37,7 +37,7 @@ public class User {
 
     @ManyToMany(
             fetch = FetchType.EAGER,
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     @JoinTable(
             name = "user_role",
