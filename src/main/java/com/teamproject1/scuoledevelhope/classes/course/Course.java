@@ -5,6 +5,8 @@ import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -25,19 +27,16 @@ public class Course {
     private String name;
     @Column(name = "course_description")
     private String description;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
-    @PreRemove
-    private void preDelete() {
-        setSchool(null);
-    }
-
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "course",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     private List<Classes> classes;
 

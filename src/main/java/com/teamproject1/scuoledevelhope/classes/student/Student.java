@@ -7,37 +7,33 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(
             cascade = CascadeType.ALL
     )
     @MapsId
     private User user;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @NotEmpty(message = "Associates at least 1 class.")
-    @Valid
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes schoolClass;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @NotEmpty(message = "Associates at least 1 register.")
-    @Valid
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
-
-    @PreRemove
-    private void preRemove() {
-        setRegister(null);
-        schoolClass.getStudents().remove(this);
-    }
 
     public Student() {
     }

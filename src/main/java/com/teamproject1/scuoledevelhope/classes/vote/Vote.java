@@ -6,45 +6,48 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "vote")
 public class Vote {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
     private Long id;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "id_student")
     private Student student;
+
     @PastOrPresent
     @Column(name = "vote_date",
             nullable = false)
     private LocalDate date;
+
     @NotBlank(message = "subject can't be blank")
     @Column(name = "vote_subject")
     private String subject;
+
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
 
     @Column(name = "annotation")
     private String annotation;
+
     @Column(name = "is_check_point",
             columnDefinition = "TINYINT", length = 1)
     private Boolean isCheckPoint;
-
-    @PreRemove
-    private void preDelete() {
-        setIdStudent(null);
-        setIdRegister(null);
-    }
 
     public Long getId() {
         return id;

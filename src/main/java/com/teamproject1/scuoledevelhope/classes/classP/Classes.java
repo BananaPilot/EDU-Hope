@@ -8,6 +8,8 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -27,37 +29,35 @@ public class Classes {
     )
     private String name;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_coordinator")
     private Coordinator coordinator;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "schoolClass",
             fetch = FetchType.LAZY
     )
     private List<Student> students;
 
-    @PreRemove
-    private void preDelete() {
-        setStudents(null);
-        setSchool(null);
-        setCourse(null);
-        setCoordinator(null);
-        setTutor(null);
-    }
-
     @OneToOne(
-            mappedBy = "schoolClass",
-            cascade = CascadeType.ALL
+            mappedBy = "schoolClass"
     )
     private Register registers;
 

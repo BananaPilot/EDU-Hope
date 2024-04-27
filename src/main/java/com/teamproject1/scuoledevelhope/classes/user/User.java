@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -17,7 +19,6 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Username is needed to create a user")
@@ -28,16 +29,18 @@ public class User {
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToOne(cascade = CascadeType.ALL)
     private UserRegistry userRegistry;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     @JoinTable(
             name = "user_role",
@@ -46,17 +49,12 @@ public class User {
     )
     private List<Role> roles;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToMany(
             mappedBy = "users",
             fetch = FetchType.LAZY
     )
     public List<Meeting> meetings;
-
-    @PreRemove
-    private void preRemove() {
-        meetings.forEach(meeting -> meeting.getUsers().remove(this));
-        roles.forEach(role -> role.getUsers().remove(this));
-    }
 
     public User(String username, String password) {
         this.username = username;

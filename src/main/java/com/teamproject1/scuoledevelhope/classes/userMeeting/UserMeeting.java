@@ -8,9 +8,11 @@ import java.util.Objects;
 @IdClass(UserMeeting.class)
 @Table(name = "user_meeting")
 public class UserMeeting {
+
     @Id
     @Column(name = "id_user")
     private Long idUser;
+
     @Id
     @Column(name = "id_meeting")
     private Long idMeeting;

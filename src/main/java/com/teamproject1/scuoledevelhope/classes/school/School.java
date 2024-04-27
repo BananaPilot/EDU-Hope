@@ -6,6 +6,8 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_school")
     private Long id;
+
     @NotBlank(message = "School name can't be blank")
     @Column(
             name = "school_name",
@@ -24,24 +27,24 @@ public class School {
     )
     private String name;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     private List<Classes> classes;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     private List<Course> courses;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "school",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     private List<User> users;
 
