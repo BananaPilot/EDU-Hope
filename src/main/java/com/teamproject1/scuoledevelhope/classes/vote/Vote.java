@@ -60,19 +60,19 @@ public class Vote {
         return isCheckPoint;
     }
 
-    public Register getRegister() {
+    public Register getIdRegister() {
         return register;
     }
 
-    public Student getStudent() {
+    public Student getIdStudent() {
         return student;
     }
 
-    public void setRegister(Register register) {
+    public void setIdRegister(Register register) {
         this.register = register;
     }
 
-    public void setStudent(Student student) {
+    public void setIdStudent(Student student) {
         this.student = student;
     }
 

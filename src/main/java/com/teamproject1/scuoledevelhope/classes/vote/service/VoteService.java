@@ -41,7 +41,7 @@ public class VoteService {
         List<VoteDTO> voteDTOS = new ArrayList<>();
 
         for (Vote element : votes) {
-            if (element.getStudent().getId().equals(idStudent)) {
+            if (element.getIdStudent().getId().equals(idStudent)) {
                 voteDTOS.add(voteMapper.toVoteDto(element));
             }
         }
