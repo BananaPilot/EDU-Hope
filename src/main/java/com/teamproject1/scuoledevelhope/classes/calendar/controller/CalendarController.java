@@ -53,7 +53,7 @@ public class CalendarController {
     }
     //aggiorna il meeting attraverso l id
     @NoAuthorization
-    @PostMapping("/meeting/update")
+    @PutMapping("/meeting/update")
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
@@ -82,30 +82,5 @@ public class CalendarController {
         System.out.println(usDTO);
         return meetingService.addParticipants(usDTO);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         //-----------END MEETING ---------//
 }
