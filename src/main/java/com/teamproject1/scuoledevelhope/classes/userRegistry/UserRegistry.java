@@ -3,23 +3,28 @@ package com.teamproject1.scuoledevelhope.classes.userRegistry;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "user_registry")
 public class UserRegistry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
     @MapsId
     private User user;
+
     @Column(name = "user_name")
     private String name;
+
     @Column(name = "user_surname")
     private String surname;
 
-    @Pattern(regexp = "^[A-Z0-9+_.-]+@[A-Z0-9.-]+$")
     @Column(
             name = "user_email",
             nullable = false,

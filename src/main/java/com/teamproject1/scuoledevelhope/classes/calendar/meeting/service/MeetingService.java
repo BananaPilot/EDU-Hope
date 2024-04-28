@@ -126,7 +126,7 @@ public class MeetingService {
         meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(participants.getIdMeeting()).getElement()));
 
         //salva i partecipanti nella many to many
-        for (Long usDTO : participants.getAddParticipantsId()) {
+        for(Long usDTO : participants.getparticipantsId()){
             UserMeeting userMeeting = new UserMeeting();
             userMeeting.setIdMeeting((participants.getIdMeeting()));
             userMeeting.setIdUser(usDTO);

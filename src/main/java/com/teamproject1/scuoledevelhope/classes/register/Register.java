@@ -7,39 +7,49 @@ import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
 @Entity
 @Table(name = "register")
 public class Register {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register")
     private Long id;
+
     @NotBlank(message = "school year can't be blank")
     @Column(
             name = "register_school_year",
-            nullable = false)
+            nullable = false
+    )
     private String schoolYear;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToOne
     @JoinColumn(name = "id_class")
     private Classes schoolClass;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "register",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Vote> votes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "register",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Student> students;
 
     public Long getId() {

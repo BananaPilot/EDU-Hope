@@ -8,7 +8,8 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -24,28 +25,40 @@ public class Classes {
     @NotBlank(message = "Class name can't be blank")
     @Column(
             name = "class_name",
-            nullable = false)
+            nullable = false
+    )
     private String name;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_tutor")
     private Tutor tutor;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_coordinator")
     private Coordinator coordinator;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_course")
     private Course course;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "schoolClass",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Student> students;
-    @OneToOne(mappedBy = "schoolClass")
+
+    @OneToOne(
+            mappedBy = "schoolClass"
+    )
     private Register registers;
 
     public Long getId() {
@@ -56,12 +69,20 @@ public class Classes {
         return name;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public void setCoordinator(Coordinator coordinator) {

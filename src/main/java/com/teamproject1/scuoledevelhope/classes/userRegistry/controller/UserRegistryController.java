@@ -29,10 +29,4 @@ public class UserRegistryController {
     public BaseResponseElement<UserRegistry> findById(@Valid @RequestParam Long id) {
         return userRegistryService.findById(id);
     }
-
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PostMapping("/save")
-    public BaseResponseElement<UserRegistry> save(@Valid @RequestBody UserRegistry userRegistry) {
-        return userRegistryService.save(userRegistry);
-    }
 }

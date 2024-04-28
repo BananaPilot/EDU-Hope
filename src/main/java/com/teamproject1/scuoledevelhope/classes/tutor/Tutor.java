@@ -6,6 +6,8 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -16,20 +18,24 @@ public class Tutor {
     @Id
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne
     @MapsId
     private User user;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @NotEmpty(message = "Associates at least 1 class.")
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Classes> classes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Register> registers;
 
     public User getUser() {
@@ -38,5 +44,13 @@ public class Tutor {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(List<Register> registers) {
+        this.registers = registers;
     }
 }

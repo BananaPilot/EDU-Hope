@@ -5,35 +5,46 @@ import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "vote")
 public class Vote {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
     private Long id;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student student;
+
     @PastOrPresent
     @Column(name = "vote_date",
             nullable = false)
     private LocalDate date;
+
     @NotBlank(message = "subject can't be blank")
     @Column(name = "vote_subject")
     private String subject;
+
     @Column(name = "vote_evaluation",
             nullable = false)
     private Float evaluation;
 
     @Column(name = "annotation")
     private String annotation;
+
     @Column(name = "is_check_point",
             columnDefinition = "TINYINT", length = 1)
     private Boolean isCheckPoint;
@@ -54,23 +65,23 @@ public class Vote {
         return annotation;
     }
 
-    public Boolean getCheckPoint() {
+    public Boolean getIsCheckPoint() {
         return isCheckPoint;
     }
 
-    public Register getRegister() {
+    public Register getIdRegister() {
         return register;
     }
 
-    public Student getStudent() {
+    public Student getIdStudent() {
         return student;
     }
 
-    public void setRegister(Register register) {
+    public void setIdRegister(Register register) {
         this.register = register;
     }
 
-    public void setStudent(Student student) {
+    public void setIdStudent(Student student) {
         this.student = student;
     }
 
@@ -86,8 +97,8 @@ public class Vote {
         this.annotation = annotation;
     }
 
-    public void setCheckPoint(Boolean checkPoint) {
-        isCheckPoint = checkPoint;
+    public void setIsCheckPoint(Boolean isCheckPoint) {
+        this.isCheckPoint = isCheckPoint;
     }
 
     public String getSubject() {
