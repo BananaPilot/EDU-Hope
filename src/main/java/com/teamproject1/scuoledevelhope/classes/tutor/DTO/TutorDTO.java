@@ -22,10 +22,6 @@ public class TutorDTO {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public List<Long> getClassIds() {
         return classIds;
     }
