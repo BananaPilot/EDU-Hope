@@ -20,10 +20,6 @@ public class StudentDTO {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getSchoolClassId() {
         return schoolClassId;
     }
