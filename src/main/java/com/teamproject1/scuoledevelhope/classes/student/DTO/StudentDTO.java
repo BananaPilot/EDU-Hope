@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class StudentDTO {
 
-    @NotNull(message = "L'ID dello studente non può essere nullo")
-    private Long id;
-
     @NotNull(message = "L'utente dello studente non può essere nullo")
     private Long userId;
 
@@ -18,15 +15,7 @@ public class StudentDTO {
 
     public StudentDTO() {
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public Long getUserId() {
         return userId;
     }
