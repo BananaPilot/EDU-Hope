@@ -42,6 +42,7 @@ public class StudentService {
         return new BaseResponseElement<>(temp.get());
 
     }
+    
     public BaseResponseElement<Student> save(@Valid Student student) {
 
         return new BaseResponseElement<>(studentDAO.save(student));
