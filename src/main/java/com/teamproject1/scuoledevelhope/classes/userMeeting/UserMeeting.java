@@ -20,6 +20,11 @@ public class UserMeeting {
     public UserMeeting() {
     }
 
+    public UserMeeting(Long idUser, Long idMeeting) {
+        this.idUser = idUser;
+        this.idMeeting = idMeeting;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

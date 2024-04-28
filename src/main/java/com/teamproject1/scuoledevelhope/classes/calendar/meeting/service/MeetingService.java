@@ -5,6 +5,7 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.mapper.MeetingMapper;
+import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.UserMeeting;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.userMeeting.repository.UserMeetingRepository;
@@ -32,13 +33,15 @@ public class MeetingService {
     private final UserMeetingRepository userMeetingRepository;
     private final UserRegistryDAO userRegistryDAO;
     private final UserRegistryMapper userRegistryMapper;
+    private final UserDao userDao;
 
-    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper, UserMeetingRepository userMeetingRepository, UserRegistryDAO userRegistryDAO, UserRegistryMapper userRegistryMapper) {
+    public MeetingService(MeetingDAO meetingDAO, MeetingMapper mapper, UserMeetingRepository userMeetingRepository, UserRegistryDAO userRegistryDAO, UserRegistryMapper userRegistryMapper, UserDao userDao) {
         this.meetingDAO = meetingDAO;
         this.mapper = mapper;
         this.userMeetingRepository = userMeetingRepository;
         this.userRegistryDAO = userRegistryDAO;
         this.userRegistryMapper = userRegistryMapper;
+        this.userDao = userDao;
     }
 
     //trova meeting by id
@@ -51,40 +54,55 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user
-    public BaseResponseList<Meeting> allMeetingByUser(Long id) {
-        return new BaseResponseList<>(meetingDAO.allMeetingByUser(id));
+    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id) {
+        List<MeetingDTO> meetingDTO = new ArrayList<>();
+
+        for(Meeting meeting : meetingDAO.allMeetingByUser(id)){
+            meetingDTO.add(mapper.toMeetingDTO(meeting));
+        }
+        return new BaseResponseList<>(meetingDTO);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
-    public BaseResponseList<Meeting> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
-        return new BaseResponseList<>(meetingDAO.intervalGetByID(id, startDate, endDate));
+    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
+
+        List<MeetingDTO> meetingDTO = new ArrayList<>();
+
+        for(Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)){
+            meetingDTO.add(mapper.toMeetingDTO(meeting));
+        }
+        return new BaseResponseList<>(meetingDTO);
     }
 
-    public BaseResponseElement<Meeting> save(Meeting meeting) {
-        meeting.setMeetingID(null);
-        checkData(meeting);
-        return new BaseResponseElement<Meeting>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), "Data saving successful", meetingDAO.save(meeting));
+    public BaseResponseElement<MeetingDTO> save(MeetingDTO meetingDTO) {
+
+        meetingDTO.setMeetingID(null);
+        checkData(meetingDTO);
+        Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
+
+        return new BaseResponseElement<MeetingDTO>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(),"Data saving successful",mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO) {
         if (meetingDTO.getMeetingID() == null) {
             throw new SQLException("It is not possible to update the meeting without the ID");
         }
+        checkData(meetingDTO);
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
-        checkData(meeting);
+
         return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Data updated correctly", mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> deleteMeeting(Long id) {
 
-        Meeting temp = new Meeting();
-        temp = findById(id).getElement();
+        MeetingDTO temp = new MeetingDTO();
+        temp = mapper.toMeetingDTO(findById(id).getElement());
         checkData(temp);
         meetingDAO.deleteById(id);
-        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", mapper.toMeetingDTO(temp));
+        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", temp);
     }
 
-    public Meeting checkData(Meeting meeting) {
+    public MeetingDTO checkData(MeetingDTO meeting) {
 
         LocalDateTime start_date = meeting.getStartDate();
         LocalDateTime end_date = meeting.getEndDate();
@@ -101,15 +119,15 @@ public class MeetingService {
 
     public BaseResponseElement<MeetingDTO> cancelMeeting(Long id) {
 
-        Meeting temp = findById(id).getElement();
+        MeetingDTO temp =mapper.toMeetingDTO( findById(id).getElement());
         checkData(temp);
         temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** Original note: " + temp.getNote());
         temp.setLink("*** Link deleted ***");
-        updateMeeting(mapper.toMeetingDTO(temp));
+        updateMeeting(temp);
 
-        return new BaseResponseElement<>(mapper.toMeetingDTO(temp));
+        return new BaseResponseElement<>(temp);
     }
-
+    //prossimo meeting di un user (entro 7 gg)
     public BaseResponseElement<MeetingDTO> nextMeetingById(Long id) {
         Meeting meeting = new Meeting();
         meeting = meetingDAO.nextMeetingById(id, LocalDate.now(), LocalDate.now().plusDays(7));
@@ -126,7 +144,7 @@ public class MeetingService {
         meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(participants.getIdMeeting()).getElement()));
 
         //salva i partecipanti nella many to many
-        for(Long usDTO : participants.getparticipantsId()){
+        for(Long usDTO : participants.getParticipantsId()){
             UserMeeting userMeeting = new UserMeeting();
             userMeeting.setIdMeeting((participants.getIdMeeting()));
             userMeeting.setIdUser(usDTO);
@@ -147,4 +165,32 @@ public class MeetingService {
 
         return new BaseResponseElement<>(meetingResponse);
     }
+
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(UserMeetingDTO usDTO) {
+
+        //controllo su presenza meeting
+        if(meetingDAO.findById(usDTO.getIdMeeting()).isEmpty()){
+            throw new RuntimeException("This meeting does not exist");
+        }
+        for (Long userRemove : usDTO.getParticipantsId()) {
+            //controllo se esiste l user
+            if(userDao.findById(userRemove).isPresent()){
+                //rimuove utente e meeting dalla many to many
+                userMeetingRepository.delete(new UserMeeting(userRemove,usDTO.getIdMeeting()));
+            }
+        }
+        MeetingResponse meetingResponse = new MeetingResponse();
+        meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(usDTO.getIdMeeting()).getElement()));
+
+        List<UserRegistryDTO> userRegistryDTO = new ArrayList<>();
+        for(UserRegistry userRegistry : userRegistryDAO.allUserByMeeting(usDTO.getIdMeeting())){
+            userRegistryDTO.add(userRegistryMapper.toUserRegistryDTO(userRegistry));
+        }
+
+        meetingResponse.setParticipants(userRegistryDTO);
+        return new BaseResponseElement<>(meetingResponse);
+
+    }
+
+
 }

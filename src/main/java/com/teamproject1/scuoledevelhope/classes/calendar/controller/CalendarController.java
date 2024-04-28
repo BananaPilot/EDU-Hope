@@ -33,30 +33,30 @@ public class CalendarController {
         return calendarService.allCalendar(id, startDate, endDate);
     }
 
-    //----------- MEETING ---------//
+                            //----------- MEETING ---------//
     //tutti i meeting di un user
     @NoAuthorization
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id) {
         return meetingService.allMeetingByUser(id);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
     @NoAuthorization
     @GetMapping("/meeting/intervalByUserId/{id}")
-    public BaseResponseList<Meeting> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
         return meetingService.intervalGetById(id, startDate, endDate);
     }
 
     @NoAuthorization
     @PostMapping("/meeting/save")
-    public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
-        return meetingService.save(meeting);
+    public BaseResponseElement<MeetingDTO> saveMeeting(@RequestBody MeetingDTO meetingDTO) {
+        return meetingService.save(meetingDTO);
     }
 
     //aggiorna il meeting attraverso l id
     @NoAuthorization
-    @PostMapping("/meeting/update")
+    @PutMapping("/meeting/update")
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
@@ -68,7 +68,7 @@ public class CalendarController {
     }
 
     @NoAuthorization
-    @GetMapping("/meeting/delete/{id}")
+    @DeleteMapping("/meeting/delete/{id}")
     public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id) {
         return meetingService.deleteMeeting(id);
     }
@@ -85,7 +85,13 @@ public class CalendarController {
         System.out.println(usDTO);
         return meetingService.addParticipants(usDTO);
     }
+    @NoAuthorization
+    @DeleteMapping("/meeting/deleteUser")
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO){
+        System.out.println(usDTO);
 
+        return meetingService.removeUserFromMeeting(usDTO);
+    }
 
-    //-----------END MEETING ---------//
+                        //-----------END MEETING ---------//
 }
