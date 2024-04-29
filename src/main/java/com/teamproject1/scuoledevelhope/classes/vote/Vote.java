@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class Vote {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vote")
     private Long id;
 
