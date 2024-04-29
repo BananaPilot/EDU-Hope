@@ -56,6 +56,7 @@ public class Classes {
     )
     private List<Student> students;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(
             mappedBy = "schoolClass"
     )
