@@ -9,6 +9,8 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +22,6 @@ public class CalendarService {
     MeetingDAO meetingDAO;
     MeetingMapper meetingMapper;
     UserRegistryMapper urMapper;
-
     UserRegistryDAO urDAO;
 
     public CalendarService(MeetingDAO meetingDAO, MeetingMapper meetingMapper, UserRegistryMapper urMapper, UserRegistryDAO urDAO) {
@@ -30,17 +31,17 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
 
-    }
-
-    private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
+        Page<Meeting> allMeetings = meetingDAO.intervalGetByIDpageable(id, startDate, endDate, PageRequest.of(page,pageSize));
 
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
+        calendar.setPage(allMeetings.getPageable().getPageNumber());
+        calendar.setTotalPages(allMeetings.getTotalPages());
+        calendar.setPageSize(allMeetings.getPageable().getPageSize());
+        calendar.setTotalElements(allMeetings.getTotalElements());
 
         for (Meeting allMeet : allMeetings) {
 
@@ -51,10 +52,9 @@ public class CalendarService {
             for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }
-
             calendar.getCalendar().add(meetingResponse);
         }
-        return calendar;
-    }
+        return new BaseResponseElement<>(calendar);
 
+    }
 }
