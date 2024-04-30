@@ -49,7 +49,7 @@ public class User {
     )
     private List<Role> roles;
 
-    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(
             mappedBy = "users",
             fetch = FetchType.LAZY
