@@ -27,6 +27,7 @@ public class Register {
             nullable = false
     )
     private String schoolYear;
+
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
     @JoinColumn(name = "id_class")

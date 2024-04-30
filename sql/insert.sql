@@ -1,4 +1,4 @@
-insert INTO user(password,username)
+insert INTO user(password, username)
 values
 ('cheballalavita','Carlo'),
 ('develz','VeroCoorinatrice'),
