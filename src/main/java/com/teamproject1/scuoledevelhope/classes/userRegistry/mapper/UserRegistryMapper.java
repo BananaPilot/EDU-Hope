@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserRegistryMapper {
-
     public UserRegistryDTO toUserRegistryDTO(UserRegistry userRegistry) {
 
         UserRegistryDTO urDTO = new UserRegistryDTO();

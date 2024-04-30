@@ -92,6 +92,5 @@ public class CalendarController {
 
         return meetingService.removeUserFromMeeting(usDTO);
     }
-
                         //-----------END MEETING ---------//
 }
