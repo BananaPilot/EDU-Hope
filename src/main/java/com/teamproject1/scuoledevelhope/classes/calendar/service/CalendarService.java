@@ -38,10 +38,7 @@ public class CalendarService {
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
-        calendar.setPage(allMeetings.getPageable().getPageNumber());
-        calendar.setTotalPages(allMeetings.getTotalPages());
-        calendar.setPageSize(allMeetings.getPageable().getPageSize());
-        calendar.setTotalElements(allMeetings.getTotalElements());
+
 
         for (Meeting allMeet : allMeetings) {
 
@@ -54,7 +51,14 @@ public class CalendarService {
             }
             calendar.getCalendar().add(meetingResponse);
         }
-        return new BaseResponseElement<>(calendar);
+
+        BaseResponseElement<Calendar> response = new BaseResponseElement<>(calendar);
+        response.setPage(allMeetings.getPageable().getPageNumber());
+        response.setTotalPages(allMeetings.getTotalPages());
+        response.setPageSize(allMeetings.getPageable().getPageSize());
+        response.setTotalElements(allMeetings.getTotalElements());
+
+        return response;
 
     }
 }
