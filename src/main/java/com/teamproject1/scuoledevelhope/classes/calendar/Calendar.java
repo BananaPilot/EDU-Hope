@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calendar {
+
     private LocalDate startDate;
     private LocalDate endDate;
     private List<MeetingResponse> calendar = new ArrayList<>();
 
     public Calendar() {
     }
+
 
     public LocalDate getStartDate() {
         return startDate;
