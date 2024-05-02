@@ -9,9 +9,11 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,14 +32,16 @@ public class CalendarService {
         this.urDAO = urDAO;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
         List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
 
+        List<Calendar> listCalendar = new ArrayList<>();
+        listCalendar.add(buildCalendar(startDate, endDate, allMeetings));
+
+        return new BaseResponseList<>(listCalendar);
     }
 
     private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
-
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
@@ -51,7 +55,6 @@ public class CalendarService {
             for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }
-
             calendar.getCalendar().add(meetingResponse);
         }
         return calendar;

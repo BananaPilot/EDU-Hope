@@ -29,7 +29,7 @@ public class CalendarController {
     //calendario di un utente in un intervallo di tempo
     @NoAuthorization
     @GetMapping("/{id}")
-    public BaseResponseElement<Calendar> intervalGetByID(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<Calendar> intervalGetByID(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
         return calendarService.allCalendar(id, startDate, endDate);
     }
 
