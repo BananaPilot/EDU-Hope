@@ -9,6 +9,9 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.utils.Utils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,27 +23,25 @@ public class CalendarService {
     MeetingDAO meetingDAO;
     MeetingMapper meetingMapper;
     UserRegistryMapper urMapper;
-
     UserRegistryDAO urDAO;
+    private final Utils utils;
 
-    public CalendarService(MeetingDAO meetingDAO, MeetingMapper meetingMapper, UserRegistryMapper urMapper, UserRegistryDAO urDAO) {
+    public CalendarService(MeetingDAO meetingDAO, MeetingMapper meetingMapper, UserRegistryMapper urMapper, UserRegistryDAO urDAO, Utils utils) {
         this.meetingDAO = meetingDAO;
         this.meetingMapper = meetingMapper;
         this.urMapper = urMapper;
         this.urDAO = urDAO;
+        this.utils = utils;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate) {
-        List<Meeting> allMeetings = meetingDAO.intervalGetByID(id, startDate, endDate);
-        return new BaseResponseElement<>(buildCalendar(startDate, endDate, allMeetings));
+    public BaseResponseElement<Calendar> allCalendar(String jwt, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
 
-    }
-
-    private Calendar buildCalendar(LocalDate startDate, LocalDate endDate, List<Meeting> allMeetings) {
+        Page<Meeting> allMeetings = meetingDAO.intervalGetByIDpageable(utils.getUserFromJwt(jwt).getId(), startDate, endDate, PageRequest.of(page,pageSize));
 
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
         calendar.setEndDate(endDate);
+
 
         for (Meeting allMeet : allMeetings) {
 
@@ -51,10 +52,16 @@ public class CalendarService {
             for (UserRegistry urList : ur) {
                 meetingResponse.getParticipants().add(urMapper.toUserRegistryDTO(urList));
             }
-
             calendar.getCalendar().add(meetingResponse);
         }
-        return calendar;
-    }
 
+        BaseResponseElement<Calendar> response = new BaseResponseElement<>(calendar);
+        response.setPage(allMeetings.getPageable().getPageNumber());
+        response.setTotalPages(allMeetings.getTotalPages());
+        response.setPageSize(allMeetings.getPageable().getPageSize());
+        response.setTotalElements(allMeetings.getTotalElements());
+
+        return response;
+
+    }
 }

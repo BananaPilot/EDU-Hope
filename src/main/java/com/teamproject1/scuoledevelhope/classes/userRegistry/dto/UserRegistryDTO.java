@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRegistryDTO {
 
-
     private String name;
     private String surname;
     private String email;
