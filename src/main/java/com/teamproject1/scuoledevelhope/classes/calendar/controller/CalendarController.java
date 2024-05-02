@@ -1,9 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
@@ -30,12 +28,12 @@ public class CalendarController {
     //calendario di un utente in un intervallo di tempo
     @FloorLevelAuthorization(floorRole = "USER")
     @GetMapping("/")
-    public BaseResponseElement<Calendar> intervalGetByID(
-            @RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page , int pageSize) {
-        return calendarService.allCalendar(jwt, startDate, endDate, page , pageSize);
+    public Calendar intervalGetByJwt(
+            @RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+        return calendarService.allCalendar(jwt, startDate, endDate, page, pageSize);
     }
 
-                            //----------- MEETING ---------//
+    //----------- MEETING ---------//
     //tutti i meeting di un user
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/allMeetingByUserId/{id}")
@@ -87,12 +85,13 @@ public class CalendarController {
         System.out.println(usDTO);
         return meetingService.addParticipants(usDTO);
     }
+
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/meeting/deleteUser")
-    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO){
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO) {
         System.out.println(usDTO);
 
         return meetingService.removeUserFromMeeting(usDTO);
     }
-                        //-----------END MEETING ---------//
+    //-----------END MEETING ---------//
 }

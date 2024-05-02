@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +35,7 @@ public class CalendarService {
         this.utils = utils;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(String jwt, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
+    public Calendar allCalendar(String jwt, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
 
         Page<Meeting> allMeetings = meetingDAO.intervalGetByIDpageable(utils.getUserFromJwt(jwt).getId(), startDate, endDate, PageRequest.of(page,pageSize));
 
@@ -55,13 +56,12 @@ public class CalendarService {
             calendar.getCalendar().add(meetingResponse);
         }
 
-        BaseResponseElement<Calendar> response = new BaseResponseElement<>(calendar);
-        response.setPage(allMeetings.getPageable().getPageNumber());
-        response.setTotalPages(allMeetings.getTotalPages());
-        response.setPageSize(allMeetings.getPageable().getPageSize());
-        response.setTotalElements(allMeetings.getTotalElements());
+        calendar.setPage(allMeetings.getPageable().getPageNumber());
+        calendar.setTotalPages(allMeetings.getTotalPages());
+        calendar.setPageSize(allMeetings.getPageable().getPageSize());
+        calendar.setTotalElements(allMeetings.getTotalElements());
 
-        return response;
+        return calendar;
 
     }
 }

@@ -1,12 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.calendar;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
+import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calendar {
+public class Calendar extends Pagination {
 
     private LocalDate startDate;
     private LocalDate endDate;
