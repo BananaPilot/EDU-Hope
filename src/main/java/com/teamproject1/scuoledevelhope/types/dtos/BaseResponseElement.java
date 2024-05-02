@@ -3,11 +3,11 @@ package com.teamproject1.scuoledevelhope.types.dtos;
 import org.springframework.http.HttpStatus;
 
 public class BaseResponseElement<T> extends BaseResponse {
+    private T element;
     private int page ;
     private int pageSize ;
     private long totalElements ;
     private int totalPages ;
-    private T element;
 
     public BaseResponseElement() {
 

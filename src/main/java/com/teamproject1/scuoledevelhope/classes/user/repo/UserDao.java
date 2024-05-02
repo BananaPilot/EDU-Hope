@@ -2,6 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.user.repo;
 
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +16,7 @@ import java.util.List;
 public interface UserDao extends JpaRepository<User, Long> {
 
     @Query(value = "select * from user", nativeQuery = true)
-    List<User> getAll();
+    Page<User> getAll(Pageable page);
 
     @Query(value = "select * from user where username = :username", nativeQuery = true)
     User getByUsername(@Param("username") String username);
