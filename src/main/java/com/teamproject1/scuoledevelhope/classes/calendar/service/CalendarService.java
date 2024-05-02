@@ -9,6 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistryMapper;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,19 @@ public class CalendarService {
     MeetingMapper meetingMapper;
     UserRegistryMapper urMapper;
     UserRegistryDAO urDAO;
+    private final Utils utils;
 
-    public CalendarService(MeetingDAO meetingDAO, MeetingMapper meetingMapper, UserRegistryMapper urMapper, UserRegistryDAO urDAO) {
+    public CalendarService(MeetingDAO meetingDAO, MeetingMapper meetingMapper, UserRegistryMapper urMapper, UserRegistryDAO urDAO, Utils utils) {
         this.meetingDAO = meetingDAO;
         this.meetingMapper = meetingMapper;
         this.urMapper = urMapper;
         this.urDAO = urDAO;
+        this.utils = utils;
     }
 
-    public BaseResponseElement<Calendar> allCalendar(Long id, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
+    public BaseResponseElement<Calendar> allCalendar(String jwt, LocalDate startDate, LocalDate endDate, int page , int pageSize) {
 
-        Page<Meeting> allMeetings = meetingDAO.intervalGetByIDpageable(id, startDate, endDate, PageRequest.of(page,pageSize));
+        Page<Meeting> allMeetings = meetingDAO.intervalGetByIDpageable(utils.getUserFromJwt(jwt).getId(), startDate, endDate, PageRequest.of(page,pageSize));
 
         Calendar calendar = new Calendar();
         calendar.setStartDate(startDate);
