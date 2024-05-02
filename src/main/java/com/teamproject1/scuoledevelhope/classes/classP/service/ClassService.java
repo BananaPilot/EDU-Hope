@@ -39,7 +39,7 @@ public class ClassService {
         if (temp.isEmpty()) {
             throw new SQLException("Class was not present");
         }
-        classDAO.deleteClassById(id);
+        classDAO.deleteById(id);
 
         return new BaseResponseElement<>(temp.get());
     }

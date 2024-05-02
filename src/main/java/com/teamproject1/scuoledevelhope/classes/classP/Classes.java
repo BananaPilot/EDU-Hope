@@ -73,6 +73,26 @@ public class Classes {
         return students;
     }
 
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public Coordinator getCoordinator() {
+        return coordinator;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public Register getRegisters() {
+        return registers;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
