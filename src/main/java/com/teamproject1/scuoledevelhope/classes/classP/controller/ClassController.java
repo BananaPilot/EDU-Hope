@@ -18,13 +18,13 @@ public class ClassController {
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping("/get-all")
+    @GetMapping("/all")
     public BaseResponseList<Classes> findAll() {
         return classService.findAll();
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping("/get-by-id")
+    @GetMapping
     public BaseResponseElement<Classes> findById(@RequestParam Long id) {
         return classService.findById(id);
     }
@@ -36,7 +36,7 @@ public class ClassController {
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete-by-id")
+    @DeleteMapping("/delete")
     public BaseResponseElement<Classes> delete(@Valid @RequestParam Long id) {
         return classService.deleteById(id);
     }

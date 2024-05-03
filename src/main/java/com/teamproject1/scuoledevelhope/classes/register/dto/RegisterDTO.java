@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.register.DTO;
+package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
 

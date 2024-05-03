@@ -17,6 +17,7 @@ public class UserRegistry {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
     @MapsId
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "user_name")

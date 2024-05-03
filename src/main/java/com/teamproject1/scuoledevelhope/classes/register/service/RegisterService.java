@@ -30,31 +30,12 @@ public class RegisterService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseList<Register> getAllBySchoolYear(String schoolYear) {
-        return new BaseResponseList<>(registerDao.getAllBySchoolYear(schoolYear));
-    }
-
-    public BaseResponseList<Register> getAllByTutor(Long tutorId) {
-        return new BaseResponseList<>(registerDao.getAllByTutor(tutorId));
-    }
-
     public BaseResponseElement<Register> save(Register register) {
         int res = registerDao.addRegister(register.getSchoolYear(), register.getSchoolClass().getId(), register.getTutor().getUser().getId());
         if (res < 1) {
             throw new SQLException("User was not added");
         }
         return new BaseResponseElement<>(register);
-    }
-
-    public BaseResponseElement<Register> deleteById(Long id) {
-        Optional<Register> temp = registerDao.findById(id);
-
-        if (temp.isEmpty()) {
-            throw new SQLException("Register was not present");
-        }
-        registerDao.deleteById(id);
-
-        return new BaseResponseElement<>(temp.get());
     }
 
 }

@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.student.DTO;
+package com.teamproject1.scuoledevelhope.classes.student.dto;
 
 import jakarta.validation.constraints.NotNull;
 

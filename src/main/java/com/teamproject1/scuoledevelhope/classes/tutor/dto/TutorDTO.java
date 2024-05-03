@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.tutor.DTO;
+package com.teamproject1.scuoledevelhope.classes.tutor.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

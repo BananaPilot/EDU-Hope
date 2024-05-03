@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.school.DTO;
+package com.teamproject1.scuoledevelhope.classes.school.dto;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
