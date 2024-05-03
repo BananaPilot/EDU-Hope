@@ -4,15 +4,16 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class BaseResponseList<T> extends BaseResponse {
+public class BaseResponseList<T> extends Pagination {
+
     List<T> elements;
 
     public BaseResponseList() {
 
     }
 
-    public BaseResponseList(HttpStatus httpStatus, String message, String description, List<T> elements) {
-        super(httpStatus, message, description);
+    public BaseResponseList(HttpStatus httpStatus, String message, String description, int page, int pageSize, long totalElements, int totalPages, List<T> elements) {
+        super(httpStatus, message, description, page, pageSize, totalElements, totalPages);
         this.elements = elements;
     }
 
