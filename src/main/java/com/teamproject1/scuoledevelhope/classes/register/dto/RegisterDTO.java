@@ -15,29 +15,7 @@ public class RegisterDTO {
 
     private Long tutorId;
 
-    public String getSchoolYear() {
-        return schoolYear;
-    }
 
-    public void setSchoolYear(String schoolYear) {
-        this.schoolYear = schoolYear;
-    }
-
-    public Long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(Long classId) {
-        this.classId = classId;
-    }
-
-    public Long getTutorId() {
-        return tutorId;
-    }
-
-    public void setTutorId(Long tutorId) {
-        this.tutorId = tutorId;
-    }
 }
 
 

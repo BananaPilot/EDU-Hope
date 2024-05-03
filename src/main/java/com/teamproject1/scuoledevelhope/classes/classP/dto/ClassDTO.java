@@ -1,28 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.classP.dto;
 
-public class ClassRegisterDTO {
-
-    private Long classId;
+public class ClassDTO {
 
     private String className;
-
     private Long tutorId;
-
     private Long coordinatorId;
-
     private Long courseId;
-
     private Long schoolId;
     private String schoolYear;
-
-
-    public Long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(Long classId) {
-        this.classId = classId;
-    }
 
     public String getClassName() {
         return className;

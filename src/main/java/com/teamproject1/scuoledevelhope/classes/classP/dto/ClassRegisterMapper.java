@@ -8,8 +8,9 @@ import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class ClassRegisterMapper {
     private final CoordinatorDAO coordinatorDAO;
     private final CourseDAO courseDAO;
@@ -26,23 +27,20 @@ public class ClassRegisterMapper {
         this.classDAO = classDAO;
     }
 
-    public Classes toClass(ClassRegisterDTO classRegisterDTO){
+    public Classes toClass(ClassDTO classRegisterDTO){
         Classes classes = new Classes();
 
         classes.setName(classRegisterDTO.getClassName());
         classes.setCoordinator(coordinatorDAO.findById(classRegisterDTO.getCoordinatorId()).orElse(null));
-        classes.setCourse(courseDAO.findById(classRegisterDTO.getClassId()).orElse(null));
+        classes.setCourse(courseDAO.findById(classRegisterDTO.getCourseId()).orElse(null));
         classes.setTutor(tutorDAO.findById(classRegisterDTO.getTutorId()).orElse(null));
         classes.setSchool(schoolDAO.findById(classRegisterDTO.getSchoolId()).orElse(null));
         return classes;
     }
 
-    public Register toRegister(ClassRegisterDTO classRegisterDTO){
+    public Register toRegister(ClassDTO classRegisterDTO){
         Register register = new Register();
 
-        register.setClasses(classDAO.findById(classRegisterDTO.getClassId()).orElseThrow(
-                ()-> new NotFoundException("class not found")
-        ));
         register.setTutor(tutorDAO.findById(classRegisterDTO.getTutorId()).orElse(null));
         register.setSchoolYear(classRegisterDTO.getSchoolYear());
 

@@ -1,13 +1,15 @@
 package com.teamproject1.scuoledevelhope.classes.classP.service;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
@@ -37,14 +39,18 @@ public class ClassService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseElement<ClassRegisterDTO> save(ClassRegisterDTO classRegisterDTO) {
-        Classes classes = classRegisterMapper.toClass(classRegisterDTO);
-        Register register = classRegisterMapper.toRegister(classRegisterDTO);
+    public BaseResponseElement<ClassDTO> save(ClassDTO classDTO) {
+        Classes classes = classRegisterMapper.toClass(classDTO);
+        Register register = classRegisterMapper.toRegister(classDTO);
 
         classDAO.save(classes);
         registerDao.save(register);
 
-        return new BaseResponseElement<>(classRegisterDTO);
+        register.setSchoolClass(classDAO.findById(classes.getId()).orElseThrow(
+                ()-> new NotFoundException("class not found")
+        ));
+
+        return new BaseResponseElement<>(classDTO);
     }
 
     public BaseResponseElement<Classes> deleteById(Long id) {

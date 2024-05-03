@@ -2,7 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.classP.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.service.ClassService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -32,7 +32,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<ClassRegisterDTO> save(@Valid @RequestBody ClassRegisterDTO classRegisterDTO) {
+    public BaseResponseElement<ClassDTO> save(@Valid @RequestBody ClassDTO classRegisterDTO) {
         return classService.save(classRegisterDTO);
     }
 
