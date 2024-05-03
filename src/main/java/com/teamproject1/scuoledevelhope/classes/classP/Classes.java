@@ -89,21 +89,14 @@ public class Classes {
         return school;
     }
 
-    public Register getRegisters() {
-        return registers;
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void t(Tutor tutor) {
-        this.tutor = tutor;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 
     public void setCoordinator(Coordinator coordinator) {
         this.coordinator = coordinator;
@@ -111,10 +104,6 @@ public class Classes {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public void setRegisters(Register registers) {
-        this.registers = registers;
     }
 
     public void setSchool(School school) {

@@ -9,52 +9,35 @@ import java.util.List;
 public class RegisterDTO {
 
 
-        private Date schoolYear;
+    private String schoolYear;
 
-        private long classId;
+    private Long classId;
 
-        private long tutorId;
+    private Long tutorId;
 
-        public RegisterDTO(Date schoolYear, long classId, long tutorId) {
-            this.schoolYear = schoolYear;
-            this.classId = classId;
-            this.tutorId = tutorId;
-        }
-
-        public Date getSchoolYear() {
-            return schoolYear;
-        }
-
-        public void setSchoolYear(Date schoolYear) {
-            this.schoolYear = schoolYear;
-        }
-
-        public long getClassId() {
-            return classId;
-        }
-
-        public void setClassId(long classId) {
-            this.classId = classId;
-        }
-
-        public long getTutorId() {
-            return tutorId;
-        }
-
-        public void setTutorId(long tutorId) {
-            this.tutorId = tutorId;
-        }
-
-        public List<VoteDTO> getRegisterVoteDTO() {
-            return registerVoteDTO;
-        }
-
-        public void setRegisterVoteDTO(List<VoteDTO> registerVoteDTO) {
-            this.registerVoteDTO = registerVoteDTO;
-        }
-
-        List<VoteDTO> registerVoteDTO = new ArrayList<>();
-
+    public String getSchoolYear() {
+        return schoolYear;
     }
+
+    public void setSchoolYear(String schoolYear) {
+        this.schoolYear = schoolYear;
+    }
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
+
+    public Long getTutorId() {
+        return tutorId;
+    }
+
+    public void setTutorId(Long tutorId) {
+        this.tutorId = tutorId;
+    }
+}
 
 
