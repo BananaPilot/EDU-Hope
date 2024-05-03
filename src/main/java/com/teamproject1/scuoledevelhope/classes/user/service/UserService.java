@@ -42,6 +42,8 @@ public class UserService {
 
     @Transactional
     public BaseResponseElement<User> addUser(UserAdd userAdd) {
+
+
         int userRes = userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
         User user = userDao.getByUsername(userAdd.getUsername());
         int userRegistryRes = userRegistryDAO.addRegistry(userAdd.getEmail(), userAdd.getName(), userAdd.getSurname(), userAdd.getPhoneNumber(), user.getId());
