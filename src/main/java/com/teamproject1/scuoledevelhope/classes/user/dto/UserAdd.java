@@ -14,7 +14,6 @@ public class UserAdd {
     @NotBlank(message = "surname can't be blank")
     private String surname;
     @NotBlank(message = "email can't be blank")
-    @Pattern(regexp = "^[A-Z0-9+_.-]+@[A-Z0-9.-]+$")
     private String email;
     @NotBlank(message = "phone number can't be blank")
     @Pattern(regexp = "^(\\((00|\\+)39\\)|(00|\\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\\d{7}$")
@@ -56,6 +55,9 @@ public class UserAdd {
         return phoneNumber;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public static final class UserAddBuilder {
         private @NotBlank(message = "username can't be blank") String username;
