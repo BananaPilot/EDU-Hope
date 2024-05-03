@@ -11,8 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassDAO extends JpaRepository<Classes, Long> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "delete from class where id_class = :id", nativeQuery = true)
-    int deleteClassById(@Param("id") Long id);
 }

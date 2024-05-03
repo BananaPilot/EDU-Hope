@@ -16,9 +16,8 @@ import java.util.List;
 @Table(name = "register")
 public class Register {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_register")
     private Long id;
 
     @NotBlank(message = "school year can't be blank")
@@ -30,6 +29,7 @@ public class Register {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
+    @MapsId
     @JoinColumn(name = "id_class")
     private Classes schoolClass;
 

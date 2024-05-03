@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.classP.DTO;
+package com.teamproject1.scuoledevelhope.classes.classP.dto;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.course.Course;

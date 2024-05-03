@@ -31,7 +31,8 @@ public class User {
     private String password;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "user_registry_id")
     private UserRegistry userRegistry;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
@@ -50,7 +51,7 @@ public class User {
     )
     private List<Role> roles;
 
-    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(
             mappedBy = "users",
             fetch = FetchType.LAZY

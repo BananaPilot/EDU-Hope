@@ -55,7 +55,6 @@ public class Classes {
             fetch = FetchType.LAZY
     )
     private List<Student> students;
-
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(
             mappedBy = "schoolClass"
@@ -74,11 +73,31 @@ public class Classes {
         return students;
     }
 
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public Coordinator getCoordinator() {
+        return coordinator;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public Register getRegisters() {
+        return registers;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setTutor(Tutor tutor) {
+    public void t(Tutor tutor) {
         this.tutor = tutor;
     }
 

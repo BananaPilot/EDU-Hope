@@ -12,11 +12,6 @@ import java.util.List;
 
 @Repository
 public interface RegisterDao extends JpaRepository<Register, Long> {
-    @Query(value = "select * from register where schoolYear = :schoolYear", nativeQuery = true)
-    List<Register> getAllBySchoolYear(@Param("schoolYear") String schoolYear);
-
-    @Query(value = "select * from register where tutor = :tutorId", nativeQuery = true)
-    List<Register> getAllByTutor(@Param("tutorId") Long tutorId);
 
     @Modifying
     @Transactional

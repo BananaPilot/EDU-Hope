@@ -30,7 +30,23 @@ public class Coordinator {
     )
     private List<Classes> classes;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setClasses(List<Classes> classes) {
+        this.classes = classes;
     }
 }
