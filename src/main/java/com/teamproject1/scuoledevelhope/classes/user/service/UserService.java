@@ -13,6 +13,8 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,8 +34,14 @@ public class UserService {
         this.utils = utils;
     }
 
-    public BaseResponseList<User> getAll() {
-        return new BaseResponseList<>(userDao.getAll());
+    public BaseResponseList<User> getAll(int pageSize, int page) {
+        Page<User> users = userDao.getAll(PageRequest.of(pageSize, page));
+        BaseResponseList<User> userBaseResponseList = new BaseResponseList<>();
+        userBaseResponseList.setPage(users.getPageable().getPageNumber());
+        userBaseResponseList.setPageSize(users.getPageable().getPageSize());
+        userBaseResponseList.setTotalElements(users.getTotalElements());
+        userBaseResponseList.setTotalPages(users.getTotalPages());
+        return userBaseResponseList;
     }
 
     public BaseResponseElement<User> getByUsername(String username) {
@@ -42,6 +50,8 @@ public class UserService {
 
     @Transactional
     public BaseResponseElement<User> addUser(UserAdd userAdd) {
+
+
         int userRes = userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
         User user = userDao.getByUsername(userAdd.getUsername());
         int userRegistryRes = userRegistryDAO.addRegistry(userAdd.getEmail(), userAdd.getName(), userAdd.getSurname(), userAdd.getPhoneNumber(), user.getId());
