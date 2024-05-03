@@ -6,7 +6,6 @@ import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -31,7 +30,7 @@ public class Register {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id_class")
-    private Classes schoolClass;
+    private Classes classes;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
@@ -60,8 +59,8 @@ public class Register {
         return schoolYear;
     }
 
-    public void setSchoolClass(Classes schoolClass) {
-        this.schoolClass = schoolClass;
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 
     public void setTutor(Tutor tutor) {
@@ -72,8 +71,8 @@ public class Register {
         this.schoolYear = schoolYear;
     }
 
-    public Classes getSchoolClass() {
-        return schoolClass;
+    public Classes getClasses() {
+        return classes;
     }
 
     public Tutor getTutor() {
