@@ -31,7 +31,7 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "update user set user_registry_id = :userRegistry where user.id = :userRegistry", nativeQuery = true)
+    @Query(value = "update user set user_registry_user_id = :userRegistry where user.id = :userRegistry", nativeQuery = true)
     void addUserRegistry(@Param("userRegistry") Long userRegistry);
 
     @Transactional

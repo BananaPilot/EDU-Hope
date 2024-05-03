@@ -7,16 +7,11 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
 public class DashboardDto {
 
     private String username;
-    private String password;
     private RoleDashboard role;
     private UserRegistry userRegistry;
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public RoleDashboard getRole() {
@@ -29,7 +24,6 @@ public class DashboardDto {
 
     public DashboardDto(String username, String password, RoleDashboard role, UserRegistry userRegistry) {
         this.username = username;
-        this.password = password;
         this.role = role;
         this.userRegistry = userRegistry;
     }
@@ -39,7 +33,6 @@ public class DashboardDto {
 
     public static final class DashboardDtoBuilder {
         private String username;
-        private String password;
         private RoleDashboard role;
         private UserRegistry userRegistry;
 
@@ -48,7 +41,6 @@ public class DashboardDto {
 
         public static DashboardDtoBuilder map(User user) {
             return DashboardDtoBuilder.aDashboardDto()
-                    .withPassword(user.getPassword())
                     .withUsername(user.getUsername())
                     .withUserRegistry(user.getUserRegistry());
         }
@@ -59,11 +51,6 @@ public class DashboardDto {
 
         public DashboardDtoBuilder withUsername(String username) {
             this.username = username;
-            return this;
-        }
-
-        public DashboardDtoBuilder withPassword(String password) {
-            this.password = password;
             return this;
         }
 
@@ -82,7 +69,6 @@ public class DashboardDto {
             dashboardDto.userRegistry = this.userRegistry;
             dashboardDto.role = this.role;
             dashboardDto.username = this.username;
-            dashboardDto.password = this.password;
             return dashboardDto;
         }
     }

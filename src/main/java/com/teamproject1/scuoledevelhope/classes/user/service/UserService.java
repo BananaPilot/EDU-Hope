@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.user.service;
 
+import com.bananapilot.samplespringauthenticationframework.utils.BCryptPasswordEncoder;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
 import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
@@ -51,6 +52,9 @@ public class UserService {
     @Transactional
     public BaseResponseElement<User> addUser(UserAdd userAdd) {
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        userAdd.setPassword(encoder.encode(userAdd.getPassword()));
 
         int userRes = userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
         User user = userDao.getByUsername(userAdd.getUsername());
