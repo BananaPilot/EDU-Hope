@@ -50,12 +50,6 @@ public class UserService {
                 .withTotalElements(users.getTotalElements())
                 .withTotalPages(users.getTotalPages())
                 .build();
-//        BaseResponseList<User> userBaseResponseList = new BaseResponseList<>();
-//        userBaseResponseList.setPage(users.getPageable().getPageNumber());
-//        userBaseResponseList.setPageSize(users.getPageable().getPageSize());
-//        userBaseResponseList.setTotalElements(users.getTotalElements());
-//        userBaseResponseList.setTotalPages(users.getTotalPages());
-//        return userBaseResponseList;
     }
 
     public UserDtoElement getByUsername(String username) {

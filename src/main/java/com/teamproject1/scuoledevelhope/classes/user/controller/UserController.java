@@ -44,8 +44,8 @@ public class UserController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public UserListDto getAll(@RequestParam int pageSize, int limit) {
-        return userService.getAll(pageSize, limit);
+    public UserListDto getAll(@RequestParam int limit, int page) {
+        return userService.getAll(limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "USER")

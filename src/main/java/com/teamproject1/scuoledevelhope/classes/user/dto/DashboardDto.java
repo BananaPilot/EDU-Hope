@@ -38,7 +38,7 @@ public class DashboardDto extends BaseResponse {
         private String username;
         private RoleDashboard role;
         private UserRegistry userRegistry;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
 
