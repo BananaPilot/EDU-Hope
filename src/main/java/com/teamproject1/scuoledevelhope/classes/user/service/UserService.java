@@ -7,6 +7,9 @@ import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserDtoElement;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
+import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -16,6 +19,7 @@ import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +31,8 @@ public class UserService {
     private final RoleDao roleDao;
 
     private final Utils utils;
+
+    private final UserMapper mapper = new UserMapper();
 
     public UserService(UserDao userDao, UserRegistryDAO userRegistryDAO, RoleDao roleDao, Utils utils) {
         this.userDao = userDao;
@@ -84,16 +90,15 @@ public class UserService {
 
 
     public DashboardDto getDashboard(String jwt) {
-        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+        User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
-        return new BaseResponseElement<>(dashboardDto);
     }
 
 
     public DashboardDto delete(String jwt) {
-        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+        User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         userDao.deleteUser(user.getId());
         return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
@@ -102,16 +107,15 @@ public class UserService {
     }
 
     @Transactional
-    public BaseResponseElement<DashboardDto> updateUser(String jwt, UserAdd updatedUser) {
+    public DashboardDto updateUser(String jwt, UserAdd updatedUser) {
         int userRes = userDao.userUpdate(utils.getUserFromJwt(jwt).getId(), updatedUser.getUsername(), updatedUser.getPassword());
         int userRegistryRes = userRegistryDAO.userRegistryUpdate(updatedUser.getEmail(), updatedUser.getName(), updatedUser.getSurname(), updatedUser.getPhoneNumber(), utils.getUserFromJwt(jwt).getId());
         if (userRes < 0 || userRegistryRes < 0) {
             throw new SQLException("user was not updated");
         }
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
-        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
+        return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
-        return new BaseResponseElement<>(dashboardDto);
     }
 }

@@ -32,7 +32,7 @@ public class UserController {
     @NoAuthorization
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseElement<User> addUser(@Valid @RequestBody UserAdd user) {
+    public DashboardDto addUser(@Valid @RequestBody UserAdd user) {
         return userService.addUser(user);
     }
 
@@ -56,7 +56,7 @@ public class UserController {
 
     @FloorLevelAuthorization(floorRole = "USER")
     @PutMapping("/update")
-    public BaseResponseElement<DashboardDto> update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
+    public DashboardDto update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
         return userService.updateUser(jwt, updatedUser);
     }
     
