@@ -6,13 +6,12 @@ import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
-import org.junit.jupiter.api.BeforeAll;
+import com.teamproject1.scuoledevelhope.utils.Utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -23,6 +22,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import javax.sql.DataSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,6 +48,9 @@ public class UserControllerTest {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    Utils utils;
+
     static boolean init = false;
 
     @BeforeEach
@@ -59,8 +63,13 @@ public class UserControllerTest {
         }
     }
 
-    private User createAUser() {
+    private User createUserForLogin() {
+        return userDao.getByUsername("gianni");
+    }
+
+    public User createUser() {
         return User.UserBuilder.anUser()
+                .withId(1L)
                 .withUsername("gianni")
                 .withPassword("GianniBello2!")
                 .build();
@@ -93,5 +102,25 @@ public class UserControllerTest {
         assertEquals(userAdd.getEmail(), dashboardDto.getUserRegistry().getEmail());
         assertEquals(userAdd.getName(), dashboardDto.getUserRegistry().getName());
         assertEquals(userAdd.getSurname(), dashboardDto.getUserRegistry().getSurname());
+    }
+
+    @Test
+    void getLogin() throws Exception {
+        User user = createUserForLogin();
+
+        MvcResult res = this.mock.perform(multipart("/user/login").contentType(MediaType.MULTIPART_FORM_DATA)
+                        .param("username", user.getUsername())
+                        .param("password", "gianniBello200!")
+                        .param("id", user.getId().toString())
+                )
+                .andDo(print())
+                .andReturn();
+
+        String jwt = res.getResponse().getHeader("Authorization");
+        String toConvert = "Bearer " + jwt;
+        User userRes = utils.getUserFromJwt(toConvert);
+
+        assertEquals(user.getUsername(), userRes.getUsername());
+        assertEquals(user.getId(), userRes.getId());
     }
 }

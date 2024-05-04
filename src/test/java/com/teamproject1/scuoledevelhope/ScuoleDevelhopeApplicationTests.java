@@ -10,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 class ScuoleDevelhopeApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
+    void contextLoads() {}
 
 }
