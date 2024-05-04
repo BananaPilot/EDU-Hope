@@ -59,27 +59,49 @@ public class UserService {
         int userRes = userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
         User user = userDao.getByUsername(userAdd.getUsername());
         int userRegistryRes = userRegistryDAO.addRegistry(userAdd.getEmail(), userAdd.getName(), userAdd.getSurname(), userAdd.getPhoneNumber(), user.getId());
-        userDao.addUserRegistry(user.getId());
-        roleDao.addRoleWithUsername(userAdd.getUsername(), Role.RoleEnum.USER.getRoleString());
         if (userRes < 0 || userRegistryRes < 0) {
             throw new SQLException("User was not added");
         }
+        userDao.addUserRegistry(user.getId());
+        roleDao.addRoleWithUsername(userAdd.getUsername(), Role.RoleEnum.USER.getRoleString());
         return new BaseResponseElement<>(userDao.getByUsername(userAdd.getUsername()));
     }
 
 
-    public BaseResponseElement<DashboardDto> getDashboard(String jwt) {
-        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+    public BaseResponseElement<DashboardDto> getUserById(String jwt) {
+        User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
         return new BaseResponseElement<>(dashboardDto);
     }
 
-    
+    public BaseResponseElement<DashboardDto> getUserById(Long id) {
+        User user = userDao.userById(id);
+        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .build();
+        return new BaseResponseElement<>(dashboardDto);
+    }
+
+
     public BaseResponseElement<User> delete(String jwt) {
-        User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
+        User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         userDao.deleteUser(user.getId());
         return new BaseResponseElement<>(user);
+    }
+
+    @Transactional
+    public BaseResponseElement<DashboardDto> updateUser(String jwt, UserAdd updatedUser) {
+        int userRes = userDao.userUpdate(utils.getUserFromJwt(jwt).getId(), updatedUser.getUsername(), updatedUser.getPassword());
+        int userRegistryRes = userRegistryDAO.userRegistryUpdate(updatedUser.getEmail(), updatedUser.getName(), updatedUser.getSurname(), updatedUser.getPhoneNumber(), utils.getUserFromJwt(jwt).getId());
+        if (userRes < 0 || userRegistryRes < 0) {
+            throw new SQLException("user was not updated");
+        }
+        User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
+        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .build();
+        return new BaseResponseElement<>(dashboardDto);
     }
 }
