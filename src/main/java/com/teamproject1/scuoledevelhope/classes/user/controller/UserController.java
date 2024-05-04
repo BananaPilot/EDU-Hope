@@ -5,6 +5,8 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.No
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserDtoElement;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -36,25 +38,25 @@ public class UserController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/{username}")
-    public BaseResponseElement<User> getByUsername(@Valid @PathVariable("username") String username) {
+    public UserDtoElement getByUsername(@Valid @PathVariable("username") String username) {
         return userService.getByUsername(username);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<User> getAll(@RequestParam int pageSize, int limit) {
+    public UserListDto getAll(@RequestParam int pageSize, int limit) {
         return userService.getAll(pageSize, limit);
     }
 
     @NoAuthorization
     @GetMapping("/dashboard")
-    public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
+    public DashboardDto dashboard(@RequestHeader("Authorization") String jwt) {
         return userService.getDashboard(jwt);
     }
 
     @NoAuthorization
     @DeleteMapping("/delete")
-    public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
+    public DashboardDto delete(@RequestHeader("Authorization") String jwt) {
         return userService.delete(jwt);
     }
 }

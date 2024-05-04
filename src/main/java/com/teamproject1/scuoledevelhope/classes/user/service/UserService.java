@@ -7,6 +7,9 @@ import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserDtoElement;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
+import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -16,7 +19,11 @@ import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -28,6 +35,8 @@ public class UserService {
 
     private final Utils utils;
 
+    private final UserMapper mapper = new UserMapper();
+
     public UserService(UserDao userDao, UserRegistryDAO userRegistryDAO, RoleDao roleDao, Utils utils) {
         this.userDao = userDao;
         this.userRegistryDAO = userRegistryDAO;
@@ -35,22 +44,32 @@ public class UserService {
         this.utils = utils;
     }
 
-    public BaseResponseList<User> getAll(int pageSize, int page) {
-        Page<User> users = userDao.getAll(PageRequest.of(pageSize, page));
-        BaseResponseList<User> userBaseResponseList = new BaseResponseList<>();
-        userBaseResponseList.setPage(users.getPageable().getPageNumber());
-        userBaseResponseList.setPageSize(users.getPageable().getPageSize());
-        userBaseResponseList.setTotalElements(users.getTotalElements());
-        userBaseResponseList.setTotalPages(users.getTotalPages());
-        return userBaseResponseList;
+    public UserListDto getAll(int pageSize, int page) {
+        Page<User> users = userDao.getAll(PageRequest.of(page, pageSize));
+        return UserListDto.UserListDtoBuilder.anUserListDto()
+                .withUsers(mapper.userDtoList(users.toList()))
+                .withPage(users.getPageable().getPageNumber())
+                .withPageSize(users.getPageable().getPageSize())
+                .withTotalElements(users.getTotalElements())
+                .withTotalPages(users.getTotalPages())
+                .build();
+//        BaseResponseList<User> userBaseResponseList = new BaseResponseList<>();
+//        userBaseResponseList.setPage(users.getPageable().getPageNumber());
+//        userBaseResponseList.setPageSize(users.getPageable().getPageSize());
+//        userBaseResponseList.setTotalElements(users.getTotalElements());
+//        userBaseResponseList.setTotalPages(users.getTotalPages());
+//        return userBaseResponseList;
     }
 
-    public BaseResponseElement<User> getByUsername(String username) {
-        return new BaseResponseElement<>(userDao.getByUsername(username));
+    public UserDtoElement getByUsername(String username) {
+        return UserDtoElement.UserDtoElementBuilder.anUserDtoElement()
+                .withUserDto(mapper.userToUserDto(userDao.getByUsername(username)))
+                .withMessage("Found")
+                .build();
     }
 
     @Transactional
-    public BaseResponseElement<User> addUser(UserAdd userAdd) {
+    public DashboardDto addUser(UserAdd userAdd) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -64,22 +83,29 @@ public class UserService {
         if (userRes < 0 || userRegistryRes < 0) {
             throw new SQLException("User was not added");
         }
-        return new BaseResponseElement<>(userDao.getByUsername(userAdd.getUsername()));
+        user = userDao.getByUsername(userAdd.getUsername());
+        return DashboardDto.DashboardDtoBuilder.map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .withHttpStatus(HttpStatus.CREATED)
+                .withMessage("User created")
+                .build();
     }
 
 
-    public BaseResponseElement<DashboardDto> getDashboard(String jwt) {
+    public DashboardDto getDashboard(String jwt) {
         User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
-        DashboardDto dashboardDto = DashboardDto.DashboardDtoBuilder.map(user)
+        return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
-        return new BaseResponseElement<>(dashboardDto);
     }
 
-    
-    public BaseResponseElement<User> delete(String jwt) {
+
+    public DashboardDto delete(String jwt) {
         User user = userDao.getByID(utils.getUserFromJwt(jwt).getId());
         userDao.deleteUser(user.getId());
-        return new BaseResponseElement<>(user);
+        return DashboardDto.DashboardDtoBuilder.map(user)
+                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .withMessage("User deleted")
+                .build();
     }
 }
