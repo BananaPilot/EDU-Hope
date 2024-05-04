@@ -57,8 +57,7 @@ public class UserController {
     public BaseResponseElement<DashboardDto> update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
         return userService.updateUser(jwt, updatedUser);
     }
-
-
+    
     @FloorLevelAuthorization(floorRole = "USER")
     @DeleteMapping("/delete")
     public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
