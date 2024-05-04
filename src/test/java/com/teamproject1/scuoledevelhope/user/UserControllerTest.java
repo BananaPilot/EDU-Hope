@@ -1,23 +1,28 @@
 package com.teamproject1.scuoledevelhope.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.sql.DataSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,6 +44,21 @@ public class UserControllerTest {
     @Autowired
     UserRegistryDAO userRegistryDAO;
 
+    @Autowired
+    DataSource dataSource;
+
+    static boolean init = false;
+
+    @BeforeEach
+    void populateDatabase() {
+        if (!init) {
+            ResourceDatabasePopulator populate = new ResourceDatabasePopulator();
+            populate.addScript(new FileSystemResource("src/test/java/com/teamproject1/scuoledevelhope/user/roles.sql"));
+            populate.execute(dataSource);
+            init = true;
+        }
+    }
+
     private User createAUser() {
         return User.UserBuilder.anUser()
                 .withUsername("gianni")
@@ -49,7 +69,7 @@ public class UserControllerTest {
     private UserAdd createAUserAdd() {
         return UserAdd.UserAddBuilder.anUserAdd()
                 .withUsername("gianni")
-                .withPassword("GianniBello2!")
+                .withPassword("gianniBello200!")
                 .withEmail("gianniBello@gmail.com")
                 .withName("gianni")
                 .withSurname("bello")
@@ -58,14 +78,12 @@ public class UserControllerTest {
     }
 
     @Test
-    public void userPost() throws Exception{
-        userDao.deleteAll();
-        userRegistryDAO.deleteAll();
+    void userPost() throws Exception {
         UserAdd userAdd = createAUserAdd();
         MvcResult res = this.mock.perform(post("/user/sign-up")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(userAdd))
-        )
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userAdd))
+                )
                 .andDo(print())
                 .andExpect(status().is(201))
                 .andReturn();

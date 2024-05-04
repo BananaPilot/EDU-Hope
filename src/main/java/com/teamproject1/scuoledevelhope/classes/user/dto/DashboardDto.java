@@ -51,8 +51,7 @@ public class DashboardDto extends BaseResponse {
 
         public static DashboardDtoBuilder map(User user) {
             return DashboardDtoBuilder.aDashboardDto()
-                    .withUsername(user.getUsername())
-                    .withUserRegistry(user.getUserRegistry());
+                    .withUsername(user.getUsername());
         }
 
         public DashboardDtoBuilder withUsername(String username) {
