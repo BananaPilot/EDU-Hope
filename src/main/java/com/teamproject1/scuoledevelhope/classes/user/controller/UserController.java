@@ -21,14 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @NoAuthorization()
+    @NoAuthorization
     @PostMapping("/login")
     public String login() {
         return "JWT is in Authorization header";
     }
 
     @NoAuthorization
-    @PostMapping("/signin")
+    @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponseElement<User> addUser(@Valid @RequestBody UserAdd user) {
         return userService.addUser(user);
@@ -46,13 +46,20 @@ public class UserController {
         return userService.getAll(pageSize, limit);
     }
 
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "USER")
     @GetMapping("/dashboard")
     public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
-        return userService.getDashboard(jwt);
+        return userService.getUserById(jwt);
     }
 
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "USER")
+    @PutMapping("/update")
+    public BaseResponseElement<DashboardDto> update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
+        return userService.updateUser(jwt, updatedUser);
+    }
+
+
+    @FloorLevelAuthorization(floorRole = "USER")
     @DeleteMapping("/delete")
     public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
         return userService.delete(jwt);
