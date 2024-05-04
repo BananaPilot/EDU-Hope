@@ -70,7 +70,6 @@ public class User {
         return id;
     }
 
-    @JsonIgnore
     public List<Meeting> getMeetings() {
         return meetings;
     }
@@ -79,17 +78,14 @@ public class User {
         return username;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
-    @JsonIgnore
     public UserRegistry getUserRegistry() {
         return userRegistry;
     }
 
-    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
     }

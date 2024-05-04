@@ -5,6 +5,8 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.No
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserDtoElement;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -30,37 +32,37 @@ public class UserController {
     @NoAuthorization
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseElement<User> addUser(@Valid @RequestBody UserAdd user) {
+    public DashboardDto addUser(@Valid @RequestBody UserAdd user) {
         return userService.addUser(user);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/{username}")
-    public BaseResponseElement<User> getByUsername(@Valid @PathVariable("username") String username) {
+    public UserDtoElement getByUsername(@Valid @PathVariable("username") String username) {
         return userService.getByUsername(username);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<User> getAll(@RequestParam int pageSize, int limit) {
-        return userService.getAll(pageSize, limit);
+    public UserListDto getAll(@RequestParam int limit, int page) {
+        return userService.getAll(limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "USER")
     @GetMapping("/dashboard")
-    public BaseResponseElement<DashboardDto> dashboard(@RequestHeader("Authorization") String jwt) {
-        return userService.getUserById(jwt);
+    public DashboardDto dashboard(@RequestHeader("Authorization") String jwt) {
+        return userService.getDashboard(jwt);
     }
 
     @FloorLevelAuthorization(floorRole = "USER")
     @PutMapping("/update")
-    public BaseResponseElement<DashboardDto> update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
+    public DashboardDto update(@RequestHeader("Authorization") String jwt, @Valid @RequestBody UserAdd updatedUser) {
         return userService.updateUser(jwt, updatedUser);
     }
     
     @FloorLevelAuthorization(floorRole = "USER")
     @DeleteMapping("/delete")
-    public BaseResponseElement<User> delete(@RequestHeader("Authorization") String jwt) {
+    public DashboardDto delete(@RequestHeader("Authorization") String jwt) {
         return userService.delete(jwt);
     }
 }
