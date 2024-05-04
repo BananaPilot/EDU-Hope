@@ -21,4 +21,9 @@ public interface UserRegistryDAO extends JpaRepository<UserRegistry, Long> {
     @Modifying
     @Query(value = "insert into user_registry (user_email, user_name, user_surname, user_telephone, user_id) value (:email, :name, :surname, :phone, :id)", nativeQuery = true)
     int addRegistry(@Param("email") String email, @Param("name") String name, @Param("surname") String surname, @Param("phone") String phone, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update user_registry set user_email = :email, user_name = :name, user_surname = :surname, user_telephone = :phone where user_id = :id", nativeQuery = true)
+    int userRegistryUpdate(@Param("email") String email, @Param("name") String name, @Param("surname") String surname, @Param("phone") String phone, @Param("id") Long id);
 }
