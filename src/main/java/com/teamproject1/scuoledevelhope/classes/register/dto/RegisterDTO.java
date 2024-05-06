@@ -47,6 +47,7 @@ public class RegisterDTO extends Pagination {
 
     public void setVotes(List<VoteDTO> votes) {
         this.votes = votes;
+
     }
 
     public String getNameClass() {

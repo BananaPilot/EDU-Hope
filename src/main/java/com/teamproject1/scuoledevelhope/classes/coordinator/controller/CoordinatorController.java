@@ -1,13 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.dto.CoordinatorDto;
 import com.teamproject1.scuoledevelhope.classes.coordinator.dto.CoordinatorDtoList;
 import com.teamproject1.scuoledevelhope.classes.coordinator.service.CoordinatorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

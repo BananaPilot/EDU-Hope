@@ -18,6 +18,7 @@ public class BaseResponseElement<T> extends BaseResponse {
     public BaseResponseElement(T element) {
         this.element = element;
     }
+
     public T getElement() {
         return element;
     }
