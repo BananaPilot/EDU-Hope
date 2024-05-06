@@ -64,7 +64,7 @@ public class ClassService {
         if (register.isEmpty()){
             throw new SQLException("Register was not present");
         }
-        ClassRegisterDTO temp = classRegisterMapper.toClassRegisterDTO(classes.get(), register.get());
+        ClassRegisterDTO temp = classRegisterMapper.toClassRegisterDTO(classes.get());
 
         registerDao.deleteById(id);
         classDAO.deleteById(id);
