@@ -31,12 +31,4 @@ public class RegisterController {
         return registerService.findById(id);
     }
 
-    //ADD - UPDATE
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PostMapping("/save")
-    public BaseResponseElement<Register> save(@Valid @RequestBody Register register) {
-        return registerService.save(register);
-    }
-
-
 }
