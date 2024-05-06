@@ -20,13 +20,13 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<Classes> findAll() {
+    public BaseResponseList<ClassRegisterDTO> findAll() {
         return classService.findAll();
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping
-    public BaseResponseElement<Classes> findById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public BaseResponseElement<ClassRegisterDTO> findById(@PathVariable Long id) {
         return classService.findById(id);
     }
 
@@ -37,8 +37,8 @@ public class ClassController {
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete")
-    public BaseResponseElement<ClassRegisterDTO> delete(@Valid @RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public BaseResponseElement<ClassRegisterDTO> delete(@Valid @PathVariable Long id) {
         return classService.deleteById(id);
     }
 

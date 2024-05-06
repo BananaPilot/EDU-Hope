@@ -1,13 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.register.service;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
-import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

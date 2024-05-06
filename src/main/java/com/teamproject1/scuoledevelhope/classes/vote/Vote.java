@@ -109,4 +109,75 @@ public class Vote {
         this.subject = subject;
     }
 
+
+    public static final class VoteBuilder {
+        private Long id;
+        private Register register;
+        private Student student;
+        private @PastOrPresent LocalDate date;
+        private @NotBlank(message = "subject can't be blank") String subject;
+        private Float evaluation;
+        private String annotation;
+        private Boolean isCheckPoint;
+
+        private VoteBuilder() {
+        }
+
+        public static VoteBuilder aVote() {
+            return new VoteBuilder();
+        }
+
+        public VoteBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public VoteBuilder withRegister(Register register) {
+            this.register = register;
+            return this;
+        }
+
+        public VoteBuilder withStudent(Student student) {
+            this.student = student;
+            return this;
+        }
+
+        public VoteBuilder withDate(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public VoteBuilder withSubject(String subject) {
+            this.subject = subject;
+            return this;
+        }
+
+        public VoteBuilder withEvaluation(Float evaluation) {
+            this.evaluation = evaluation;
+            return this;
+        }
+
+        public VoteBuilder withAnnotation(String annotation) {
+            this.annotation = annotation;
+            return this;
+        }
+
+        public VoteBuilder withIsCheckPoint(Boolean isCheckPoint) {
+            this.isCheckPoint = isCheckPoint;
+            return this;
+        }
+
+        public Vote build() {
+            Vote vote = new Vote();
+            vote.setDate(date);
+            vote.setSubject(subject);
+            vote.setEvaluation(evaluation);
+            vote.setAnnotation(annotation);
+            vote.setIsCheckPoint(isCheckPoint);
+            vote.id = this.id;
+            vote.student = this.student;
+            vote.register = this.register;
+            return vote;
+        }
+    }
 }

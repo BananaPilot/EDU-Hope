@@ -69,4 +69,69 @@ public class VoteDTO {
     public void setIsCheckPoint(Boolean isCheckPoint) {
         this.isCheckPoint = isCheckPoint;
     }
+
+
+    public static final class VoteDTOBuilder {
+        private Long idRegister;
+        private Long idStudent;
+        private LocalDate date;
+        private String subject;
+        private Float evaluation;
+        private String annotation;
+        private Boolean isCheckPoint;
+
+        private VoteDTOBuilder() {
+        }
+
+        public static VoteDTOBuilder aVoteDTO() {
+            return new VoteDTOBuilder();
+        }
+
+        public VoteDTOBuilder withIdRegister(Long idRegister) {
+            this.idRegister = idRegister;
+            return this;
+        }
+
+        public VoteDTOBuilder withIdStudent(Long idStudent) {
+            this.idStudent = idStudent;
+            return this;
+        }
+
+        public VoteDTOBuilder withDate(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public VoteDTOBuilder withSubject(String subject) {
+            this.subject = subject;
+            return this;
+        }
+
+        public VoteDTOBuilder withEvaluation(Float evaluation) {
+            this.evaluation = evaluation;
+            return this;
+        }
+
+        public VoteDTOBuilder withAnnotation(String annotation) {
+            this.annotation = annotation;
+            return this;
+        }
+
+        public VoteDTOBuilder withIsCheckPoint(Boolean isCheckPoint) {
+            this.isCheckPoint = isCheckPoint;
+            return this;
+        }
+
+        public VoteDTO build() {
+            VoteDTO voteDTO = new VoteDTO();
+            voteDTO.setIdRegister(idRegister);
+            voteDTO.setIdStudent(idStudent);
+            voteDTO.setDate(date);
+            voteDTO.setSubject(subject);
+            voteDTO.setEvaluation(evaluation);
+            voteDTO.setAnnotation(annotation);
+            voteDTO.setIsCheckPoint(isCheckPoint);
+            return voteDTO;
+        }
+    }
 }

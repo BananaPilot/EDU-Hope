@@ -27,16 +27,16 @@ public class ClassService {
         this.classRegisterMapper = classRegisterMapper;
     }
 
-    public BaseResponseList<Classes> findAll() {
-        return new BaseResponseList<>(classDAO.findAll());
+    public BaseResponseList<ClassRegisterDTO> findAll() {
+        return new BaseResponseList<>(classRegisterMapper.toListOfClassRegisterDto(classDAO.findAll()));
     }
 
-    public BaseResponseElement<Classes> findById(Long id) {
+    public BaseResponseElement<ClassRegisterDTO> findById(Long id) {
         Optional<Classes> result = classDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
         }
-        return new BaseResponseElement<>(result.get());
+        return new BaseResponseElement<>(classRegisterMapper.toClassRegisterDTO(result.get()));
     }
 
     public BaseResponseElement<ClassRegisterDTO> save(ClassRegisterDTO classDTO) {
