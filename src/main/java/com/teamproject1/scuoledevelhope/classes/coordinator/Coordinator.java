@@ -3,8 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.coordinator;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,7 +21,6 @@ public class Coordinator {
     private User user;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @NotEmpty(message = "Associates at least 1 class.")
     @OneToMany(
             mappedBy = "coordinator",
             fetch = FetchType.LAZY
@@ -42,11 +39,49 @@ public class Coordinator {
     public List<Classes> getClasses() {
         return classes;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
 
     public void setClasses(List<Classes> classes) {
         this.classes = classes;
+    }
+
+
+    public static final class CoordinatorBuilder {
+        private Long id;
+        private User user;
+        private List<Classes> classes;
+
+        private CoordinatorBuilder() {
+        }
+
+        public static CoordinatorBuilder aCoordinator() {
+            return new CoordinatorBuilder();
+        }
+
+        public CoordinatorBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public CoordinatorBuilder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public CoordinatorBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public Coordinator build() {
+            Coordinator coordinator = new Coordinator();
+            coordinator.setUser(user);
+            coordinator.setClasses(classes);
+            coordinator.id = this.id;
+            return coordinator;
+        }
     }
 }

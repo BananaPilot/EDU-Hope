@@ -14,10 +14,17 @@ public class UserMapper {
 
     public List<UserDto> userDtoList(List<User> users) {
         List<UserDto> userDtoList = new ArrayList<>();
-        for (User user: users) {
+        for (User user : users) {
             userDtoList.add(userToUserDto(user));
         }
         return userDtoList;
+    }
+
+    public User userDtoToUser(UserDto userDto){
+        return User.UserBuilder.anUser()
+                .withId(userDto.getId())
+                .withUsername(userDto.getUsername())
+                .build();
     }
 
 }

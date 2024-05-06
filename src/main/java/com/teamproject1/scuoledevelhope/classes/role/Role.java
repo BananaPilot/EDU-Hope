@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 

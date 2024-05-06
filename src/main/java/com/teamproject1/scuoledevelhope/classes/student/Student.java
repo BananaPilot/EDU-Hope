@@ -4,9 +4,6 @@ import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -24,13 +21,11 @@ public class Student {
     private User user;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @NotEmpty(message = "Associates at least 1 class.")
     @ManyToOne
     @JoinColumn(name = "id_class")
     private Classes schoolClass;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @NotEmpty(message = "Associates at least 1 register.")
     @ManyToOne
     @JoinColumn(name = "id_register")
     private Register register;
@@ -70,5 +65,49 @@ public class Student {
 
     public void setRegister(Register register) {
         this.register = register;
+    }
+
+
+    public static final class StudentBuilder {
+        private Long id;
+        private User user;
+        private Classes schoolClass;
+        private Register register;
+
+        private StudentBuilder() {
+        }
+
+        public static StudentBuilder aStudent() {
+            return new StudentBuilder();
+        }
+
+        public StudentBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public StudentBuilder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public StudentBuilder withSchoolClass(Classes schoolClass) {
+            this.schoolClass = schoolClass;
+            return this;
+        }
+
+        public StudentBuilder withRegister(Register register) {
+            this.register = register;
+            return this;
+        }
+
+        public Student build() {
+            Student student = new Student();
+            student.setUser(user);
+            student.setSchoolClass(schoolClass);
+            student.setRegister(register);
+            student.id = this.id;
+            return student;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.classP.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.service.ClassService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -19,27 +20,26 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<Classes> findAll() {
+    public BaseResponseList<ClassRegisterDTO> findAll() {
         return classService.findAll();
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping
-    public BaseResponseElement<Classes> findById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public BaseResponseElement<ClassRegisterDTO> findById(@PathVariable Long id) {
         return classService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<Classes> save(@Valid @RequestBody Classes classes) {
-        return classService.save(classes);
+    public BaseResponseElement<ClassRegisterDTO> save(@Valid @RequestBody ClassRegisterDTO classRegisterDTO) {
+        return classService.save(classRegisterDTO);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete")
-    public BaseResponseElement<Classes> delete(@Valid @RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public BaseResponseElement<ClassRegisterDTO> delete(@Valid @PathVariable Long id) {
         return classService.deleteById(id);
     }
-
 
 }

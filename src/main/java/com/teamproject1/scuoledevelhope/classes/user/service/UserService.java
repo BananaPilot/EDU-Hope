@@ -39,8 +39,8 @@ public class UserService {
         this.utils = utils;
     }
 
-    public UserListDto getAll(int pageSize, int page) {
-        Page<User> users = userDao.getAll(PageRequest.of(page, pageSize));
+    public UserListDto getAll(int limit, int page) {
+        Page<User> users = userDao.getAll(PageRequest.of(page, limit));
         return UserListDto.UserListDtoBuilder.anUserListDto()
                 .withUsers(mapper.userDtoList(users.toList()))
                 .withPage(users.getPageable().getPageNumber())

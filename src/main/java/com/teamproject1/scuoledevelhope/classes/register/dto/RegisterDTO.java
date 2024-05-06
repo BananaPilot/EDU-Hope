@@ -1,60 +1,60 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
+import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
+import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class RegisterDTO {
+public class RegisterDTO extends Pagination {
+    private String schoolYear;
+    private Long tutorId;
+    private String nameClass;
+    private List<StudentDto> students;
+    private List<VoteDTO> votes;
 
+    public String getSchoolYear() {
+        return schoolYear;
+    }
 
-        private Date schoolYear;
+    public void setSchoolYear(String schoolYear) {
+        this.schoolYear = schoolYear;
+    }
 
-        private long classId;
+    public Long getTutorId() {
+        return tutorId;
+    }
 
-        private long tutorId;
+    public void setTutorId(Long tutorId) {
+        this.tutorId = tutorId;
+    }
 
-        public RegisterDTO(Date schoolYear, long classId, long tutorId) {
-            this.schoolYear = schoolYear;
-            this.classId = classId;
-            this.tutorId = tutorId;
-        }
+    public List<StudentDto> getStudents() {
+        return students;
+    }
 
-        public Date getSchoolYear() {
-            return schoolYear;
-        }
+    public void setStudents(List<StudentDto> students) {
+        this.students = students;
+    }
 
-        public void setSchoolYear(Date schoolYear) {
-            this.schoolYear = schoolYear;
-        }
+    public List<VoteDTO> getVotes() {
+        return votes;
+    }
 
-        public long getClassId() {
-            return classId;
-        }
-
-        public void setClassId(long classId) {
-            this.classId = classId;
-        }
-
-        public long getTutorId() {
-            return tutorId;
-        }
-
-        public void setTutorId(long tutorId) {
-            this.tutorId = tutorId;
-        }
-
-        public List<VoteDTO> getRegisterVoteDTO() {
-            return registerVoteDTO;
-        }
-
-        public void setRegisterVoteDTO(List<VoteDTO> registerVoteDTO) {
-            this.registerVoteDTO = registerVoteDTO;
-        }
-
-        List<VoteDTO> registerVoteDTO = new ArrayList<>();
+    public void setVotes(List<VoteDTO> votes) {
+        this.votes = votes;
 
     }
 
+    public String getNameClass() {
+        return nameClass;
+    }
 
+    public void setNameClass(String nameClass) {
+        this.nameClass = nameClass;
+    }
+}
