@@ -24,7 +24,7 @@ public class TutorMapper {
     public TutorDto tutorToTutorDto(Tutor tutor) {
         return TutorDto.TutorDtoBuilder.aTutorDto()
                 .withUser(userMapper.userToUserDto(tutor.getUser()))
-                .withClasses(classRegisterMapper.toListOfClassRegisterDto(tutor.getClasses()))
+                .withClasses(tutor.getClasses() != null ? classRegisterMapper.toListOfClassRegisterDto(tutor.getClasses()) : null)
                 .build();
     }
 

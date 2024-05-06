@@ -36,6 +36,12 @@ public class StudentController {
         return studentService.deleteById(id);
     }
 
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @PostMapping("/save/{username}")
+    public BaseResponseElement<StudentDto> save(@PathVariable String username) {
+        return studentService.save(username);
+    }
+
 
 }
 

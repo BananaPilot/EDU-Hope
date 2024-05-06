@@ -23,7 +23,7 @@ public class StudentMapper {
     public StudentDto toStudentDto(Student student) {
         return StudentDto.StudentDtoBuilder.aStudentDto()
                 .withUser(userMapper.userToUserDto(student.getUser()))
-                .withSchoolClass(classRegisterMapper.toClassRegisterDTO(student.getSchoolClass()))
+                .withSchoolClass(student.getSchoolClass() != null ? classRegisterMapper.toClassRegisterDTO(student.getSchoolClass()) : null)
                 .build();
     }
 

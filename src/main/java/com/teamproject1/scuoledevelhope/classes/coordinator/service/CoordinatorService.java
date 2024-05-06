@@ -5,9 +5,12 @@ import com.teamproject1.scuoledevelhope.classes.coordinator.dto.CoordinatorDto;
 import com.teamproject1.scuoledevelhope.classes.coordinator.dto.CoordinatorDtoList;
 import com.teamproject1.scuoledevelhope.classes.coordinator.dto.CoordinatorMapper;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
+import com.teamproject1.scuoledevelhope.classes.role.Role;
+import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -20,11 +23,13 @@ public class CoordinatorService {
 
     private final CoordinatorDAO coordinatorDAO;
     private final UserDao userDao;
+    private final RoleDao roleDao;
     private final CoordinatorMapper coordinatorMapper;
 
-    public CoordinatorService(CoordinatorDAO coordinatorDAO, UserDao userDao, CoordinatorMapper coordinatorMapper) {
+    public CoordinatorService(CoordinatorDAO coordinatorDAO, UserDao userDao, RoleDao roleDao, CoordinatorMapper coordinatorMapper) {
         this.coordinatorDAO = coordinatorDAO;
         this.userDao = userDao;
+        this.roleDao = roleDao;
         this.coordinatorMapper = coordinatorMapper;
     }
 
@@ -49,8 +54,10 @@ public class CoordinatorService {
         return new BaseResponseElement<>(coordinatorMapper.toCoordinatorDto(result.get()));
     }
 
+    @Transactional
     public BaseResponseElement<CoordinatorDto> save(String username) {
         Coordinator coordinator = coordinatorDAO.save(coordinatorMapper.userToCoordinator(userDao.getByUsername(username)));
+        roleDao.addRoleWithUsername(username, Role.RoleEnum.COORDINATOR.getRoleString());
         return new BaseResponseElement<>(coordinatorMapper.toCoordinatorDto(coordinator));
     }
 

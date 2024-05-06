@@ -22,7 +22,7 @@ public class CoordinatorMapper {
 
     public CoordinatorDto toCoordinatorDto(Coordinator coordinator) {
         return CoordinatorDto.CoordinatorDtoBuilder.aCoordinatorDto()
-                .withClasses(classRegisterMapper.toListOfClassRegisterDto(coordinator.getClasses()))
+                .withClasses(coordinator.getClasses() != null ? classRegisterMapper.toListOfClassRegisterDto(coordinator.getClasses()) : null)
                 .withUser(userMapper.userToUserDto(coordinator.getUser()))
                 .build();
     }
