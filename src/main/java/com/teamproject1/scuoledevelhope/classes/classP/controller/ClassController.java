@@ -38,9 +38,8 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/delete")
-    public BaseResponseElement<Classes> delete(@Valid @RequestParam Long id) {
+    public BaseResponseElement<ClassRegisterDTO> delete(@Valid @RequestParam Long id) {
         return classService.deleteById(id);
     }
-
 
 }

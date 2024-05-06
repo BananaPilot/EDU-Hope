@@ -10,6 +10,7 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -52,15 +53,22 @@ public class ClassService {
 
         return new BaseResponseElement<>(classDTO);
     }
+    @Transactional
+    public BaseResponseElement<ClassRegisterDTO> deleteById(Long id) {
+        Optional<Classes> classes = classDAO.findById(id);
+        Optional<Register> register = registerDao.findById(id);
 
-    public BaseResponseElement<Classes> deleteById(Long id) {
-        Optional<Classes> temp = classDAO.findById(id);
-
-        if (temp.isEmpty()) {
+        if (classes.isEmpty()) {
             throw new SQLException("Class was not present");
         }
+        if (register.isEmpty()){
+            throw new SQLException("Register was not present");
+        }
+        ClassRegisterDTO temp = classRegisterMapper.toClassRegisterDTO(classes.get(), register.get());
+
+        registerDao.deleteById(id);
         classDAO.deleteById(id);
 
-        return new BaseResponseElement<>(temp.get());
+        return new BaseResponseElement<>(temp);
     }
 }
