@@ -51,4 +51,5 @@ public class VoteMapper {
 
         return propertyMapper.map(vote);
     }
+
 }

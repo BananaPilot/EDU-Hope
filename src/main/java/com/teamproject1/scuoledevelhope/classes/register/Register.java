@@ -79,4 +79,20 @@ public class Register {
     public Tutor getTutor() {
         return tutor;
     }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 }
