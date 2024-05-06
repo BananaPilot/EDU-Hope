@@ -42,4 +42,17 @@ public class ClassRegisterMapper {
 
         return register;
     }
+
+    public ClassRegisterDTO toClassRegisterDTO(Classes classes, Register register){
+        ClassRegisterDTO classRegisterDTO = new ClassRegisterDTO();
+
+        classRegisterDTO.setSchoolYear(register.getSchoolYear());
+        classRegisterDTO.setClassName(classes.getName());
+        classRegisterDTO.setSchoolId(classes.getSchool().getId());
+        classRegisterDTO.setCoordinatorId(classes.getTutor().getUser().getId());
+        classRegisterDTO.setCourseId(classes.getCourse().getId());
+        classRegisterDTO.setTutorId(classes.getTutor().getUser().getId());
+
+        return classRegisterDTO;
+    }
 }
