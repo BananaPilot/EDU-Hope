@@ -24,7 +24,6 @@ public class Tutor {
     private User user;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @NotEmpty(message = "Associates at least 1 class.")
     @OneToMany(
             mappedBy = "tutor",
             fetch = FetchType.LAZY
@@ -56,5 +55,49 @@ public class Tutor {
 
     public void setRegisters(List<Register> registers) {
         this.registers = registers;
+    }
+
+
+    public static final class TutorBuilder {
+        private Long id;
+        private User user;
+        private List<Classes> classes;
+        private List<Register> registers;
+
+        private TutorBuilder() {
+        }
+
+        public static TutorBuilder aTutor() {
+            return new TutorBuilder();
+        }
+
+        public TutorBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public TutorBuilder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public TutorBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public TutorBuilder withRegisters(List<Register> registers) {
+            this.registers = registers;
+            return this;
+        }
+
+        public Tutor build() {
+            Tutor tutor = new Tutor();
+            tutor.setUser(user);
+            tutor.setRegisters(registers);
+            tutor.id = this.id;
+            tutor.classes = this.classes;
+            return tutor;
+        }
     }
 }

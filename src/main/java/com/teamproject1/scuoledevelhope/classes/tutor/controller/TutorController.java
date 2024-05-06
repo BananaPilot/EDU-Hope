@@ -2,7 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.tutor.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.tutor.dto.TutorDto;
+import com.teamproject1.scuoledevelhope.classes.tutor.dto.TutorDtoList;
 import com.teamproject1.scuoledevelhope.classes.tutor.service.TutorService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/tutor")
 public class TutorController {
 
     private final TutorService tutorService;
@@ -18,29 +20,28 @@ public class TutorController {
         this.tutorService = tutorService;
     }
 
-
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/get-all")
-    public BaseResponseList<Tutor> findAll() {
-        return tutorService.findAll();
+    public TutorDtoList findAll(@RequestParam int limit, int page) {
+        return tutorService.findAll(limit, page);
     }
 
     @NoAuthorization
-    // @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @GetMapping("/get-by-id")
-    public BaseResponseElement<Tutor> findById(@Valid @RequestParam Long id) {
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @GetMapping("/{id}")
+    public BaseResponseElement<TutorDto> findById(@Valid @PathVariable Long id) {
         return tutorService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PostMapping("/save")
-    public BaseResponseElement<Tutor> save(@Valid @RequestBody Tutor tutor) {
-        return tutorService.save(tutor);
+    @PostMapping("/save/{username}")
+    public BaseResponseElement<TutorDto> save(@Valid @PathVariable String username) {
+        return tutorService.save(username);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Tutor> delete(@Valid @RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public BaseResponseElement<TutorDto> delete(@Valid @PathVariable Long id) {
         return tutorService.deleteById(id);
     }
 

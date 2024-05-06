@@ -89,6 +89,10 @@ public class Classes {
         return school;
     }
 
+    public Register getRegisters() {
+        return registers;
+    }
+
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }

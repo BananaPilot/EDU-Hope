@@ -2,7 +2,7 @@ package com.teamproject1.scuoledevelhope.types.dtos;
 
 import org.springframework.http.HttpStatus;
 
-public class Pagination extends BaseResponse{
+public class Pagination extends BaseResponse {
 
     public Pagination(HttpStatus httpStatus, String message, String description, int page, int pageSize, long totalElements, int totalPages) {
         super(httpStatus, message, description);

@@ -8,6 +8,9 @@ import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ClassRegisterMapper {
     private final CoordinatorDAO coordinatorDAO;
@@ -43,16 +46,26 @@ public class ClassRegisterMapper {
         return register;
     }
 
-    public ClassRegisterDTO toClassRegisterDTO(Classes classes, Register register){
+    public ClassRegisterDTO toClassRegisterDTO(Classes classes){
         ClassRegisterDTO classRegisterDTO = new ClassRegisterDTO();
 
-        classRegisterDTO.setSchoolYear(register.getSchoolYear());
+        classRegisterDTO.setSchoolYear(classes.getRegisters().getSchoolYear());
         classRegisterDTO.setClassName(classes.getName());
         classRegisterDTO.setSchoolId(classes.getSchool().getId());
-        classRegisterDTO.setCoordinatorId(classes.getTutor().getUser().getId());
+        classRegisterDTO.setCoordinatorId(classes.getCoordinator().getUser().getId());
         classRegisterDTO.setCourseId(classes.getCourse().getId());
         classRegisterDTO.setTutorId(classes.getTutor().getUser().getId());
 
         return classRegisterDTO;
     }
+
+    public List<ClassRegisterDTO> toListOfClassRegisterDto(List<Classes> classes) {
+        List<ClassRegisterDTO> toReturn = new ArrayList<>();
+        for (Classes clazz: classes) {
+            toReturn.add(toClassRegisterDTO(clazz));
+        }
+        return toReturn;
+    }
+
+
 }
