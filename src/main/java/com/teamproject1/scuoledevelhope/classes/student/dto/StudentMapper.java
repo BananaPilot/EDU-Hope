@@ -38,4 +38,22 @@ public class StudentMapper {
                 .withUser(user)
                 .build();
     }
+
+    public Student toStudent(StudentDto studentDto){
+        return Student.StudentBuilder.aStudent()
+                .withUser(userMapper.userDtoToUser(studentDto.getUser()))
+                .withId(studentDto.getUser().getId())
+                .withSchoolClass(classRegisterMapper.toClass(studentDto.getSchoolClass()))
+                .withRegister(classRegisterMapper.toRegister(studentDto.getSchoolClass()))
+                .build();
+    }
+
+    public  List<Student> toStudentList(List<StudentDto> studentDtoList){
+        List<Student> students = new ArrayList<>();
+        for( StudentDto element : studentDtoList){
+            students.add(this.toStudent(element));
+        }
+
+        return students;
+    }
 }

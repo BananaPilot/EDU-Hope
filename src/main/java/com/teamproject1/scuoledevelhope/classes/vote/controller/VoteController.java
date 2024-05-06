@@ -24,8 +24,8 @@ public class VoteController {
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/by-student")
-    public BaseResponseList<VoteDTO> findByStudent(@Valid @RequestParam Long idStudent) {
+    @GetMapping("/{idStudent}")
+    public BaseResponseList<VoteDTO> findByStudent(@Valid @PathVariable Long idStudent) {
         return voteService.findByStudent(idStudent);
     }
 
