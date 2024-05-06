@@ -11,6 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassDAO extends JpaRepository<Classes, Long> {
 
-
-
 }
