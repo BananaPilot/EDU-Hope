@@ -38,6 +38,10 @@ public class Tutor {
     )
     private List<Register> registers;
 
+    public List<Classes> getClasses() {
+        return classes;
+    }
+
     public User getUser() {
         return user;
     }

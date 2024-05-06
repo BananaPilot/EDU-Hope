@@ -42,4 +42,8 @@ public class ClassRegisterMapper {
 
         return register;
     }
+
+    public ClassRegisterDTO classToClassRegisterDto(Classes classes) {
+        return ClassRegisterDTO
+    }
 }
