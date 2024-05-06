@@ -42,5 +42,4 @@ public class ClassController {
         return classService.deleteById(id);
     }
 
-
 }
