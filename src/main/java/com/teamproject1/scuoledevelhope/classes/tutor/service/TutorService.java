@@ -23,11 +23,12 @@ public class TutorService {
 
     private final UserDao userDao;
 
-    private final TutorMapper tutorMapper = new TutorMapper();
+    private final TutorMapper tutorMapper;
 
-    public TutorService(TutorDAO tutorDAO, UserDao userDao) {
+    public TutorService(TutorDAO tutorDAO, UserDao userDao, TutorMapper tutorMapper) {
         this.tutorDAO = tutorDAO;
         this.userDao = userDao;
+        this.tutorMapper = tutorMapper;
     }
 
 

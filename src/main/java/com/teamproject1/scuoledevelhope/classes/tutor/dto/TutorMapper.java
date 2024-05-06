@@ -15,8 +15,12 @@ public class TutorMapper {
 
     private final UserMapper userMapper = new UserMapper();
 
-    @Autowired
-    ClassRegisterMapper classRegisterMapper;
+    private final ClassRegisterMapper classRegisterMapper;
+
+    public TutorMapper(ClassRegisterMapper classRegisterMapper) {
+
+        this.classRegisterMapper = classRegisterMapper;
+    }
 
     public TutorDto tutorToTutorDto(Tutor tutor) {
         return TutorDto.TutorDtoBuilder.aTutorDto()

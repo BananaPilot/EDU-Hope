@@ -22,11 +22,12 @@ public class CoordinatorService {
 
     private final CoordinatorDAO coordinatorDAO;
     private final UserDao userDao;
-    private final CoordinatorMapper coordinatorMapper = new CoordinatorMapper();
+    private final CoordinatorMapper coordinatorMapper;
 
-    public CoordinatorService(CoordinatorDAO coordinatorDAO, UserDao userDao) {
+    public CoordinatorService(CoordinatorDAO coordinatorDAO, UserDao userDao, CoordinatorMapper coordinatorMapper) {
         this.coordinatorDAO = coordinatorDAO;
         this.userDao = userDao;
+        this.coordinatorMapper = coordinatorMapper;
     }
 
 

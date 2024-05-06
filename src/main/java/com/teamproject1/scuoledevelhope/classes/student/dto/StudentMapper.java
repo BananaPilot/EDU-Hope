@@ -4,6 +4,7 @@ import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,11 @@ public class StudentMapper {
 
     @Autowired
     private ClassRegisterMapper classRegisterMapper;
+
+    @PostConstruct
+    void postContruct() {
+        System.out.println(classRegisterMapper);
+    }
 
     public StudentDto toStudentDto(Student student) {
         return StudentDto.StudentDtoBuilder.aStudentDto()
