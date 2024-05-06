@@ -24,7 +24,6 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 

@@ -64,17 +64,15 @@ public class UserService {
 
         userAdd.setPassword(encoder.encode(userAdd.getPassword()));
 
-        int userRes = userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
+        userDao.addUser(userAdd.getUsername(), userAdd.getPassword());
         User user = userDao.getByUsername(userAdd.getUsername());
-        int userRegistryRes = userRegistryDAO.addRegistry(userAdd.getEmail(), userAdd.getName(), userAdd.getSurname(), userAdd.getPhoneNumber(), user.getId());
+        userRegistryDAO.addRegistry(userAdd.getEmail(), userAdd.getName(), userAdd.getSurname(), userAdd.getPhoneNumber(), user.getId());
         userDao.addUserRegistry(user.getId());
         roleDao.addRoleWithUsername(userAdd.getUsername(), Role.RoleEnum.USER.getRoleString());
-        if (userRes < 0 || userRegistryRes < 0) {
-            throw new SQLException("User was not added");
-        }
         user = userDao.getByUsername(userAdd.getUsername());
         return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .withUserRegistry(userRegistryDAO.registryById(user.getId()))
                 .withHttpStatus(HttpStatus.CREATED)
                 .withMessage("User created")
                 .build();

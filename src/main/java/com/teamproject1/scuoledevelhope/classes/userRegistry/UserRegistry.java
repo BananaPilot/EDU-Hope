@@ -70,4 +70,5 @@ public class UserRegistry {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
 }
