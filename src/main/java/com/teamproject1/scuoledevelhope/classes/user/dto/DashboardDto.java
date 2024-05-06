@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 public class DashboardDto extends BaseResponse {
 
     private String username;
-    private RoleDashboard role;
     private UserRegistry userRegistry;
+    private RoleDashboard role;
 
     public String getUsername() {
         return username;
