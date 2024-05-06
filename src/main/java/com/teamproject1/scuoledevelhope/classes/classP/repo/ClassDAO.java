@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassDAO extends JpaRepository<Classes, Long> {
 
+    @Query(value = "select * from class where class_name = :className", nativeQuery = true)
+    Classes getByName(@Param("className") String className);
+
 }
