@@ -43,7 +43,7 @@ public class ClassRegisterMapper {
         return register;
     }
 
-    public ClassRegisterDTO classRegisterDTO(Classes classes, Register register){
+    public ClassRegisterDTO toClassRegisterDTO(Classes classes, Register register){
         ClassRegisterDTO classRegisterDTO = new ClassRegisterDTO();
 
         classRegisterDTO.setSchoolYear(register.getSchoolYear());
