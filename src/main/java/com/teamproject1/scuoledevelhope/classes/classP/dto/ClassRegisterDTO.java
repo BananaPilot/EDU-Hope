@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.classP.dto;
 
-public class ClassDTO {
+public class ClassRegisterDTO {
 
     private String className;
     private Long tutorId;

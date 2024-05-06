@@ -1,11 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.classP.service;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassDTO;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -39,16 +38,17 @@ public class ClassService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseElement<ClassDTO> save(ClassDTO classDTO) {
+    public BaseResponseElement<ClassRegisterDTO> save(ClassRegisterDTO classDTO) {
         Classes classes = classRegisterMapper.toClass(classDTO);
         Register register = classRegisterMapper.toRegister(classDTO);
 
         classDAO.save(classes);
-        registerDao.save(register);
 
         register.setSchoolClass(classDAO.findById(classes.getId()).orElseThrow(
                 ()-> new NotFoundException("class not found")
         ));
+
+        registerDao.save(register);
 
         return new BaseResponseElement<>(classDTO);
     }
