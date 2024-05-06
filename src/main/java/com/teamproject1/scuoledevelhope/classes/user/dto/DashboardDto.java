@@ -31,7 +31,8 @@ public class DashboardDto extends BaseResponse {
         this.userRegistry = userRegistry;
     }
 
-    public DashboardDto() {}
+    public DashboardDto() {
+    }
 
 
     public static final class DashboardDtoBuilder {

@@ -1,14 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.student.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,7 +35,6 @@ public class StudentController {
 
         return studentService.deleteById(id);
     }
-
 
 
 }

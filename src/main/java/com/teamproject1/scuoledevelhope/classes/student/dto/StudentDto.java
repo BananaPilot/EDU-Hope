@@ -3,8 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.student.dto;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserDto;
 
-import java.io.Serializable;
-
 public class StudentDto {
     private final UserDto user;
     private final ClassRegisterDTO schoolClass;

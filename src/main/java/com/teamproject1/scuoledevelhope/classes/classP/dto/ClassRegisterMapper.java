@@ -26,7 +26,7 @@ public class ClassRegisterMapper {
         this.schoolDAO = schoolDAO;
     }
 
-    public Classes toClass(ClassRegisterDTO classRegisterDTO){
+    public Classes toClass(ClassRegisterDTO classRegisterDTO) {
         Classes classes = new Classes();
 
         classes.setName(classRegisterDTO.getClassName());
@@ -37,7 +37,7 @@ public class ClassRegisterMapper {
         return classes;
     }
 
-    public Register toRegister(ClassRegisterDTO classRegisterDTO){
+    public Register toRegister(ClassRegisterDTO classRegisterDTO) {
         Register register = new Register();
 
         register.setTutor(tutorDAO.findById(classRegisterDTO.getTutorId()).orElse(null));
@@ -46,7 +46,7 @@ public class ClassRegisterMapper {
         return register;
     }
 
-    public ClassRegisterDTO toClassRegisterDTO(Classes classes){
+    public ClassRegisterDTO toClassRegisterDTO(Classes classes) {
         ClassRegisterDTO classRegisterDTO = new ClassRegisterDTO();
 
         classRegisterDTO.setSchoolYear(classes.getRegisters().getSchoolYear());
@@ -61,7 +61,7 @@ public class ClassRegisterMapper {
 
     public List<ClassRegisterDTO> toListOfClassRegisterDto(List<Classes> classes) {
         List<ClassRegisterDTO> toReturn = new ArrayList<>();
-        for (Classes clazz: classes) {
+        for (Classes clazz : classes) {
             toReturn.add(toClassRegisterDTO(clazz));
         }
         return toReturn;

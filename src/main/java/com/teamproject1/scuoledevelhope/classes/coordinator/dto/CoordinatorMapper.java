@@ -2,10 +2,8 @@ package com.teamproject1.scuoledevelhope.classes.coordinator.dto;
 
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
-import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,10 +12,13 @@ import java.util.List;
 @Component
 public class CoordinatorMapper {
 
-    @Autowired
-    ClassRegisterMapper classRegisterMapper;
+    private final ClassRegisterMapper classRegisterMapper;
 
     private final UserMapper userMapper = new UserMapper();
+
+    public CoordinatorMapper(ClassRegisterMapper classRegisterMapper) {
+        this.classRegisterMapper = classRegisterMapper;
+    }
 
     public CoordinatorDto toCoordinatorDto(Coordinator coordinator) {
         return CoordinatorDto.CoordinatorDtoBuilder.aCoordinatorDto()
@@ -28,7 +29,7 @@ public class CoordinatorMapper {
 
     public List<CoordinatorDto> toCoordinatorDtoList(List<Coordinator> coordinators) {
         List<CoordinatorDto> toReturn = new ArrayList<>();
-        for (Coordinator coordinator: coordinators) {
+        for (Coordinator coordinator : coordinators) {
             toReturn.add(toCoordinatorDto(coordinator));
         }
         return toReturn;

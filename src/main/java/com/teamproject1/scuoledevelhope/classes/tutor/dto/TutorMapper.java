@@ -4,7 +4,6 @@ import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class TutorMapper {
 
     public List<TutorDto> toListTutorDto(List<Tutor> tutors) {
         List<TutorDto> toReturn = new ArrayList<>();
-        for (Tutor tutor: tutors) {
+        for (Tutor tutor : tutors) {
             toReturn.add(this.tutorToTutorDto(tutor));
         }
         return toReturn;

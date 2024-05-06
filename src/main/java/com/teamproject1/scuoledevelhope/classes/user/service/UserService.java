@@ -12,8 +12,6 @@ import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.transaction.Transactional;

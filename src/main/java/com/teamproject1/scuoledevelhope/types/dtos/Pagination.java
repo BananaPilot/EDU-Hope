@@ -16,9 +16,9 @@ public class Pagination extends BaseResponse {
     }
 
     private int page;
-    private int pageSize ;
-    private long totalElements ;
-    private int totalPages ;
+    private int pageSize;
+    private long totalElements;
+    private int totalPages;
 
     public int getPage() {
         return page;

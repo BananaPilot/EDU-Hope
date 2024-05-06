@@ -3,8 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.coordinator;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -41,6 +39,7 @@ public class Coordinator {
     public List<Classes> getClasses() {
         return classes;
     }
+
     public void setUser(User user) {
         this.user = user;
     }

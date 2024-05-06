@@ -4,8 +4,6 @@ import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,12 +14,10 @@ public class StudentMapper {
 
     private final UserMapper userMapper = new UserMapper();
 
-    @Autowired
-    private ClassRegisterMapper classRegisterMapper;
+    private final ClassRegisterMapper classRegisterMapper;
 
-    @PostConstruct
-    void postContruct() {
-        System.out.println(classRegisterMapper);
+    public StudentMapper(ClassRegisterMapper classRegisterMapper) {
+        this.classRegisterMapper = classRegisterMapper;
     }
 
     public StudentDto toStudentDto(Student student) {
@@ -33,7 +29,7 @@ public class StudentMapper {
 
     public List<StudentDto> toStudentDtoList(List<Student> students) {
         List<StudentDto> toReturn = new ArrayList<>();
-        for (Student student: students) {
+        for (Student student : students) {
             toReturn.add(this.toStudentDto(student));
         }
         return toReturn;

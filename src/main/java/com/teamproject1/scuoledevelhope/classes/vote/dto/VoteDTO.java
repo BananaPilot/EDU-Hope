@@ -65,7 +65,7 @@ public class VoteDTO {
     public Boolean getIsCheckPoint() {
         return isCheckPoint;
     }
-  
+
     public void setIsCheckPoint(Boolean isCheckPoint) {
         this.isCheckPoint = isCheckPoint;
     }

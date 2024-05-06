@@ -14,7 +14,8 @@ public class Calendar extends Pagination {
     private LocalDate endDate;
     private List<MeetingResponse> calendar = new ArrayList<>();
 
-    public Calendar() {}
+    public Calendar() {
+    }
 
     public Calendar(HttpStatus httpStatus, String message, String description, int page, int pageSize, long totalElements, int totalPages, LocalDate startDate, LocalDate endDate, List<MeetingResponse> calendar) {
         super(httpStatus, message, description, page, pageSize, totalElements, totalPages);

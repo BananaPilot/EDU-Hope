@@ -7,7 +7,6 @@ import com.teamproject1.scuoledevelhope.classes.tutor.dto.TutorMapper;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

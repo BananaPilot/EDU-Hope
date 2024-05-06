@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.coordinator.dto;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserDto;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class CoordinatorDto {

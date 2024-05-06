@@ -7,10 +7,8 @@ import com.teamproject1.scuoledevelhope.classes.student.dto.StudentMapper;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -64,7 +62,7 @@ public class StudentService {
         return new BaseResponseElement<>(studentMapper.toStudentDto(temp.get()));
 
     }
-    
+
     public BaseResponseElement<StudentDto> save(@Valid String username) {
         Student student = studentMapper.userToStudent(userDao.getByUsername(username));
         return new BaseResponseElement<>(studentMapper.toStudentDto(studentDAO.save(student)));
