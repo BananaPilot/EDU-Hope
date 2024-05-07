@@ -36,7 +36,6 @@ public class SchoolService {
 
     public BaseResponseElement<SchoolDto> save(SchoolDto schoolDto){
         SchoolDto school = schoolMapper.toSchoolDto(schoolDAO.save(schoolMapper.toSchool(schoolDto)));
-
         return new BaseResponseElement<>(school);
     }
 

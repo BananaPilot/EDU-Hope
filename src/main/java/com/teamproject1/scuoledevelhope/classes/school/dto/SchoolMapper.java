@@ -13,7 +13,7 @@ public class SchoolMapper {
     }
 
     public SchoolDto toSchoolDto(School school){
-        return SchoolDto.SchoolDtoBuilder.aSchoolDTO()
+        return SchoolDto.SchoolDtoBuilder.aSchoolDto()
                 .withName(school.getName())
                 .build();
     }
