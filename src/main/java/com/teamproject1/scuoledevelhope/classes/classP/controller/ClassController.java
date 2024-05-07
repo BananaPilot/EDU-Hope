@@ -3,6 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.classP.controller;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.classP.service.ClassService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -20,8 +21,8 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<ClassRegisterDTO> findAll() {
-        return classService.findAll();
+    public ClassRegisterDtoList findAll(@RequestParam int limit, int page) {
+        return classService.findAll(limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
@@ -41,5 +42,7 @@ public class ClassController {
     public BaseResponseElement<ClassRegisterDTO> delete(@Valid @PathVariable Long id) {
         return classService.deleteById(id);
     }
+
+
 
 }
