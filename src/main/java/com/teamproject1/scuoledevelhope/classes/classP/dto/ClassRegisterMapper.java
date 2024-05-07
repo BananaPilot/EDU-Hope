@@ -61,8 +61,16 @@ public class ClassRegisterMapper {
 
     public List<ClassRegisterDTO> toListOfClassRegisterDto(List<Classes> classes) {
         List<ClassRegisterDTO> toReturn = new ArrayList<>();
-        for (Classes clazz : classes) {
-            toReturn.add(toClassRegisterDTO(clazz));
+        for (Classes element : classes) {
+            toReturn.add(this.toClassRegisterDTO(element));
+        }
+        return toReturn;
+    }
+
+    public List<Classes> toListOfClass(List<ClassRegisterDTO> classRegisterListDto) {
+        List<Classes> toReturn = new ArrayList<>();
+        for (ClassRegisterDTO element : classRegisterListDto) {
+            toReturn.add(this.toClass(element));
         }
         return toReturn;
     }
