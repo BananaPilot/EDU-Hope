@@ -13,7 +13,6 @@ public class SchoolDto {
 
 
     public static final class SchoolDtoBuilder {
-        private Long id;
         private String name;
 
         private SchoolDtoBuilder() {
@@ -22,7 +21,6 @@ public class SchoolDto {
         public static SchoolDtoBuilder aSchoolDto() {
             return new SchoolDtoBuilder();
         }
-
 
         public SchoolDtoBuilder withName(String name) {
             this.name = name;
