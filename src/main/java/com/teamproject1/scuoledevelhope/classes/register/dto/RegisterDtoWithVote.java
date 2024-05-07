@@ -1,21 +1,14 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
-import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
-import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
-import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
-import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class RegisterDTO {
+public class RegisterDtoWithVote {
     private String schoolYear;
     private Long tutorId;
     private String nameClass;
-    private List<StudentDto> students;
     private List<VoteDTO> votes;
 
     public String getSchoolYear() {
@@ -34,13 +27,6 @@ public class RegisterDTO {
         this.tutorId = tutorId;
     }
 
-    public List<StudentDto> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<StudentDto> students) {
-        this.students = students;
-    }
 
     public List<VoteDTO> getVotes() {
         return votes;
@@ -88,22 +74,17 @@ public class RegisterDTO {
             return this;
         }
 
-        public RegisterDTOBuilder withStudents(List<StudentDto> students) {
-            this.students = students;
-            return this;
-        }
 
         public RegisterDTOBuilder withVotes(List<VoteDTO> votes) {
             this.votes = votes;
             return this;
         }
 
-        public RegisterDTO build() {
-            RegisterDTO registerDTO = new RegisterDTO();
+        public RegisterDtoWithVote build() {
+            RegisterDtoWithVote registerDTO = new RegisterDtoWithVote();
             registerDTO.setSchoolYear(schoolYear);
             registerDTO.setTutorId(tutorId);
             registerDTO.setNameClass(nameClass);
-            registerDTO.setStudents(students);
             registerDTO.setVotes(votes);
             return registerDTO;
         }
