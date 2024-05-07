@@ -67,7 +67,7 @@ public class VoteService {
     }
 
     public BaseResponseElement<VoteDTO> addVote(VoteDTO voteDTO) {
-        Vote res = voteDAO.save(voteMapper.toVote(voteDTO));
+        voteDAO.save(voteMapper.toVote(voteDTO));
 
         return new BaseResponseElement<>(voteDTO);
     }

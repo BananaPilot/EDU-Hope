@@ -58,4 +58,55 @@ public class School {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public static final class SchoolBuilder {
+        private @NotBlank(message = "School name can't be blank") String name;
+
+        private Long id;
+        private List<Classes> classes;
+        private List<Course> courses;
+        private List<User> users;
+
+        private SchoolBuilder() {
+        }
+
+        public static SchoolBuilder aSchool() {
+            return new SchoolBuilder();
+        }
+
+        public SchoolBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SchoolBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+        public SchoolBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public SchoolBuilder withCourses(List<Course> courses) {
+            this.courses = courses;
+            return this;
+        }
+
+        public SchoolBuilder withUsers(List<User> users) {
+            this.users = users;
+            return this;
+        }
+
+        public School build() {
+            School school = new School();
+            school.setName(name);
+            school.id = this.id;
+            school.classes = this.classes;
+            school.courses = this.courses;
+            school.users = this.users;
+            return school;
+        }
+    }
 }
