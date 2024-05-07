@@ -94,4 +94,57 @@ public class Register {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+
+    public static final class RegisterBuilder {
+        private Long id;
+        private @NotBlank(message = "school year can't be blank") String schoolYear;
+        private Classes schoolClass;
+        private Tutor tutor;
+        private List<Vote> votes;
+        private List<Student> students;
+
+        private RegisterBuilder() {
+        }
+
+        public static RegisterBuilder aRegister() {
+            return new RegisterBuilder();
+        }
+
+        public RegisterBuilder withSchoolYear(String schoolYear) {
+            this.schoolYear = schoolYear;
+            return this;
+        }
+
+        public RegisterBuilder withSchoolClass(Classes schoolClass) {
+            this.schoolClass = schoolClass;
+            return this;
+        }
+
+        public RegisterBuilder withTutor(Tutor tutor) {
+            this.tutor = tutor;
+            return this;
+        }
+
+        public RegisterBuilder withVotes(List<Vote> votes) {
+            this.votes = votes;
+            return this;
+        }
+
+        public RegisterBuilder withStudents(List<Student> students) {
+            this.students = students;
+            return this;
+        }
+
+        public Register build() {
+            Register register = new Register();
+            register.setSchoolYear(schoolYear);
+            register.setSchoolClass(schoolClass);
+            register.setTutor(tutor);
+            register.setVotes(votes);
+            register.setStudents(students);
+            register.id = this.id;
+            return register;
+        }
+    }
 }
