@@ -1,6 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.course.service;
 
 import com.teamproject1.scuoledevelhope.classes.course.Course;
+import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
+import com.teamproject1.scuoledevelhope.classes.course.dto.CourseWithClassesDto;
+import com.teamproject1.scuoledevelhope.classes.course.dto.CourseMapper;
 import com.teamproject1.scuoledevelhope.classes.course.repo.CourseDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -13,28 +16,32 @@ import java.util.Optional;
 public class CourseService {
 
     private final CourseDAO courseDAO;
+    private final CourseMapper courseMapper;
 
-    public CourseService(CourseDAO courseDAO) {
+    public CourseService(CourseDAO courseDAO, CourseMapper courseMapper) {
         this.courseDAO = courseDAO;
+        this.courseMapper = courseMapper;
     }
 
-    public BaseResponseList<Course> findAll() {
-        return new BaseResponseList<>(courseDAO.findAll());
+    public BaseResponseList<CourseWithClassesDto> findAll() {
+        return new BaseResponseList<>(courseMapper.toCourseListDto(courseDAO.findAll()));
     }
 
-    public BaseResponseElement<Course> findById(Long id) {
+    public BaseResponseElement<CourseWithClassesDto> findById(Long id) {
         Optional<Course> result = courseDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Course was not present");
         }
-        return new BaseResponseElement<>(result.get());
+        return new BaseResponseElement<>(courseMapper.toCourseWithClassesDto(result.get()));
     }
 
-    public BaseResponseElement<Course> save(Course course) {
-        return new BaseResponseElement<>(courseDAO.save(course));
+    public BaseResponseElement<CourseDto> save(CourseDto courseDto) {
+
+        courseDAO.save(courseMapper.courseDtotoCourse(courseDto));
+        return new BaseResponseElement<>(courseDto);
     }
 
-    public BaseResponseElement<Course> deleteById(Long id) {
+    public BaseResponseElement<CourseDto> deleteById(Long id) {
         Optional<Course> temp = courseDAO.findById(id);
 
         if (temp.isEmpty()) {
@@ -42,7 +49,7 @@ public class CourseService {
         }
         courseDAO.deleteById(id);
 
-        return new BaseResponseElement<>(temp.get());
+        return new BaseResponseElement<>(courseMapper.toCourseDto(temp.get()));
     }
 }
 
