@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.school.dto;
 
 public class SchoolDto {
-    private Long id;
     private String name;
 
     public String getName() {
@@ -10,10 +9,6 @@ public class SchoolDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
     }
 
 
@@ -28,10 +23,6 @@ public class SchoolDto {
             return new SchoolDtoBuilder();
         }
 
-        public SchoolDtoBuilder withId(Long id) {
-            this.id = id;
-            return this;
-        }
 
         public SchoolDtoBuilder withName(String name) {
             this.name = name;
@@ -41,7 +32,6 @@ public class SchoolDto {
         public SchoolDto build() {
             SchoolDto schoolDto = new SchoolDto();
             schoolDto.setName(name);
-            schoolDto.id = this.id;
             return schoolDto;
         }
     }
