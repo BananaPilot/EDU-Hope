@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
@@ -28,17 +29,17 @@ public class CalendarController {
     //calendario di un utente in un intervallo di tempo
     @FloorLevelAuthorization(floorRole = "USER")
     @GetMapping("/")
-    public Calendar intervalGetByJwt(
-            @RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+    public Calendar intervalGetByJwt(@RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
         return calendarService.allCalendar(jwt, startDate, endDate, page, pageSize);
     }
 
     //----------- MEETING ---------//
     //tutti i meeting di un user
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    //@FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @NoAuthorization
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id) {
-        return meetingService.allMeetingByUser(id);
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id,@RequestParam int page, int pageSize) {
+        return meetingService.allMeetingByUser(id, page, pageSize);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
@@ -74,7 +75,7 @@ public class CalendarController {
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @GetMapping("/meeting/cancel/{id}")
+    @PutMapping("/meeting/cancel/{id}")
     public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id) {
         return meetingService.cancelMeeting(id);
     }

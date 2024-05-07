@@ -15,8 +15,8 @@ import java.util.List;
 public interface MeetingDAO extends JpaRepository<Meeting, Long> {
 
     //tutti i meeting di un user
-    @Query(value = "select m.* from meeting m join defaultdb.user_meeting um on m.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :userId", nativeQuery = true)
-    List<Meeting> allMeetingByUser(@Param("userId") Long id);
+    @Query(value = "select meeting.id_meeting , end_date ,link ,note ,start_date ,title from meeting join defaultdb.user_meeting um on meeting.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :userId", nativeQuery = true)
+    Page<Meeting> allMeetingByUser(@Param("userId") Long id, Pageable page);
 
     @Query(value = "select m.* from meeting m join defaultdb.user_meeting um on m.id_meeting = um.id_meeting join defaultdb.user u on u.id = um.id_user where u.id = :id and m.start_date > :startDate and m.start_date < :endDate", nativeQuery = true)
     List<Meeting> intervalGetByID(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);

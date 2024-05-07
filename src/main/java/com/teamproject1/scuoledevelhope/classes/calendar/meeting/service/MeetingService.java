@@ -16,6 +16,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDA
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +55,10 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user
-    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id) {
+    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id, int page, int pageSize) {
         List<MeetingDTO> meetingDTO = new ArrayList<>();
 
-        for (Meeting meeting : meetingDAO.allMeetingByUser(id)) {
+        for (Meeting meeting : meetingDAO.allMeetingByUser(id, PageRequest.of(page, pageSize))) {
             meetingDTO.add(mapper.toMeetingDTO(meeting));
         }
         return new BaseResponseList<>(meetingDTO);
