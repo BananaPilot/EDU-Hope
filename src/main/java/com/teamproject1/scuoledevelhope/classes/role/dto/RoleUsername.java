@@ -30,4 +30,34 @@ public class RoleUsername {
     public void setRoleEnum(Role.RoleEnum roleEnum) {
         this.roleEnum = roleEnum;
     }
+
+
+    public static final class RoleUsernameBuilder {
+        private String username;
+        private Role.RoleEnum roleEnum;
+
+        private RoleUsernameBuilder() {
+        }
+
+        public static RoleUsernameBuilder aRoleUsername() {
+            return new RoleUsernameBuilder();
+        }
+
+        public RoleUsernameBuilder withUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public RoleUsernameBuilder withRoleEnum(Role.RoleEnum roleEnum) {
+            this.roleEnum = roleEnum;
+            return this;
+        }
+
+        public RoleUsername build() {
+            RoleUsername roleUsername = new RoleUsername();
+            roleUsername.setUsername(username);
+            roleUsername.setRoleEnum(roleEnum);
+            return roleUsername;
+        }
+    }
 }

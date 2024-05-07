@@ -57,7 +57,7 @@ public class MeetingService {
     public BaseResponseList<MeetingDTO> allMeetingByUser(Long id) {
         List<MeetingDTO> meetingDTO = new ArrayList<>();
 
-        for(Meeting meeting : meetingDAO.allMeetingByUser(id)){
+        for (Meeting meeting : meetingDAO.allMeetingByUser(id)) {
             meetingDTO.add(mapper.toMeetingDTO(meeting));
         }
         return new BaseResponseList<>(meetingDTO);
@@ -68,7 +68,7 @@ public class MeetingService {
 
         List<MeetingDTO> meetingDTO = new ArrayList<>();
 
-        for(Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)){
+        for (Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)) {
             meetingDTO.add(mapper.toMeetingDTO(meeting));
         }
         return new BaseResponseList<>(meetingDTO);
@@ -80,7 +80,7 @@ public class MeetingService {
         checkData(meetingDTO);
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
 
-        return new BaseResponseElement<MeetingDTO>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(),"Data saving successful",mapper.toMeetingDTO(meeting));
+        return new BaseResponseElement<MeetingDTO>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), "Data saving successful", mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO) {
@@ -119,7 +119,7 @@ public class MeetingService {
 
     public BaseResponseElement<MeetingDTO> cancelMeeting(Long id) {
 
-        MeetingDTO temp =mapper.toMeetingDTO( findById(id).getElement());
+        MeetingDTO temp = mapper.toMeetingDTO(findById(id).getElement());
         checkData(temp);
         temp.setNote("*** This event was canceled on " + LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES) + " *** Original note: " + temp.getNote());
         temp.setLink("*** Link deleted ***");
@@ -127,6 +127,7 @@ public class MeetingService {
 
         return new BaseResponseElement<>(temp);
     }
+
     //prossimo meeting di un user (entro 7 gg)
     public BaseResponseElement<MeetingDTO> nextMeetingById(Long id) {
         Meeting meeting = new Meeting();
@@ -144,7 +145,7 @@ public class MeetingService {
         meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(participants.getIdMeeting()).getElement()));
 
         //salva i partecipanti nella many to many
-        for(Long usDTO : participants.getParticipantsId()){
+        for (Long usDTO : participants.getParticipantsId()) {
             UserMeeting userMeeting = new UserMeeting();
             userMeeting.setIdMeeting((participants.getIdMeeting()));
             userMeeting.setIdUser(usDTO);
@@ -169,21 +170,21 @@ public class MeetingService {
     public BaseResponseElement<MeetingResponse> removeUserFromMeeting(UserMeetingDTO usDTO) {
 
         //controllo su presenza meeting
-        if(meetingDAO.findById(usDTO.getIdMeeting()).isEmpty()){
+        if (meetingDAO.findById(usDTO.getIdMeeting()).isEmpty()) {
             throw new RuntimeException("This meeting does not exist");
         }
         for (Long userRemove : usDTO.getParticipantsId()) {
             //controllo se esiste l user
-            if(userDao.findById(userRemove).isPresent()){
+            if (userDao.findById(userRemove).isPresent()) {
                 //rimuove utente e meeting dalla many to many
-                userMeetingRepository.delete(new UserMeeting(userRemove,usDTO.getIdMeeting()));
+                userMeetingRepository.delete(new UserMeeting(userRemove, usDTO.getIdMeeting()));
             }
         }
         MeetingResponse meetingResponse = new MeetingResponse();
         meetingResponse.setMeetingDTO(mapper.toMeetingDTO(findById(usDTO.getIdMeeting()).getElement()));
 
         List<UserRegistryDTO> userRegistryDTO = new ArrayList<>();
-        for(UserRegistry userRegistry : userRegistryDAO.allUserByMeeting(usDTO.getIdMeeting())){
+        for (UserRegistry userRegistry : userRegistryDAO.allUserByMeeting(usDTO.getIdMeeting())) {
             userRegistryDTO.add(userRegistryMapper.toUserRegistryDTO(userRegistry));
         }
 

@@ -7,7 +7,6 @@ import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.modelmapper.internal.bytebuddy.dynamic.DynamicType;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.stylesheets.LinkStyle;
 

@@ -48,6 +48,7 @@ public class RegisterDTO {
 
     public void setVotes(List<VoteDTO> votes) {
         this.votes = votes;
+
     }
 
     public String getNameClass() {

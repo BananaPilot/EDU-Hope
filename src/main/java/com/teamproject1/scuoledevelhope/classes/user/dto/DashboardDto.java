@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 public class DashboardDto extends BaseResponse {
 
     private String username;
-    private RoleDashboard role;
     private UserRegistry userRegistry;
+    private RoleDashboard role;
 
     public String getUsername() {
         return username;
@@ -31,7 +31,8 @@ public class DashboardDto extends BaseResponse {
         this.userRegistry = userRegistry;
     }
 
-    public DashboardDto() {}
+    public DashboardDto() {
+    }
 
 
     public static final class DashboardDtoBuilder {
@@ -51,8 +52,7 @@ public class DashboardDto extends BaseResponse {
 
         public static DashboardDtoBuilder map(User user) {
             return DashboardDtoBuilder.aDashboardDto()
-                    .withUsername(user.getUsername())
-                    .withUserRegistry(user.getUserRegistry());
+                    .withUsername(user.getUsername());
         }
 
         public DashboardDtoBuilder withUsername(String username) {

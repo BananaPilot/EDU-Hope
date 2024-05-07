@@ -46,13 +46,14 @@ public class ClassService {
         classDAO.save(classes);
 
         register.setSchoolClass(classDAO.findById(classes.getId()).orElseThrow(
-                ()-> new NotFoundException("class not found")
+                () -> new NotFoundException("class not found")
         ));
 
         registerDao.save(register);
 
         return new BaseResponseElement<>(classDTO);
     }
+
     @Transactional
     public BaseResponseElement<ClassRegisterDTO> deleteById(Long id) {
         Optional<Classes> classes = classDAO.findById(id);
@@ -61,7 +62,7 @@ public class ClassService {
         if (classes.isEmpty()) {
             throw new SQLException("Class was not present");
         }
-        if (register.isEmpty()){
+        if (register.isEmpty()) {
             throw new SQLException("Register was not present");
         }
         ClassRegisterDTO temp = classRegisterMapper.toClassRegisterDTO(classes.get());

@@ -2,6 +2,8 @@
 spring:
   jpa:
     database: mysql
+    hibernate:
+      ddl-auto: create
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 1234

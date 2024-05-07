@@ -31,10 +31,10 @@ public interface MeetingDAO extends JpaRepository<Meeting, Long> {
     //prossimo meeting di un user ( entro 7 gg)
     @Query(value =
             "select meeting.* from meeting\n" +
-            "join user_meeting on user_meeting.id_meeting  = meeting.id_meeting \n" +
-            "where user_meeting.id_user = :id\n" +
-            "and start_date > :startDate and end_date < :endDate\n" +
-            "Order by start_date asc\n" +
-            "LIMIT 1", nativeQuery = true)
+                    "join user_meeting on user_meeting.id_meeting  = meeting.id_meeting \n" +
+                    "where user_meeting.id_user = :id\n" +
+                    "and start_date > :startDate and end_date < :endDate\n" +
+                    "Order by start_date asc\n" +
+                    "LIMIT 1", nativeQuery = true)
     Meeting nextMeetingById(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

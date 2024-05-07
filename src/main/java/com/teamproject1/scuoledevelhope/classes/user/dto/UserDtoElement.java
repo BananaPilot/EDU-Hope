@@ -7,7 +7,8 @@ public class UserDtoElement extends BaseResponse {
 
     private UserDto user;
 
-    public UserDtoElement() {}
+    public UserDtoElement() {
+    }
 
     public UserDtoElement(HttpStatus httpStatus, String message, String description, UserDto user) {
         super(httpStatus, message, description);

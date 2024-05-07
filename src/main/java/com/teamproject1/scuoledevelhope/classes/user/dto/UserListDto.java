@@ -9,7 +9,8 @@ public class UserListDto extends Pagination {
 
     private List<UserDto> users;
 
-    public UserListDto() {}
+    public UserListDto() {
+    }
 
     public List<UserDto> getUsers() {
         return users;
