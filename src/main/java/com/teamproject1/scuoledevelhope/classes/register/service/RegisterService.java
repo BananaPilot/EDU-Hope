@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.register.service;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.register.controller.RegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
@@ -14,7 +15,6 @@ public class RegisterService {
 
     private final RegisterDao registerDao;
     private final RegisterMapper registerMapper;
-
     public RegisterService(RegisterDao registerDao, RegisterMapper registerMapper) {
         this.registerDao = registerDao;
         this.registerMapper = registerMapper;
@@ -30,4 +30,7 @@ public class RegisterService {
         return registerMapper.toRegisterDto(register.get()) ;
     }
 
+    public RegisterDtoList findAll(){
+        return registerMapper.registerDtoToRegisterList(registerDao.findAll());
+    }
 }

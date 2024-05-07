@@ -114,4 +114,76 @@ public class Classes {
         this.school = school;
 
     }
+
+
+    public static final class ClassesBuilder {
+        private Long id;
+        private @NotBlank(message = "Class name can't be blank") String name;
+        private Tutor tutor;
+        private Coordinator coordinator;
+        private Course course;
+        private School school;
+        private List<Student> students;
+        private Register registers;
+
+        private ClassesBuilder() {
+        }
+
+        public static ClassesBuilder aClasses() {
+            return new ClassesBuilder();
+        }
+
+        public ClassesBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ClassesBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ClassesBuilder withTutor(Tutor tutor) {
+            this.tutor = tutor;
+            return this;
+        }
+
+        public ClassesBuilder withCoordinator(Coordinator coordinator) {
+            this.coordinator = coordinator;
+            return this;
+        }
+
+        public ClassesBuilder withCourse(Course course) {
+            this.course = course;
+            return this;
+        }
+
+        public ClassesBuilder withSchool(School school) {
+            this.school = school;
+            return this;
+        }
+
+        public ClassesBuilder withStudents(List<Student> students) {
+            this.students = students;
+            return this;
+        }
+
+        public ClassesBuilder withRegisters(Register registers) {
+            this.registers = registers;
+            return this;
+        }
+
+        public Classes build() {
+            Classes classes = new Classes();
+            classes.setName(name);
+            classes.setTutor(tutor);
+            classes.setCoordinator(coordinator);
+            classes.setCourse(course);
+            classes.setSchool(school);
+            classes.id = this.id;
+            classes.registers = this.registers;
+            classes.students = this.students;
+            return classes;
+        }
+    }
 }

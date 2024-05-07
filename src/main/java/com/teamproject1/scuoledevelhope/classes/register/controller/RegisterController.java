@@ -21,9 +21,14 @@ public class RegisterController {
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping
-    public RegisterDTO findById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public RegisterDTO findById(@PathVariable Long id) {
         return registerService.findById(id);
     }
 
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/all")
+    public RegisterDtoList findAll() {
+        return registerService.findAll();
+    }
 }
