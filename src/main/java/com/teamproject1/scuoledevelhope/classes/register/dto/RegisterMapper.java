@@ -1,14 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.register.controller.RegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentMapper;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,39 +23,62 @@ public class RegisterMapper {
         this.voteMapper = voteMapper;
     }
 
-    public Register toRegister(RegisterDTO registerDTO){
+    public Register toRegister(RegisterDto registerDto){
 
         return Register.RegisterBuilder.aRegister()
-                .withSchoolClass(classDAO.getByName(registerDTO.getNameClass()))
-                .withSchoolYear(registerDTO.getSchoolYear())
-                .withTutor(tutorDAO.findById(registerDTO.getTutorId()).orElse(null))
-                .withStudents(studentMapper.toStudentList(registerDTO.getStudents()))
-                .withVotes(voteMapper.toVoteList(registerDTO.getVotes()))
+                .withSchoolClass(classDAO.getByName(registerDto.getNameClass()))
+                .withSchoolYear(registerDto.getSchoolYear())
+                .withTutor(tutorDAO.findById(registerDto.getTutorId()).orElse(null))
+                .withStudents(studentMapper.toStudentList(registerDto.getStudents()))
+                .withVotes(voteMapper.toVoteList(registerDto.getVotes()))
                 .build();
     }
 
-    public RegisterDTO toRegisterDto(Register register) {
+    public RegisterDtoWithStudent toRegisterDtoWithStudent(Register register) {
 
-        return RegisterDTO.RegisterDTOBuilder.aRegisterDTO()
+        return RegisterDtoWithStudent.RegisterDtoWithStudentBuilder.aRegisterDtoWithStudent()
                 .withNameClass(register.getSchoolClass().getName())
                 .withSchoolYear(register.getSchoolYear())
                 .withTutorId(register.getTutor().getUser().getId())
                 .withStudents(studentMapper.toStudentDtoList(register.getStudents()))
+                .build();
+    }
+
+    public RegisterDtoWithVote toRegisterDtoWithVote(Register register) {
+
+        return RegisterDtoWithVote.RegisterDTOBuilder.aRegisterDTO()
+                .withNameClass(register.getSchoolClass().getName())
+                .withSchoolYear(register.getSchoolYear())
+                .withTutorId(register.getTutor().getUser().getId())
                 .withVotes(voteMapper.toVoteDtoList(register.getVotes()))
                 .build();
     }
 
-    public List<RegisterDTO> toRegisterDtoList(List<Register> registers){
-        List<RegisterDTO> registerDtoList = new ArrayList<>();
+    public List<RegisterDtoWithStudent> toRegisterDtoListWithStudent(List<Register> registers){
+        List<RegisterDtoWithStudent> registerDtoList = new ArrayList<>();
         for(Register element : registers){
-            registerDtoList.add(this.toRegisterDto(element));
+            registerDtoList.add(this.toRegisterDtoWithStudent(element));
         }
         return registerDtoList;
     }
 
-    public RegisterDtoList registerDtoToRegisterList(List<Register> registers){
-        RegisterDtoList registerDtoList = new RegisterDtoList();
-        registerDtoList.setRegisterDtoList(this.toRegisterDtoList(registers));
+    public List<RegisterDtoWithVote> toRegisterDtoListWithVote(List<Register> registers){
+        List<RegisterDtoWithVote> registerDtoList = new ArrayList<>();
+        for(Register element : registers){
+            registerDtoList.add(this.toRegisterDtoWithVote(element));
+        }
+        return registerDtoList;
+    }
+
+    public RegisterDtoListWithStudent registerDtoToRegisterListWithStudent(List<Register> registers){
+        RegisterDtoListWithStudent registerDtoList = new RegisterDtoListWithStudent();
+        registerDtoList.setRegisterDtoList(this.toRegisterDtoListWithStudent(registers));
+        return registerDtoList;
+    }
+
+    public RegisterDtoListWithVote registerDtoToRegisterListWithVote(List<Register> registers){
+        RegisterDtoListWithVote registerDtoList = new RegisterDtoListWithVote();
+        registerDtoList.setRegisterDtoList(this.toRegisterDtoListWithVote(registers));
         return registerDtoList;
     }
 
