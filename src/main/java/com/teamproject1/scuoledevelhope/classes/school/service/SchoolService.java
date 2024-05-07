@@ -1,6 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.school.service;
 
 import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolDto;
+import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolMapper;
 import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class SchoolService {
 
     private final SchoolDAO schoolDAO;
+    private final SchoolMapper schoolMapper;
 
-    public SchoolService(SchoolDAO schoolDAO) {
+    public SchoolService(SchoolDAO schoolDAO, SchoolMapper schoolMapper) {
         this.schoolDAO = schoolDAO;
+        this.schoolMapper = schoolMapper;
     }
 
     public BaseResponseList<School> findAll() {
@@ -30,8 +34,9 @@ public class SchoolService {
         return new BaseResponseElement<>(result.get());
     }
 
-    public BaseResponseElement<School> save(School school) {
-        return new BaseResponseElement<>(schoolDAO.save(school));
+    public BaseResponseElement<SchoolDto> save(SchoolDto schoolDto){
+        SchoolDto school = schoolMapper.toSchoolDto(schoolDAO.save(schoolMapper.toSchool(schoolDto)));
+        return new BaseResponseElement<>(school);
     }
 
     public BaseResponseElement<School> deleteById(Long id) {
