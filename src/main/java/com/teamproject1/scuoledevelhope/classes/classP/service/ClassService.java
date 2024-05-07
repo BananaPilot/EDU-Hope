@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.classP.service;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
@@ -11,6 +12,8 @@ import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,8 +30,15 @@ public class ClassService {
         this.classRegisterMapper = classRegisterMapper;
     }
 
-    public BaseResponseList<ClassRegisterDTO> findAll() {
-        return new BaseResponseList<>(classRegisterMapper.toListOfClassRegisterDto(classDAO.findAll()));
+    public ClassRegisterDtoList findAll(int limit, int page) {
+        Page<Classes> classes = classDAO.findAll(PageRequest.of(page, limit));
+        return ClassRegisterDtoList.ClassRegisterDtoListBuilder.aClassRegisterDtoList()
+                .withClasses(classRegisterMapper.toListOfClassRegisterDto(classes.toList()))
+                .withPage(classes.getPageable().getPageNumber())
+                .withTotalElements(classes.getTotalElements())
+                .withPageSize(classes.getPageable().getPageSize())
+                .withTotalPages(classes.getTotalPages())
+                .build();
     }
 
     public BaseResponseElement<ClassRegisterDTO> findById(Long id) {
