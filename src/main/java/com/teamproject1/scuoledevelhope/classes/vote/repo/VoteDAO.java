@@ -26,4 +26,6 @@ public interface VoteDAO extends JpaRepository<Vote, Long> {
     int voteUpdate(@Param("annotation") String annotation, @Param("voteDate") String voteDate, @Param("voteEvaluation") Float voteEvaluation, @Param("isCheckPoint") Boolean isCheckPoint, @Param("voteSubject") String voteSubject, @Param("idRegister") Long idRegister, @Param("idStudent") Long idStudent, @Param("id") Long id);
 
     Page<Vote> findAllByRegisterId(Long registerId, Pageable pageable);
+
+    Page<Vote> findAllByStudentId(Long idStudent, Pageable pageable);
 }

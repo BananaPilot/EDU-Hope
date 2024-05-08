@@ -1,6 +1,9 @@
 package com.teamproject1.scuoledevelhope.classes.classP.repo;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +16,9 @@ public interface ClassDAO extends JpaRepository<Classes, Long> {
 
     @Query(value = "select * from class where class_name = :className", nativeQuery = true)
     Classes getByName(@Param("className") String className);
-
+  
+    Page<Classes> findAllByCourseId(Long id, Pageable of);
+  
     @Transactional
     @Modifying
     @Query(value = "update class c set id_coordinator = :coordinatorId where id_class = :id", nativeQuery = true)

@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.course.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
+import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseWithClassesDto;
@@ -21,11 +22,10 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    //@FloorLevelAuthorization(floorRole = "ADMIN")
-    @NoAuthorization
-    @GetMapping("/all")
-    public BaseResponseList<CourseWithClassesDto> findAll() {
-        return courseService.findAll();
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/all-class/{id}")
+    public ClassRegisterDtoList findAll(@PathVariable Long id, @RequestParam int limit, int page) {
+        return courseService.findAllClass(id, limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")

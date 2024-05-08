@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.vote.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import com.teamproject1.scuoledevelhope.classes.vote.service.VoteService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -19,8 +20,8 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @GetMapping("/{idStudent}")
-    public BaseResponseList<VoteDto> findByStudent(@Valid @PathVariable Long idStudent) {
-        return voteService.findByStudent(idStudent);
+    public VoteDtoList findByStudent(@Valid @PathVariable Long idStudent, @RequestParam int limit, int page) {
+        return voteService.findByStudent(idStudent, limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
