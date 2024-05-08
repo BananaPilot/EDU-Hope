@@ -23,24 +23,4 @@ public class RegisterDtoListWithStudent extends Pagination {
         this.registerDtoList = registerDtoList;
     }
 
-    public static final class RegisterDtoListBuilder {
-        private List<RegisterDtoWithStudent> registerDtoList;
-
-        private RegisterDtoListBuilder() {
-        }
-
-        public static RegisterDtoListBuilder aRegisterDtoList() {
-            return new RegisterDtoListBuilder();
-        }
-
-        public RegisterDtoListBuilder withRegisterDtoList(List<RegisterDtoWithStudent> registerDtoList) {
-            this.registerDtoList = registerDtoList;
-            return this;
-        }
-
-        public RegisterDtoListWithStudent build() {
-
-            return new RegisterDtoListWithStudent(this.registerDtoList);
-        }
-    }
 }

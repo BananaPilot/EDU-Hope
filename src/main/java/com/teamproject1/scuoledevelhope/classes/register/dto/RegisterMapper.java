@@ -23,33 +23,34 @@ public class RegisterMapper {
         this.voteMapper = voteMapper;
     }
 
-    public Register toRegister(RegisterDto registerDto){
-
-        return Register.RegisterBuilder.aRegister()
-                .withSchoolClass(classDAO.getByName(registerDto.getNameClass()))
-                .withSchoolYear(registerDto.getSchoolYear())
-                .withTutor(tutorDAO.findById(registerDto.getTutorId()).orElse(null))
-                .withStudents(studentMapper.toStudentList(registerDto.getStudents()))
-                .withVotes(voteMapper.toVoteList(registerDto.getVotes()))
+    public RegisterDto toRegisterDto(Register register){
+        return RegisterDto.RegisterDtoBuilder.aRegisterDto()
+                .withSchoolYear(register.getSchoolYear())
+                .withTutorId(register.getTutor() != null? register.getTutor().getUser().getId() : null)
+                .withNameClass(register.getSchoolClass().getName())
                 .build();
+    }
+
+    public List<RegisterDto> toRegisterDtoList(List<Register> registers){
+        List<RegisterDto> registerDtoList = new ArrayList<>();
+        for(Register element : registers){
+            registerDtoList.add(this.toRegisterDto(element));
+        }
+        return registerDtoList;
     }
 
     public RegisterDtoWithStudent toRegisterDtoWithStudent(Register register) {
 
         return RegisterDtoWithStudent.RegisterDtoWithStudentBuilder.aRegisterDtoWithStudent()
-                .withNameClass(register.getSchoolClass().getName())
-                .withSchoolYear(register.getSchoolYear())
-                .withTutorId(register.getTutor().getUser().getId())
+                .withRegisterDto(this.toRegisterDto(register))
                 .withStudents(studentMapper.toStudentDtoList(register.getStudents()))
                 .build();
     }
 
     public RegisterDtoWithVote toRegisterDtoWithVote(Register register) {
 
-        return RegisterDtoWithVote.RegisterDTOBuilder.aRegisterDTO()
-                .withNameClass(register.getSchoolClass().getName())
-                .withSchoolYear(register.getSchoolYear())
-                .withTutorId(register.getTutor().getUser().getId())
+        return RegisterDtoWithVote.RegisterDtoWithVoteBuilder.aRegisterDtoWithVote()
+                .withRegisterDto(this.toRegisterDto(register))
                 .withVotes(voteMapper.toVoteDtoList(register.getVotes()))
                 .build();
     }

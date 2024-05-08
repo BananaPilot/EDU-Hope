@@ -1,31 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class RegisterDtoWithStudent {
-
-    private String schoolYear;
-    private Long tutorId;
-    private String nameClass;
+public class RegisterDtoWithStudent{
+    private RegisterDto registerDto;
     private List<StudentDto> students;
-
-    public String getSchoolYear() {
-        return schoolYear;
-    }
-
-    public void setSchoolYear(String schoolYear) {
-        this.schoolYear = schoolYear;
-    }
-
-    public Long getTutorId() {
-        return tutorId;
-    }
-
-    public void setTutorId(Long tutorId) {
-        this.tutorId = tutorId;
-    }
 
     public List<StudentDto> getStudents() {
         return students;
@@ -35,19 +17,16 @@ public class RegisterDtoWithStudent {
         this.students = students;
     }
 
-    public String getNameClass() {
-        return nameClass;
+    public RegisterDto getRegisterDto() {
+        return registerDto;
     }
 
-    public void setNameClass(String nameClass) {
-        this.nameClass = nameClass;
+    public void setRegisterDto(RegisterDto registerDto) {
+        this.registerDto = registerDto;
     }
-
 
     public static final class RegisterDtoWithStudentBuilder {
-        private String schoolYear;
-        private Long tutorId;
-        private String nameClass;
+        private RegisterDto registerDto;
         private List<StudentDto> students;
 
         private RegisterDtoWithStudentBuilder() {
@@ -57,18 +36,8 @@ public class RegisterDtoWithStudent {
             return new RegisterDtoWithStudentBuilder();
         }
 
-        public RegisterDtoWithStudentBuilder withSchoolYear(String schoolYear) {
-            this.schoolYear = schoolYear;
-            return this;
-        }
-
-        public RegisterDtoWithStudentBuilder withTutorId(Long tutorId) {
-            this.tutorId = tutorId;
-            return this;
-        }
-
-        public RegisterDtoWithStudentBuilder withNameClass(String nameClass) {
-            this.nameClass = nameClass;
+        public RegisterDtoWithStudentBuilder withRegisterDto(RegisterDto registerDto) {
+            this.registerDto = registerDto;
             return this;
         }
 
@@ -79,10 +48,8 @@ public class RegisterDtoWithStudent {
 
         public RegisterDtoWithStudent build() {
             RegisterDtoWithStudent registerDtoWithStudent = new RegisterDtoWithStudent();
-            registerDtoWithStudent.setSchoolYear(schoolYear);
-            registerDtoWithStudent.setTutorId(tutorId);
-            registerDtoWithStudent.setNameClass(nameClass);
             registerDtoWithStudent.setStudents(students);
+            registerDtoWithStudent.registerDto = this.registerDto;
             return registerDtoWithStudent;
         }
     }
