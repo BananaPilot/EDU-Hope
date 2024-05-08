@@ -22,8 +22,8 @@ public class SchoolController {
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<School> findAll() {
-        return schoolService.findAll();
+    public BaseResponseList<School> findAll(@RequestParam int limit, int page) {
+        return schoolService.findAll(limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
