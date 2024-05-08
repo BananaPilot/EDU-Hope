@@ -54,12 +54,18 @@ public class VoteMapper {
         return voteList;
     }
 
-    public List<VoteDto> toVoteDtoList(List<Vote> votes){
+    public List<VoteDto> toListVoteDto(List<Vote> votes){
         List<VoteDto> voteDtoList = new ArrayList<>();
         for(Vote element : votes){
             voteDtoList.add(this.toVoteDto(element));
         }
         return voteDtoList;
+    }
+
+    public VoteDtoList toVoteDtoList(List<Vote> votes){
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(this.toListVoteDto(votes))
+                .build();
     }
 
 }

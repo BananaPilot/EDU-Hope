@@ -7,6 +7,8 @@ import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoListWith
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoWithVote;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoListWithStudent;
 import com.teamproject1.scuoledevelhope.classes.register.service.RegisterService;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,13 +29,13 @@ public class RegisterController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all-vote/{registerId}")
-    public RegisterDtoListWithVote findAllVote(@PathVariable Long registerId, @RequestParam int limit, int page) {
+    public VoteDtoList findAllVote(@PathVariable Long registerId, @RequestParam int limit, int page) {
         return registerService.findAllVote(registerId, limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all-student/{registerId}")
-    public RegisterDtoListWithStudent findAllStudent(@PathVariable Long registerId, @RequestParam int limit, int page) {
+    public StudentDtoList findAllStudent(@PathVariable Long registerId, @RequestParam int limit, int page) {
         return registerService.findAllStudent(registerId, limit, page);
     }
 
