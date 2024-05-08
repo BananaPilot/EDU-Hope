@@ -2,7 +2,13 @@ package com.teamproject1.scuoledevelhope.classes.register;
 
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+<<<<<<< HEAD
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
+=======
+import com.teamproject1.scuoledevelhope.classes.tutor.dto.TutorDto;
+import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
+import com.teamproject1.scuoledevelhope.classes.user.User;
+>>>>>>> 4b883ef89e770a1d654b4269a7bc6078ad7af93e
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -57,8 +63,9 @@ public class RegisterInterceptor implements HandlerInterceptor {
         paths.add("/register/all-student/**");
         paths.add("/register/all-vote/**");
         boolean bool = false;
-        for (String path : paths) {
-            if (pathMatcher.match(path, request.getRequestURI())) {
+
+        for (String path: paths) {
+            if (pathMatcher.match(path, request.getRequestURI())){
                 bool = true;
                 break;
             }
