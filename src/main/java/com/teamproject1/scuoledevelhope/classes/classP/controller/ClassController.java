@@ -43,6 +43,9 @@ public class ClassController {
         return classService.deleteById(id);
     }
 
-
-
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @PutMapping("/addClass")
+    public BaseResponseElement<ClassRegisterDTO> addClassToUser(@RequestParam Long userId, Long classId) {
+        return classService.addClassToUser(userId, classId);
+    }
 }
