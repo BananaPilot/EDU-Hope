@@ -43,7 +43,7 @@ public class RegisterMapper {
 
         return RegisterDtoWithStudent.RegisterDtoWithStudentBuilder.aRegisterDtoWithStudent()
                 .withRegisterDto(this.toRegisterDto(register))
-                .withStudents(studentMapper.toStudentDtoList(register.getStudents()))
+                .withStudents(studentMapper.toListStudentDto(register.getStudents()))
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class RegisterMapper {
 
         return RegisterDtoWithVote.RegisterDtoWithVoteBuilder.aRegisterDtoWithVote()
                 .withRegisterDto(this.toRegisterDto(register))
-                .withVotes(voteMapper.toVoteDtoList(register.getVotes()))
+                .withVotes(voteMapper.toListVoteDto(register.getVotes()))
                 .build();
     }
 

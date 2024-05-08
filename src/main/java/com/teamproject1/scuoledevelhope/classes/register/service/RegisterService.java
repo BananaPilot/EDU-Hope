@@ -3,10 +3,17 @@ package com.teamproject1.scuoledevelhope.classes.register.service;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.dto.*;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentMapper;
+import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
+import com.teamproject1.scuoledevelhope.classes.vote.Vote;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
+import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
-import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,31 +27,55 @@ public class RegisterService {
 
     private final RegisterDao registerDao;
     private final RegisterMapper registerMapper;
+    private final StudentMapper studentMapper;
+    private final VoteMapper voteMapper;
     private final Utils utils;
     private final TutorDAO tutorDAO;
-    public RegisterService(RegisterDao registerDao, RegisterMapper registerMapper, Utils utils, TutorDAO tutorDAO) {
+    private final StudentDAO studentDAO;
+    private final VoteDAO voteDAO;
+    public RegisterService(RegisterDao registerDao, RegisterMapper registerMapper, StudentMapper studentMapper, VoteMapper voteMapper, Utils utils, TutorDAO tutorDAO, StudentDAO studentDAO, VoteDAO voteDAO) {
         this.registerDao = registerDao;
         this.registerMapper = registerMapper;
+        this.studentMapper = studentMapper;
+        this.voteMapper = voteMapper;
         this.utils = utils;
         this.tutorDAO = tutorDAO;
+        this.studentDAO = studentDAO;
+        this.voteDAO = voteDAO;
     }
 
     public RegisterDtoWithVote findById(Long id) {
         Optional<Register> register = registerDao.findById(id);
 
         if(register.isEmpty()){
-            throw new NotFoundException("Register not found");
+            throw new NotFoundException("Register was not found");
         }
 
         return registerMapper.toRegisterDtoWithVote(register.get()) ;
     }
 
-    public RegisterDtoListWithVote findAllVote(){
-        return registerMapper.registerDtoToRegisterListWithVote(registerDao.findAll());
+    public VoteDtoList findAllVote(Long registerId, int limit, int page){
+        Page<Vote> votes = voteDAO.findAllByRegisterId(registerId, PageRequest.of(page, limit));
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(voteMapper.toListVoteDto(votes.toList()))
+                .withHttpStatus(HttpStatus.OK)
+                .withPage(votes.getPageable().getPageNumber())
+                .withPageSize(votes.getPageable().getPageSize())
+                .withTotalElements(votes.getTotalElements())
+                .withTotalPages(votes.getTotalPages())
+                .build();
     }
 
-    public RegisterDtoListWithStudent findAllStudent(){
-        return registerMapper.registerDtoToRegisterListWithStudent(registerDao.findAll());
+    public StudentDtoList findAllStudent(Long registerId, int limit, int page){
+        Page<Student> students = studentDAO.findAllByRegisterId(registerId, PageRequest.of(page, limit));
+        return StudentDtoList.StudentDtoListBuilder.aStudentDtoList()
+                .withStudents(studentMapper.toListStudentDto(students.toList()))
+                .withHttpStatus(HttpStatus.OK)
+                .withPage(students.getPageable().getPageNumber())
+                .withPageSize(students.getPageable().getPageSize())
+                .withTotalElements(students.getTotalElements())
+                .withTotalPages(students.getTotalPages())
+                .build();
     }
 
     public RegisterDtoList findAllByTutor(String jwt, int limit, int page) {
