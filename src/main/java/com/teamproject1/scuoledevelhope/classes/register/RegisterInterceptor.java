@@ -8,6 +8,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -33,6 +34,7 @@ public class RegisterInterceptor implements HandlerInterceptor {
         this.utils = utils;
     }
 
+    @Transactional
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!includePath(request)) return true;
@@ -41,17 +43,21 @@ public class RegisterInterceptor implements HandlerInterceptor {
         return false;
     }
 
+    @Transactional
     public boolean handle(HttpServletRequest request, HttpServletResponse response) {
-        Long registerId = Long.parseLong(request.getRequestURI().split("/")[1]);
+        Long registerId = Long.parseLong(request.getRequestURI().split("/")[3]);
         Register register = registerDao.findById(registerId).get();
         Tutor tutor = tutorDAO.findById(utils.getUserFromJwt(request.getHeader("Authorization")).getId()).get();
-        return tutor.getRegisters().contains(register);
+        for (Register registersInTutor: tutor.getRegisters()) {
+            if (registersInTutor.getId().equals(registerId)) return true;
+        }
+        return false;
     }
 
     public boolean includePath(HttpServletRequest request) {
         List<String> paths = new ArrayList<>();
-        paths.add("/all-student/**");
-        paths.add("/all-vote/**");
+        paths.add("/register/all-student/**");
+        paths.add("/register/all-vote/**");
         boolean bool = false;
         for (String path: paths) {
             if (pathMatcher.match(path, request.getRequestURI())){

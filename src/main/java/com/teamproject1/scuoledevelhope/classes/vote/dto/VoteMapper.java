@@ -40,7 +40,7 @@ public class VoteMapper {
                 .withAnnotation(vote.getAnnotation())
                 .withEvaluation(vote.getEvaluation())
                 .withIdRegister(vote.getIdRegister().getId())
-                .withIdStudent(vote.getIdStudent().getId())
+                .withIdStudent(vote.getIdStudent() != null ? vote.getIdStudent().getId() : null)
                 .withIsCheckPoint(vote.getIsCheckPoint())
                 .withSubject(vote.getSubject())
                 .build();
