@@ -4,6 +4,7 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Fl
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolDto;
+import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolListDto;
 import com.teamproject1.scuoledevelhope.classes.school.service.SchoolService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
@@ -22,7 +23,7 @@ public class SchoolController {
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @GetMapping("/all")
-    public BaseResponseList<School> findAll(@RequestParam int limit, int page) {
+    public SchoolListDto findAll(@RequestParam int limit, int page) {
         return schoolService.findAll(limit, page);
     }
 
