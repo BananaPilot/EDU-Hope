@@ -35,8 +35,7 @@ public class CalendarController {
 
     //----------- MEETING ---------//
     //tutti i meeting di un user
-    //@FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/allMeetingByUserId/{id}")
     public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id,@RequestParam int page, int pageSize) {
         return meetingService.allMeetingByUser(id, page, pageSize);
@@ -45,8 +44,8 @@ public class CalendarController {
     //tutti i meeting di un user in un intervallo di tempo
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/intervalByUserId/{id}")
-    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return meetingService.intervalGetById(id, startDate, endDate);
+    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+        return meetingService.intervalGetById(id, startDate, endDate, page , pageSize);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")

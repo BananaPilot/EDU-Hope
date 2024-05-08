@@ -75,14 +75,23 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user in un intervallo di tempo
-    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate ,int page, int pageSize) {
 
-        List<MeetingDTO> meetingDTO = new ArrayList<>();
+        List<MeetingDTO> brlMeetingDTO = new ArrayList<>();
+        Page<Meeting> meeting = meetingDAO.intervalGetByID(id, startDate, endDate, PageRequest.of(page, pageSize));
 
-        for (Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)) {
-            meetingDTO.add(mapper.toMeetingDTO(meeting));
+        for (Meeting m : meeting) {
+            brlMeetingDTO.add(mapper.toMeetingDTO(m));
         }
-        return new BaseResponseList<>(meetingDTO);
+
+        BaseResponseList<MeetingDTO> response = new BaseResponseList<>(brlMeetingDTO);
+        response.setPage(meeting.getPageable().getPageNumber());
+        response.setTotalPages(meeting.getTotalPages());
+        response.setPageSize(meeting.getPageable().getPageSize());
+        response.setTotalElements(meeting.getTotalElements());
+
+        return response;
+
     }
 
     public BaseResponseElement<MeetingDTO> save(MeetingDTO meetingDTO) {
