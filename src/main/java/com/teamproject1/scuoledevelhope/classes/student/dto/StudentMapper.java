@@ -27,7 +27,7 @@ public class StudentMapper {
                 .build();
     }
 
-    public List<StudentDto> toStudentDtoList(List<Student> students) {
+    public List<StudentDto> toListStudentDto(List<Student> students) {
         List<StudentDto> toReturn = new ArrayList<>();
         for (Student student : students) {
             toReturn.add(this.toStudentDto(student));
@@ -39,23 +39,5 @@ public class StudentMapper {
         return Student.StudentBuilder.aStudent()
                 .withUser(user)
                 .build();
-    }
-
-    public Student toStudent(StudentDto studentDto){
-        return Student.StudentBuilder.aStudent()
-                .withUser(userMapper.userDtoToUser(studentDto.getUser()))
-                .withId(studentDto.getUser().getId())
-                .withSchoolClass(classRegisterMapper.toClass(studentDto.getSchoolClass()))
-                .withRegister(classRegisterMapper.toRegister(studentDto.getSchoolClass()))
-                .build();
-    }
-
-    public  List<Student> toStudentList(List<StudentDto> studentDtoList){
-        List<Student> students = new ArrayList<>();
-        for( StudentDto element : studentDtoList){
-            students.add(this.toStudent(element));
-        }
-
-        return students;
     }
 }
