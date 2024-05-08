@@ -39,11 +39,11 @@ public class RegisterService {
         return registerMapper.toRegisterDtoWithVote(register.get()) ;
     }
 
-    public RegisterDtoListWithVote findAllVote(){
+    public RegisterDtoListWithVote findAllVote(Long registerId, int limit, int page){
         return registerMapper.registerDtoToRegisterListWithVote(registerDao.findAll());
     }
 
-    public RegisterDtoListWithStudent findAllStudent(){
+    public RegisterDtoListWithStudent findAllStudent(Long registerId, int limit, int page){
         return registerMapper.registerDtoToRegisterListWithStudent(registerDao.findAll());
     }
 

@@ -26,15 +26,15 @@ public class RegisterController {
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping("/all-vote")
-    public RegisterDtoListWithVote findAllVote() {
-        return registerService.findAllVote();
+    @GetMapping("/all-vote/{registerId}")
+    public RegisterDtoListWithVote findAllVote(@PathVariable Long registerId, @RequestParam int limit, int page) {
+        return registerService.findAllVote(registerId, limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping("/all-student")
-    public RegisterDtoListWithStudent findAllStudent() {
-        return registerService.findAllStudent();
+    @GetMapping("/all-student/{registerId}")
+    public RegisterDtoListWithStudent findAllStudent(@PathVariable Long registerId, @RequestParam int limit, int page) {
+        return registerService.findAllStudent(registerId, limit, page);
     }
 
     @BasicAuthorization(roles = {"TUTOR"})
