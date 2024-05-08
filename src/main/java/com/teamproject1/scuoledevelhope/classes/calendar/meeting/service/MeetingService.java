@@ -58,27 +58,18 @@ public class MeetingService {
     //tutti i meeting di un user
     public BaseResponseList<MeetingDTO> allMeetingByUser(Long id, int page, int pageSize) {
 
-        List<MeetingDTO> brlMeetingDTO = new ArrayList<>();
-        Page<Meeting> meeting =  meetingDAO.allMeetingByUser(id, PageRequest.of(page, pageSize));
-
-        for (Meeting m : meeting) {
-            brlMeetingDTO.add(mapper.toMeetingDTO(m));
-        }
-
-        BaseResponseList<MeetingDTO> response = new BaseResponseList<>(brlMeetingDTO);
-        response.setPage(meeting.getPageable().getPageNumber());
-        response.setTotalPages(meeting.getTotalPages());
-        response.setPageSize(meeting.getPageable().getPageSize());
-        response.setTotalElements(meeting.getTotalElements());
-
-        return response;
+        return responsePageable(meetingDAO.allMeetingByUser(id, PageRequest.of(page, pageSize)));
     }
 
     //tutti i meeting di un user in un intervallo di tempo
     public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate ,int page, int pageSize) {
 
+        return responsePageable(meetingDAO.intervalGetByID(id, startDate, endDate, PageRequest.of(page, pageSize)));
+    }
+
+    private BaseResponseList<MeetingDTO> responsePageable(Page<Meeting> meeting){
+
         List<MeetingDTO> brlMeetingDTO = new ArrayList<>();
-        Page<Meeting> meeting = meetingDAO.intervalGetByID(id, startDate, endDate, PageRequest.of(page, pageSize));
 
         for (Meeting m : meeting) {
             brlMeetingDTO.add(mapper.toMeetingDTO(m));
@@ -91,7 +82,6 @@ public class MeetingService {
         response.setTotalElements(meeting.getTotalElements());
 
         return response;
-
     }
 
     public BaseResponseElement<MeetingDTO> save(MeetingDTO meetingDTO) {
