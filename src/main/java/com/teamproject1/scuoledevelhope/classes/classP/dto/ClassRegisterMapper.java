@@ -52,9 +52,9 @@ public class ClassRegisterMapper {
         classRegisterDTO.setSchoolYear(classes.getRegisters().getSchoolYear());
         classRegisterDTO.setClassName(classes.getName());
         classRegisterDTO.setSchoolId(classes.getSchool().getId());
-        classRegisterDTO.setCoordinatorId(classes.getCoordinator().getUser().getId());
+        classRegisterDTO.setCoordinatorId(classes.getCoordinator() != null ? classes.getCoordinator().getUser().getId() : null);
         classRegisterDTO.setCourseId(classes.getCourse().getId());
-        classRegisterDTO.setTutorId(classes.getTutor().getUser().getId());
+        classRegisterDTO.setTutorId(classes.getTutor() != null ? classes.getTutor().getUser().getId() : null);
 
         return classRegisterDTO;
     }
