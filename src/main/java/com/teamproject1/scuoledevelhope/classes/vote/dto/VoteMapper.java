@@ -11,12 +11,10 @@ import java.util.List;
 
 @Component
 public class VoteMapper {
-    private final ModelMapper modelMapper;
     private final RegisterDao registerDao;
     private final StudentDAO studentDao;
 
-    public VoteMapper(ModelMapper modelMapper, RegisterDao registerDao, StudentDAO studentDAO) {
-        this.modelMapper = modelMapper;
+    public VoteMapper(RegisterDao registerDao, StudentDAO studentDAO) {
         this.registerDao = registerDao;
         this.studentDao = studentDAO;
     }
