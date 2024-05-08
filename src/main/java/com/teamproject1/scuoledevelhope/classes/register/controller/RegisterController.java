@@ -1,6 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.register.controller;
 
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.BasicAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoListWithVote;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoWithVote;
 import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoListWithStudent;
@@ -33,5 +35,11 @@ public class RegisterController {
     @GetMapping("/all-student")
     public RegisterDtoListWithStudent findAllStudent() {
         return registerService.findAllStudent();
+    }
+
+    @BasicAuthorization(roles = {"TUTOR"})
+    @GetMapping("/all")
+    public RegisterDtoList findAll(@RequestHeader("Authorization") String jwt, @RequestParam int limit, int page){
+        return registerService.findAllByTutor(jwt, limit, page);
     }
 }

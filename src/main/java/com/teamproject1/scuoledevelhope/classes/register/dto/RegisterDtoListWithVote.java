@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -21,28 +22,5 @@ public class RegisterDtoListWithVote extends Pagination {
 
     public void setRegisterDtoList(List<RegisterDtoWithVote> registerDtoList) {
         this.registerDtoList = registerDtoList;
-    }
-
-
-    public static final class RegisterDtoListWithVoteBuilder {
-        private List<RegisterDtoWithVote> registerDtoList;
-
-        private RegisterDtoListWithVoteBuilder() {
-        }
-
-        public static RegisterDtoListWithVoteBuilder aRegisterDtoListWithVote() {
-            return new RegisterDtoListWithVoteBuilder();
-        }
-
-        public RegisterDtoListWithVoteBuilder withRegisterDtoList(List<RegisterDtoWithVote> registerDtoList) {
-            this.registerDtoList = registerDtoList;
-            return this;
-        }
-
-        public RegisterDtoListWithVote build() {
-            RegisterDtoListWithVote registerDtoListWithVote = new RegisterDtoListWithVote();
-            registerDtoListWithVote.setRegisterDtoList(registerDtoList);
-            return registerDtoListWithVote;
-        }
     }
 }
