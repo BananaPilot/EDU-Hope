@@ -41,7 +41,7 @@ public class StudentService {
         Page<Student> students = studentDAO.findAll(PageRequest.of(page, limit));
         return StudentDtoList.StudentDtoListBuilder.aStudentDtoList()
                 .withHttpStatus(HttpStatus.OK)
-                .withStudents(studentMapper.toStudentDtoList(students.toList()))
+                .withStudents(studentMapper.toListStudentDto(students.toList()))
                 .withPage(students.getPageable().getPageNumber())
                 .withPageSize(students.getPageable().getPageSize())
                 .withTotalElements(students.getTotalElements())

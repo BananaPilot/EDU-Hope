@@ -11,12 +11,10 @@ import java.util.List;
 
 @Component
 public class VoteMapper {
-    private final ModelMapper modelMapper;
     private final RegisterDao registerDao;
     private final StudentDAO studentDao;
 
-    public VoteMapper(ModelMapper modelMapper, RegisterDao registerDao, StudentDAO studentDAO) {
-        this.modelMapper = modelMapper;
+    public VoteMapper(RegisterDao registerDao, StudentDAO studentDAO) {
         this.registerDao = registerDao;
         this.studentDao = studentDAO;
     }
@@ -40,7 +38,7 @@ public class VoteMapper {
                 .withAnnotation(vote.getAnnotation())
                 .withEvaluation(vote.getEvaluation())
                 .withIdRegister(vote.getIdRegister().getId())
-                .withIdStudent(vote.getIdStudent().getId())
+                .withIdStudent(vote.getIdStudent() != null ? vote.getIdStudent().getId() : null)
                 .withIsCheckPoint(vote.getIsCheckPoint())
                 .withSubject(vote.getSubject())
                 .build();
@@ -54,12 +52,18 @@ public class VoteMapper {
         return voteList;
     }
 
-    public List<VoteDto> toVoteDtoList(List<Vote> votes){
+    public List<VoteDto> toListVoteDto(List<Vote> votes){
         List<VoteDto> voteDtoList = new ArrayList<>();
         for(Vote element : votes){
             voteDtoList.add(this.toVoteDto(element));
         }
         return voteDtoList;
+    }
+
+    public VoteDtoList toVoteDtoList(List<Vote> votes){
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(this.toListVoteDto(votes))
+                .build();
     }
 
 }
