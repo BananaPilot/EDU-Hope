@@ -1,5 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.register.service;
 
+import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.dto.*;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
@@ -33,7 +36,10 @@ public class RegisterService {
     private final TutorDAO tutorDAO;
     private final StudentDAO studentDAO;
     private final VoteDAO voteDAO;
-    public RegisterService(RegisterDao registerDao, RegisterMapper registerMapper, StudentMapper studentMapper, VoteMapper voteMapper, Utils utils, TutorDAO tutorDAO, StudentDAO studentDAO, VoteDAO voteDAO) {
+    private final CoordinatorDAO coordinatorDAO;
+
+    public RegisterService(RegisterDao registerDao, RegisterMapper registerMapper, StudentMapper studentMapper, VoteMapper voteMapper, Utils utils, TutorDAO tutorDAO, StudentDAO studentDAO, VoteDAO voteDAO,
+                           CoordinatorDAO coordinatorDAO) {
         this.registerDao = registerDao;
         this.registerMapper = registerMapper;
         this.studentMapper = studentMapper;
@@ -42,6 +48,7 @@ public class RegisterService {
         this.tutorDAO = tutorDAO;
         this.studentDAO = studentDAO;
         this.voteDAO = voteDAO;
+        this.coordinatorDAO = coordinatorDAO;
     }
 
     public RegisterDtoWithVote findById(Long id) {
@@ -96,5 +103,22 @@ public class RegisterService {
                 .withTotalElements(registers.getTotalElements())
                 .withTotalPages(registers.getTotalPages())
                 .build();
+    }
+
+    public RegisterDto addRegisterToUser(Long registerId, Long userId) {
+        Tutor tutor = utils.isPresent(tutorDAO.findById(userId));
+        Student student = utils.isPresent(studentDAO.findById(userId));
+        Register register = utils.isPresent(registerDao.findById(registerId));
+
+        if (student != null && student.getRegister() == null) {
+            studentDAO.updateStudentRegister(student.getId(), registerId);
+            student.setRegister(register);
+        }
+        if (tutor != null && register.getTutor() == null) {
+            registerDao.updateRegisterTutor(registerId, tutor.getUser().getId());
+            register.setTutor(tutor);
+        }
+
+        return registerMapper.toRegisterDto(register);
     }
 }

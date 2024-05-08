@@ -5,12 +5,19 @@ import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
+import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
+import com.teamproject1.scuoledevelhope.classes.student.Student;
+import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
+import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
+import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,11 +30,20 @@ public class ClassService {
     private final ClassDAO classDAO;
     private final RegisterDao registerDao;
     private final ClassRegisterMapper classRegisterMapper;
+    private final TutorDAO tutorDAO;
+    private final StudentDAO studentDAO;
+    private final CoordinatorDAO coordinatorDAO;
+    private final Utils utils;
 
-    public ClassService(ClassDAO classDAO, RegisterDao registerDao, ClassRegisterMapper classRegisterMapper) {
+    public ClassService(ClassDAO classDAO, RegisterDao registerDao, ClassRegisterMapper classRegisterMapper,
+                        TutorDAO tutorDAO, StudentDAO studentDAO, CoordinatorDAO coordinatorDAO, Utils utils) {
         this.classDAO = classDAO;
         this.registerDao = registerDao;
         this.classRegisterMapper = classRegisterMapper;
+        this.tutorDAO = tutorDAO;
+        this.studentDAO = studentDAO;
+        this.coordinatorDAO = coordinatorDAO;
+        this.utils = utils;
     }
 
     public ClassRegisterDtoList findAll(int limit, int page) {
@@ -81,5 +97,28 @@ public class ClassService {
         classDAO.deleteById(id);
 
         return new BaseResponseElement<>(temp);
+    }
+
+    @Transactional
+    public BaseResponseElement<ClassRegisterDTO> addClassToUser(Long userId, Long classId) {
+        Tutor tutor = utils.isPresent(tutorDAO.findById(userId));
+        Coordinator coordinator = utils.isPresent(coordinatorDAO.findById(userId));
+        Student student = utils.isPresent(studentDAO.findById(userId));
+        Classes classes = utils.isPresent(classDAO.findById(classId));
+
+        if (student != null && student.getSchoolClass() == null) {
+            studentDAO.updateStudentClass(student.getId(), classId);
+            student.setSchoolClass(classes);
+        }
+        if (coordinator != null && classes.getCoordinator() == null) {
+            classDAO.updateClassCoordinator(classId, coordinator.getUser().getId());
+            classes.setCoordinator(coordinator);
+        }
+        if (tutor != null && classes.getTutor() == null) {
+            classDAO.updateClassTutor(classId, tutor.getUser().getId());
+            classes.setTutor(tutor);
+        }
+
+        return new BaseResponseElement<>(classRegisterMapper.toClassRegisterDTO(classes));
     }
 }
