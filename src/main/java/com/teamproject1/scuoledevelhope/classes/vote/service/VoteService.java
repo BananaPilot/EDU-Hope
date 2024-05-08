@@ -3,7 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.vote.service;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
@@ -27,18 +27,18 @@ public class VoteService {
         this.studentDAO = studentDAO;
     }
 
-    public BaseResponseList<VoteDTO> findAll() {
+    public BaseResponseList<VoteDto> findAll() {
         List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
+        List<VoteDto> voteDTOS = new ArrayList<>();
         for (Vote element : votes) {
             voteDTOS.add(voteMapper.toVoteDto(element));
         }
         return new BaseResponseList<>(voteDTOS);
     }
 
-    public BaseResponseList<VoteDTO> findByStudent(Long idStudent) {
+    public BaseResponseList<VoteDto> findByStudent(Long idStudent) {
         List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
+        List<VoteDto> voteDTOS = new ArrayList<>();
 
         for (Vote element : votes) {
             if (element.getIdStudent().getId().equals(idStudent)) {
@@ -49,7 +49,7 @@ public class VoteService {
         return new BaseResponseList<>(voteDTOS);
     }
 
-    public BaseResponseElement<VoteDTO> deleteVote(Long idStudent, Long idVote) {
+    public BaseResponseElement<VoteDto> deleteVote(Long idStudent, Long idVote) {
         Optional<Vote> voteR = voteDAO.findById(idVote);
         Optional<Student> studentR = studentDAO.findById(idStudent);
 
@@ -60,13 +60,13 @@ public class VoteService {
             throw new SQLException("Student was not present");
         }
 
-        VoteDTO voteDTO = voteMapper.toVoteDto(voteR.get());
+        VoteDto voteDTO = voteMapper.toVoteDto(voteR.get());
         voteDAO.deleteVote(idStudent, idVote);
 
         return new BaseResponseElement<>(voteDTO);
     }
 
-    public BaseResponseElement<VoteDTO> addVote(VoteDTO voteDTO) {
+    public BaseResponseElement<VoteDto> addVote(VoteDto voteDTO) {
         voteDAO.save(voteMapper.toVote(voteDTO));
 
         return new BaseResponseElement<>(voteDTO);

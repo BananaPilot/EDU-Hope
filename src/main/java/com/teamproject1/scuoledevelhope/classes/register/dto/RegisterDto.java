@@ -1,7 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public class RegisterDto extends Pagination{
     private Long tutorId;
     private String nameClass;
     private List<StudentDto> students;
-    private List<VoteDTO> votes;
+    private List<VoteDto> votes;
 
     public String getSchoolYear() {
         return schoolYear;
@@ -37,11 +37,11 @@ public class RegisterDto extends Pagination{
         this.students = students;
     }
 
-    public List<VoteDTO> getVotes() {
+    public List<VoteDto> getVotes() {
         return votes;
     }
 
-    public void setVotes(List<VoteDTO> votes) {
+    public void setVotes(List<VoteDto> votes) {
         this.votes = votes;
 
     }
@@ -59,7 +59,7 @@ public class RegisterDto extends Pagination{
         private Long tutorId;
         private String nameClass;
         private List<StudentDto> students;
-        private List<VoteDTO> votes;
+        private List<VoteDto> votes;
 
         private RegisterDTOBuilder() {
         }
@@ -88,7 +88,7 @@ public class RegisterDto extends Pagination{
             return this;
         }
 
-        public RegisterDTOBuilder withVotes(List<VoteDTO> votes) {
+        public RegisterDTOBuilder withVotes(List<VoteDto> votes) {
             this.votes = votes;
             return this;
         }
