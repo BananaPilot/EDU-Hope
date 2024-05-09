@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
@@ -28,8 +29,7 @@ public class CalendarController {
     //calendario di un utente in un intervallo di tempo
     @FloorLevelAuthorization(floorRole = "USER")
     @GetMapping("/")
-    public Calendar intervalGetByJwt(
-            @RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+    public Calendar intervalGetByJwt(@RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
         return calendarService.allCalendar(jwt, startDate, endDate, page, pageSize);
     }
 
@@ -37,15 +37,15 @@ public class CalendarController {
     //tutti i meeting di un user
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id) {
-        return meetingService.allMeetingByUser(id);
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id,@RequestParam int page, int pageSize) {
+        return meetingService.allMeetingByUser(id, page, pageSize);
     }
 
     //tutti i meeting di un user in un intervallo di tempo
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/intervalByUserId/{id}")
-    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return meetingService.intervalGetById(id, startDate, endDate);
+    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+        return meetingService.intervalGetById(id, startDate, endDate, page , pageSize);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
@@ -74,7 +74,7 @@ public class CalendarController {
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @GetMapping("/meeting/cancel/{id}")
+    @PutMapping("/meeting/cancel/{id}")
     public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id) {
         return meetingService.cancelMeeting(id);
     }

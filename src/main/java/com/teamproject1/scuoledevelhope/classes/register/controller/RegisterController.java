@@ -4,6 +4,9 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Ba
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.register.dto.*;
 import com.teamproject1.scuoledevelhope.classes.register.service.RegisterService;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import jakarta.validation.Valid;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import org.springframework.web.bind.annotation.*;

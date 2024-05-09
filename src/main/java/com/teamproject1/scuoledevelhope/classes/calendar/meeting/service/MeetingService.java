@@ -16,6 +16,8 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDA
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -54,24 +56,32 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user
-    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id) {
-        List<MeetingDTO> meetingDTO = new ArrayList<>();
+    public BaseResponseList<MeetingDTO> allMeetingByUser(Long id, int page, int pageSize) {
 
-        for (Meeting meeting : meetingDAO.allMeetingByUser(id)) {
-            meetingDTO.add(mapper.toMeetingDTO(meeting));
-        }
-        return new BaseResponseList<>(meetingDTO);
+        return responsePageable(meetingDAO.allMeetingByUser(id, PageRequest.of(page, pageSize)));
     }
 
     //tutti i meeting di un user in un intervallo di tempo
-    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate) {
+    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate ,int page, int pageSize) {
 
-        List<MeetingDTO> meetingDTO = new ArrayList<>();
+        return responsePageable(meetingDAO.intervalGetByID(id, startDate, endDate, PageRequest.of(page, pageSize)));
+    }
 
-        for (Meeting meeting : meetingDAO.intervalGetByID(id, startDate, endDate)) {
-            meetingDTO.add(mapper.toMeetingDTO(meeting));
+    private BaseResponseList<MeetingDTO> responsePageable(Page<Meeting> meeting){
+
+        List<MeetingDTO> brlMeetingDTO = new ArrayList<>();
+
+        for (Meeting m : meeting) {
+            brlMeetingDTO.add(mapper.toMeetingDTO(m));
         }
-        return new BaseResponseList<>(meetingDTO);
+
+        BaseResponseList<MeetingDTO> response = new BaseResponseList<>(brlMeetingDTO);
+        response.setPage(meeting.getPageable().getPageNumber());
+        response.setTotalPages(meeting.getTotalPages());
+        response.setPageSize(meeting.getPageable().getPageSize());
+        response.setTotalElements(meeting.getTotalElements());
+
+        return response;
     }
 
     public BaseResponseElement<MeetingDTO> save(MeetingDTO meetingDTO) {
