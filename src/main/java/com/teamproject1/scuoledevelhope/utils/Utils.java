@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class Utils {
@@ -21,5 +22,9 @@ public class Utils {
                 .withUsername(claimsJws.getBody().get("user-username", String.class))
                 .withRoles(claimsJws.getBody().get("user-roles", List.class))
                 .build();
+    }
+
+    public <T> T isPresent(Optional<T> optional) {
+        return optional.orElse(null);
     }
 }

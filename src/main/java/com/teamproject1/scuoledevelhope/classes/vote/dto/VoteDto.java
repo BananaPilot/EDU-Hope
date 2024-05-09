@@ -2,7 +2,7 @@ package com.teamproject1.scuoledevelhope.classes.vote.dto;
 
 import java.time.LocalDate;
 
-public class VoteDTO {
+public class VoteDto {
     private Long idRegister;
     private Long idStudent;
     private LocalDate date;
@@ -11,7 +11,7 @@ public class VoteDTO {
     private String annotation;
     private Boolean isCheckPoint;
 
-    public VoteDTO() {
+    public VoteDto() {
     }
 
     public Long getIdRegister() {
@@ -122,8 +122,8 @@ public class VoteDTO {
             return this;
         }
 
-        public VoteDTO build() {
-            VoteDTO voteDTO = new VoteDTO();
+        public VoteDto build() {
+            VoteDto voteDTO = new VoteDto();
             voteDTO.setIdRegister(idRegister);
             voteDTO.setIdStudent(idStudent);
             voteDTO.setDate(date);

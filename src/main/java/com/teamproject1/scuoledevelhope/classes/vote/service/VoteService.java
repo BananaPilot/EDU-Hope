@@ -3,12 +3,17 @@ package com.teamproject1.scuoledevelhope.classes.vote.service;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,29 +32,21 @@ public class VoteService {
         this.studentDAO = studentDAO;
     }
 
-    public BaseResponseList<VoteDTO> findAll() {
-        List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
-        for (Vote element : votes) {
-            voteDTOS.add(voteMapper.toVoteDto(element));
-        }
-        return new BaseResponseList<>(voteDTOS);
+
+    public VoteDtoList findByStudent(Long idStudent, int limit, int page) {
+        Page<Vote> votes = voteDAO.findAllByStudentId(idStudent,PageRequest.of(page, limit));
+
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(voteMapper.toListVoteDto(votes.toList()))
+                .withHttpStatus(HttpStatus.OK)
+                .withPage(votes.getPageable().getPageNumber())
+                .withPageSize(votes.getPageable().getPageSize())
+                .withTotalElements(votes.getTotalElements())
+                .withTotalPages(votes.getTotalPages())
+                .build();
     }
 
-    public BaseResponseList<VoteDTO> findByStudent(Long idStudent) {
-        List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
-
-        for (Vote element : votes) {
-            if (element.getIdStudent().getId().equals(idStudent)) {
-                voteDTOS.add(voteMapper.toVoteDto(element));
-            }
-        }
-
-        return new BaseResponseList<>(voteDTOS);
-    }
-
-    public BaseResponseElement<VoteDTO> deleteVote(Long idStudent, Long idVote) {
+    public BaseResponseElement<VoteDto> deleteVote(Long idStudent, Long idVote) {
         Optional<Vote> voteR = voteDAO.findById(idVote);
         Optional<Student> studentR = studentDAO.findById(idStudent);
 
@@ -60,14 +57,14 @@ public class VoteService {
             throw new SQLException("Student was not present");
         }
 
-        VoteDTO voteDTO = voteMapper.toVoteDto(voteR.get());
+        VoteDto voteDTO = voteMapper.toVoteDto(voteR.get());
         voteDAO.deleteVote(idStudent, idVote);
 
         return new BaseResponseElement<>(voteDTO);
     }
 
-    public BaseResponseElement<VoteDTO> addVote(VoteDTO voteDTO) {
-        Vote res = voteDAO.save(voteMapper.toVote(voteDTO));
+    public BaseResponseElement<VoteDto> addVote(VoteDto voteDTO) {
+        voteDAO.save(voteMapper.toVote(voteDTO));
 
         return new BaseResponseElement<>(voteDTO);
     }

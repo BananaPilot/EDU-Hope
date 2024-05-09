@@ -54,6 +54,18 @@ public class Course {
         return description;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classes> classes) {
+        this.classes = classes;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -66,4 +78,54 @@ public class Course {
         this.school = school;
     }
 
+
+    public static final class CourseBuilder {
+        private Long id;
+        private @NotBlank(message = "Course name can't be blank") String name;
+        private String description;
+        private School school;
+        private List<Classes> classes;
+
+        private CourseBuilder() {
+        }
+
+        public static CourseBuilder aCourse() {
+            return new CourseBuilder();
+        }
+
+        public CourseBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public CourseBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CourseBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public CourseBuilder withSchool(School school) {
+            this.school = school;
+            return this;
+        }
+
+        public CourseBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public Course build() {
+            Course course = new Course();
+            course.setName(name);
+            course.setDescription(description);
+            course.setSchool(school);
+            course.classes = this.classes;
+            course.id = this.id;
+            return course;
+        }
+    }
 }

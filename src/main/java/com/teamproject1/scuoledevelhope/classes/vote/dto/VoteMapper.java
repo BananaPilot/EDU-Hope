@@ -1,33 +1,26 @@
 package com.teamproject1.scuoledevelhope.classes.vote.dto;
 
-import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
-import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class VoteMapper {
-    private final ModelMapper modelMapper;
     private final RegisterDao registerDao;
     private final StudentDAO studentDao;
 
-    public VoteMapper(ModelMapper modelMapper, RegisterDao registerDao, StudentDAO studentDAO) {
-        this.modelMapper = modelMapper;
+    public VoteMapper(RegisterDao registerDao, StudentDAO studentDAO) {
         this.registerDao = registerDao;
         this.studentDao = studentDAO;
     }
 
 
-    public Vote toVote(VoteDTO voteDto) {
+    public Vote toVote(VoteDto voteDto) {
         return Vote.VoteBuilder.aVote()
                 .withDate(voteDto.getDate())
                 .withAnnotation(voteDto.getAnnotation())
@@ -39,32 +32,38 @@ public class VoteMapper {
                 .build();
     }
 
-    public VoteDTO toVoteDto(Vote vote) {
-        return VoteDTO.VoteDTOBuilder.aVoteDTO()
+    public VoteDto toVoteDto(Vote vote) {
+        return VoteDto.VoteDTOBuilder.aVoteDTO()
                 .withDate(vote.getDate())
                 .withAnnotation(vote.getAnnotation())
                 .withEvaluation(vote.getEvaluation())
                 .withIdRegister(vote.getIdRegister().getId())
-                .withIdStudent(vote.getIdStudent().getId())
+                .withIdStudent(vote.getIdStudent() != null ? vote.getIdStudent().getId() : null)
                 .withIsCheckPoint(vote.getIsCheckPoint())
                 .withSubject(vote.getSubject())
                 .build();
     }
 
-    public List<Vote> toVoteList(List<VoteDTO> voteDtoList){
+    public List<Vote> toVoteList(List<VoteDto> voteDtoList){
         List<Vote> voteList = new ArrayList<>();
-        for(VoteDTO element : voteDtoList){
+        for(VoteDto element : voteDtoList){
             voteList.add(this.toVote(element));
         }
         return voteList;
     }
 
-    public List<VoteDTO> toVoteDtoList(List<Vote> votes){
-        List<VoteDTO> voteDtoList = new ArrayList<>();
+    public List<VoteDto> toListVoteDto(List<Vote> votes){
+        List<VoteDto> voteDtoList = new ArrayList<>();
         for(Vote element : votes){
             voteDtoList.add(this.toVoteDto(element));
         }
         return voteDtoList;
+    }
+
+    public VoteDtoList toVoteDtoList(List<Vote> votes){
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(this.toListVoteDto(votes))
+                .build();
     }
 
 }
