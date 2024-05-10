@@ -16,14 +16,12 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -125,7 +123,6 @@ class UserControllerIT {
         MvcResult res = this.mock.perform(multipart("/user/login").contentType(MediaType.MULTIPART_FORM_DATA)
                         .param("username", user.getUsername())
                         .param("password", "gianniBello200!")
-                        .param("id", user.getId().toString())
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -173,7 +170,7 @@ class UserControllerIT {
     @Test
     void getDashboard() throws Exception {
         MvcResult res = this.mock.perform(get("/user/dashboard")
-                .header("Authorization", "Bearer " + JWT))
+                        .header("Authorization", "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(result -> result.getRequest().getHeader("Authorization").equals("authenticated"))
