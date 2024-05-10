@@ -5,15 +5,13 @@ import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
 import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
-import com.teamproject1.scuoledevelhope.classes.user.dto.DashboardDto;
-import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
-import com.teamproject1.scuoledevelhope.classes.user.dto.UserDtoElement;
-import com.teamproject1.scuoledevelhope.classes.user.dto.UserListDto;
+import com.teamproject1.scuoledevelhope.classes.user.dto.*;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import com.teamproject1.scuoledevelhope.utils.Utils;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,14 +26,17 @@ public class UserService {
 
     private final RoleDao roleDao;
 
+    private final HttpServletResponse servletResponse;
+
     private final Utils utils;
 
     private final UserMapper mapper = new UserMapper();
 
-    public UserService(UserDao userDao, UserRegistryDAO userRegistryDAO, RoleDao roleDao, Utils utils) {
+    public UserService(UserDao userDao, UserRegistryDAO userRegistryDAO, RoleDao roleDao, HttpServletResponse servletResponse, Utils utils) {
         this.userDao = userDao;
         this.userRegistryDAO = userRegistryDAO;
         this.roleDao = roleDao;
+        this.servletResponse = servletResponse;
         this.utils = utils;
     }
 
@@ -82,6 +83,7 @@ public class UserService {
     public DashboardDto getDashboard(String jwt) {
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         return DashboardDto.DashboardDtoBuilder.map(user)
+                .withUserRegistry(user.getUserRegistry())
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
     }
@@ -106,6 +108,15 @@ public class UserService {
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         return DashboardDto.DashboardDtoBuilder.map(user)
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .build();
+    }
+
+    public LoginResponse getJwtHeaderResponse() {
+        return LoginResponse.LoginResponseBuilder.aLoginResponse()
+                .withElement("Bearer " + servletResponse.getHeader("Authorization"))
+                .withHttpStatus(HttpStatus.OK)
+                .withDescription("The jwt is also in the Authorization header")
+                .withMessage("jwt has been created")
                 .build();
     }
 }
