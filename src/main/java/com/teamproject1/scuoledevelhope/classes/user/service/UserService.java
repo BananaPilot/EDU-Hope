@@ -100,13 +100,14 @@ public class UserService {
 
     @Transactional
     public DashboardDto updateUser(String jwt, UserAdd updatedUser) {
-        int userRes = userDao.userUpdate(utils.getUserFromJwt(jwt).getId(), updatedUser.getUsername(), updatedUser.getPassword());
+        int userRes = userDao.userUpdate(utils.getUserFromJwt(jwt).getId(), updatedUser.getUsername());
         int userRegistryRes = userRegistryDAO.userRegistryUpdate(updatedUser.getEmail(), updatedUser.getName(), updatedUser.getSurname(), updatedUser.getPhoneNumber(), utils.getUserFromJwt(jwt).getId());
         if (userRes < 0 || userRegistryRes < 0) {
             throw new SQLException("user was not updated");
         }
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         return DashboardDto.DashboardDtoBuilder.map(user)
+                .withUserRegistry(user.getUserRegistry())
                 .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
                 .build();
     }

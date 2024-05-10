@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.user.mapper;
 
 import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.classes.user.dto.UserAdd;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserDto;
 
 import java.util.ArrayList;
@@ -24,6 +25,16 @@ public class UserMapper {
         return User.UserBuilder.anUser()
                 .withId(userDto.getId())
                 .withUsername(userDto.getUsername())
+                .build();
+    }
+
+    public UserAdd toUserAdd(User user) {
+        return UserAdd.UserAddBuilder.anUserAdd()
+                .withUsername(user.getUsername())
+                .withName(user.getUserRegistry().getName())
+                .withEmail(user.getUserRegistry().getEmail())
+                .withPhoneNumber(user.getUserRegistry().getTelephone())
+                .withPassword(user.getPassword())
                 .build();
     }
 

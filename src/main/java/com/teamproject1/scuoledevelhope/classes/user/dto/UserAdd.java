@@ -59,6 +59,26 @@ public class UserAdd {
         this.password = password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public static final class UserAddBuilder {
         private @NotBlank(message = "username can't be blank") String username;
         private @NotBlank(message = "password can't be blank") String password;
