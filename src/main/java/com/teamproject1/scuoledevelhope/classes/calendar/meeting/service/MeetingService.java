@@ -15,6 +15,7 @@ import com.teamproject1.scuoledevelhope.classes.userRegistry.mapper.UserRegistry
 import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
+import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -90,7 +91,7 @@ public class MeetingService {
         checkData(meetingDTO);
         Meeting meeting = meetingDAO.save(mapper.toMeeting(meetingDTO));
 
-        return new BaseResponseElement<MeetingDTO>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), "Data saving successful", mapper.toMeetingDTO(meeting));
+        return new BaseResponseElement<>(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), "Data saving successful", mapper.toMeetingDTO(meeting));
     }
 
     public BaseResponseElement<MeetingDTO> updateMeeting(MeetingDTO meetingDTO) {
@@ -105,8 +106,7 @@ public class MeetingService {
 
     public BaseResponseElement<MeetingDTO> deleteMeeting(Long id) {
 
-        MeetingDTO temp = new MeetingDTO();
-        temp = mapper.toMeetingDTO(findById(id).getElement());
+        MeetingDTO temp = mapper.toMeetingDTO(findById(id).getElement());
         checkData(temp);
         meetingDAO.deleteById(id);
         return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", temp);
@@ -114,14 +114,14 @@ public class MeetingService {
 
     public MeetingDTO checkData(MeetingDTO meeting) {
 
-        LocalDateTime start_date = meeting.getStartDate();
-        LocalDateTime end_date = meeting.getEndDate();
+        LocalDateTime startDate = meeting.getStartDate();
+        LocalDateTime endDate = meeting.getEndDate();
 
-        if (start_date.isBefore(LocalDateTime.now())) {
+        if (startDate.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("You cannot insert , update , cancel meeting into the past");
         }
 
-        if (end_date.isBefore(start_date)) {
+        if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("You mixed up the date");
         }
         return meeting;
@@ -140,8 +140,7 @@ public class MeetingService {
 
     //prossimo meeting di un user (entro 7 gg)
     public BaseResponseElement<MeetingDTO> nextMeetingById(Long id) {
-        Meeting meeting = new Meeting();
-        meeting = meetingDAO.nextMeetingById(id, LocalDate.now(), LocalDate.now().plusDays(7));
+        Meeting meeting = meetingDAO.nextMeetingById(id, LocalDate.now(), LocalDate.now().plusDays(7));
         if (meeting == null) {
             return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "No meetings in the next 7 days", null);
         }
@@ -164,8 +163,7 @@ public class MeetingService {
 
         //sezione partecipanti
         List<UserRegistryDTO> userRegistryDTO = new ArrayList<>();
-        List<UserRegistry> userRegistry = new ArrayList<>();
-        userRegistry = userRegistryDAO.allUserByMeeting(participants.getIdMeeting());
+        List<UserRegistry> userRegistry = userRegistryDAO.allUserByMeeting(participants.getIdMeeting());
         //conversione a userRegistryDTO
         for (UserRegistry ur : userRegistry) {
             userRegistryDTO.add(userRegistryMapper.toUserRegistryDTO(ur));
@@ -181,7 +179,7 @@ public class MeetingService {
 
         //controllo su presenza meeting
         if (meetingDAO.findById(usDTO.getIdMeeting()).isEmpty()) {
-            throw new RuntimeException("This meeting does not exist");
+            throw new NotFoundException("This meeting does not exist");
         }
         for (Long userRemove : usDTO.getParticipantsId()) {
             //controllo se esiste l user
