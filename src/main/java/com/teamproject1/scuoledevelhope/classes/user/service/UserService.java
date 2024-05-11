@@ -3,6 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.user.service;
 import com.bananapilot.samplespringauthenticationframework.utils.BCryptPasswordEncoder;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
+import com.teamproject1.scuoledevelhope.classes.role.dto.RoleMapper;
 import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.*;
@@ -29,6 +30,8 @@ public class UserService {
     private final HttpServletResponse servletResponse;
 
     private final Utils utils;
+
+    private final RoleMapper roleMapper = new RoleMapper();
 
     private final UserMapper mapper = new UserMapper();
 
@@ -71,9 +74,13 @@ public class UserService {
         userDao.addUserRegistry(user.getId());
         roleDao.addRoleWithUsername(userAdd.getUsername(), Role.RoleEnum.USER.getRoleString());
         user = userDao.getByUsername(userAdd.getUsername());
-        return DashboardDto.DashboardDtoBuilder.map(user)
-                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
-                .withUserRegistry(userRegistryDAO.registryById(user.getId()))
+        return DashboardDto.DashboardDtoBuilder.aDashboardDto()
+                .withUsername(user.getUsername())
+                .withUserRegistry(user.getUserRegistry())
+                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard()
+                        .withRoleEnum(roleMapper.toRoleEnumList(user.getRoles()))
+                        .build()
+                )
                 .withHttpStatus(HttpStatus.CREATED)
                 .withMessage("User created")
                 .build();
@@ -82,9 +89,13 @@ public class UserService {
 
     public DashboardDto getDashboard(String jwt) {
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
-        return DashboardDto.DashboardDtoBuilder.map(user)
+        return DashboardDto.DashboardDtoBuilder.aDashboardDto()
+                .withUsername(user.getUsername())
                 .withUserRegistry(user.getUserRegistry())
-                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard()
+                        .withRoleEnum(roleMapper.toRoleEnumList(user.getRoles()))
+                        .build()
+                )
                 .build();
     }
 
@@ -92,9 +103,14 @@ public class UserService {
     public DashboardDto delete(String jwt) {
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
         userDao.deleteUser(user.getId());
-        return DashboardDto.DashboardDtoBuilder.map(user)
-                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+        return DashboardDto.DashboardDtoBuilder.aDashboardDto()
+                .withUsername(user.getUsername())
+                .withUserRegistry(user.getUserRegistry())
                 .withMessage("User deleted")
+                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard()
+                        .withRoleEnum(roleMapper.toRoleEnumList(user.getRoles()))
+                        .build()
+                )
                 .build();
     }
 
@@ -106,9 +122,13 @@ public class UserService {
             throw new SQLException("user was not updated");
         }
         User user = userDao.userById(utils.getUserFromJwt(jwt).getId());
-        return DashboardDto.DashboardDtoBuilder.map(user)
+        return DashboardDto.DashboardDtoBuilder.aDashboardDto()
+                .withUsername(user.getUsername())
                 .withUserRegistry(user.getUserRegistry())
-                .withRole(RoleDashboard.RoleDashboardBuilder.map(user.getRoles()).build())
+                .withRole(RoleDashboard.RoleDashboardBuilder.aRoleDashboard()
+                        .withRoleEnum(roleMapper.toRoleEnumList(user.getRoles()))
+                        .build()
+                )
                 .build();
     }
 

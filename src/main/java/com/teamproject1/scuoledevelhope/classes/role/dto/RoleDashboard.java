@@ -23,14 +23,6 @@ public class RoleDashboard {
     public static final class RoleDashboardBuilder {
         private List<Role.RoleEnum> roleEnum;
 
-        public static RoleDashboardBuilder map(List<Role> roles) {
-            List<Role.RoleEnum> enums = new ArrayList<>();
-            for (Role role : roles) {
-                enums.add(role.getRoleEnum());
-            }
-            return new RoleDashboardBuilder().withRoleEnum(enums);
-        }
-
         private RoleDashboardBuilder() {
         }
 
