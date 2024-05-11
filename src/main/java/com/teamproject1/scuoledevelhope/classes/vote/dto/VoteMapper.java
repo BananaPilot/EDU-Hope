@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.vote.dto;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -44,23 +43,23 @@ public class VoteMapper {
                 .build();
     }
 
-    public List<Vote> toVoteList(List<VoteDto> voteDtoList){
+    public List<Vote> toVoteList(List<VoteDto> voteDtoList) {
         List<Vote> voteList = new ArrayList<>();
-        for(VoteDto element : voteDtoList){
+        for (VoteDto element : voteDtoList) {
             voteList.add(this.toVote(element));
         }
         return voteList;
     }
 
-    public List<VoteDto> toListVoteDto(List<Vote> votes){
+    public List<VoteDto> toListVoteDto(List<Vote> votes) {
         List<VoteDto> voteDtoList = new ArrayList<>();
-        for(Vote element : votes){
+        for (Vote element : votes) {
             voteDtoList.add(this.toVoteDto(element));
         }
         return voteDtoList;
     }
 
-    public VoteDtoList toVoteDtoList(List<Vote> votes){
+    public VoteDtoList toVoteDtoList(List<Vote> votes) {
         return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
                 .withVotes(this.toListVoteDto(votes))
                 .build();

@@ -57,8 +57,8 @@ public class RegisterInterceptor implements HandlerInterceptor {
         paths.add("/register/all-vote/**");
         boolean bool = false;
 
-        for (String path: paths) {
-            if (pathMatcher.match(path, request.getRequestURI())){
+        for (String path : paths) {
+            if (pathMatcher.match(path, request.getRequestURI())) {
                 bool = true;
                 break;
             }

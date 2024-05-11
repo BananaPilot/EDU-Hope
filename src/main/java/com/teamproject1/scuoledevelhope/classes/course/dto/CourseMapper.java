@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class CourseMapper {
     private final SchoolDAO schoolDAO;
@@ -17,7 +18,7 @@ public class CourseMapper {
         this.classRegisterMapper = classRegisterMapper;
     }
 
-    public Course courseWithClassesDtotoCourse(CourseWithClassesDto courseDto){
+    public Course courseWithClassesDtotoCourse(CourseWithClassesDto courseDto) {
         return Course.CourseBuilder.aCourse()
                 .withName(courseDto.getName())
                 .withDescription(courseDto.getCourseDescription())
@@ -26,7 +27,7 @@ public class CourseMapper {
                 .build();
     }
 
-    public Course courseDtotoCourse(CourseDto courseDto){
+    public Course courseDtotoCourse(CourseDto courseDto) {
         return Course.CourseBuilder.aCourse()
                 .withName(courseDto.getName())
                 .withDescription(courseDto.getDescription())
@@ -34,7 +35,7 @@ public class CourseMapper {
                 .build();
     }
 
-    public CourseDto toCourseDto(Course course){
+    public CourseDto toCourseDto(Course course) {
         return CourseDto.CourseDtoBuilder.aCourseDto()
                 .withName(course.getName())
                 .withDescription(course.getDescription())
@@ -42,7 +43,7 @@ public class CourseMapper {
                 .build();
     }
 
-    public CourseWithClassesDto toCourseWithClassesDto(Course course){
+    public CourseWithClassesDto toCourseWithClassesDto(Course course) {
         return CourseWithClassesDto.CourseWithClassesDtoBuilder.aCourseWithClassesDto()
                 .withName(course.getName())
                 .withDescription(course.getDescription())
@@ -51,9 +52,9 @@ public class CourseMapper {
                 .build();
     }
 
-    public List<CourseWithClassesDto> toCourseListDto(List<Course> courses){
+    public List<CourseWithClassesDto> toCourseListDto(List<Course> courses) {
         List<CourseWithClassesDto> courseListDto = new ArrayList<>();
-        for(Course element : courses){
+        for (Course element : courses) {
             courseListDto.add(this.toCourseWithClassesDto(element));
         }
         return courseListDto;

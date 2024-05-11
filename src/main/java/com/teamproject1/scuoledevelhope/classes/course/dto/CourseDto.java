@@ -1,9 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.course.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
-
-import java.util.List;
-
 public class CourseDto {
 
     private String name;

@@ -5,7 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import com.teamproject1.scuoledevelhope.classes.vote.service.VoteService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

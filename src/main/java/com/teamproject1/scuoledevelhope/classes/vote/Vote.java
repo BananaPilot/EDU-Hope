@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.vote;
 
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.report.Report;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

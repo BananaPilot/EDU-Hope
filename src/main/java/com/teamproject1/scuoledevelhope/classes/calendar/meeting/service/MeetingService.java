@@ -62,12 +62,12 @@ public class MeetingService {
     }
 
     //tutti i meeting di un user in un intervallo di tempo
-    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate ,int page, int pageSize) {
+    public BaseResponseList<MeetingDTO> intervalGetById(Long id, LocalDate startDate, LocalDate endDate, int page, int pageSize) {
 
         return responsePageable(meetingDAO.intervalGetByID(id, startDate, endDate, PageRequest.of(page, pageSize)));
     }
 
-    private BaseResponseList<MeetingDTO> responsePageable(Page<Meeting> meeting){
+    private BaseResponseList<MeetingDTO> responsePageable(Page<Meeting> meeting) {
 
         List<MeetingDTO> brlMeetingDTO = new ArrayList<>();
 

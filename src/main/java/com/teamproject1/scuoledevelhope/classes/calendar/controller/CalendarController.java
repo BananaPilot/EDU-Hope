@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
@@ -37,7 +36,7 @@ public class CalendarController {
     //tutti i meeting di un user
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id,@RequestParam int page, int pageSize) {
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id, @RequestParam int page, int pageSize) {
         return meetingService.allMeetingByUser(id, page, pageSize);
     }
 
@@ -45,7 +44,7 @@ public class CalendarController {
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/intervalByUserId/{id}")
     public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
-        return meetingService.intervalGetById(id, startDate, endDate, page , pageSize);
+        return meetingService.intervalGetById(id, startDate, endDate, page, pageSize);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")

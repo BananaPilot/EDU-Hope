@@ -2,7 +2,6 @@ package com.teamproject1.scuoledevelhope.classes.role.dto;
 
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDashboard {

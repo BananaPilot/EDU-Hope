@@ -1,8 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
-import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 

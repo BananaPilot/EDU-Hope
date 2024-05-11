@@ -84,6 +84,7 @@ public class School {
             this.id = id;
             return this;
         }
+
         public SchoolBuilder withClasses(List<Classes> classes) {
             this.classes = classes;
             return this;

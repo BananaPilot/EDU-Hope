@@ -27,6 +27,7 @@ public class ReportService {
         this.voteMapper = voteMapper;
         this.reportMapper = reportMapper;
     }
+
     @Transactional
     public ReportDto save(ReportVoteDto reportVoteDto, int limit, int page) {
         Page<Vote> votes = voteDao.findBySubjectAndStudentId(reportVoteDto.getSubject(), reportVoteDto.getIdStudent(), PageRequest.of(page, limit));
@@ -35,7 +36,7 @@ public class ReportService {
 
         Float gradePointAverage = 0F;
 
-        for (Vote element : voteList){
+        for (Vote element : voteList) {
             gradePointAverage += element.getEvaluation();
         }
         gradePointAverage /= voteList.size();

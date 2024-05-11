@@ -21,7 +21,7 @@ public class UserMapper {
         return userDtoList;
     }
 
-    public User userDtoToUser(UserDto userDto){
+    public User userDtoToUser(UserDto userDto) {
         return User.UserBuilder.anUser()
                 .withId(userDto.getId())
                 .withUsername(userDto.getUsername())

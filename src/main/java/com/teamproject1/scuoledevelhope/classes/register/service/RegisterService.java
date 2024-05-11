@@ -1,10 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.register.service;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.register.dto.*;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDto;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoList;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoWithVote;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
@@ -54,14 +55,14 @@ public class RegisterService {
     public RegisterDtoWithVote findById(Long id) {
         Optional<Register> register = registerDao.findById(id);
 
-        if(register.isEmpty()){
+        if (register.isEmpty()) {
             throw new NotFoundException("Register was not found");
         }
 
-        return registerMapper.toRegisterDtoWithVote(register.get()) ;
+        return registerMapper.toRegisterDtoWithVote(register.get());
     }
 
-    public VoteDtoList findAllVote(Long registerId, int limit, int page){
+    public VoteDtoList findAllVote(Long registerId, int limit, int page) {
         Page<Vote> votes = voteDAO.findAllByRegisterId(registerId, PageRequest.of(page, limit));
         return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
                 .withVotes(voteMapper.toListVoteDto(votes.toList()))
@@ -73,7 +74,7 @@ public class RegisterService {
                 .build();
     }
 
-    public StudentDtoList findAllStudent(Long registerId, int limit, int page){
+    public StudentDtoList findAllStudent(Long registerId, int limit, int page) {
         Page<Student> students = studentDAO.findAllByRegisterId(registerId, PageRequest.of(page, limit));
         return StudentDtoList.StudentDtoListBuilder.aStudentDtoList()
                 .withStudents(studentMapper.toListStudentDto(students.toList()))
@@ -88,7 +89,7 @@ public class RegisterService {
     public RegisterDtoList findAllByTutor(String jwt, int limit, int page) {
         Optional<Tutor> optional = tutorDAO.findById(utils.getUserFromJwt(jwt).getId());
 
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new NotFoundException("Tutor was not found");
         }
         Tutor tutor = optional.get();

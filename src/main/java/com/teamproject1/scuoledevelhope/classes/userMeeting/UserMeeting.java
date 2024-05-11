@@ -3,6 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.userMeeting;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.Objects;
 
 @Entity

@@ -4,10 +4,7 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Fl
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.user.dto.*;
 import com.teamproject1.scuoledevelhope.classes.user.service.UserService;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +14,7 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController( UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

@@ -1,13 +1,12 @@
 package com.teamproject1.scuoledevelhope.classes.course.service;
 
 import com.teamproject1.scuoledevelhope.classes.classP.Classes;
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
-import com.teamproject1.scuoledevelhope.classes.course.dto.CourseWithClassesDto;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseMapper;
+import com.teamproject1.scuoledevelhope.classes.course.dto.CourseWithClassesDto;
 import com.teamproject1.scuoledevelhope.classes.course.repo.CourseDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;

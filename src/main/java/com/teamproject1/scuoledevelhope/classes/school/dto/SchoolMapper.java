@@ -9,29 +9,29 @@ import java.util.List;
 @Component
 public class SchoolMapper {
 
-    public School toSchool(SchoolDto schoolDto){
+    public School toSchool(SchoolDto schoolDto) {
         return School.SchoolBuilder.aSchool()
                 .withName(schoolDto.getName())
                 .build();
     }
 
-    public SchoolDto toSchoolDto(School school){
+    public SchoolDto toSchoolDto(School school) {
         return SchoolDto.SchoolDtoBuilder.aSchoolDto()
                 .withName(school.getName())
                 .build();
     }
 
-    public List<SchoolDto> toListSchoolDto(List<School> schools){
+    public List<SchoolDto> toListSchoolDto(List<School> schools) {
         List<SchoolDto> schoolDtoList = new ArrayList<>();
-        for(School element : schools){
+        for (School element : schools) {
             schoolDtoList.add(this.toSchoolDto(element));
         }
         return schoolDtoList;
     }
 
-    public List<School> toListSchool(List<SchoolDto> schoolDtoList){
+    public List<School> toListSchool(List<SchoolDto> schoolDtoList) {
         List<School> schoolList = new ArrayList<>();
-        for (SchoolDto element : schoolDtoList){
+        for (SchoolDto element : schoolDtoList) {
             schoolList.add(this.toSchool(element));
         }
         return schoolList;

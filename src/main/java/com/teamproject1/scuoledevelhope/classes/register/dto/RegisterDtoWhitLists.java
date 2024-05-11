@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class RegisterDtoWhitLists extends Pagination{
+public class RegisterDtoWhitLists extends Pagination {
     private RegisterDto registerDto;
     private List<StudentDto> students;
     private List<VoteDto> votes;

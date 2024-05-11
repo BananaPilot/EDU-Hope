@@ -1,14 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.course.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDtoList;
-import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseWithClassesDto;
 import com.teamproject1.scuoledevelhope.classes.course.service.CourseService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +26,7 @@ public class CourseController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @PostMapping("/save")
-    public BaseResponseElement<CourseDto> save (@Valid @RequestBody CourseDto courseDto) {
+    public BaseResponseElement<CourseDto> save(@Valid @RequestBody CourseDto courseDto) {
         return courseService.save(courseDto);
     }
 

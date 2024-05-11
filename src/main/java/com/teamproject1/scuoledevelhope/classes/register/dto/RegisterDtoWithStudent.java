@@ -1,11 +1,10 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class RegisterDtoWithStudent{
+public class RegisterDtoWithStudent {
     private RegisterDto registerDto;
     private List<StudentDto> students;
 

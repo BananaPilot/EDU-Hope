@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
