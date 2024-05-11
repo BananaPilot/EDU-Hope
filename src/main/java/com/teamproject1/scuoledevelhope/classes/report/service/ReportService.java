@@ -40,7 +40,7 @@ public class ReportService {
         }
         gradePointAverage /= voteList.size();
 
-        return ReportDto.ReportDtoBuilder.aReportDto()
+        ReportDto response = ReportDto.ReportDtoBuilder.aReportDto()
                 .withGradePointAverage(gradePointAverage)
                 .withVotes(voteMapper.toListVoteDto(votes.toList()))
                 .withConduct(reportVoteDto.getConduct())
@@ -49,6 +49,10 @@ public class ReportService {
                 .withTotalElements(votes.getTotalElements())
                 .withTotalPages(votes.getTotalPages())
                 .build();
+
+        reportDao.save(reportMapper.toReport(response));
+
+        return response;
     }
 
 }
