@@ -6,7 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.classes.calendar.service.CalendarService;
-import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
+import com.teamproject1.scuoledevelhope.classes.user_meeting.dto.UserMeetingDTO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;

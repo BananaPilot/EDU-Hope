@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.userRegistry.dto;
+package com.teamproject1.scuoledevelhope.classes.user_registry.dto;
 
 import org.springframework.stereotype.Component;
 

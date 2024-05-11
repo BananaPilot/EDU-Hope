@@ -3,7 +3,7 @@ package com.teamproject1.scuoledevelhope.classes.user;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;

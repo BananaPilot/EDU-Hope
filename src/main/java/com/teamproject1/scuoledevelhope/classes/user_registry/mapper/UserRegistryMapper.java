@@ -1,7 +1,7 @@
-package com.teamproject1.scuoledevelhope.classes.userRegistry.mapper;
+package com.teamproject1.scuoledevelhope.classes.user_registry.mapper;
 
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.dto.UserRegistryDTO;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.dto.UserRegistryDTO;
 import org.springframework.stereotype.Component;
 
 @Component

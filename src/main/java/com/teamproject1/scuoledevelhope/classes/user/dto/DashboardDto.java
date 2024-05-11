@@ -1,7 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.user.dto;
 
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponse;
 import org.springframework.http.HttpStatus;
 

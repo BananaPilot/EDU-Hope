@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.userRegistry.repo;
+package com.teamproject1.scuoledevelhope.classes.user_registry.repo;
 
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

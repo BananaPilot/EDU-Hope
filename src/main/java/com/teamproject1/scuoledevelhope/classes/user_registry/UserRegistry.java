@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.userRegistry;
+package com.teamproject1.scuoledevelhope.classes.user_registry;
 
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;

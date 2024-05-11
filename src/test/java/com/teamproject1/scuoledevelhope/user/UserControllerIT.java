@@ -6,7 +6,7 @@ import com.teamproject1.scuoledevelhope.classes.role.repo.RoleDao;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.*;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
+import com.teamproject1.scuoledevelhope.classes.user_registry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

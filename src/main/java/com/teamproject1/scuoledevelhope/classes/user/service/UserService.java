@@ -9,7 +9,7 @@ import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.dto.*;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;
 import com.teamproject1.scuoledevelhope.classes.user.repo.UserDao;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.repo.UserRegistryDAO;
+import com.teamproject1.scuoledevelhope.classes.user_registry.repo.UserRegistryDAO;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.servlet.http.HttpServletResponse;
