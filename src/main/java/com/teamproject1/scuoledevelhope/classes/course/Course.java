@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.course;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.classes.Classes;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.classes.Classes;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;

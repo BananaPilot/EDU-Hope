@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.classes.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentMapper;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;

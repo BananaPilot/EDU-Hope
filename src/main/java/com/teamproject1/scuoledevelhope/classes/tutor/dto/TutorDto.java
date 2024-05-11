@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.tutor.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.classes.user.dto.UserDto;
 
 import java.util.List;

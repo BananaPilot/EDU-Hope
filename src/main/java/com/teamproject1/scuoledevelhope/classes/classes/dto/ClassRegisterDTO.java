@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.classP.dto;
+package com.teamproject1.scuoledevelhope.classes.classes.dto;
 
 public class ClassRegisterDTO {
 

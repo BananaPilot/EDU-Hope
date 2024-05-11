@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.classP.repo;
+package com.teamproject1.scuoledevelhope.classes.classes.repo;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.classes.Classes;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.classes.Classes;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
