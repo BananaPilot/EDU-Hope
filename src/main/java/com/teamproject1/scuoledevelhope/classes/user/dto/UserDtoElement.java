@@ -21,7 +21,7 @@ public class UserDtoElement extends BaseResponse {
 
     public static final class UserDtoElementBuilder {
         private UserDto user;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
 

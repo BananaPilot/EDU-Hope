@@ -19,7 +19,7 @@ public class SchoolListDto extends Pagination {
 
     public static final class SchoolListDtoBuilder {
         private List<SchoolDto> schoolDtoList;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
         private int page;

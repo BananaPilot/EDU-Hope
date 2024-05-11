@@ -54,7 +54,7 @@ public class CourseWithClassesDto extends Pagination {
         private int pageSize;
         private long totalElements;
         private int totalPages;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
 

@@ -19,7 +19,7 @@ public class VoteDtoList extends Pagination {
 
     public static final class VoteDtoListBuilder {
         private List<VoteDto> votes;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
         private int page;

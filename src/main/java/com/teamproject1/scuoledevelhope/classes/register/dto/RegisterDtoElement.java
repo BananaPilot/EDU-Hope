@@ -17,7 +17,7 @@ public class RegisterDtoElement extends BaseResponse {
 
     public static final class RegisterDtoElementBuilder {
         private RegisterDto registerDto;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
 

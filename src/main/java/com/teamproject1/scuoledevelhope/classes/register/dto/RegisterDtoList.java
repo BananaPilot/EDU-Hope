@@ -19,7 +19,7 @@ public class RegisterDtoList extends Pagination {
 
     public static final class RegisterDtoListBuilder {
         private List<RegisterDto> registerDtoList;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
         private int page;

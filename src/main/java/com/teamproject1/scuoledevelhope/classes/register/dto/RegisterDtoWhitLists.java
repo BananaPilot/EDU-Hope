@@ -42,7 +42,7 @@ public class RegisterDtoWhitLists extends Pagination{
         private RegisterDto registerDto;
         private List<StudentDto> students;
         private List<VoteDto> votes;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
         private int page;

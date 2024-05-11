@@ -18,7 +18,7 @@ public class LoginResponse extends BaseResponse {
 
     public static final class LoginResponseBuilder {
         private String element;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
 
