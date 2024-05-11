@@ -18,15 +18,6 @@ public class CourseMapper {
         this.classRegisterMapper = classRegisterMapper;
     }
 
-    public Course courseWithClassesDtotoCourse(CourseWithClassesDto courseDto) {
-        return Course.CourseBuilder.aCourse()
-                .withName(courseDto.getName())
-                .withDescription(courseDto.getCourseDescription())
-                .withSchool(schoolDAO.findById(courseDto.getSchoolId()).orElse(null))
-                .withClasses(classRegisterMapper.toListOfClass(courseDto.getClasses()))
-                .build();
-    }
-
     public Course courseDtotoCourse(CourseDto courseDto) {
         return Course.CourseBuilder.aCourse()
                 .withName(courseDto.getName())
@@ -41,22 +32,5 @@ public class CourseMapper {
                 .withDescription(course.getDescription())
                 .withSchoolId(course.getSchool().getId())
                 .build();
-    }
-
-    public CourseWithClassesDto toCourseWithClassesDto(Course course) {
-        return CourseWithClassesDto.CourseWithClassesDtoBuilder.aCourseWithClassesDto()
-                .withName(course.getName())
-                .withDescription(course.getDescription())
-                .withSchoolId(course.getSchool().getId())
-                .withClasses(classRegisterMapper.toListOfClassRegisterDto(course.getClasses()))
-                .build();
-    }
-
-    public List<CourseWithClassesDto> toCourseListDto(List<Course> courses) {
-        List<CourseWithClassesDto> courseListDto = new ArrayList<>();
-        for (Course element : courses) {
-            courseListDto.add(this.toCourseWithClassesDto(element));
-        }
-        return courseListDto;
     }
 }
