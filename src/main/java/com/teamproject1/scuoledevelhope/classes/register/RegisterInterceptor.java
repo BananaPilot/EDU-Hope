@@ -36,16 +36,15 @@ public class RegisterInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!includePath(request)) return true;
-        if (includePath(request) && handle(request, response)) return true;
+        if (includePath(request) && handle(request)) return true;
         response.sendError(403, "Forbidden");
         return false;
     }
 
     @Transactional
-    public boolean handle(HttpServletRequest request, HttpServletResponse response) {
+    public boolean handle(HttpServletRequest request) {
         Long registerId = Long.parseLong(request.getRequestURI().split("/")[3]);
-        Register register = registerDao.findById(registerId).get();
-        Tutor tutor = tutorDAO.findById(utils.getUserFromJwt(request.getHeader("Authorization")).getId()).get();
+        Tutor tutor = utils.isPresent(tutorDAO.findById(utils.getUserFromJwt(request.getHeader("Authorization")).getId()));
         for (Register registersInTutor : tutor.getRegisters()) {
             if (registersInTutor.getId().equals(registerId)) return true;
         }
