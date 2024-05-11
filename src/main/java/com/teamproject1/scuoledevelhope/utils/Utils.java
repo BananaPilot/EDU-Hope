@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.utils;
 
 import com.bananapilot.samplespringauthenticationframework.utils.JWTUtils;
 import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,6 @@ public class Utils {
     }
 
     public <T> T isPresent(Optional<T> optional) {
-        return optional.orElse(null);
+        return optional.orElse(optional.orElseThrow(() -> new NotFoundException("Optional not found")));
     }
 }

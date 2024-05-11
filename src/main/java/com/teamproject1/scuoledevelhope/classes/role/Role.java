@@ -19,9 +19,11 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
-    @ManyToMany(
-            mappedBy = "roles",
-            fetch = FetchType.LAZY
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id_role"),
+            inverseJoinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id")
     )
     private List<User> users;
 

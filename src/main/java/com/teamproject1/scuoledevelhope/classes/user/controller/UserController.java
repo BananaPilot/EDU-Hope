@@ -15,24 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    private final HttpServletResponse servletResponse;
-
     private final UserService userService;
 
-    public UserController(HttpServletResponse servletResponse, UserService userService) {
-        this.servletResponse = servletResponse;
+    public UserController( UserService userService) {
         this.userService = userService;
     }
 
     @NoAuthorization
     @PostMapping("/login")
-    public LoginResponse login() {
-        return LoginResponse.LoginResponseBuilder.aLoginResponse()
-                .withElement("Bearer " + servletResponse.getHeader("Authorization"))
-                .withHttpStatus(HttpStatus.OK)
-                .withDescription("The jwt is also in the Authorization header")
-                .withMessage("jwt has been created")
-                .build();
+    public LoginResponse login(@RequestParam String username, @RequestParam String password) {
+        return userService.getJwtHeaderResponse();
     }
 
     @NoAuthorization

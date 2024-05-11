@@ -39,12 +39,8 @@ public class User {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(
+            mappedBy = "users",
             fetch = FetchType.LAZY
-    )
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_role")
     )
     private List<Role> roles;
 

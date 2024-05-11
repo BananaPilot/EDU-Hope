@@ -50,11 +50,6 @@ public class DashboardDto extends BaseResponse {
             return new DashboardDtoBuilder();
         }
 
-        public static DashboardDtoBuilder map(User user) {
-            return DashboardDtoBuilder.aDashboardDto()
-                    .withUsername(user.getUsername());
-        }
-
         public DashboardDtoBuilder withUsername(String username) {
             this.username = username;
             return this;

@@ -24,14 +24,8 @@ public class CourseController {
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
     @GetMapping("/all-class/{id}")
-    public ClassRegisterDtoList findAll(@PathVariable Long id, @RequestParam int limit, int page) {
+    public CourseWithClassesDto findAll(@PathVariable Long id, @RequestParam int limit, int page) {
         return courseService.findAllClass(id, limit, page);
-    }
-
-    @FloorLevelAuthorization(floorRole = "ADMIN")
-    @GetMapping("/{id}")
-    public BaseResponseElement<CourseWithClassesDto> findById(@Valid @PathVariable Long id) {
-        return courseService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")

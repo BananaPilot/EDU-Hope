@@ -38,7 +38,7 @@ public class BaseResponse {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String courseDescription) {
+        this.description = courseDescription;
     }
 }
