@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.classes.dto;
+package com.teamproject1.scuoledevelhope.classes.clazzez.dto;
 
 public class ClassRegisterDTO {
 

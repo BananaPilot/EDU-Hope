@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import com.teamproject1.scuoledevelhope.classes.user.mapper.UserMapper;

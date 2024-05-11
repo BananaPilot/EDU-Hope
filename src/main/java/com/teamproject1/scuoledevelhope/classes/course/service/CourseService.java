@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.course.service;
 
-import com.teamproject1.scuoledevelhope.classes.classes.Classes;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterMapper;
-import com.teamproject1.scuoledevelhope.classes.classes.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazzez.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseMapper;

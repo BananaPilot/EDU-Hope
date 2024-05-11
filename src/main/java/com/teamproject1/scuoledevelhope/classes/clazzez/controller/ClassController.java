@@ -1,9 +1,9 @@
-package com.teamproject1.scuoledevelhope.classes.classes.controller;
+package com.teamproject1.scuoledevelhope.classes.clazzez.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterDTO;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterDtoList;
-import com.teamproject1.scuoledevelhope.classes.classes.service.ClassService;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDtoList;
+import com.teamproject1.scuoledevelhope.classes.clazzez.service.ClassService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.classes;
+package com.teamproject1.scuoledevelhope.classes.clazzez;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.course.Course;

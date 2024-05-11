@@ -1,10 +1,10 @@
-package com.teamproject1.scuoledevelhope.classes.classes.service;
+package com.teamproject1.scuoledevelhope.classes.clazzez.service;
 
-import com.teamproject1.scuoledevelhope.classes.classes.Classes;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterDTO;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterDtoList;
-import com.teamproject1.scuoledevelhope.classes.classes.dto.ClassRegisterMapper;
-import com.teamproject1.scuoledevelhope.classes.classes.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDtoList;
+import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazzez.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;

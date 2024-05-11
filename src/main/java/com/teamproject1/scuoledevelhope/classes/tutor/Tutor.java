@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.tutor;
 
-import com.teamproject1.scuoledevelhope.classes.classes.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;

@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.classes.dto;
+package com.teamproject1.scuoledevelhope.classes.clazzez.dto;
 
-import com.teamproject1.scuoledevelhope.classes.classes.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.course.repo.CourseDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
