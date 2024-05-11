@@ -1,5 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.vote.service;
 
+import com.teamproject1.scuoledevelhope.classes.report.dto.ReportMapper;
+import com.teamproject1.scuoledevelhope.classes.report.service.ReportService;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
@@ -9,6 +11,7 @@ import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -21,11 +24,14 @@ public class VoteService {
     private final VoteDAO voteDAO;
     private final VoteMapper voteMapper;
     private final StudentDAO studentDAO;
-
-    public VoteService(VoteDAO voteDAO, VoteMapper voteMapper, StudentDAO studentDAO) {
+    private final ReportService reportService;
+    private final ReportMapper reportMapper;
+    public VoteService(VoteDAO voteDAO, VoteMapper voteMapper, StudentDAO studentDAO, ReportService reportService, ReportMapper reportMapper) {
         this.voteDAO = voteDAO;
         this.voteMapper = voteMapper;
         this.studentDAO = studentDAO;
+        this.reportService = reportService;
+        this.reportMapper = reportMapper;
     }
 
 
@@ -59,8 +65,13 @@ public class VoteService {
         return new BaseResponseElement<>(voteDTO);
     }
 
+    @Transactional
     public BaseResponseElement<VoteDto> addVote(VoteDto voteDTO) {
-        voteDAO.save(voteMapper.toVote(voteDTO));
+        Vote vote = voteDAO.save(voteMapper.toVote(voteDTO));
+
+        if(voteDTO.getIsCheckPoint()){
+            reportService.save(reportMapper.voteDtoToReportVoteDto(voteMapper.toVoteDto(vote)));
+        }
 
         return new BaseResponseElement<>(voteDTO);
     }

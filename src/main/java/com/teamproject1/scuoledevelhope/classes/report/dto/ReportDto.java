@@ -11,6 +11,8 @@ public class ReportDto extends Pagination {
     private Float conduct;
     private Float gradePointAverage;
     private List<VoteDto> votes;
+    private Long idStudent;
+    private String subject;
 
     public Float getConduct() {
         return conduct;
@@ -36,11 +38,29 @@ public class ReportDto extends Pagination {
         this.votes = votes;
     }
 
+    public Long getIdStudent() {
+        return idStudent;
+    }
+
+    public void setIdStudent(Long idStudent) {
+        this.idStudent = idStudent;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public static final class ReportDtoBuilder {
         private Float conduct;
         private Float gradePointAverage;
         private List<VoteDto> votes;
-        private HttpStatus httpStatus = HttpStatus.OK;
+        private Long idStudent;
+        private String subject;
+        private HttpStatus httpStatus;
         private String message;
         private String description;
         private int page;
@@ -67,6 +87,16 @@ public class ReportDto extends Pagination {
 
         public ReportDtoBuilder withVotes(List<VoteDto> votes) {
             this.votes = votes;
+            return this;
+        }
+
+        public ReportDtoBuilder withIdStudent(Long idStudent) {
+            this.idStudent = idStudent;
+            return this;
+        }
+
+        public ReportDtoBuilder withSubject(String subject) {
+            this.subject = subject;
             return this;
         }
 
@@ -110,6 +140,8 @@ public class ReportDto extends Pagination {
             reportDto.setConduct(conduct);
             reportDto.setGradePointAverage(gradePointAverage);
             reportDto.setVotes(votes);
+            reportDto.setIdStudent(idStudent);
+            reportDto.setSubject(subject);
             reportDto.setHttpStatus(httpStatus);
             reportDto.setMessage(message);
             reportDto.setDescription(description);

@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.report;
 
+import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,13 @@ public class Report {
 
     @Column(name = "grade_point_average")
     private Float gradePointAverage;
+
+    @ManyToOne
+    @JoinColumn(name = "id_student")
+    private Student student;
+
+    @Column(name = "subject")
+    private String subject;
 
     public Long getId() {
         return id;
@@ -36,11 +44,28 @@ public class Report {
         this.gradePointAverage = gradePointAverage;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
     public static final class ReportBuilder {
         private Long id;
         private Float conduct;
         private Float gradePointAverage;
+        private Student student;
+        private String subject;
 
         private ReportBuilder() {
         }
@@ -64,10 +89,22 @@ public class Report {
             return this;
         }
 
+        public ReportBuilder withStudent(Student student) {
+            this.student = student;
+            return this;
+        }
+
+        public ReportBuilder withSubject(String subject) {
+            this.subject = subject;
+            return this;
+        }
+
         public Report build() {
             Report report = new Report();
             report.setConduct(conduct);
             report.setGradePointAverage(gradePointAverage);
+            report.setStudent(student);
+            report.setSubject(subject);
             report.id = this.id;
             return report;
         }
