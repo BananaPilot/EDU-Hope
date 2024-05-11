@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.vote.service;
 
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportMapper;
+import com.teamproject1.scuoledevelhope.classes.report.dto.ReportVoteDto;
 import com.teamproject1.scuoledevelhope.classes.report.service.ReportService;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
@@ -67,10 +68,11 @@ public class VoteService {
 
     @Transactional
     public BaseResponseElement<VoteDto> addVote(VoteDto voteDTO) {
-        Vote vote = voteDAO.save(voteMapper.toVote(voteDTO));
+        voteDAO.save(voteMapper.toVote(voteDTO));
+        ReportVoteDto reportVoteDto = reportMapper.voteDtoToReportVoteDto(voteDTO);
 
         if(voteDTO.getIsCheckPoint()){
-            reportService.save(reportMapper.voteDtoToReportVoteDto(voteMapper.toVoteDto(vote)));
+            reportService.save(reportVoteDto);
         }
 
         return new BaseResponseElement<>(voteDTO);

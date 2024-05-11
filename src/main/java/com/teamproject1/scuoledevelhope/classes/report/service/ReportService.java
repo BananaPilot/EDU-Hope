@@ -42,7 +42,7 @@ public class ReportService {
 
         ReportDto response = ReportDto.ReportDtoBuilder.aReportDto()
                 .withGradePointAverage(gradePointAverage)
-                .withVotes(voteMapper.toListVoteDto(voteList))
+                .withVotes(voteMapper.toVoteResponseDto(voteList))
                 .withConduct(reportVoteDto.getConduct())
                 .withSubject(reportVoteDto.getSubject())
                 .withIdStudent(reportVoteDto.getIdStudent())
@@ -59,7 +59,9 @@ public class ReportService {
 
         return ReportDto.ReportDtoBuilder.aReportDto()
                 .withGradePointAverage(report.getGradePointAverage())
-                .withVotes(voteMapper.toListVoteDto(voteList.toList()))
+                .withVotes(voteMapper.toVoteResponseDto(voteList.toList()))
+                .withIdStudent(idStudent)
+                .withSubject(subject)
                 .withTotalPages(voteList.getTotalPages())
                 .withTotalElements(voteList.getTotalElements())
                 .withPage(voteList.getPageable().getPageNumber())

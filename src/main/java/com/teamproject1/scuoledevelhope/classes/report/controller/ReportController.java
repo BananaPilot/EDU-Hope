@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.report.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportDto;
 import com.teamproject1.scuoledevelhope.classes.report.service.ReportService;
 import jakarta.validation.Valid;
