@@ -22,7 +22,7 @@ public class ClassRegisterDtoList extends Pagination {
 
     public static final class ClassRegisterDtoListBuilder {
         private List<ClassRegisterDTO> classes;
-        private HttpStatus httpStatus;
+        private HttpStatus httpStatus = HttpStatus.OK;
         private String message;
         private String description;
         private int page;

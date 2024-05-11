@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.course.dto;
 
 import com.teamproject1.scuoledevelhope.classes.classP.dto.ClassRegisterMapper;
-import com.teamproject1.scuoledevelhope.classes.classP.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ public class CourseMapper {
     private final SchoolDAO schoolDAO;
     private final ClassRegisterMapper classRegisterMapper;
 
-    public CourseMapper(ClassDAO classDAO, SchoolDAO schoolDAO, ClassRegisterMapper classRegisterMapper) {
+    public CourseMapper(SchoolDAO schoolDAO, ClassRegisterMapper classRegisterMapper) {
         this.schoolDAO = schoolDAO;
         this.classRegisterMapper = classRegisterMapper;
     }
@@ -21,7 +20,7 @@ public class CourseMapper {
     public Course courseWithClassesDtotoCourse(CourseWithClassesDto courseDto){
         return Course.CourseBuilder.aCourse()
                 .withName(courseDto.getName())
-                .withDescription(courseDto.getDescription())
+                .withDescription(courseDto.getCourseDescription())
                 .withSchool(schoolDAO.findById(courseDto.getSchoolId()).orElse(null))
                 .withClasses(classRegisterMapper.toListOfClass(courseDto.getClasses()))
                 .build();

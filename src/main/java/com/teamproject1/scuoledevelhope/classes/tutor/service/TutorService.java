@@ -64,6 +64,7 @@ public class TutorService {
         return new BaseResponseElement<>(tutorMapper.tutorToTutorDto(tutor));
     }
 
+    @Transactional
     public BaseResponseElement<TutorDto> deleteById(Long id) {
         Optional<Tutor> temp = tutorDAO.findById(id);
 

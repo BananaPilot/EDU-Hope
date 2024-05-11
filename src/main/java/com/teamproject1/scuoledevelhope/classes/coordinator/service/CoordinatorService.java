@@ -61,6 +61,7 @@ public class CoordinatorService {
         return new BaseResponseElement<>(coordinatorMapper.toCoordinatorDto(coordinator));
     }
 
+    @Transactional
     public BaseResponseElement<CoordinatorDto> deleteById(Long id) {
         Optional<Coordinator> temp = coordinatorDAO.findById(id);
 

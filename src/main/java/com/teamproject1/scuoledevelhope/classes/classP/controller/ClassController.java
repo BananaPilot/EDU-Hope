@@ -33,7 +33,7 @@ public class ClassController {
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/save")
-    public BaseResponseElement<ClassRegisterDTO> save(@Valid @RequestBody ClassRegisterDTO classRegisterDTO) {
+    public BaseResponseElement<ClassRegisterDTO> save(@RequestBody ClassRegisterDTO classRegisterDTO) {
         return classService.save(classRegisterDTO);
     }
 
