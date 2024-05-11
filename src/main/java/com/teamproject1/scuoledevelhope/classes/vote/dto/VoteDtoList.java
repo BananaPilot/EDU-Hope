@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.vote.dto;
 
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
-import org.springdoc.core.converters.models.Pageable;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
