@@ -16,8 +16,11 @@ import java.util.List;
 @Repository
 public class UserDetailsDaoImpl implements UserDetailsDao {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
+
+    public UserDetailsDaoImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override

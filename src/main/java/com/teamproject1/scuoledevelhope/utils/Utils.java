@@ -13,8 +13,12 @@ import java.util.Optional;
 
 @Component
 public class Utils {
-    @Autowired
-    JWTUtils jwtUtils;
+
+    private final JWTUtils jwtUtils;
+
+    public Utils(JWTUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
 
     public User getUserFromJwt(String jwt) {
         Jws<Claims> claimsJws = jwtUtils.validate(jwt.split(" ")[1]);

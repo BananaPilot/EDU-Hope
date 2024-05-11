@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.types;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -11,19 +12,22 @@ import java.util.Objects;
 public class UserRole {
 
     @Id
-    Long id_role;
+    @Column(name = "id_role")
+    Long idRole;
+
     @Id
-    Long id_user;
+    @Column(name = "id_user")
+    Long idUser;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserRole userRole)) return false;
-        return Objects.equals(id_role, userRole.id_role) && Objects.equals(id_user, userRole.id_user);
+        return Objects.equals(idRole, userRole.idRole) && Objects.equals(idUser, userRole.idUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_role, id_user);
+        return Objects.hash(idRole, idUser);
     }
 }

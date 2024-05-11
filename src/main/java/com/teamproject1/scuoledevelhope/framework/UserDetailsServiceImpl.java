@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserDetailsDaoImpl userDetailsDao;
+    private final UserDetailsDaoImpl userDetailsDao;
+
+    public UserDetailsServiceImpl(UserDetailsDaoImpl userDetailsDao) {
+        this.userDetailsDao = userDetailsDao;
+    }
 
 
     @Override
