@@ -21,19 +21,11 @@ public interface MeetingDAO extends JpaRepository<Meeting, Long> {
     Page<Meeting> intervalGetByID(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, Pageable page);
 
     //tutti i meeting di un user in un intervallo di tempo
-    @Query(value = "select meeting.id_meeting , end_date ,link ,note ,start_date ,title from meeting\n" +
-            "join user_meeting on user_meeting.id_meeting = meeting.id_meeting\n" +
-            "where user_meeting.id_user = :id\n" +
-            "and start_date > :startDate and end_date < :endDate", nativeQuery = true)
+    @Query(value = "select meeting.id_meeting , end_date ,link ,note ,start_date ,title from meeting join user_meeting on user_meeting.id_meeting = meeting.id_meeting where user_meeting.id_user = :id and start_date > :startDate and end_date < :endDate", nativeQuery = true)
     Page<Meeting> intervalGetByIDpageable(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, Pageable page);
 
     //prossimo meeting di un user ( entro 7 gg)
     @Query(value =
-            "select meeting.* from meeting\n" +
-                    "join user_meeting on user_meeting.id_meeting  = meeting.id_meeting \n" +
-                    "where user_meeting.id_user = :id\n" +
-                    "and start_date > :startDate and end_date < :endDate\n" +
-                    "Order by start_date asc\n" +
-                    "LIMIT 1", nativeQuery = true)
+            "select meeting.* from meeting join user_meeting on user_meeting.id_meeting  = meeting.id_meeting where user_meeting.id_user = :id and start_date > :startDate and end_date < :endDate Order by start_date LIMIT 1", nativeQuery = true)
     Meeting nextMeetingById(@Param("id") Long id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

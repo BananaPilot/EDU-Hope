@@ -81,15 +81,12 @@ public class CalendarController {
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/meeting/addParticipants")
     public BaseResponseElement<MeetingResponse> addParticipants(@RequestBody UserMeetingDTO usDTO) {
-        System.out.println(usDTO);
         return meetingService.addParticipants(usDTO);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/meeting/deleteUser")
     public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO) {
-        System.out.println(usDTO);
-
         return meetingService.removeUserFromMeeting(usDTO);
     }
     //-----------END MEETING ---------//

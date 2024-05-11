@@ -16,9 +16,7 @@ import java.util.List;
 public interface VoteDAO extends JpaRepository<Vote, Long> {
     @Transactional
     @Modifying
-    @Query(value = "delete v from vote v \n" +
-            "join student s on v.id_student = s.user_id \n" +
-            "where s.user_id  = ?1 AND v.id_vote = ?2", nativeQuery = true)
+    @Query(value = "delete v from vote v join student s on v.id_student = s.user_id where s.user_id  = ?1 AND v.id_vote = ?2", nativeQuery = true)
     void deleteVote(Long idStudent, Long idVote);
 
     @Transactional
