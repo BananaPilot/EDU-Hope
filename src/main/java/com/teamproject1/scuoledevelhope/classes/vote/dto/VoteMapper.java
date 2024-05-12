@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.vote.dto;
 
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
+import com.teamproject1.scuoledevelhope.classes.report.dto.ReportVoteDto;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import org.springframework.stereotype.Component;
@@ -43,14 +44,6 @@ public class VoteMapper {
                 .build();
     }
 
-    public List<Vote> toVoteList(List<VoteDto> voteDtoList) {
-        List<Vote> voteList = new ArrayList<>();
-        for (VoteDto element : voteDtoList) {
-            voteList.add(this.toVote(element));
-        }
-        return voteList;
-    }
-
     public List<VoteDto> toListVoteDto(List<Vote> votes) {
         List<VoteDto> voteDtoList = new ArrayList<>();
         for (Vote element : votes) {
@@ -59,10 +52,21 @@ public class VoteMapper {
         return voteDtoList;
     }
 
-    public VoteDtoList toVoteDtoList(List<Vote> votes) {
-        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
-                .withVotes(this.toListVoteDto(votes))
+    public VoteResponseDto toVoteResponseDto(Vote vote){
+        return VoteResponseDto.VoteResponseDtoBuilder.aVoteResponseDto()
+                .withDate(vote.getDate())
+                .withAnnotation(vote.getAnnotation())
+                .withEvaluation(vote.getEvaluation())
+                .withIsCheckPoint(vote.getIsCheckPoint())
                 .build();
     }
 
+    public List<VoteResponseDto> toVoteResponseDto(List<Vote> votes){
+        List<VoteResponseDto> voteResponseDtoList = new ArrayList<>();
+        for(Vote element : votes){
+            voteResponseDtoList.add(this.toVoteResponseDto(element));
+        }
+
+        return  voteResponseDtoList;
+    }
 }

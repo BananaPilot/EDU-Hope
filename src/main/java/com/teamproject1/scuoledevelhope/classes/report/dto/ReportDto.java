@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.report.dto;
 
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteResponseDto;
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 import org.springframework.http.HttpStatus;
 
@@ -10,7 +11,9 @@ public class ReportDto extends Pagination {
 
     private Float conduct;
     private Float gradePointAverage;
-    private List<VoteDto> votes;
+    private Long idStudent;
+    private String subject;
+    private List<VoteResponseDto> votes;
 
     public Float getConduct() {
         return conduct;
@@ -28,19 +31,37 @@ public class ReportDto extends Pagination {
         this.gradePointAverage = gradePointAverage;
     }
 
-    public List<VoteDto> getVotes() {
+    public List<VoteResponseDto> getVotes() {
         return votes;
     }
 
-    public void setVotes(List<VoteDto> votes) {
+    public void setVotes(List<VoteResponseDto> votes) {
         this.votes = votes;
+    }
+
+    public Long getIdStudent() {
+        return idStudent;
+    }
+
+    public void setIdStudent(Long idStudent) {
+        this.idStudent = idStudent;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public static final class ReportDtoBuilder {
         private Float conduct;
         private Float gradePointAverage;
-        private List<VoteDto> votes;
-        private HttpStatus httpStatus = HttpStatus.OK;
+        private Long idStudent;
+        private String subject;
+        private List<VoteResponseDto> votes;
+        private HttpStatus httpStatus;
         private String message;
         private String description;
         private int page;
@@ -65,7 +86,17 @@ public class ReportDto extends Pagination {
             return this;
         }
 
-        public ReportDtoBuilder withVotes(List<VoteDto> votes) {
+        public ReportDtoBuilder withIdStudent(Long idStudent) {
+            this.idStudent = idStudent;
+            return this;
+        }
+
+        public ReportDtoBuilder withSubject(String subject) {
+            this.subject = subject;
+            return this;
+        }
+
+        public ReportDtoBuilder withVotes(List<VoteResponseDto> votes) {
             this.votes = votes;
             return this;
         }
@@ -109,6 +140,8 @@ public class ReportDto extends Pagination {
             ReportDto reportDto = new ReportDto();
             reportDto.setConduct(conduct);
             reportDto.setGradePointAverage(gradePointAverage);
+            reportDto.setIdStudent(idStudent);
+            reportDto.setSubject(subject);
             reportDto.setVotes(votes);
             reportDto.setHttpStatus(httpStatus);
             reportDto.setMessage(message);

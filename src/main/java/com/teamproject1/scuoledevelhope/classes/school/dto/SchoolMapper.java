@@ -28,12 +28,4 @@ public class SchoolMapper {
         }
         return schoolDtoList;
     }
-
-    public List<School> toListSchool(List<SchoolDto> schoolDtoList) {
-        List<School> schoolList = new ArrayList<>();
-        for (SchoolDto element : schoolDtoList) {
-            schoolList.add(this.toSchool(element));
-        }
-        return schoolList;
-    }
 }

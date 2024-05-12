@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.report.service;
 
+import com.teamproject1.scuoledevelhope.classes.report.Report;
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportDto;
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportMapper;
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportVoteDto;
@@ -21,17 +22,15 @@ public class ReportService {
     private final VoteMapper voteMapper;
     private final ReportMapper reportMapper;
 
-    public ReportService(ReportDao reportDao, VoteDAO voteDao, VoteMapper voteMapper, ReportMapper reportMapper) {
+    public ReportService(ReportDao reportDao, VoteDAO voteDao, VoteMapper voteMapper, ReportMapper reportMapper, ReportMapper reportMapper1) {
         this.reportDao = reportDao;
         this.voteDao = voteDao;
         this.voteMapper = voteMapper;
-        this.reportMapper = reportMapper;
+        this.reportMapper = reportMapper1;
     }
 
     @Transactional
-    public ReportDto save(ReportVoteDto reportVoteDto, int limit, int page) {
-        Page<Vote> votes = voteDao.findBySubjectAndStudentId(reportVoteDto.getSubject(), reportVoteDto.getIdStudent(), PageRequest.of(page, limit));
-
+    public ReportDto save(ReportVoteDto reportVoteDto) {
         List<Vote> voteList = voteDao.findBySubjectAndStudentId(reportVoteDto.getSubject(), reportVoteDto.getIdStudent());
 
         Float gradePointAverage = 0F;
@@ -43,12 +42,10 @@ public class ReportService {
 
         ReportDto response = ReportDto.ReportDtoBuilder.aReportDto()
                 .withGradePointAverage(gradePointAverage)
-                .withVotes(voteMapper.toListVoteDto(votes.toList()))
+                .withVotes(voteMapper.toVoteResponseDto(voteList))
                 .withConduct(reportVoteDto.getConduct())
-                .withPage(votes.getPageable().getPageNumber())
-                .withPageSize(votes.getPageable().getPageSize())
-                .withTotalElements(votes.getTotalElements())
-                .withTotalPages(votes.getTotalPages())
+                .withSubject(reportVoteDto.getSubject())
+                .withIdStudent(reportVoteDto.getIdStudent())
                 .build();
 
         reportDao.save(reportMapper.toReport(response));
@@ -56,4 +53,19 @@ public class ReportService {
         return response;
     }
 
+    public ReportDto findReport(Long idStudent, String subject, int limit, int page) {
+        Report report = reportDao.findByIdStudentAndSubject(idStudent, subject);
+        Page<Vote> voteList = voteDao.findBySubjectAndStudentId(report.getSubject(), report.getStudent().getId(), PageRequest.of(page, limit));
+
+        return ReportDto.ReportDtoBuilder.aReportDto()
+                .withGradePointAverage(report.getGradePointAverage())
+                .withVotes(voteMapper.toVoteResponseDto(voteList.toList()))
+                .withIdStudent(idStudent)
+                .withSubject(subject)
+                .withTotalPages(voteList.getTotalPages())
+                .withTotalElements(voteList.getTotalElements())
+                .withPage(voteList.getPageable().getPageNumber())
+                .withPageSize(voteList.getPageable().getPageSize())
+                .build();
+    }
 }
