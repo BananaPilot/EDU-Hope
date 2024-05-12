@@ -5,7 +5,6 @@ import com.bananapilot.samplespringauthenticationframework.types.UserDetails;
 import com.bananapilot.samplespringauthenticationframework.utils.BCryptPasswordEncoder;
 import com.teamproject1.scuoledevelhope.types.errors.BadRequestException;
 import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
