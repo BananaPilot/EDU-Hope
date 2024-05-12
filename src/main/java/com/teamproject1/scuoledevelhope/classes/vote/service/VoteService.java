@@ -27,6 +27,7 @@ public class VoteService {
     private final StudentDAO studentDAO;
     private final ReportService reportService;
     private final ReportMapper reportMapper;
+
     public VoteService(VoteDAO voteDAO, VoteMapper voteMapper, StudentDAO studentDAO, ReportService reportService, ReportMapper reportMapper) {
         this.voteDAO = voteDAO;
         this.voteMapper = voteMapper;
@@ -71,7 +72,7 @@ public class VoteService {
         voteDAO.save(voteMapper.toVote(voteDTO));
         ReportVoteDto reportVoteDto = reportMapper.voteDtoToReportVoteDto(voteDTO);
 
-        if(voteDTO.getIsCheckPoint()){
+        if (voteDTO.getIsCheckPoint()) {
             reportService.save(reportVoteDto);
         }
 

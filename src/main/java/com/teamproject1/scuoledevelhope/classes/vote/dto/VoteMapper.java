@@ -1,7 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.vote.dto;
 
 import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
-import com.teamproject1.scuoledevelhope.classes.report.dto.ReportVoteDto;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
 import org.springframework.stereotype.Component;
@@ -52,7 +51,7 @@ public class VoteMapper {
         return voteDtoList;
     }
 
-    public VoteResponseDto toVoteResponseDto(Vote vote){
+    public VoteResponseDto toVoteResponseDto(Vote vote) {
         return VoteResponseDto.VoteResponseDtoBuilder.aVoteResponseDto()
                 .withDate(vote.getDate())
                 .withAnnotation(vote.getAnnotation())
@@ -61,12 +60,12 @@ public class VoteMapper {
                 .build();
     }
 
-    public List<VoteResponseDto> toVoteResponseDto(List<Vote> votes){
+    public List<VoteResponseDto> toVoteResponseDto(List<Vote> votes) {
         List<VoteResponseDto> voteResponseDtoList = new ArrayList<>();
-        for(Vote element : votes){
+        for (Vote element : votes) {
             voteResponseDtoList.add(this.toVoteResponseDto(element));
         }
 
-        return  voteResponseDtoList;
+        return voteResponseDtoList;
     }
 }

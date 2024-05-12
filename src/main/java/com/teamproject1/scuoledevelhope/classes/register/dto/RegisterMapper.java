@@ -1,9 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register.dto;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
-import com.teamproject1.scuoledevelhope.classes.student.dto.StudentMapper;
-import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import org.springframework.stereotype.Component;
 

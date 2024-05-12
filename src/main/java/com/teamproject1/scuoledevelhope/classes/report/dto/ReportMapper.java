@@ -23,7 +23,7 @@ public class ReportMapper {
     }
 
 
-    public ReportVoteDto voteDtoToReportVoteDto(VoteDto voteDto){
+    public ReportVoteDto voteDtoToReportVoteDto(VoteDto voteDto) {
         return ReportVoteDto.ReportVoteDtoBuilder.aReportVoteDto()
                 .withIdStudent(voteDto.getIdStudent())
                 .withSubject(voteDto.getSubject())

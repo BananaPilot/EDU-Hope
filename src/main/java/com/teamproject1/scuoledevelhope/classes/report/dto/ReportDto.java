@@ -1,6 +1,5 @@
 package com.teamproject1.scuoledevelhope.classes.report.dto;
 
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteResponseDto;
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 import org.springframework.http.HttpStatus;

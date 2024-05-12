@@ -5,9 +5,6 @@ import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 public class CourseMapper {
     private final SchoolDAO schoolDAO;
