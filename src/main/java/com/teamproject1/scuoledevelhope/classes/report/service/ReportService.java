@@ -22,11 +22,11 @@ public class ReportService {
     private final VoteMapper voteMapper;
     private final ReportMapper reportMapper;
 
-    public ReportService(ReportDao reportDao, VoteDAO voteDao, VoteMapper voteMapper, ReportMapper reportMapper, ReportMapper reportMapper1) {
+    public ReportService(ReportDao reportDao, VoteDAO voteDao, VoteMapper voteMapper, ReportMapper reportMapper) {
         this.reportDao = reportDao;
         this.voteDao = voteDao;
         this.voteMapper = voteMapper;
-        this.reportMapper = reportMapper1;
+        this.reportMapper = reportMapper;
     }
 
     @Transactional
