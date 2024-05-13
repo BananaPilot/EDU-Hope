@@ -1,21 +1,12 @@
 package com.teamproject1.scuoledevelhope.classes.register;
 
-import com.teamproject1.scuoledevelhope.Interceptors;
-import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.tutor.repo.TutorDAO;
 import com.teamproject1.scuoledevelhope.types.Interceptor;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
-import org.springframework.web.servlet.HandlerInterceptor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class RegisterInterceptor extends Interceptor {
