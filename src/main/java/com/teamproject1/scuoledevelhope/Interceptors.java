@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 
 @Component
 public class Interceptors implements WebMvcConfigurer {
@@ -15,9 +17,8 @@ public class Interceptors implements WebMvcConfigurer {
         this.registerInterceptor = registerInterceptor;
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(registerInterceptor);
+        registry.addInterceptor(registerInterceptor.setPaths(List.of("/register/all-student/**", "/register/all-vote/**")));
     }
 }
