@@ -25,7 +25,7 @@ public class VoteController {
 
     @FloorLevelAuthorization(floorRole = "TUTOR")
     @PostMapping("/save")
-    public BaseResponseElement<VoteDto> add(@Valid @RequestBody VoteDto voteDTO) {
+    public BaseResponseElement<VoteDto> add(@Valid @RequestBody VoteDto voteDTO, @RequestParam Long idRegister) {
         return voteService.addVote(voteDTO);
     }
 
