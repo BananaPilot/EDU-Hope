@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface ReportDao extends JpaRepository<Report, Long> {
 
     @Query(value = "select * from report where id_student = :idStudent and subject = :subject", nativeQuery = true)
-    Report findByIdStudentAndSubject(@Param("idStudent") Long idStudent, @Param("subject") String subject);
+    Report findByIdStudentAndSubject(@Param("subject") String subject);
+
+    Report findByIdStudentAndSubject(String idStudent, String subject);
 }
