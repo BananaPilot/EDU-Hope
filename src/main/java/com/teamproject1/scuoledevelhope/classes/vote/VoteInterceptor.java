@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -40,11 +39,13 @@ public class VoteInterceptor extends Interceptor {
         Tutor tutor = utils.isPresent(tutorDAO.findById(utils.getUserFromJwt(request.getHeader("Authorization")).getId()));
 
         if("POST".equals(request.getMethod())){
+
             Long registerId = Long.parseLong(request.getParameter("idRegister"));
             Assert.notNull(registerId, "Register ID is null");
             Register register = utils.isPresent(registerDao.findById(registerId));
             return tutor.getRegisters().contains(register);
         }
+
         if("GET".equals(request.getMethod())){
             Student student = utils.isPresent(studentDAO.findById(Long.parseLong(request.getRequestURI().split("/")[2])));
             return student.getRegister().getTutor().equals(tutor);
