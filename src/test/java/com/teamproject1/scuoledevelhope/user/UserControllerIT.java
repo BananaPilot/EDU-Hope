@@ -120,7 +120,6 @@ class UserControllerIT {
     void getLogin() throws Exception {
         User user = createUserForLogin();
 
-
         MvcResult res = this.mock.perform(multipart("/user/login").contentType(MediaType.MULTIPART_FORM_DATA)
                         .param("username", user.getUsername())
                         .param("password", "gianniBello200!")

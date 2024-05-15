@@ -109,7 +109,7 @@ public class MeetingService {
         MeetingDTO temp = mapper.toMeetingDTO(findById(id).getElement());
         checkData(temp);
         meetingDAO.deleteById(id);
-        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meetings deleted", temp);
+        return new BaseResponseElement<>(HttpStatus.OK, HttpStatus.OK.getReasonPhrase(), "Meeting deleted", temp);
     }
 
     public MeetingDTO checkData(MeetingDTO meeting) {
