@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -34,10 +33,14 @@ public class VoteInterceptor extends Interceptor {
         Tutor tutor = utils.isPresent(tutorDAO.findById(utils.getUserFromJwt(request.getHeader("Authorization")).getId()));
 
         if("POST".equals(request.getMethod())){
-            Map<String, String[]> params = request.getParameterMap();
-            System.out.println(params.get("idRegister")[0]);
+            VoteDto voteDto = objectMapper.readValue(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())), VoteDto.class);
 
+            for(Register element : tutor.getRegisters()){
+                if(element.getId().equals(voteDto.getIdRegister())) return true;
+            }
             return false;
+
+            
         }
         if("GET".equals(request.getMethod())){
             Student student = utils.isPresent(studentDAO.findById(Long.parseLong(request.getRequestURI().split("/")[2])));

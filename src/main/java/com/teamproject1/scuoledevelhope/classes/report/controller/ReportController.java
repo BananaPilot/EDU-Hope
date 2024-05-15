@@ -26,5 +26,4 @@ public class ReportController {
         return reportService.findReport(idStudent, subject, limit, page);
     }
 
-
 }
