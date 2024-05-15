@@ -50,7 +50,7 @@ public class CalendarController {
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/meeting/save")
     public BaseResponseElement<MeetingDTO> saveMeeting(@RequestBody MeetingDTO meetingDTO) {
-        return meetingService.save(meetingDTO);
+        return  meetingService.save(meetingDTO);
     }
 
     //aggiorna il meeting attraverso l id
