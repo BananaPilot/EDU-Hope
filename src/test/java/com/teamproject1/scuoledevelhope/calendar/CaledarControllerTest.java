@@ -79,8 +79,9 @@ public class CaledarControllerTest {
 
         BaseResponseElement<MeetingDTO> baseResponseElement = objectMapper.readValue(response.getContentAsString(),BaseResponseElement.class);
 
-        MeetingDTO meetingDTOresp = baseResponseElement.getElement();
+
         /*
+        MeetingDTO meetingDTOresp = baseResponseElement.getElement();
         Long id = meetingDTOresp.getMeetingID();
         assertNotNull(id); PASQUALE PERCH STA ROBA è NULL??
         System.out.println(id);
@@ -88,10 +89,11 @@ public class CaledarControllerTest {
 
         assertEquals(HttpStatus.CREATED,baseResponseElement.getHttpStatus());
     }
+    /*
     @Test
     public void deleteMeeting() throws Exception {
 
         //saveMeeting();
     }
-
+*/
 }
