@@ -76,7 +76,7 @@ public class ReportService {
         // Verifica se il report esiste
         if (report != null) {
             // Aggiorna il voto nel report corrente
-            report.getVote(subject);
+            report.getVote();
 
             // Salva il report aggiornato
             reportDao.save(report);
