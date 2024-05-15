@@ -7,6 +7,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.io.IOException;
 import java.util.List;
 
 public abstract class Interceptor implements HandlerInterceptor {
@@ -25,7 +26,7 @@ public abstract class Interceptor implements HandlerInterceptor {
         return false;
     }
 
-    public abstract boolean handle(HttpServletRequest request);
+    public abstract boolean handle(HttpServletRequest request) throws IOException;
 
     private boolean includePath(HttpServletRequest request) {
         boolean bool = false;
