@@ -1,5 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.report;
 
+import com.teamproject1.scuoledevelhope.classes.report.service.ReportNotFound;
+import com.teamproject1.scuoledevelhope.classes.report.service.ReportNotFoundException;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.persistence.*;
 
@@ -59,6 +61,27 @@ public class Report {
     public void setSubject(String subject) {
         this.subject = subject;
     }
+
+
+    public double getVote() throws ReportNotFound {
+        // Trova il report corrente per la materia specificata
+        Report report = reportDao.findBySubject(subject);
+
+        // Verifica se il report esiste
+        if (report != null) {
+            // Restituisci il voto per la materia specificata
+            return report.getVote();
+        } else {
+            // Se il report non esiste, solleva un'eccezione ReportNotFound
+            throw new ReportNotFound("Report not found for subject: " + subject);
+        }
+    }
+
+
+}
+
+
+
 
     public static final class ReportBuilder {
         private Long id;
