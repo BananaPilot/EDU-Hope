@@ -5,9 +5,10 @@ import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.types.Interceptor;
 import com.teamproject1.scuoledevelhope.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
 public class ReportInterceptor extends Interceptor {
 
     private final StudentDAO studentDao;
