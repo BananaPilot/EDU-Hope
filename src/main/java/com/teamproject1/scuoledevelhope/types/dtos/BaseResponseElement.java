@@ -12,15 +12,14 @@ public class BaseResponseElement<T> extends BaseResponse {
     public BaseResponseElement(HttpStatus httpStatus, String message, String description, T element) {
         super(httpStatus, message, description);
         this.element = element;
+
     }
 
     public BaseResponseElement(T element) {
         this.element = element;
     }
 
-
     public T getElement() {
         return element;
     }
-
 }

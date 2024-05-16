@@ -1,20 +1,23 @@
 package com.teamproject1.scuoledevelhope.classes.vote.service;
 
-import com.teamproject1.scuoledevelhope.classes.register.repo.RegisterDao;
+import com.teamproject1.scuoledevelhope.classes.report.dto.ReportMapper;
+import com.teamproject1.scuoledevelhope.classes.report.dto.ReportVoteDto;
+import com.teamproject1.scuoledevelhope.classes.report.service.ReportService;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.student.repo.StudentDAO;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
-import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDTO;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDto;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteMapper;
 import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import com.teamproject1.scuoledevelhope.types.errors.SQLException;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,53 +25,56 @@ public class VoteService {
     private final VoteDAO voteDAO;
     private final VoteMapper voteMapper;
     private final StudentDAO studentDAO;
+    private final ReportService reportService;
+    private final ReportMapper reportMapper;
 
-    public VoteService(VoteDAO voteDAO, VoteMapper voteMapper, StudentDAO studentDAO) {
+    public VoteService(VoteDAO voteDAO, VoteMapper voteMapper, StudentDAO studentDAO, ReportService reportService, ReportMapper reportMapper) {
         this.voteDAO = voteDAO;
         this.voteMapper = voteMapper;
         this.studentDAO = studentDAO;
+        this.reportService = reportService;
+        this.reportMapper = reportMapper;
     }
 
-    public BaseResponseList<VoteDTO> findAll() {
-        List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
-        for(Vote element : votes){
-            voteDTOS.add(voteMapper.toVoteDto(element));
-        }
-        return new BaseResponseList<>(voteDTOS);
-    }
-    public BaseResponseList<VoteDTO> findByStudent(Long idStudent){
-        List<Vote> votes = voteDAO.findAll();
-        List<VoteDTO> voteDTOS = new ArrayList<>();
 
-        for (Vote element : votes){
-            if(element.getStudent().getId().equals(idStudent)) {
-                voteDTOS.add(voteMapper.toVoteDto(element));
-            }
-        }
+    public VoteDtoList findByStudent(Long idStudent, int limit, int page) {
+        Page<Vote> votes = voteDAO.findAllByStudentId(idStudent, PageRequest.of(page, limit));
 
-        return new BaseResponseList<>(voteDTOS);
+        return VoteDtoList.VoteDtoListBuilder.aVoteDtoList()
+                .withVotes(voteMapper.toListVoteDto(votes.toList()))
+                .withHttpStatus(HttpStatus.OK)
+                .withPage(votes.getPageable().getPageNumber())
+                .withPageSize(votes.getPageable().getPageSize())
+                .withTotalElements(votes.getTotalElements())
+                .withTotalPages(votes.getTotalPages())
+                .build();
     }
 
-    public BaseResponseElement<VoteDTO> deleteVote(Long idStudent, Long idVote) {
+    public BaseResponseElement<VoteDto> deleteVote(Long idStudent, Long idVote) {
         Optional<Vote> voteR = voteDAO.findById(idVote);
         Optional<Student> studentR = studentDAO.findById(idStudent);
 
         if (voteR.isEmpty()) {
             throw new SQLException("Vote was not present");
         }
-        if (studentR.isEmpty()){
+        if (studentR.isEmpty()) {
             throw new SQLException("Student was not present");
         }
 
-        VoteDTO voteDTO = voteMapper.toVoteDto(voteR.get());
+        VoteDto voteDTO = voteMapper.toVoteDto(voteR.get());
         voteDAO.deleteVote(idStudent, idVote);
 
         return new BaseResponseElement<>(voteDTO);
     }
 
-    public BaseResponseElement<VoteDTO> addVote(VoteDTO voteDTO)  {
-        Vote res = voteDAO.save(voteMapper.toVote(voteDTO));
+    @Transactional
+    public BaseResponseElement<VoteDto> addVote(VoteDto voteDTO) {
+        voteDAO.save(voteMapper.toVote(voteDTO));
+        ReportVoteDto reportVoteDto = reportMapper.voteDtoToReportVoteDto(voteDTO);
+
+        if (voteDTO.getIsCheckPoint()) {
+            reportService.save(reportVoteDto);
+        }
 
         return new BaseResponseElement<>(voteDTO);
     }

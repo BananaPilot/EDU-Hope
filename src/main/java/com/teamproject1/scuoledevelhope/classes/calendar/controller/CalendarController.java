@@ -1,14 +1,12 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.controller;
 
-import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
-import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.MeetingResponse;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.classes.calendar.service.CalendarService;
-import com.teamproject1.scuoledevelhope.classes.userMeeting.UserMeeting;
-import com.teamproject1.scuoledevelhope.classes.userMeeting.dto.UserMeetingDTO;
+import com.teamproject1.scuoledevelhope.classes.user_meeting.dto.UserMeetingDTO;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import org.springframework.web.bind.annotation.*;
@@ -26,86 +24,70 @@ public class CalendarController {
         this.calendarService = calendarService;
         this.meetingService = meetingService;
     }
+
     //calendario di un utente in un intervallo di tempo
-    @NoAuthorization
-    @GetMapping("/{id}")
-    public BaseResponseElement<Calendar> intervalGetByID(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return calendarService.allCalendar(id, startDate, endDate);
+    @FloorLevelAuthorization(floorRole = "USER")
+    @GetMapping("/")
+    public Calendar intervalGetByJwt(@RequestHeader("Authorization") String jwt, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+        return calendarService.allCalendar(jwt, startDate, endDate, page, pageSize);
     }
 
-                    //----------- MEETING ---------//
+    //----------- MEETING ---------//
     //tutti i meeting di un user
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/allMeetingByUserId/{id}")
-    public BaseResponseList<Meeting> allMeetingByUser(@PathVariable Long id) {
-        return meetingService.allMeetingByUser(id);
+    public BaseResponseList<MeetingDTO> allMeetingByUser(@PathVariable Long id, @RequestParam int page, int pageSize) {
+        return meetingService.allMeetingByUser(id, page, pageSize);
     }
+
     //tutti i meeting di un user in un intervallo di tempo
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/intervalByUserId/{id}")
-    public BaseResponseList<Meeting> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate) {
-        return meetingService.intervalGetById(id, startDate, endDate);
+    public BaseResponseList<MeetingDTO> intervalGetById(@PathVariable Long id, @RequestParam LocalDate startDate, LocalDate endDate, int page, int pageSize) {
+        return meetingService.intervalGetById(id, startDate, endDate, page, pageSize);
     }
-    @NoAuthorization
+
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/meeting/save")
-    public BaseResponseElement<Meeting> saveMeeting(@RequestBody Meeting meeting) {
-        return meetingService.save(meeting);
+    public BaseResponseElement<MeetingDTO> saveMeeting(@RequestBody MeetingDTO meetingDTO) {
+        return  meetingService.save(meetingDTO);
     }
+
     //aggiorna il meeting attraverso l id
-    @NoAuthorization
-    @PostMapping("/meeting/update")
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @PutMapping("/meeting/update")
     public BaseResponseElement<MeetingDTO> updateMeeting(@RequestBody MeetingDTO meeting) {
         return meetingService.updateMeeting(meeting);
     }
 
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @GetMapping("/meeting/nextByUserId/{id}")
-    public BaseResponseElement<MeetingDTO> nextMeetingById(@PathVariable Long id){
+    public BaseResponseElement<MeetingDTO> nextMeetingById(@PathVariable Long id) {
         return meetingService.nextMeetingById(id);
     }
 
-    @NoAuthorization
-    @GetMapping("/meeting/delete/{id}")
-    public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id){
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @DeleteMapping("/meeting/delete/{id}")
+    public BaseResponseElement<MeetingDTO> deleteMeeting(@PathVariable Long id) {
         return meetingService.deleteMeeting(id);
     }
 
-    @NoAuthorization
-    @GetMapping("/meeting/cancel/{id}")
-    public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id){
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @PutMapping("/meeting/cancel/{id}")
+    public BaseResponseElement<MeetingDTO> cancelMeeting(@PathVariable Long id) {
         return meetingService.cancelMeeting(id);
     }
 
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @PostMapping("/meeting/addParticipants")
-    public BaseResponseElement<MeetingResponse> addParticipants(@RequestBody UserMeetingDTO usDTO){
-        System.out.println(usDTO);
+    public BaseResponseElement<MeetingResponse> addParticipants(@RequestBody UserMeetingDTO usDTO) {
         return meetingService.addParticipants(usDTO);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        //-----------END MEETING ---------//
+    @FloorLevelAuthorization(floorRole = "COORDINATOR")
+    @DeleteMapping("/meeting/deleteUser")
+    public BaseResponseElement<MeetingResponse> removeUserFromMeeting(@RequestBody UserMeetingDTO usDTO) {
+        return meetingService.removeUserFromMeeting(usDTO);
+    }
+    //-----------END MEETING ---------//
 }

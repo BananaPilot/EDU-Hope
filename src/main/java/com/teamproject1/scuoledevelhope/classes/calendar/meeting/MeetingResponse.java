@@ -1,7 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.calendar.meeting;
 
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.dto.UserRegistryDTO;
+import com.teamproject1.scuoledevelhope.classes.user_registry.dto.UserRegistryDTO;
 
 import java.util.ArrayList;
 import java.util.List;

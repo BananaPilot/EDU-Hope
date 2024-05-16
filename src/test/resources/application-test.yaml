@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 1993
+    username: root
+    url: jdbc:mysql://localhost:3306/test
+framework:
+  jwt:
+    hashKey: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    advice: ciao
+    timeToExpire: 3000

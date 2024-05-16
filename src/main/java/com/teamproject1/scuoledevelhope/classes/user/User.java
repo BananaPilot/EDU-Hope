@@ -1,14 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.role.Role;
 import com.teamproject1.scuoledevelhope.classes.school.School;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -24,29 +23,27 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     @NotBlank(message = "Password is needed to create a user")
     private String password;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @OneToOne()
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OneToOne
+    @JoinColumn(name = "user_registry_id")
     private UserRegistry userRegistry;
 
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "id_school")
     private School school;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_role")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(
+            mappedBy = "users",
+            fetch = FetchType.LAZY
     )
     private List<Role> roles;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToMany(
             mappedBy = "users",
             fetch = FetchType.LAZY
@@ -65,7 +62,6 @@ public class User {
         return id;
     }
 
-    @JsonIgnore
     public List<Meeting> getMeetings() {
         return meetings;
     }

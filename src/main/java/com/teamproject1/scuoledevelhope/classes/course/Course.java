@@ -1,10 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.course;
 
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -25,13 +26,17 @@ public class Course {
     private String name;
     @Column(name = "course_description")
     private String description;
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_school")
     private School school;
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
             mappedBy = "course",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Classes> classes;
 
     public Course() {
@@ -49,6 +54,18 @@ public class Course {
         return description;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classes> classes) {
+        this.classes = classes;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -61,4 +78,54 @@ public class Course {
         this.school = school;
     }
 
+
+    public static final class CourseBuilder {
+        private Long id;
+        private @NotBlank(message = "Course name can't be blank") String name;
+        private String description;
+        private School school;
+        private List<Classes> classes;
+
+        private CourseBuilder() {
+        }
+
+        public static CourseBuilder aCourse() {
+            return new CourseBuilder();
+        }
+
+        public CourseBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public CourseBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CourseBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public CourseBuilder withSchool(School school) {
+            this.school = school;
+            return this;
+        }
+
+        public CourseBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public Course build() {
+            Course course = new Course();
+            course.setName(name);
+            course.setDescription(description);
+            course.setSchool(school);
+            course.classes = this.classes;
+            course.id = this.id;
+            return course;
+        }
+    }
 }

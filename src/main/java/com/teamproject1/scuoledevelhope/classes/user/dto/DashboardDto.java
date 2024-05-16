@@ -1,22 +1,18 @@
 package com.teamproject1.scuoledevelhope.classes.user.dto;
 
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleDashboard;
-import com.teamproject1.scuoledevelhope.classes.user.User;
-import com.teamproject1.scuoledevelhope.classes.userRegistry.UserRegistry;
+import com.teamproject1.scuoledevelhope.classes.user_registry.UserRegistry;
+import com.teamproject1.scuoledevelhope.types.dtos.BaseResponse;
+import org.springframework.http.HttpStatus;
 
-public class DashboardDto {
+public class DashboardDto extends BaseResponse {
 
     private String username;
-    private String password;
-    private RoleDashboard role;
     private UserRegistry userRegistry;
+    private RoleDashboard role;
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public RoleDashboard getRole() {
@@ -27,9 +23,9 @@ public class DashboardDto {
         return userRegistry;
     }
 
-    public DashboardDto(String username, String password, RoleDashboard role, UserRegistry userRegistry) {
+    public DashboardDto(HttpStatus httpStatus, String message, String description, String username, RoleDashboard role, UserRegistry userRegistry) {
+        super(httpStatus, message, description);
         this.username = username;
-        this.password = password;
         this.role = role;
         this.userRegistry = userRegistry;
     }
@@ -37,20 +33,16 @@ public class DashboardDto {
     public DashboardDto() {
     }
 
+
     public static final class DashboardDtoBuilder {
         private String username;
-        private String password;
         private RoleDashboard role;
         private UserRegistry userRegistry;
+        private HttpStatus httpStatus = HttpStatus.OK;
+        private String message;
+        private String description;
 
         private DashboardDtoBuilder() {
-        }
-
-        public DashboardDtoBuilder map(User user) {
-            return DashboardDtoBuilder.aDashboardDto()
-                    .withPassword(user.getPassword())
-                    .withUsername(user.getUsername())
-                    .withUserRegistry(user.getUserRegistry());
         }
 
         public static DashboardDtoBuilder aDashboardDto() {
@@ -59,11 +51,6 @@ public class DashboardDto {
 
         public DashboardDtoBuilder withUsername(String username) {
             this.username = username;
-            return this;
-        }
-
-        public DashboardDtoBuilder withPassword(String password) {
-            this.password = password;
             return this;
         }
 
@@ -77,13 +64,23 @@ public class DashboardDto {
             return this;
         }
 
+        public DashboardDtoBuilder withHttpStatus(HttpStatus httpStatus) {
+            this.httpStatus = httpStatus;
+            return this;
+        }
+
+        public DashboardDtoBuilder withMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public DashboardDtoBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
         public DashboardDto build() {
-            DashboardDto dashboardDto = new DashboardDto();
-            dashboardDto.userRegistry = this.userRegistry;
-            dashboardDto.role = this.role;
-            dashboardDto.username = this.username;
-            dashboardDto.password = this.password;
-            return dashboardDto;
+            return new DashboardDto(httpStatus, message, description, username, role, userRegistry);
         }
     }
 }

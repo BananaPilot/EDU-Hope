@@ -2,9 +2,10 @@ package com.teamproject1.scuoledevelhope.classes.school.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
 import com.teamproject1.scuoledevelhope.classes.school.School;
+import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolDto;
+import com.teamproject1.scuoledevelhope.classes.school.dto.SchoolListDto;
 import com.teamproject1.scuoledevelhope.classes.school.service.SchoolService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,26 +20,26 @@ public class SchoolController {
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
-    @GetMapping("/get-all")
-    public BaseResponseList<School> findAll() {
-        return schoolService.findAll();
+    @GetMapping("/all")
+    public SchoolListDto findAll(@RequestParam int limit, int page) {
+        return schoolService.findAll(limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
-    @GetMapping("/get-by-id")
-    public BaseResponseElement<School> findById(@Valid @RequestParam Long id) {
+    @GetMapping("/{id}")
+    public BaseResponseElement<School> findById(@Valid @PathVariable Long id) {
         return schoolService.findById(id);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
     @PostMapping("/save")
-    public BaseResponseElement<School> save(@Valid @RequestBody School school) {
-        return schoolService.save(school);
+    public BaseResponseElement<SchoolDto> save(@Valid @RequestBody SchoolDto schoolDto) {
+        return schoolService.save(schoolDto);
     }
 
     @FloorLevelAuthorization(floorRole = "SUPER_ADMIN")
-    @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<School> delete(@Valid @RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public BaseResponseElement<School> delete(@Valid @PathVariable Long id) {
         return schoolService.deleteById(id);
     }
 }

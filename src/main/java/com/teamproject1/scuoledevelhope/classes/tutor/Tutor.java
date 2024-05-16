@@ -1,14 +1,11 @@
 package com.teamproject1.scuoledevelhope.classes.tutor;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamproject1.scuoledevelhope.classes.classP.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -19,21 +16,28 @@ public class Tutor {
     @Id
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne
     @MapsId
     private User user;
 
-    @NotEmpty(message = "Associates at least 1 class.")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Classes> classes;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
             mappedBy = "tutor",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY
+    )
     private List<Register> registers;
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
 
     public User getUser() {
         return user;
@@ -41,5 +45,57 @@ public class Tutor {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(List<Register> registers) {
+        this.registers = registers;
+    }
+
+
+    public static final class TutorBuilder {
+        private Long id;
+        private User user;
+        private List<Classes> classes;
+        private List<Register> registers;
+
+        private TutorBuilder() {
+        }
+
+        public static TutorBuilder aTutor() {
+            return new TutorBuilder();
+        }
+
+        public TutorBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public TutorBuilder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public TutorBuilder withClasses(List<Classes> classes) {
+            this.classes = classes;
+            return this;
+        }
+
+        public TutorBuilder withRegisters(List<Register> registers) {
+            this.registers = registers;
+            return this;
+        }
+
+        public Tutor build() {
+            Tutor tutor = new Tutor();
+            tutor.setUser(user);
+            tutor.setRegisters(registers);
+            tutor.id = this.id;
+            tutor.classes = this.classes;
+            return tutor;
+        }
     }
 }

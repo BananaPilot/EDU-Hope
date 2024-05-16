@@ -2,17 +2,27 @@ package com.teamproject1.scuoledevelhope.utils;
 
 import com.bananapilot.samplespringauthenticationframework.utils.JWTUtils;
 import com.teamproject1.scuoledevelhope.classes.user.User;
+import com.teamproject1.scuoledevelhope.types.errors.NotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class Utils {
-    @Autowired
-    JWTUtils jwtUtils;
+
+    private final JWTUtils jwtUtils;
+
+    public Utils(JWTUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
 
     public User getUserFromJwt(String jwt) {
         Jws<Claims> claimsJws = jwtUtils.validate(jwt.split(" ")[1]);
@@ -21,5 +31,9 @@ public class Utils {
                 .withUsername(claimsJws.getBody().get("user-username", String.class))
                 .withRoles(claimsJws.getBody().get("user-roles", List.class))
                 .build();
+    }
+
+    public <T> T isPresent(Optional<T> optional) {
+        return optional.orElse(optional.orElseThrow(() -> new NotFoundException("Optional not found")));
     }
 }

@@ -3,7 +3,6 @@ package com.teamproject1.scuoledevelhope.classes.role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -20,22 +19,32 @@ public class Role {
     @Enumerated(EnumType.STRING)
     RoleEnum roleEnum;
 
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @ManyToMany(
-            mappedBy = "roles",
-            fetch = FetchType.LAZY
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id_role"),
+            inverseJoinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id")
     )
     private List<User> users;
 
     public enum RoleEnum {
-        SUPER_ADMIN,
-        ADMIN,
-        MODERATOR,
-        USER,
-        COORDINATOR,
-        TUTOR,
-        STUDENT
+        SUPER_ADMIN("SUPER_ADMIN"),
+        ADMIN("ADMIN"),
+        MODERATOR("MODERATOR"),
+        USER("USER"),
+        COORDINATOR("COORDINATOR"),
+        TUTOR("TUTOR"),
+        STUDENT("STUDENT");
 
+        private final String roleString;
+
+        RoleEnum(String roleString) {
+            this.roleString = roleString;
+        }
+
+        public String getRoleString() {
+            return roleString;
+        }
     }
 
     public Long getId() {

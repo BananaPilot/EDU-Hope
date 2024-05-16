@@ -1,11 +1,13 @@
 package com.teamproject1.scuoledevelhope.classes.register.controller;
 
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.BasicAuthorization;
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
-import com.teamproject1.scuoledevelhope.classes.register.Register;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDto;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoList;
+import com.teamproject1.scuoledevelhope.classes.register.dto.RegisterDtoWithVote;
 import com.teamproject1.scuoledevelhope.classes.register.service.RegisterService;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
-import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseList;
-import jakarta.validation.Valid;
+import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
+import com.teamproject1.scuoledevelhope.classes.vote.dto.VoteDtoList;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,43 +20,33 @@ public class RegisterController {
         this.registerService = registerService;
     }
 
-    //READ
-    @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-all")
-    public BaseResponseList<Register> findAll() {
-        return registerService.findAll();
-    }
-
-    @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-by-id")
-    public BaseResponseElement<Register> findById(@Valid @RequestParam Long id) {
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/{id}")
+    public RegisterDtoWithVote findById(@PathVariable Long id) {
         return registerService.findById(id);
     }
 
-    @FloorLevelAuthorization(floorRole = "TUTOR")
-    @GetMapping("/get-by-year")
-    public BaseResponseList<Register> getAllBySchoolYear(@Valid @RequestParam String schoolYear) {
-        return registerService.getAllBySchoolYear(schoolYear);
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/all-vote/{registerId}")
+    public VoteDtoList findAllVote(@PathVariable Long registerId, @RequestParam int limit, int page) {
+        return registerService.findAllVote(registerId, limit, page);
+    }
+
+    @FloorLevelAuthorization(floorRole = "ADMIN")
+    @GetMapping("/all-student/{registerId}")
+    public StudentDtoList findAllStudent(@PathVariable Long registerId, @RequestParam int limit, int page) {
+        return registerService.findAllStudent(registerId, limit, page);
+    }
+
+    @BasicAuthorization(roles = {"TUTOR"})
+    @GetMapping("/all")
+    public RegisterDtoList findAll(@RequestHeader("Authorization") String jwt, @RequestParam int limit, int page) {
+        return registerService.findAllByTutor(jwt, limit, page);
     }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @GetMapping("/get-by-tutor")
-    public BaseResponseList<Register> getAllByTutor(@Valid @RequestParam Long tutor) {
-        return registerService.getAllByTutor(tutor);
+    @PutMapping("/addRegister")
+    public RegisterDto addRegister(@RequestParam Long registerId, Long userId) {
+        return registerService.addRegisterToUser(registerId, userId);
     }
-
-    //ADD - UPDATE
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PostMapping("/save")
-    public BaseResponseElement<Register> save(@Valid @RequestBody Register register) {
-        return registerService.save(register);
-    }
-
-    //DELETE
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @DeleteMapping("/delete-by-id")
-    public BaseResponseElement<Register> delete(@Valid @RequestParam Long id) {
-        return registerService.deleteById(id);
-    }
-
 }
