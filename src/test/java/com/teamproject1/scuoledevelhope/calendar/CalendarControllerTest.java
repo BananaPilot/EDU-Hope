@@ -8,6 +8,7 @@ import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dto.MeetingDTO;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.service.MeetingService;
 import com.teamproject1.scuoledevelhope.types.dtos.BaseResponseElement;
+import com.teamproject1.scuoledevelhope.types.errors.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.sql.DataSource;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -31,7 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-public class CaledarControllerTest {
+public class CalendarControllerTest {
 
     private static final String JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyLXVzZXJuYW1lIjoiZ2lhbm5pIiwidXNlci1pZCI6MSwidXNlci1yb2xlcyI6WyJVU0VSIiwiU1VQRVJfQURNSU4iXX0.rlDJT5JQl1AixYy7N9JaOdxBSkocZ1o4vJ7u2lyMQ28";
     @Autowired
@@ -103,8 +105,11 @@ public class CaledarControllerTest {
                 .header("Authorization", "Bearer " + JWT)).andReturn().getResponse();
         BaseResponseElement<MeetingDTO> baseResponseElement = objectMapper.readValue(response.getContentAsString(),new TypeReference<BaseResponseElement<MeetingDTO>>() {});
         assertEquals(HttpStatus.OK,baseResponseElement.getHttpStatus());
-        //assertNull(meetingService.findById(baseResponseElement.getElement().getMeetingID()));
 
+        //Test per rilevare un eccezione
+        //l id 1 non deve esistere
+        assertThrows(SQLException.class, () ->
+                meetingService.findById(baseResponseElement.getElement().getMeetingID()));
     }
     @Test
     public void updateMeeting() throws Exception{
@@ -130,5 +135,21 @@ public class CaledarControllerTest {
         assertNotEquals(oldMeeting.getElement().getTitle(),aggiornamento.getTitle());
 
         assertEquals(HttpStatus.OK, baseResponseElement.getHttpStatus());
+    }
+
+    @Test
+    public void cancelMeeting() throws Exception{
+
+        MockHttpServletResponse response = this.mock.perform(put("/calendar/meeting/cancel/1")
+                .header("Authorization", "Bearer " + JWT)).andReturn().getResponse();
+        BaseResponseElement<MeetingDTO> baseResponseElement = objectMapper.readValue(response.getContentAsString(),new TypeReference<BaseResponseElement<MeetingDTO>>() {});
+        assertEquals("*** This event was canceled on "+LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)+" *** Original note: filosofia del piccone",baseResponseElement.getElement().getNote());
+    }
+    @Test
+    public void checkDate(){
+        //Test check date, un evento passato non puo essere creato, eliminato o modificato
+        assertThrows(Exception.class, () ->
+                this.mock.perform(delete("/calendar/meeting/delete/3")
+                        .header("Authorization", "Bearer " + JWT)).andReturn().getResponse());
     }
 }
