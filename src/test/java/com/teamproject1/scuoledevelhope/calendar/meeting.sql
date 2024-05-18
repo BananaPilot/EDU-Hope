@@ -1,6 +1,6 @@
 insert into meeting(end_date,link,note,start_date,title)
 values
-('2024-04-16 05:30:00','mine.com','filosofia del piccone','2024-04-16 05:00:00','vita in miniera'),
+('2025-04-16 05:30:00','mine.com','filosofia del piccone','2025-04-16 05:00:00','vita in miniera'),
 ('2024-04-16 23:30:00','horror.com','A cena con il truncate','2024-04-16 20:00:00','8500 row affected'),
 ('2024-04-17 23:30:00','horror.com','A cena con delete','2024-04-17 20:00:00','8000 row affected '),
 ('2024-04-18 11:30:00','love.com','appuntamento con i sentimenti introduzione','2024-04-18 10:00:00','Ciao come stai'),
