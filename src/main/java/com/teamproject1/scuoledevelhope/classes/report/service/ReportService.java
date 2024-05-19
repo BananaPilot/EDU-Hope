@@ -69,21 +69,4 @@ public class ReportService {
                 .build();
     }
 
-    public void update(String idStudent, String subject) throws ReportNotFound {
-        // Trova il report corrente dello studente per la materia specificata
-        Report report = reportDao.findByIdStudentAndSubject(idStudent, subject);
-
-        // Verifica se il report esiste
-        if (report != null) {
-            // Aggiorna il voto nel report corrente
-            report.getVote();
-
-            // Salva il report aggiornato
-            reportDao.save(report);
-        } else {
-            // Se il report non esiste, solleva un'eccezione ReportNotFoundException
-            throw new ReportNotFound("Report not found for the student: " + idStudent + " and subject: " + subject);
-        }
-    }
-
 }
