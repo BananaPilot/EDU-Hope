@@ -2,6 +2,7 @@ package com.teamproject1.scuoledevelhope.calendar;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teamproject1.scuoledevelhope.classes.calendar.Calendar;
 import com.teamproject1.scuoledevelhope.classes.calendar.controller.CalendarController;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.Meeting;
 import com.teamproject1.scuoledevelhope.classes.calendar.meeting.dao.MeetingDAO;
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.sql.DataSource;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -67,6 +69,20 @@ public class CalendarControllerTest {
     }
 
     @Test
+    public void testCalendar() throws  Exception{
+
+        MockHttpServletResponse response = this.mock.perform(get("/calendar/")
+                .header("Authorization", "Bearer " + JWT)
+                .param("startDate","2024-04-10").param("endDate","2024-05-30")
+                .param("page","0").param("pageSize","5"))
+                .andReturn().getResponse();
+        Calendar calendar = objectMapper.readValue(response.getContentAsString(), new TypeReference<Calendar>() {
+        });
+
+        assertEquals(HttpStatus.OK,calendar.getHttpStatus());
+    }
+
+    @Test
     public void saveMeeting() throws Exception{
 
         MeetingDTO meetingDTO = new MeetingDTO();
@@ -80,7 +96,6 @@ public class CalendarControllerTest {
                 .header("Authorization", "Bearer " + JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(meetingDTO))).andReturn().getResponse();
-
         BaseResponseElement<MeetingDTO> baseResponseElement = objectMapper.readValue(response.getContentAsString(), new TypeReference<BaseResponseElement<MeetingDTO>>() {});
 
         MeetingDTO meetingDTOresp = baseResponseElement.getElement();
@@ -144,6 +159,7 @@ public class CalendarControllerTest {
                 .header("Authorization", "Bearer " + JWT)).andReturn().getResponse();
         BaseResponseElement<MeetingDTO> baseResponseElement = objectMapper.readValue(response.getContentAsString(),new TypeReference<BaseResponseElement<MeetingDTO>>() {});
         assertEquals("*** This event was canceled on "+LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)+" *** Original note: filosofia del piccone",baseResponseElement.getElement().getNote());
+        assertEquals(HttpStatus.OK,baseResponseElement.getHttpStatus());
     }
     @Test
     public void checkDate(){
