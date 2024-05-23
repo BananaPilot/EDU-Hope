@@ -114,9 +114,16 @@ public class MeetingService {
 
     public MeetingDTO checkData(MeetingDTO meeting) {
 
-        LocalDateTime startDate = meeting.getStartDate();
-        LocalDateTime endDate = meeting.getEndDate();
+        LocalDateTime startDate;
+        LocalDateTime endDate;
 
+        if (meeting.getMeetingID() != null){
+            startDate = findById(meeting.getMeetingID()).getElement().getStartDate();
+            endDate = findById(meeting.getMeetingID()).getElement().getEndDate();
+        }else {
+            startDate = meeting.getStartDate();
+            endDate = meeting.getEndDate();
+        }
         if (startDate.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("You cannot insert , update , cancel meeting into the past");
         }

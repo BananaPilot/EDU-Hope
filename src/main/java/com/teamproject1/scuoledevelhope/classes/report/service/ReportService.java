@@ -54,7 +54,7 @@ public class ReportService {
     }
 
     public ReportDto findReport(Long idStudent, String subject, int limit, int page) {
-        Report report = reportDao.findByIdStudentAndSubject(idStudent, subject);
+        Report report = reportDao.findByIdStudentAndSubject(subject);
         Page<Vote> voteList = voteDao.findBySubjectAndStudentId(report.getSubject(), report.getStudent().getId(), PageRequest.of(page, limit));
 
         return ReportDto.ReportDtoBuilder.aReportDto()
@@ -68,4 +68,5 @@ public class ReportService {
                 .withPageSize(voteList.getPageable().getPageSize())
                 .build();
     }
+
 }

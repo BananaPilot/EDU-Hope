@@ -60,6 +60,8 @@ public class Report {
         this.subject = subject;
     }
 
+
+
     public static final class ReportBuilder {
         private Long id;
         private Float conduct;
