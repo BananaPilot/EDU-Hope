@@ -1,10 +1,10 @@
-package com.teamproject1.scuoledevelhope.classes.clazzez.service;
+package com.teamproject1.scuoledevelhope.classes.clazz.service;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDTO;
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDtoList;
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
-import com.teamproject1.scuoledevelhope.classes.clazzez.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterDtoList;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazz.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
@@ -46,7 +46,7 @@ public class ClassService {
     }
 
     public ClassRegisterDtoList findAll(int limit, int page) {
-        Page<Classes> classes = classDAO.findAll(PageRequest.of(page, limit));
+        Page<Clazz> classes = classDAO.findAll(PageRequest.of(page, limit));
         return ClassRegisterDtoList.ClassRegisterDtoListBuilder.aClassRegisterDtoList()
                 .withClasses(classRegisterMapper.toListOfClassRegisterDto(classes.toList()))
                 .withPage(classes.getPageable().getPageNumber())
@@ -57,7 +57,7 @@ public class ClassService {
     }
 
     public BaseResponseElement<ClassRegisterDTO> findById(Long id) {
-        Optional<Classes> result = classDAO.findById(id);
+        Optional<Clazz> result = classDAO.findById(id);
         if (result.isEmpty()) {
             throw new SQLException("Class was not present");
         }
@@ -65,7 +65,7 @@ public class ClassService {
     }
 
     public BaseResponseElement<ClassRegisterDTO> save(ClassRegisterDTO classDTO) {
-        Classes classes = classRegisterMapper.toClass(classDTO);
+        Clazz classes = classRegisterMapper.toClass(classDTO);
         Register register = classRegisterMapper.toRegister(classDTO);
 
         classDAO.save(classes);
@@ -81,7 +81,7 @@ public class ClassService {
 
     @Transactional
     public BaseResponseElement<ClassRegisterDTO> deleteById(Long id) {
-        Optional<Classes> classes = classDAO.findById(id);
+        Optional<Clazz> classes = classDAO.findById(id);
         Optional<Register> register = registerDao.findById(id);
 
         if (classes.isEmpty()) {
@@ -103,7 +103,7 @@ public class ClassService {
         Tutor tutor = utils.isPresent(tutorDAO.findById(userId));
         Coordinator coordinator = utils.isPresent(coordinatorDAO.findById(userId));
         Student student = utils.isPresent(studentDAO.findById(userId));
-        Classes classes = utils.isPresent(classDAO.findById(classId));
+        Clazz classes = utils.isPresent(classDAO.findById(classId));
 
         if (student != null && student.getSchoolClass() == null) {
             studentDAO.updateStudentClass(student.getId(), classId);

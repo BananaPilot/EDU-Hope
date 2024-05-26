@@ -36,7 +36,6 @@ public class StudentController {
 
         return studentService.deleteById(id);
     }
-
     @NoAuthorization
     @PutMapping("/class")
     public BaseResponseElement<StudentDto> updateStudentClass(@RequestParam Long idStudent, Long idClass){

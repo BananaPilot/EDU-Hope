@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.student;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class Student {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
     @JoinColumn(name = "id_class")
-    private Classes schoolClass;
+    private Clazz schoolClass;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
@@ -33,7 +33,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(User user, Classes schoolClass, Register register) {
+    public Student(User user, Clazz schoolClass, Register register) {
         this.user = user;
         this.schoolClass = schoolClass;
         this.register = register;
@@ -47,7 +47,7 @@ public class Student {
         return user;
     }
 
-    public Classes getSchoolClass() {
+    public Clazz getSchoolClass() {
         return schoolClass;
     }
 
@@ -59,7 +59,7 @@ public class Student {
         this.user = user;
     }
 
-    public void setSchoolClass(Classes schoolClass) {
+    public void setSchoolClass(Clazz schoolClass) {
         this.schoolClass = schoolClass;
     }
 
@@ -71,7 +71,7 @@ public class Student {
     public static final class StudentBuilder {
         private Long id;
         private User user;
-        private Classes schoolClass;
+        private Clazz schoolClass;
         private Register register;
 
         private StudentBuilder() {
@@ -91,7 +91,7 @@ public class Student {
             return this;
         }
 
-        public StudentBuilder withSchoolClass(Classes schoolClass) {
+        public StudentBuilder withSchoolClass(Clazz schoolClass) {
             this.schoolClass = schoolClass;
             return this;
         }

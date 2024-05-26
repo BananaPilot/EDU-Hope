@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.clazzez.repo;
+package com.teamproject1.scuoledevelhope.classes.clazz.repo;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,12 +11,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClassDAO extends JpaRepository<Classes, Long> {
+public interface ClassDAO extends JpaRepository<Clazz, Long> {
 
     @Query(value = "select * from class where class_name = :className", nativeQuery = true)
-    Classes getByName(@Param("className") String className);
+    Clazz getByName(@Param("className") String className);
 
-    Page<Classes> findAllByCourseId(Long id, Pageable of);
+    Page<Clazz> findAllByCourseId(Long id, Pageable of);
 
     @Transactional
     @Modifying

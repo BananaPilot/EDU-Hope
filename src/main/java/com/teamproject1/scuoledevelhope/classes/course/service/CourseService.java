@@ -1,8 +1,8 @@
 package com.teamproject1.scuoledevelhope.classes.course.service;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
-import com.teamproject1.scuoledevelhope.classes.clazzez.repo.ClassDAO;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazz.repo.ClassDAO;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseDto;
 import com.teamproject1.scuoledevelhope.classes.course.dto.CourseMapper;
@@ -37,7 +37,7 @@ public class CourseService {
 
     public CourseWithClassesDto findAllClass(Long id, int limit, int page) {
         Course course = utils.isPresent(courseDAO.findById(id));
-        Page<Classes> classes = classDAO.findAllByCourseId(id, PageRequest.of(page, limit));
+        Page<Clazz> classes = classDAO.findAllByCourseId(id, PageRequest.of(page, limit));
         return CourseWithClassesDto.CourseWithClassesDtoBuilder.aCourseWithClassesDto()
                 .withClasses(classRegisterMapper.toListOfClassRegisterDto(classes.toList()))
                 .withHttpStatus(HttpStatus.OK)

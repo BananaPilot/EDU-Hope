@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.tutor;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
@@ -26,7 +26,7 @@ public class Tutor {
             mappedBy = "tutor",
             fetch = FetchType.LAZY
     )
-    private List<Classes> classes;
+    private List<Clazz> classes;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(
@@ -35,7 +35,7 @@ public class Tutor {
     )
     private List<Register> registers;
 
-    public List<Classes> getClasses() {
+    public List<Clazz> getClasses() {
         return classes;
     }
 
@@ -62,7 +62,7 @@ public class Tutor {
     public static final class TutorBuilder {
         private Long id;
         private User user;
-        private List<Classes> classes;
+        private List<Clazz> classes;
         private List<Register> registers;
 
         private TutorBuilder() {
@@ -82,7 +82,7 @@ public class Tutor {
             return this;
         }
 
-        public TutorBuilder withClasses(List<Classes> classes) {
+        public TutorBuilder withClasses(List<Clazz> classes) {
             this.classes = classes;
             return this;
         }

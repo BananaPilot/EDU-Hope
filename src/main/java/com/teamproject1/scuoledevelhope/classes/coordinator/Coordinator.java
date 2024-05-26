@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.coordinator;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -25,7 +25,7 @@ public class Coordinator {
             mappedBy = "coordinator",
             fetch = FetchType.LAZY
     )
-    private List<Classes> classes;
+    private List<Clazz> classes;
 
 
     public Long getId() {
@@ -36,7 +36,7 @@ public class Coordinator {
         return user;
     }
 
-    public List<Classes> getClasses() {
+    public List<Clazz> getClasses() {
         return classes;
     }
 
@@ -44,7 +44,7 @@ public class Coordinator {
         this.user = user;
     }
 
-    public void setClasses(List<Classes> classes) {
+    public void setClasses(List<Clazz> classes) {
         this.classes = classes;
     }
 
@@ -52,7 +52,7 @@ public class Coordinator {
     public static final class CoordinatorBuilder {
         private Long id;
         private User user;
-        private List<Classes> classes;
+        private List<Clazz> classes;
 
         private CoordinatorBuilder() {
         }
@@ -71,7 +71,7 @@ public class Coordinator {
             return this;
         }
 
-        public CoordinatorBuilder withClasses(List<Classes> classes) {
+        public CoordinatorBuilder withClasses(List<Clazz> classes) {
             this.classes = classes;
             return this;
         }

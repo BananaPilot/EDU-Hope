@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.register;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import com.teamproject1.scuoledevelhope.classes.tutor.Tutor;
 import com.teamproject1.scuoledevelhope.classes.vote.Vote;
@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Table(name = "register")
 public class Register {
-
 
     @Id
     private Long id;
@@ -30,7 +29,7 @@ public class Register {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id_class")
-    private Classes schoolClass;
+    private Clazz schoolClass;
 
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @ManyToOne
@@ -59,7 +58,7 @@ public class Register {
         return schoolYear;
     }
 
-    public void setSchoolClass(Classes schoolClass) {
+    public void setSchoolClass(Clazz schoolClass) {
         this.schoolClass = schoolClass;
     }
 
@@ -71,7 +70,7 @@ public class Register {
         this.schoolYear = schoolYear;
     }
 
-    public Classes getSchoolClass() {
+    public Clazz getSchoolClass() {
         return schoolClass;
     }
 
@@ -99,7 +98,7 @@ public class Register {
     public static final class RegisterBuilder {
         private Long id;
         private @NotBlank(message = "school year can't be blank") String schoolYear;
-        private Classes schoolClass;
+        private Clazz schoolClass;
         private Tutor tutor;
         private List<Vote> votes;
         private List<Student> students;
@@ -116,7 +115,7 @@ public class Register {
             return this;
         }
 
-        public RegisterBuilder withSchoolClass(Classes schoolClass) {
+        public RegisterBuilder withSchoolClass(Clazz schoolClass) {
             this.schoolClass = schoolClass;
             return this;
         }

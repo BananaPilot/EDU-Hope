@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.clazzez;
+package com.teamproject1.scuoledevelhope.classes.clazz;
 
 import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "class")
-public class Classes {
+public class Clazz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -173,8 +173,8 @@ public class Classes {
             return this;
         }
 
-        public Classes build() {
-            Classes classes = new Classes();
+        public Clazz build() {
+            Clazz classes = new Clazz();
             classes.setName(name);
             classes.setTutor(tutor);
             classes.setCoordinator(coordinator);
