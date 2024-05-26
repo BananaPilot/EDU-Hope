@@ -75,4 +75,11 @@ public class StudentService {
         return new BaseResponseElement<>(studentMapper.toStudentDto(studentDAO.save(student)));
     }
 
+    public BaseResponseElement<StudentDto> updateStudentClass(Long idClass, Long idStudent){
+        Student student = studentDAO.findById(idStudent).orElseThrow();
+        studentDAO.updateStudentClass(idStudent, idClass);
+
+        return new BaseResponseElement<>(studentMapper.toStudentDto(student));
+    }
+
 }

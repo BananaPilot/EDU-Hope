@@ -106,20 +106,4 @@ public class RegisterService {
                 .build();
     }
 
-    public RegisterDto addRegisterToUser(Long registerId, Long userId) {
-        Tutor tutor = utils.isPresent(tutorDAO.findById(userId));
-        Student student = utils.isPresent(studentDAO.findById(userId));
-        Register register = utils.isPresent(registerDao.findById(registerId));
-
-        if (student != null && student.getRegister() == null) {
-            studentDAO.updateStudentRegister(student.getId(), registerId);
-            student.setRegister(register);
-        }
-        if (tutor != null && register.getTutor() == null) {
-            registerDao.updateRegisterTutor(registerId, tutor.getUser().getId());
-            register.setTutor(tutor);
-        }
-
-        return registerMapper.toRegisterDto(register);
-    }
 }
