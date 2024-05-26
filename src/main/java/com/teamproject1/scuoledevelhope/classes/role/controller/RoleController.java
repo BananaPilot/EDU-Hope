@@ -22,8 +22,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    //@FloorLevelAuthorization(floorRole = "ADMIN")
-    @NoAuthorization
+    @FloorLevelAuthorization(floorRole = "ADMIN")
     @PutMapping("/add")
     public BaseResponseElement<RolesUser> addRoleToUser(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.addRole(roleUsername);
