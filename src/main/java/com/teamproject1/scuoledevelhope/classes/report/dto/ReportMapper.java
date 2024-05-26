@@ -30,4 +30,13 @@ public class ReportMapper {
                 .build();
     }
 
+    public ReportDto toReportDto(Report report){
+        return ReportDto.ReportDtoBuilder.aReportDto()
+                .withSubject(report.getSubject())
+                .withIdStudent(report.getStudent().getId())
+                .withGradePointAverage(report.getGradePointAverage())
+                .withConduct(report.getConduct())
+                .build();
+    }
+
 }

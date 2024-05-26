@@ -16,6 +16,7 @@ public interface UserDao extends JpaRepository<User, Long> {
     @Query(value = "select * from user", nativeQuery = true)
     Page<User> getAll(Pageable page);
 
+
     @Query(value = "select * from user where username = :username", nativeQuery = true)
     User getByUsername(@Param("username") String username);
 

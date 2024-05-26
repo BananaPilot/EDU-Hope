@@ -72,7 +72,6 @@ public class StudentService {
     @Transactional
     public BaseResponseElement<StudentDto> save(@Valid String username) {
         Student student = studentMapper.userToStudent(userDao.getByUsername(username));
-        roleDao.addRoleWithUsername(username, Role.RoleEnum.STUDENT.getRoleString());
         return new BaseResponseElement<>(studentMapper.toStudentDto(studentDAO.save(student)));
     }
 

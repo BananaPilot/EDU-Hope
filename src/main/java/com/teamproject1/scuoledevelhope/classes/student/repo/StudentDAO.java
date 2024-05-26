@@ -1,5 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.student.repo;
 
+import com.teamproject1.scuoledevelhope.classes.coordinator.Coordinator;
 import com.teamproject1.scuoledevelhope.classes.student.Student;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -21,4 +22,5 @@ public interface StudentDAO extends JpaRepository<Student, Long> {
     @Modifying
     @Query(value = "update student s set s.id_register = :registerId where user_id = :id", nativeQuery = true)
     void updateStudentRegister(@Param("id") Long studentId, @Param("registerId") Long registerId);
+
 }

@@ -55,6 +55,9 @@ public class Tutor {
         this.registers = registers;
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public static final class TutorBuilder {
         private Long id;
