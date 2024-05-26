@@ -28,6 +28,8 @@ public class RoleService {
         if (res < 1) {
             throw new SQLException("role wasn't added");
         }
+
+        //TODO save tutor - student - coordinator
         return new BaseResponseElement<>(roleMapper.toRolesUser(userDao.getByUsername(roleUsername.getUsername())));
     }
 

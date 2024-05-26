@@ -5,10 +5,7 @@ import com.bananapilot.samplespringauthenticationframework.filtes.annotations.Fl
 import com.teamproject1.scuoledevelhope.classes.report.dto.ReportDto;
 import com.teamproject1.scuoledevelhope.classes.report.service.ReportService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/report")
@@ -24,6 +21,12 @@ public class ReportController {
     @GetMapping
     public ReportDto findReport(@Valid @RequestParam Long idStudent, String subject, int limit, int page) {
         return reportService.findReport(idStudent, subject, limit, page);
+    }
+
+    @BasicAuthorization(roles = {"TUTOR"})
+    @PutMapping
+    public ReportDto addConduct(@RequestParam Long idStudent, String subject, Float conduct){
+        return reportService.addConduct(conduct, idStudent, subject);
     }
 
 }

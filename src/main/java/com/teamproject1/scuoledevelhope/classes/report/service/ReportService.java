@@ -11,6 +11,7 @@ import com.teamproject1.scuoledevelhope.classes.vote.repo.VoteDAO;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class ReportService {
     }
 
     public ReportDto findReport(Long idStudent, String subject, int limit, int page) {
-        Report report = reportDao.findByIdStudentAndSubject(subject);
+        Report report = reportDao.findByIdStudentAndSubject(idStudent, subject);
         Page<Vote> voteList = voteDao.findBySubjectAndStudentId(report.getSubject(), report.getStudent().getId(), PageRequest.of(page, limit));
 
         return ReportDto.ReportDtoBuilder.aReportDto()
@@ -62,11 +63,18 @@ public class ReportService {
                 .withVotes(voteMapper.toVoteResponseDto(voteList.toList()))
                 .withIdStudent(idStudent)
                 .withSubject(subject)
+                .withConduct(report.getConduct())
                 .withTotalPages(voteList.getTotalPages())
                 .withTotalElements(voteList.getTotalElements())
                 .withPage(voteList.getPageable().getPageNumber())
                 .withPageSize(voteList.getPageable().getPageSize())
                 .build();
+    }
+
+    public ReportDto addConduct(Float conduct, Long idStudent, String subject){
+        reportDao.addConduct(conduct, idStudent, subject);
+
+        return reportMapper.toReportDto(reportDao.findByIdStudentAndSubject(idStudent, subject));
     }
 
 }
