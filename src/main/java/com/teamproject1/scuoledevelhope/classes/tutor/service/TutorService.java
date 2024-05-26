@@ -60,7 +60,6 @@ public class TutorService {
     @Transactional
     public BaseResponseElement<TutorDto> save(String username) {
         Tutor tutor = tutorDAO.save(tutorMapper.userToTutor(userDao.getByUsername(username)));
-        roleDao.addRoleWithUsername(username, Role.RoleEnum.TUTOR.getRoleString());
         return new BaseResponseElement<>(tutorMapper.tutorToTutorDto(tutor));
     }
 

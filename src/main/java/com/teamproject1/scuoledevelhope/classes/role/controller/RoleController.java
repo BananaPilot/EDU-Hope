@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.role.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.role.dto.RoleUsername;
 import com.teamproject1.scuoledevelhope.classes.role.dto.RolesUser;
 import com.teamproject1.scuoledevelhope.classes.role.service.RoleService;
@@ -21,7 +22,8 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @FloorLevelAuthorization(floorRole = "ADMIN")
+    //@FloorLevelAuthorization(floorRole = "ADMIN")
+    @NoAuthorization
     @PutMapping("/add")
     public BaseResponseElement<RolesUser> addRoleToUser(@Valid @RequestBody RoleUsername roleUsername) {
         return roleService.addRole(roleUsername);

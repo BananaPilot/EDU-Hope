@@ -57,7 +57,6 @@ public class CoordinatorService {
     @Transactional
     public BaseResponseElement<CoordinatorDto> save(String username) {
         Coordinator coordinator = coordinatorDAO.save(coordinatorMapper.userToCoordinator(userDao.getByUsername(username)));
-        roleDao.addRoleWithUsername(username, Role.RoleEnum.COORDINATOR.getRoleString());
         return new BaseResponseElement<>(coordinatorMapper.toCoordinatorDto(coordinator));
     }
 

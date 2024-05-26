@@ -32,11 +32,6 @@ public class TutorController {
         return tutorService.findById(id);
     }
 
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PostMapping("/save/{username}")
-    public BaseResponseElement<TutorDto> save(@Valid @PathVariable String username) {
-        return tutorService.save(username);
-    }
 
     @FloorLevelAuthorization(floorRole = "COORDINATOR")
     @DeleteMapping("/{id}")

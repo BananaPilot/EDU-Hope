@@ -31,12 +31,6 @@ public class CoordinatorController {
     }
 
     @FloorLevelAuthorization(floorRole = "ADMIN")
-    @PostMapping("/save/{username}")
-    public BaseResponseElement<CoordinatorDto> save(@PathVariable String username) {
-        return coordinatorService.save(username);
-    }
-
-    @FloorLevelAuthorization(floorRole = "ADMIN")
     @DeleteMapping("/{id}")
     public BaseResponseElement<CoordinatorDto> delete(@PathVariable Long id) {
         return coordinatorService.deleteById(id);
