@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.course.dto;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterDTO;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterDTO;
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 import org.springframework.http.HttpStatus;
 

@@ -1,4 +1,4 @@
-package com.teamproject1.scuoledevelhope.classes.clazzez.dto;
+package com.teamproject1.scuoledevelhope.classes.clazz.dto;
 
 import com.teamproject1.scuoledevelhope.types.dtos.Pagination;
 import org.springframework.http.HttpStatus;

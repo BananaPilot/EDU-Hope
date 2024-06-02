@@ -1,6 +1,6 @@
-package com.teamproject1.scuoledevelhope.classes.clazzez.dto;
+package com.teamproject1.scuoledevelhope.classes.clazz.dto;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.coordinator.repo.CoordinatorDAO;
 import com.teamproject1.scuoledevelhope.classes.course.repo.CourseDAO;
 import com.teamproject1.scuoledevelhope.classes.register.Register;
@@ -26,8 +26,8 @@ public class ClassRegisterMapper {
         this.schoolDAO = schoolDAO;
     }
 
-    public Classes toClass(ClassRegisterDTO classRegisterDTO) {
-        Classes classes = new Classes();
+    public Clazz toClass(ClassRegisterDTO classRegisterDTO) {
+        Clazz classes = new Clazz();
 
         classes.setName(classRegisterDTO.getClassName());
         classes.setCoordinator(coordinatorDAO.findById(classRegisterDTO.getCoordinatorId()).orElse(null));
@@ -46,7 +46,7 @@ public class ClassRegisterMapper {
         return register;
     }
 
-    public ClassRegisterDTO toClassRegisterDTO(Classes classes) {
+    public ClassRegisterDTO toClassRegisterDTO(Clazz classes) {
         ClassRegisterDTO classRegisterDTO = new ClassRegisterDTO();
 
         classRegisterDTO.setSchoolYear(classes.getRegisters().getSchoolYear());
@@ -59,16 +59,16 @@ public class ClassRegisterMapper {
         return classRegisterDTO;
     }
 
-    public List<ClassRegisterDTO> toListOfClassRegisterDto(List<Classes> classes) {
+    public List<ClassRegisterDTO> toListOfClassRegisterDto(List<Clazz> classes) {
         List<ClassRegisterDTO> toReturn = new ArrayList<>();
-        for (Classes element : classes) {
+        for (Clazz element : classes) {
             toReturn.add(this.toClassRegisterDTO(element));
         }
         return toReturn;
     }
 
-    public List<Classes> toListOfClass(List<ClassRegisterDTO> classRegisterListDto) {
-        List<Classes> toReturn = new ArrayList<>();
+    public List<Clazz> toListOfClass(List<ClassRegisterDTO> classRegisterListDto) {
+        List<Clazz> toReturn = new ArrayList<>();
         for (ClassRegisterDTO element : classRegisterListDto) {
             toReturn.add(this.toClass(element));
         }

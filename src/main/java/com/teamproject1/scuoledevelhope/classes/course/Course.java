@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.course;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.school.School;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -37,7 +37,7 @@ public class Course {
             mappedBy = "course",
             fetch = FetchType.LAZY
     )
-    private List<Classes> classes;
+    private List<Clazz> classes;
 
     public Course() {
     }
@@ -58,11 +58,11 @@ public class Course {
         return school;
     }
 
-    public List<Classes> getClasses() {
+    public List<Clazz> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<Classes> classes) {
+    public void setClasses(List<Clazz> classes) {
         this.classes = classes;
     }
 
@@ -84,7 +84,7 @@ public class Course {
         private @NotBlank(message = "Course name can't be blank") String name;
         private String description;
         private School school;
-        private List<Classes> classes;
+        private List<Clazz> classes;
 
         private CourseBuilder() {
         }
@@ -113,7 +113,7 @@ public class Course {
             return this;
         }
 
-        public CourseBuilder withClasses(List<Classes> classes) {
+        public CourseBuilder withClasses(List<Clazz> classes) {
             this.classes = classes;
             return this;
         }

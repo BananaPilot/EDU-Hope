@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.course.dto;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.dto.ClassRegisterMapper;
+import com.teamproject1.scuoledevelhope.classes.clazz.dto.ClassRegisterMapper;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.school.repo.SchoolDAO;
 import org.springframework.stereotype.Component;

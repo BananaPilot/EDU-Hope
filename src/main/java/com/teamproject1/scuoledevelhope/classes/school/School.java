@@ -1,6 +1,6 @@
 package com.teamproject1.scuoledevelhope.classes.school;
 
-import com.teamproject1.scuoledevelhope.classes.clazzez.Classes;
+import com.teamproject1.scuoledevelhope.classes.clazz.Clazz;
 import com.teamproject1.scuoledevelhope.classes.course.Course;
 import com.teamproject1.scuoledevelhope.classes.user.User;
 import jakarta.persistence.*;
@@ -31,7 +31,7 @@ public class School {
             mappedBy = "school",
             fetch = FetchType.LAZY
     )
-    private List<Classes> classes;
+    private List<Clazz> classes;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(
@@ -64,7 +64,7 @@ public class School {
         private @NotBlank(message = "School name can't be blank") String name;
 
         private Long id;
-        private List<Classes> classes;
+        private List<Clazz> classes;
         private List<Course> courses;
         private List<User> users;
 
@@ -85,7 +85,7 @@ public class School {
             return this;
         }
 
-        public SchoolBuilder withClasses(List<Classes> classes) {
+        public SchoolBuilder withClasses(List<Clazz> classes) {
             this.classes = classes;
             return this;
         }
