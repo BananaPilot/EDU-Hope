@@ -1,6 +1,7 @@
 package com.teamproject1.scuoledevelhope.classes.student.controller;
 
 import com.bananapilot.samplespringauthenticationframework.filtes.annotations.FloorLevelAuthorization;
+import com.bananapilot.samplespringauthenticationframework.filtes.annotations.NoAuthorization;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDto;
 import com.teamproject1.scuoledevelhope.classes.student.dto.StudentDtoList;
 import com.teamproject1.scuoledevelhope.classes.student.service.StudentService;
@@ -36,7 +37,11 @@ public class StudentController {
         return studentService.deleteById(id);
     }
 
-    //TODO update
+    @NoAuthorization
+    @PutMapping("/class")
+    public BaseResponseElement<StudentDto> updateStudentClass(@RequestParam Long idStudent, Long idClass){
+        return studentService.updateStudentClass(idClass, idStudent);
+    }
 
 }
 

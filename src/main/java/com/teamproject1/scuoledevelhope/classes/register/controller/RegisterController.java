@@ -43,10 +43,4 @@ public class RegisterController {
     public RegisterDtoList findAll(@RequestHeader("Authorization") String jwt, @RequestParam int limit, int page) {
         return registerService.findAllByTutor(jwt, limit, page);
     }
-
-    @FloorLevelAuthorization(floorRole = "COORDINATOR")
-    @PutMapping("/addRegister")
-    public RegisterDto addRegister(@RequestParam Long registerId, Long userId) {
-        return registerService.addRegisterToUser(registerId, userId);
-    }
 }
